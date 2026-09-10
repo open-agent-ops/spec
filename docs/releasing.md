@@ -61,3 +61,39 @@ Retain full stdout/stderr, record hashes and same-run identity for 90 days;
 release source/SBOM/provenance remain immutable release assets. Check actual host
 retention and notification ownership at admission. Secrets never belong in
 logs, URLs, archives, receipts or persistent Git configuration.
+
+## Publisher App credentials
+
+Install the organization-owned publisher GitHub App only on this repository,
+with Contents write, Actions read and implicit Metadata read. In public-release,
+store its client ID as AOM_PUBLISHER_CLIENT_ID and its private key as the
+AOM_PUBLISHER_PRIVATE_KEY secret. The pinned token action runs after independent
+environment approval, requests only this repository and these permissions, and
+revokes the installation token when the job ends. Only the publish step receives
+that token. The built-in workflow token has read permissions.
+
+Grant the admitted App a bypass only for tag creation. Do not add a bypass to
+main protection or tag update/deletion protection. The private key can mint App
+tokens outside Actions too: retain it under owner-controlled secret custody,
+never in source, logs or ordinary variables. To rotate, pause release dispatch,
+create a replacement App key, replace the environment secret securely, verify
+its identity through an approved read-only check, then revoke the old key.
+Do not dispatch a release merely to test a credential. Record only key metadata.
+
+## Учётные данные приложения-издателя
+
+Установите принадлежащее организации GitHub App только в этот репозиторий:
+Contents write, Actions read и обязательное Metadata read. В public-release
+сохраните client ID в AOM_PUBLISHER_CLIENT_ID, приватный ключ — в секрете
+AOM_PUBLISHER_PRIVATE_KEY. Закреплённый action получает токен только после
+независимого одобрения окружения, ограничивает его этим репозиторием и указанными
+правами и отзывает после завершения задания. Токен получает только шаг publish;
+встроенный токен workflow имеет права чтения.
+
+Разрешите приложению обход только запрета создания тегов. Защита main и запрет
+изменения или удаления тегов остаются без исключений. Приватный ключ позволяет
+получать токены и вне Actions: храните его под контролем владельца, исключив
+исходники, логи и обычные переменные. Для ротации приостановите запуск релизов,
+создайте новый ключ App, безопасно замените секрет окружения, подтвердите
+идентичность разрешённой проверкой без записи и отзовите старый ключ. Не запускайте
+релиз ради проверки ключа. В доказательствах сохраняйте только метаданные ключа.

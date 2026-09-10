@@ -18,6 +18,23 @@
 5. Commit candidate changes before composition/release checks. These inspect a
    clean exact Git tree. A history-free exported directory is inspected directly.
    Ordinary unit tests can run while editing: `go test -mod=readonly ./...`.
+   Every tracked file is listed in `process/policy.json` and in both `paths` and
+   `files` of `composition-manifest.json`; the policy gate verifies each recorded
+   `sha256`, class and license against the candidate bytes and the policy. After
+   adding, removing or editing a file, refresh its policy `protected_hash` where
+   one is set and regenerate the manifest records, for example:
+
+   ```sh
+   jq -c '.files[]|[.path,.class,.license]' process/policy.json | while read -r r; do
+     p=$(jq -r '.[0]' <<<"$r")
+     h=$([ "$p" = composition-manifest.json ] && echo null || printf '"%s"' "$(shasum -a 256 "$p" | cut -d' ' -f1)")
+     jq -c --argjson h "$h" '{path:.[0],kind:"regular",sha256:$h,class:.[1],license:.[2]}' <<<"$r"
+   done | jq -s . > files.tmp
+   jq --indent 2 --slurpfile f files.tmp '.files=$f[0]' composition-manifest.json > m.tmp
+   mv m.tmp composition-manifest.json && rm files.tmp
+   ```
+
+   The gate names the first stale or unregistered path when it rejects.
 6. Open a PR and link the issue/proposal. Required checks are AOM / policy,
    conformance, docs, supply-chain and aggregate. Main/scheduled/release checks
    additionally include heavy and reproducibility. Missing, stale, failed,

@@ -51,7 +51,6 @@ jobs:
     mirror:
         env:
             AOM_MIRROR_REPOSITORY: ${{ vars.AOM_MIRROR_REPOSITORY }}
-            AOM_MIRROR_TOKEN: ${{ secrets.AOM_MIRROR_TOKEN }}
         environment: public-mirror
         name: AOM / mirror
         needs:
@@ -69,7 +68,10 @@ jobs:
               with:
                 name: release-candidate-${{ github.run_id }}
                 path: .aom-release/
-            - run: |-
+            - env:
+                AOM_GITHUB_TOKEN: ${{ github.token }}
+                AOM_MIRROR_TOKEN: ${{ secrets.AOM_MIRROR_TOKEN }}
+              run: |-
                 chmod 700 .aom-release/spec-release
                 .aom-release/spec-release mirror > .aom-release/mirror-receipt.json
             - if: ${{ always() }}

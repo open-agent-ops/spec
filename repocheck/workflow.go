@@ -27,14 +27,14 @@ func Workflow(data []byte, lock ToolLock, release bool) error {
 		return ErrInput
 	}
 	pins := map[string]string{}
-	versions := map[string]string{"actions/checkout": "v7.0.1", "actions/upload-artifact": "v7.0.1", "actions/download-artifact": "v8.0.1"}
+	versions := map[string]string{"actions/checkout": "v7.0.1", "actions/upload-artifact": "v7.0.1", "actions/download-artifact": "v8.0.1", "actions/create-github-app-token": "v3.2.0"}
 	for _, p := range lock.Actions {
 		if versions[p.Repository] != p.Version || !Commit(p.Commit) || !Digest(p.ActionSHA256) || pins[p.Repository] != "" {
 			return ErrInput
 		}
 		pins[p.Repository] = p.Repository + "@" + p.Commit
 	}
-	if len(pins) != 3 {
+	if len(pins) != 4 {
 		return ErrInput
 	}
 	node, e := YAML(data)
@@ -94,7 +94,7 @@ func WorkflowModel(lock ToolLock, pins map[string]string, release bool) map[stri
 	build["if"] = "${{ github.ref == 'refs/heads/main' && github.run_attempt == 1 && inputs.candidate_sha == github.sha }}"
 	build["steps"] = []any{checkout("${{ github.sha }}"), map[string]any{"run": "sh scripts/provision.sh"}, map[string]any{"run": "go run -mod=readonly ./cmd/spec-check prepare-release"}, map[string]any{"uses": pins["actions/upload-artifact"], "with": map[string]any{"name": "release-candidate-${{ github.run_id }}", "path": ".aom-release/", "if-no-files-found": "error", "retention-days": 90, "include-hidden-files": true}}}
 	build["steps"] = append(build["steps"].([]any), upload("release-evidence-${{ github.run_id }}-${{ github.run_attempt }}"))
-	publish := map[string]any{"name": "AOM / publish", "runs-on": "ubuntu-24.04", "permissions": map[string]any{"contents": "write", "actions": "read"}, "timeout-minutes": 30, "environment": "public-release", "needs": []any{"build"}, "env": map[string]any{"AOM_GITHUB_TOKEN": "${{ github.token }}", "AOM_OWNER_IDS": "${{ vars.AOM_OWNER_IDS }}"}, "steps": []any{checkout("${{ github.sha }}"), map[string]any{"uses": pins["actions/download-artifact"], "with": map[string]any{"name": "release-candidate-${{ github.run_id }}", "path": ".aom-release/"}}, map[string]any{"run": "chmod 700 .aom-release/spec-release\n.aom-release/spec-release publish > .aom-release/publication-receipt.json"}}}
+	publish := map[string]any{"name": "AOM / publish", "runs-on": "ubuntu-24.04", "permissions": map[string]any{"contents": "read", "actions": "read"}, "timeout-minutes": 30, "environment": "public-release", "needs": []any{"build"}, "env": map[string]any{"AOM_OWNER_IDS": "${{ vars.AOM_OWNER_IDS }}"}, "steps": []any{checkout("${{ github.sha }}"), map[string]any{"uses": pins["actions/download-artifact"], "with": map[string]any{"name": "release-candidate-${{ github.run_id }}", "path": ".aom-release/"}}, map[string]any{"id": "publisher-token", "name": "Create scoped publisher token", "uses": pins["actions/create-github-app-token"], "with": map[string]any{"client-id": "${{ vars.AOM_PUBLISHER_CLIENT_ID }}", "private-key": "${{ secrets.AOM_PUBLISHER_PRIVATE_KEY }}", "owner": "open-agent-ops", "repositories": "spec", "permission-contents": "write", "permission-actions": "read", "skip-token-revoke": false}}, map[string]any{"env": map[string]any{"AOM_GITHUB_TOKEN": "${{ steps.publisher-token.outputs.token }}"}, "run": "chmod 700 .aom-release/spec-release\n.aom-release/spec-release publish > .aom-release/publication-receipt.json"}}}
 	mirror := map[string]any{"name": "AOM / mirror", "runs-on": "ubuntu-24.04", "permissions": read, "timeout-minutes": 30, "environment": "public-mirror", "needs": []any{"publish"}, "env": map[string]any{"AOM_MIRROR_TOKEN": "${{ secrets.AOM_MIRROR_TOKEN }}", "AOM_MIRROR_REPOSITORY": "${{ vars.AOM_MIRROR_REPOSITORY }}"}, "steps": []any{checkout("${{ github.sha }}"), map[string]any{"uses": pins["actions/download-artifact"], "with": map[string]any{"name": "release-candidate-${{ github.run_id }}", "path": ".aom-release/"}}, map[string]any{"run": "chmod 700 .aom-release/spec-release\n.aom-release/spec-release mirror > .aom-release/mirror-receipt.json"}}}
 	for name, j := range map[string]map[string]any{"publication": publish, "mirror": mirror} {
 		j["steps"] = append(j["steps"].([]any), map[string]any{"name": "Retain publication observation", "if": "${{ always() }}", "uses": pins["actions/upload-artifact"], "with": map[string]any{"name": name + "-receipt-${{ github.run_id }}-${{ github.run_attempt }}", "path": ".aom-release/" + name + "-receipt.json", "if-no-files-found": "error", "retention-days": 90, "include-hidden-files": true}})

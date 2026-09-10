@@ -84,7 +84,6 @@ jobs:
         timeout-minutes: 30
     publish:
         env:
-            AOM_GITHUB_TOKEN: ${{ github.token }}
             AOM_OWNER_IDS: ${{ vars.AOM_OWNER_IDS }}
         environment: public-release
         name: AOM / publish
@@ -92,7 +91,7 @@ jobs:
             - build
         permissions:
             actions: read
-            contents: write
+            contents: read
         runs-on: ubuntu-24.04
         steps:
             - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -104,7 +103,20 @@ jobs:
               with:
                 name: release-candidate-${{ github.run_id }}
                 path: .aom-release/
-            - run: |-
+            - id: publisher-token
+              name: Create scoped publisher token
+              uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+              with:
+                client-id: ${{ vars.AOM_PUBLISHER_CLIENT_ID }}
+                owner: open-agent-ops
+                permission-actions: read
+                permission-contents: write
+                private-key: ${{ secrets.AOM_PUBLISHER_PRIVATE_KEY }}
+                repositories: spec
+                skip-token-revoke: false
+            - env:
+                AOM_GITHUB_TOKEN: ${{ steps.publisher-token.outputs.token }}
+              run: |-
                 chmod 700 .aom-release/spec-release
                 .aom-release/spec-release publish > .aom-release/publication-receipt.json
             - if: ${{ always() }}

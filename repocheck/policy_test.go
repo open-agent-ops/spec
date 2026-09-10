@@ -201,3 +201,74 @@ func TestRule12(t *testing.T) {
 	}
 	t.Log("fixture-only cases=sanitized_reason_role_next_action_pass")
 }
+
+func TestPublisherAppAuthorityBoundaries(t *testing.T) {
+	data, err := os.ReadFile("../.github/workflows/release.yml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	lock := toolLock(t)
+	if err := repocheck.Workflow(data, lock, true); err != nil {
+		t.Fatal(err)
+	}
+	cases := []struct {
+		name  string
+		path  []string
+		value any
+	}{
+		{"wrong environment", []string{"jobs", "publish", "environment"}, "public-mirror"},
+		{"missing environment", []string{"jobs", "publish", "environment"}, nil},
+		{"builtin write", []string{"jobs", "publish", "permissions", "contents"}, "write"},
+		{"job token exposure", []string{"jobs", "publish", "env", "AOM_GITHUB_TOKEN"}, "${{ steps.publisher-token.outputs.token }}"},
+		{"build token exposure", []string{"jobs", "build", "env"}, map[string]any{"AOM_GITHUB_TOKEN": "${{ github.token }}"}},
+		{"wrong owner", []string{"token", "with", "owner"}, "other-owner"},
+		{"wrong repository", []string{"token", "with", "repositories"}, "other-repository"},
+		{"all repositories", []string{"token", "with", "repositories"}, nil},
+		{"extra permission", []string{"token", "with", "permission-administration"}, "write"},
+		{"write actions", []string{"token", "with", "permission-actions"}, "write"},
+		{"no revocation", []string{"token", "with", "skip-token-revoke"}, true},
+		{"unpinned action", []string{"token", "uses"}, "actions/create-github-app-token@v3"},
+		{"ordinary key variable", []string{"token", "with", "private-key"}, "${{ vars.AOM_PUBLISHER_PRIVATE_KEY }}"},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			var m map[string]any
+			if err := yaml.Unmarshal(data, &m); err != nil {
+				t.Fatal(err)
+			}
+			target := m
+			path := tc.path
+			if path[0] == "token" {
+				steps := m["jobs"].(map[string]any)["publish"].(map[string]any)["steps"].([]any)
+				found := false
+				for _, step := range steps {
+					x := step.(map[string]any)
+					if x["id"] == "publisher-token" {
+						target = x
+						found = true
+					}
+				}
+				if !found {
+					t.Fatal("token step missing")
+				}
+				path = path[1:]
+			}
+			for _, key := range path[:len(path)-1] {
+				target = target[key].(map[string]any)
+			}
+			last := path[len(path)-1]
+			if tc.value == nil {
+				delete(target, last)
+			} else {
+				target[last] = tc.value
+			}
+			altered, err := yaml.Marshal(m)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if repocheck.Workflow(altered, lock, true) == nil {
+				t.Fatal("unsafe workflow accepted")
+			}
+		})
+	}
+}

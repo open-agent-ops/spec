@@ -19,6 +19,7 @@
     "VERSIONING.md",
     "bilingual-pairs.json",
     "cmd/spec-check/main.go",
+    "cmd/spec-check/main_test.go",
     "cmd/spec-release/main.go",
     "composition-manifest.json",
     "conformance/assessment.go",

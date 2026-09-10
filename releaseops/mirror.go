@@ -126,29 +126,91 @@ func (b *boundedOutput) Write(p []byte) (int, error) {
 type discardWriter struct{}
 
 func (*discardWriter) Write(p []byte) (int, error) { return len(p), nil }
-func (m *gitMirror) Observe(ctx context.Context, v string) (string, bool, error) {
-	if !repocheck.Version(v) {
+
+type mirrorRefs struct{ tag, main string }
+
+// Only the two requested direct refs are admissible. Partial state is never a
+// completed mirror, even when the immutable tag already exists.
+func parseMirrorRefs(data []byte, version string) (mirrorRefs, error) {
+	var refs mirrorRefs
+	seen := map[string]bool{}
+	for _, line := range strings.Split(strings.TrimSpace(string(data)), "\n") {
+		if line == "" {
+			continue
+		}
+		fields := strings.Fields(line)
+		if len(fields) != 2 || !repocheck.Commit(fields[0]) || seen[fields[1]] {
+			return refs, ErrUnknown
+		}
+		seen[fields[1]] = true
+		switch fields[1] {
+		case "refs/tags/" + version:
+			refs.tag = fields[0]
+		case "refs/heads/main":
+			refs.main = fields[0]
+		default:
+			return refs, ErrUnknown
+		}
+	}
+	return refs, nil
+}
+func (m *gitMirror) refs(ctx context.Context, version string) (mirrorRefs, error) {
+	data, err := m.git(ctx, true, "ls-remote", "--refs", m.remote, "refs/tags/"+version, "refs/heads/main")
+	if err != nil {
+		return mirrorRefs{}, err
+	}
+	return parseMirrorRefs(data, version)
+}
+func (m *gitMirror) Observe(ctx context.Context, version string) (string, bool, error) {
+	if !repocheck.Version(version) {
 		return "", false, ErrAuthority
 	}
-	b, e := m.git(ctx, true, "ls-remote", "--refs", m.remote, "refs/tags/"+v)
-	if e != nil {
-		return "", false, e
+	refs, err := m.refs(ctx, version)
+	if err != nil {
+		return "", false, err
 	}
-	lines := strings.Fields(string(b))
-	if len(lines) == 0 {
-		return "", false, nil
-	}
-	if len(lines) != 2 || !repocheck.Commit(lines[0]) || lines[1] != "refs/tags/"+v {
-		return "", false, ErrConflict
-	}
-	return lines[0], true, nil
+	return refs.tag, refs.tag != "" && refs.tag == refs.main, nil
 }
-func (m *gitMirror) Push(ctx context.Context, sha, v string) error {
-	if !repocheck.Commit(sha) || !repocheck.Version(v) {
+
+// The candidate's complete canonical history is fetched before this check.
+// No mirror history is imported to justify an update. The server must support
+// atomic push; there is deliberately no sequential or force-push fallback.
+func mirrorPushArgs(remote, candidate, version string, refs mirrorRefs, ancestor func(string, string) error) ([]string, error) {
+	if !repocheck.Commit(candidate) || !repocheck.Version(version) {
+		return nil, ErrAuthority
+	}
+	if refs.tag != "" && refs.tag != candidate {
+		return nil, ErrConflict
+	}
+	if refs.main != "" && refs.main != candidate {
+		if !repocheck.Commit(refs.main) || ancestor(refs.main, candidate) != nil {
+			return nil, ErrConflict
+		}
+	}
+	return []string{"push", "--atomic", "--porcelain", remote, candidate + ":refs/tags/" + version, candidate + ":refs/heads/main"}, nil
+}
+func (m *gitMirror) Push(ctx context.Context, candidate, version string) error {
+	if !repocheck.Commit(candidate) || !repocheck.Version(version) {
 		return ErrAuthority
 	}
-	_, e := m.git(ctx, true, "push", "--porcelain", m.remote, sha+":refs/tags/"+v)
-	return e
+	refs, err := m.refs(ctx, version)
+	if err != nil {
+		return err
+	}
+	args, err := mirrorPushArgs(m.remote, candidate, version, refs, func(old, next string) error {
+		_, e := m.git(ctx, false, "merge-base", "--is-ancestor", old, next)
+		return e
+	})
+	if err != nil {
+		return err
+	}
+	_, err = m.git(ctx, true, args...)
+	return err
+}
+
+func mainIsDefault(data []byte, candidate string) bool {
+	fields := strings.Fields(string(data))
+	return len(fields) == 5 && fields[0] == "ref:" && fields[1] == "refs/heads/main" && fields[2] == "HEAD" && fields[3] == candidate && fields[4] == "HEAD"
 }
 
 // MirrorApproved creates an isolated repository fetched only from the fixed
@@ -219,5 +281,15 @@ func MirrorApproved(ctx context.Context, p repocheck.Proposal) (out repocheck.Re
 		return out, ErrConflict
 	}
 	out.Mirror, e = mirror(ctx, p, m, backoff)
+	if e == nil {
+		head, err := m.git(ctx, true, "ls-remote", "--symref", m.remote, "HEAD")
+		if err != nil || !mainIsDefault(head, p.Candidate) {
+			out.Mirror = "unknown"
+			if err != nil {
+				return out, err
+			}
+			return out, ErrAuthority
+		}
+	}
 	return out, e
 }

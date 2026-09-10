@@ -143,7 +143,7 @@ func check(name string, s repocheck.Snapshot, p repocheck.Policy, lock repocheck
 		if repocheck.Composition(s, p) != nil {
 			return repocheck.ErrRejected
 		}
-		if repocheck.Workflow(s[".github/workflows/ci.yml"], lock, false) != nil || repocheck.Workflow(s[".github/workflows/release.yml"], lock, true) != nil {
+		if repocheck.Workflow(s[".github/workflows/ci.yml"], lock, false) != nil || repocheck.Workflow(s[".github/workflows/release.yml"], lock, true) != nil || repocheck.MirrorBootstrapWorkflow(s[".github/workflows/mirror-bootstrap.yml"], lock) != nil {
 			return repocheck.ErrRejected
 		}
 		return repocheck.Docs(s, p)
@@ -295,7 +295,7 @@ func gate(name string) error {
 	case "policy":
 		e = check(name, s, p, lock)
 		if e == nil {
-			e = execCheck(tool("actionlint"), ".github/workflows/ci.yml", ".github/workflows/release.yml")
+			e = execCheck(tool("actionlint"), ".github/workflows/ci.yml", ".github/workflows/release.yml", ".github/workflows/mirror-bootstrap.yml")
 		}
 	case "docs":
 		e = check(name, s, p, lock)

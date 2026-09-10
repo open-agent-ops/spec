@@ -23,20 +23,11 @@ type ToolLock struct {
 // Workflow validates the AST against a closed executable catalog. The expected
 // commands are fixed source literals, not supplied by the workflow under test.
 func Workflow(data []byte, lock ToolLock, release bool) error {
-	if lock.Schema != "aom04a.toolchain-lock.v1" || lock.GoVersion != "1.26.8" || lock.GoMinimum != "1.25.13" || lock.Execution != "github-hosted-native" {
-		return ErrInput
+	pins, e := workflowPins(lock)
+	if e != nil {
+		return e
 	}
-	pins := map[string]string{}
-	versions := map[string]string{"actions/checkout": "v7.0.1", "actions/upload-artifact": "v7.0.1", "actions/download-artifact": "v8.0.1", "actions/create-github-app-token": "v3.2.0"}
-	for _, p := range lock.Actions {
-		if versions[p.Repository] != p.Version || !Commit(p.Commit) || !Digest(p.ActionSHA256) || pins[p.Repository] != "" {
-			return ErrInput
-		}
-		pins[p.Repository] = p.Repository + "@" + p.Commit
-	}
-	if len(pins) != 4 {
-		return ErrInput
-	}
+
 	node, e := YAML(data)
 	if e != nil {
 		return e
@@ -131,3 +122,21 @@ func NeedsSuccess(data []byte, full bool) error {
 	return nil
 }
 func CheckName(job string) string { return fmt.Sprintf("AOM / %s", job) }
+
+func workflowPins(lock ToolLock) (map[string]string, error) {
+	if lock.Schema != "aom04a.toolchain-lock.v1" || lock.GoVersion != "1.26.8" || lock.GoMinimum != "1.25.13" || lock.Execution != "github-hosted-native" {
+		return nil, ErrInput
+	}
+	pins := map[string]string{}
+	versions := map[string]string{"actions/checkout": "v7.0.1", "actions/upload-artifact": "v7.0.1", "actions/download-artifact": "v8.0.1", "actions/create-github-app-token": "v3.2.0"}
+	for _, p := range lock.Actions {
+		if versions[p.Repository] != p.Version || !Commit(p.Commit) || !Digest(p.ActionSHA256) || pins[p.Repository] != "" {
+			return nil, ErrInput
+		}
+		pins[p.Repository] = p.Repository + "@" + p.Commit
+	}
+	if len(pins) != 4 {
+		return nil, ErrInput
+	}
+	return pins, nil
+}

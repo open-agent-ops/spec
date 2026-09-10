@@ -97,3 +97,33 @@ AOM_PUBLISHER_PRIVATE_KEY. Закреплённый action получает то
 создайте новый ключ App, безопасно замените секрет окружения, подтвердите
 идентичность разрешённой проверкой без записи и отзовите старый ключ. Не запускайте
 релиз ради проверки ключа. В доказательствах сохраняйте только метаданные ключа.
+
+## GitVerse branch and browser visibility
+
+The mirror contains the approved release tag and a `main` branch at the same
+commit. An existing tag alone is incomplete. Each release updates both refs in
+one atomic, non-force push after canonical verification. Existing tags are
+immutable; an existing `main` must be an ancestor of the approved candidate.
+Divergence or an older release cannot overwrite or roll back the mirror branch.
+If GitVerse cannot accept atomic push, publication remains incomplete; there is
+no sequential fallback. Readback must confirm both refs and `HEAD` pointing to
+`main` at the approved commit. GitHub release attachments remain canonical on
+GitHub; this operation mirrors Git refs and their reachable objects.
+
+For the original tag-only `v0.4.0` mirror, the fixed-purpose
+`mirror-bootstrap.yml` workflow can create `main` at
+`100d10849268ff1c36ddb9568b99a9fbf9ff4dbb`. It runs from reviewed canonical `main`,
+requires independent `public-mirror` approval, uses the existing mirror secret,
+and admits only attempt 1. It has no dispatch inputs, release creation, tag
+write or forced update. A matching branch is a no-op; any other existing branch
+stops the repair. This is a separately approved host action, not ordinary CI.
+
+After bootstrap, verify the default branch in GitVerse. If the provider did not
+select `main` automatically, a repository administrator must select it in the
+repository settings. Do not add administration rights to the permanent mirror
+token. The equivalent administrator-only API change is
+`PATCH /repos/open-agent-ops/spec` with only `{"default_branch":"main"}` after
+confirming repository ID 330883 and the exact branch SHA. Re-read the settings,
+`git ls-remote --symref` and the public code page. A branch created successfully
+with an incorrect default branch is partial progress, not complete recovery;
+retain the receipt and reconcile before authorizing another execution.

@@ -5,6 +5,9 @@ import (
 	"os/exec"
 	"path/filepath"
 	"testing"
+
+	// Register the suite-wide replay flags used by scripts/check.sh.
+	_ "pgregory.net/rapid"
 )
 
 func TestSnapshotIndependentRootAndSubdirectory(t *testing.T) {

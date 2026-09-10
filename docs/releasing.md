@@ -98,4 +98,4 @@ AOM_PUBLISHER_PRIVATE_KEY. Закреплённый action получает то
 идентичность разрешённой проверкой без записи и отзовите старый ключ. Не запускайте
 релиз ради проверки ключа. В доказательствах сохраняйте только метаданные ключа.
 
-<!-- Temporary host acceptance canary revision 1; never merge into main. -->
+<!-- Temporary host acceptance canary revision 2; never merge into main. -->

@@ -1,222 +1,197 @@
 concurrency:
-    cancel-in-progress: true
-    group: aom-ci-${{ github.repository }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+  group: aom-ci-${{ github.repository }}-${{ github.event.pull_request.number || github.ref
+    }}
 env:
-    AOM_ATTEMPT: ${{ github.run_attempt }}
-    AOM_BASE: ${{ github.event.pull_request.base.sha || github.sha }}
-    AOM_EVENT: ${{ github.event_name }}
-    AOM_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
-    AOM_REPOSITORY: ${{ github.repository }}
-    AOM_RUN: ${{ github.run_id }}
-    AOM_SHA: ${{ github.sha }}
-    AOM_WORKFLOW: ${{ github.workflow_sha }}
-    GOTOOLCHAIN: local
-    GOWORK: "off"
+  AOM_ATTEMPT: ${{ github.run_attempt }}
+  AOM_BASE: ${{ github.event.pull_request.base.sha || github.sha }}
+  AOM_EVENT: ${{ github.event_name }}
+  AOM_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+  AOM_REPOSITORY: ${{ github.repository }}
+  AOM_RUN: ${{ github.run_id }}
+  AOM_SHA: ${{ github.sha }}
+  AOM_WORKFLOW: ${{ github.workflow_sha }}
+  GOTOOLCHAIN: local
+  GOWORK: 'off'
 jobs:
-    aggregate:
-        env:
-            AOM_NEEDS: ${{ toJSON(needs) }}
-        if: ${{ always() }}
-        name: AOM / aggregate
-        needs:
-            - policy
-            - conformance
-            - docs
-            - supply-chain
-            - heavy
-            - reproducibility
-        permissions:
-            contents: read
-        runs-on: ubuntu-24.04
-        steps:
-            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-              with:
-                fetch-depth: 0
-                persist-credentials: false
-                ref: ${{ github.sha }}
-            - name: Verify and provision tools
-              run: sh scripts/provision.sh
-            - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
-              with:
-                merge-multiple: true
-                path: .aom-evidence/
-                pattern: '*-${{ github.run_id }}-${{ github.run_attempt }}'
-            - name: Execute bounded check
-              run: go run -mod=readonly ./cmd/spec-check gate aggregate
-            - if: ${{ always() }}
-              name: Retain complete evidence
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-              with:
-                if-no-files-found: error
-                include-hidden-files: true
-                name: aggregate-${{ github.run_id }}-${{ github.run_attempt }}
-                path: .aom-evidence/
-                retention-days: 90
-        timeout-minutes: 20
-    conformance:
-        name: AOM / conformance
-        permissions:
-            contents: read
-        runs-on: ubuntu-24.04
-        steps:
-            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-              with:
-                fetch-depth: 0
-                persist-credentials: false
-                ref: ${{ github.sha }}
-            - name: Verify and provision tools
-              run: sh scripts/provision.sh
-            - name: Execute bounded check
-              run: go run -mod=readonly ./cmd/spec-check gate conformance
-            - if: ${{ always() }}
-              name: Retain complete evidence
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-              with:
-                if-no-files-found: error
-                include-hidden-files: true
-                name: conformance-${{ github.run_id }}-${{ github.run_attempt }}
-                path: .aom-evidence/
-                retention-days: 90
-        timeout-minutes: 20
-    docs:
-        name: AOM / docs
-        permissions:
-            contents: read
-        runs-on: ubuntu-24.04
-        steps:
-            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-              with:
-                fetch-depth: 0
-                persist-credentials: false
-                ref: ${{ github.sha }}
-            - name: Verify and provision tools
-              run: sh scripts/provision.sh
-            - name: Execute bounded check
-              run: go run -mod=readonly ./cmd/spec-check gate docs
-            - if: ${{ always() }}
-              name: Retain complete evidence
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-              with:
-                if-no-files-found: error
-                include-hidden-files: true
-                name: docs-${{ github.run_id }}-${{ github.run_attempt }}
-                path: .aom-evidence/
-                retention-days: 90
-        timeout-minutes: 20
-    heavy:
-        if: ${{ github.event_name != 'pull_request' }}
-        name: AOM / heavy
-        permissions:
-            contents: read
-        runs-on: ubuntu-24.04
-        steps:
-            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-              with:
-                fetch-depth: 0
-                persist-credentials: false
-                ref: ${{ github.sha }}
-            - name: Verify and provision tools
-              run: sh scripts/provision.sh
-            - name: Execute bounded check
-              run: go run -mod=readonly ./cmd/spec-check gate heavy
-            - if: ${{ always() }}
-              name: Retain complete evidence
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-              with:
-                if-no-files-found: error
-                include-hidden-files: true
-                name: heavy-${{ github.run_id }}-${{ github.run_attempt }}
-                path: .aom-evidence/
-                retention-days: 90
-        timeout-minutes: 45
-    policy:
-        name: AOM / policy
-        permissions:
-            contents: read
-        runs-on: ubuntu-24.04
-        steps:
-            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-              with:
-                fetch-depth: 0
-                persist-credentials: false
-                ref: ${{ github.sha }}
-            - name: Verify and provision tools
-              run: sh scripts/provision.sh
-            - name: Execute bounded check
-              run: go run -mod=readonly ./cmd/spec-check gate policy
-            - if: ${{ always() }}
-              name: Retain complete evidence
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-              with:
-                if-no-files-found: error
-                include-hidden-files: true
-                name: policy-${{ github.run_id }}-${{ github.run_attempt }}
-                path: .aom-evidence/
-                retention-days: 90
-        timeout-minutes: 20
-    reproducibility:
-        if: ${{ github.event_name != 'pull_request' }}
-        name: AOM / reproducibility
-        permissions:
-            contents: read
-        runs-on: ubuntu-24.04
-        steps:
-            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-              with:
-                fetch-depth: 0
-                persist-credentials: false
-                ref: ${{ github.sha }}
-            - name: Verify and provision tools
-              run: sh scripts/provision.sh
-            - name: Execute bounded check
-              run: go run -mod=readonly ./cmd/spec-check gate reproducibility
-            - if: ${{ always() }}
-              name: Retain complete evidence
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-              with:
-                if-no-files-found: error
-                include-hidden-files: true
-                name: reproducibility-${{ github.run_id }}-${{ github.run_attempt }}
-                path: .aom-evidence/
-                retention-days: 90
-        timeout-minutes: 45
-    supply-chain:
-        name: AOM / supply-chain
-        permissions:
-            contents: read
-        runs-on: ubuntu-24.04
-        steps:
-            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-              with:
-                fetch-depth: 0
-                persist-credentials: false
-                ref: ${{ github.sha }}
-            - name: Verify and provision tools
-              run: sh scripts/provision.sh
-            - name: Execute bounded check
-              run: go run -mod=readonly ./cmd/spec-check gate supply-chain
-            - if: ${{ always() }}
-              name: Retain complete evidence
-              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-              with:
-                if-no-files-found: error
-                include-hidden-files: true
-                name: supply-chain-${{ github.run_id }}-${{ github.run_attempt }}
-                path: .aom-evidence/
-                retention-days: 90
-        timeout-minutes: 20
+  aggregate:
+    env:
+      AOM_NEEDS: ${{ toJSON(needs) }}
+    if: ${{ always() }}
+    name: AOM / aggregate
+    needs:
+    - policy
+    - conformance
+    - supply-chain
+    - heavy
+    - reproducibility
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+        ref: ${{ github.sha }}
+    - name: Verify and provision tools
+      run: sh scripts/provision.sh
+    - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+      with:
+        merge-multiple: true
+        path: .aom-evidence/
+        pattern: '*-${{ github.run_id }}-${{ github.run_attempt }}'
+    - name: Execute bounded check
+      run: go run -mod=readonly ./cmd/spec-check gate aggregate
+    - if: ${{ always() }}
+      name: Retain complete evidence
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      with:
+        if-no-files-found: error
+        include-hidden-files: true
+        name: aggregate-${{ github.run_id }}-${{ github.run_attempt }}
+        path: .aom-evidence/
+        retention-days: 90
+    timeout-minutes: 20
+  conformance:
+    name: AOM / conformance
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+        ref: ${{ github.sha }}
+    - name: Verify and provision tools
+      run: sh scripts/provision.sh
+    - name: Execute bounded check
+      run: go run -mod=readonly ./cmd/spec-check gate conformance
+    - if: ${{ always() }}
+      name: Retain complete evidence
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      with:
+        if-no-files-found: error
+        include-hidden-files: true
+        name: conformance-${{ github.run_id }}-${{ github.run_attempt }}
+        path: .aom-evidence/
+        retention-days: 90
+    timeout-minutes: 20
+  heavy:
+    if: ${{ github.event_name != 'pull_request' }}
+    name: AOM / heavy
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+        ref: ${{ github.sha }}
+    - name: Verify and provision tools
+      run: sh scripts/provision.sh
+    - name: Execute bounded check
+      run: go run -mod=readonly ./cmd/spec-check gate heavy
+    - if: ${{ always() }}
+      name: Retain complete evidence
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      with:
+        if-no-files-found: error
+        include-hidden-files: true
+        name: heavy-${{ github.run_id }}-${{ github.run_attempt }}
+        path: .aom-evidence/
+        retention-days: 90
+    timeout-minutes: 45
+  policy:
+    name: AOM / policy
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+        ref: ${{ github.sha }}
+    - name: Verify and provision tools
+      run: sh scripts/provision.sh
+    - name: Execute bounded check
+      run: go run -mod=readonly ./cmd/spec-check gate policy
+    - if: ${{ always() }}
+      name: Retain complete evidence
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      with:
+        if-no-files-found: error
+        include-hidden-files: true
+        name: policy-${{ github.run_id }}-${{ github.run_attempt }}
+        path: .aom-evidence/
+        retention-days: 90
+    timeout-minutes: 20
+  reproducibility:
+    if: ${{ github.event_name != 'pull_request' }}
+    name: AOM / reproducibility
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+        ref: ${{ github.sha }}
+    - name: Verify and provision tools
+      run: sh scripts/provision.sh
+    - name: Execute bounded check
+      run: go run -mod=readonly ./cmd/spec-check gate reproducibility
+    - if: ${{ always() }}
+      name: Retain complete evidence
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      with:
+        if-no-files-found: error
+        include-hidden-files: true
+        name: reproducibility-${{ github.run_id }}-${{ github.run_attempt }}
+        path: .aom-evidence/
+        retention-days: 90
+    timeout-minutes: 45
+  supply-chain:
+    name: AOM / supply-chain
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+        ref: ${{ github.sha }}
+    - name: Verify and provision tools
+      run: sh scripts/provision.sh
+    - name: Execute bounded check
+      run: go run -mod=readonly ./cmd/spec-check gate supply-chain
+    - if: ${{ always() }}
+      name: Retain complete evidence
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      with:
+        if-no-files-found: error
+        include-hidden-files: true
+        name: supply-chain-${{ github.run_id }}-${{ github.run_attempt }}
+        path: .aom-evidence/
+        retention-days: 90
+    timeout-minutes: 20
 name: AOM checks
-"on":
-    pull_request:
-        types:
-            - opened
-            - synchronize
-            - reopened
-            - ready_for_review
-    push:
-        branches:
-            - main
-    schedule:
-        - cron: 0 3 * * 1
-    workflow_dispatch: null
+'on':
+  pull_request:
+    types:
+    - opened
+    - synchronize
+    - reopened
+    - ready_for_review
+  push:
+    branches:
+    - main
+  schedule:
+  - cron: 0 3 * * 1
+  workflow_dispatch: null
 permissions: {}

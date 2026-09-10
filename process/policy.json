@@ -38,6 +38,13 @@
       "protected_hash": ""
     },
     {
+      "path": ".github/workflows/mirror-bootstrap.yml",
+      "class": "metadata",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": ""
+    },
+    {
       "path": ".github/workflows/release.yml",
       "class": "metadata",
       "license": "Apache-2.0",
@@ -724,6 +731,13 @@
       "protected_hash": ""
     },
     {
+      "path": "releaseops/mirror_main_test.go",
+      "class": "code",
+      "license": "Apache-2.0",
+      "normative": false,
+      "protected_hash": ""
+    },
+    {
       "path": "releaseops/process_other.go",
       "class": "source",
       "license": "Apache-2.0",
@@ -777,6 +791,20 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": true,
+      "protected_hash": ""
+    },
+    {
+      "path": "repocheck/mirror_bootstrap.go",
+      "class": "code",
+      "license": "Apache-2.0",
+      "normative": false,
+      "protected_hash": ""
+    },
+    {
+      "path": "repocheck/mirror_bootstrap_test.go",
+      "class": "code",
+      "license": "Apache-2.0",
+      "normative": false,
       "protected_hash": ""
     },
     {

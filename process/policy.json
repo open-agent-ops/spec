@@ -129,6 +129,13 @@
       "protected_hash": ""
     },
     {
+      "path": "cmd/spec-check/main_test.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": ""
+    },
+    {
       "path": "cmd/spec-release/main.go",
       "class": "source",
       "license": "Apache-2.0",

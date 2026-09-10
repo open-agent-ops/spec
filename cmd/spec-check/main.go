@@ -52,7 +52,7 @@ func snapshot(strict bool) (repocheck.Snapshot, error) {
 		if e != nil || strings.HasPrefix(prefix, "..") {
 			return nil, repocheck.ErrInput
 		}
-		ref := "HEAD"
+		ref := "HEAD^{tree}"
 		if prefix != "." {
 			ref += ":" + filepath.ToSlash(prefix)
 		}

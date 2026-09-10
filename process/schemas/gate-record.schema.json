@@ -1,0 +1,98 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "aom04a.gate-record.v1"
+    },
+    "repository": {
+      "const": "github.com/open-agent-ops/spec"
+    },
+    "candidate": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "base": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "policy": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "lock": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "workflow": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "run": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[1-9][0-9]{0,19}$"
+    },
+    "job": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure",
+        "skipped",
+        "cancelled",
+        "neutral",
+        "unknown"
+      ]
+    },
+    "stdout": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stderr": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "schema",
+    "repository",
+    "candidate",
+    "base",
+    "policy",
+    "lock",
+    "workflow",
+    "run",
+    "job",
+    "attempt",
+    "result",
+    "stdout",
+    "stderr"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-agent-ops.org/process/gate-record.v1"
+}

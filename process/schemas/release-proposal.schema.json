@@ -1,0 +1,133 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "aom04a.release-proposal.v1"
+    },
+    "repository": {
+      "const": "github.com/open-agent-ops/spec"
+    },
+    "candidate": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^v(0|1)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "tree": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "inventory": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "^[A-Za-z0-9_.][A-Za-z0-9_./-]*$"
+          },
+          "sha256": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 67108864
+          }
+        },
+        "required": [
+          "name",
+          "sha256",
+          "size"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 16,
+      "minItems": 1
+    },
+    "sbom": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "workflow": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "run": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[1-9][0-9]{0,19}$"
+    },
+    "attempt": {
+      "const": 1
+    },
+    "lock": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "policy": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "checked_at": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "schema",
+    "repository",
+    "candidate",
+    "version",
+    "tree",
+    "inventory",
+    "assets",
+    "sbom",
+    "workflow",
+    "run",
+    "attempt",
+    "lock",
+    "policy",
+    "checked_at",
+    "expires_at"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-agent-ops.org/process/release-proposal.v1"
+}

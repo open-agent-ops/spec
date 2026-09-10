@@ -1,0 +1,97 @@
+{
+  "assumptions": [
+    "Comparable request load"
+  ],
+  "author_ref": {
+    "id": "author",
+    "kind": "owner",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "authorship_attestation_ref": {
+    "id": "authorship-attestation",
+    "kind": "evidence_record",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "baseline": "P95 latency is 800 ms",
+  "constraints": [
+    "Read-only discovery"
+  ],
+  "decision_map_ref": {
+    "id": "latency",
+    "kind": "decision_map",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "document_schema": {
+    "id": "https://agent-ops.ru/schemas/foundation_operational_intent.schema.json",
+    "media_type": "application/schema+json",
+    "sha256": "8d18026815ffabd75952ae278b4d6af213539da2b6b009ff3e8dd85e95700246",
+    "version": "1.0.0"
+  },
+  "expected_outcome": "P95 latency is at or below 500 ms",
+  "falsification_criteria": [
+    {
+      "comparator": "gt",
+      "expected": 500,
+      "id": "p95-latency",
+      "observation_class": "prometheus_metric",
+      "unit": "ms"
+    }
+  ],
+  "format_version": "1.0.0",
+  "measurable_targets": [
+    {
+      "comparator": "lte",
+      "expected": 500,
+      "id": "p95-latency",
+      "observation_class": "prometheus_metric",
+      "unit": "ms"
+    }
+  ],
+  "objective": "Reduce API latency within the bounded service scope",
+  "outcome_hypothesis": "Reviewed bounded tuning can reduce latency",
+  "owner_ref": {
+    "id": "operator",
+    "kind": "owner",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "prohibited_actions": [
+    "execute_target_command"
+  ],
+  "ref": {
+    "id": "reduce-latency",
+    "kind": "operational_intent",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "required_outcome_check": {
+    "id": "latency",
+    "kind": "outcome_check",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "scope": {
+    "project_ref": {
+      "id": "example",
+      "kind": "project",
+      "namespace": "projects",
+      "version": "1.0.0"
+    }
+  },
+  "stakeholder_refs": [
+    {
+      "id": "operator",
+      "kind": "owner",
+      "namespace": "projects/example",
+      "version": "1.0.0"
+    }
+  ],
+  "time_window": {
+    "end": "2026-08-04T11:00:00Z",
+    "start": "2026-08-04T10:00:00Z"
+  },
+  "unexpected_field": true
+}

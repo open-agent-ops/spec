@@ -1,0 +1,48 @@
+{
+  "authority": "development_evidence",
+  "bundle_ref": {
+    "id": "uow-fnd-example",
+    "kind": "evidence_bundle",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "bundle_version": "1.0.0",
+  "completeness": "complete",
+  "descriptor_ref": {
+    "id": "foundation-capability",
+    "kind": "eval_descriptor",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "descriptor_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "document_schema": {
+    "id": "https://agent-ops.ru/schemas/foundation_eval_result.schema.json",
+    "media_type": "application/schema+json",
+    "sha256": "85b5bb30ee8e32f71eca843e914d547b750562d5ad669e9350ad060ec7052f93",
+    "version": "1.0.0"
+  },
+  "evaluated_at": "2026-08-05T00:00:00Z",
+  "evaluation_subject_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "fixture_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "measurements": [
+    {
+      "metric": "pass_rate",
+      "unit": "ratio",
+      "value": "1.0"
+    }
+  ],
+  "outcome": "passed",
+  "owner_ref": {
+    "id": "platform-team",
+    "kind": "owner",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "ref": {
+    "id": "foundation-capability-result",
+    "kind": "eval_result",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "threshold_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+}

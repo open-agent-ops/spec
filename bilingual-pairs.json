@@ -1,0 +1,34 @@
+{
+  "entries": [
+    {
+      "english_path": "docs/normative/glossary.en.md",
+      "english_precedence": true,
+      "pair_id": "glossary",
+      "required": true,
+      "russian_path": "docs/normative/glossary.ru.md",
+      "source_revision": "aom-03-r12"
+    },
+    {
+      "english_path": "docs/normative/standards-map.en.md",
+      "english_precedence": true,
+      "pair_id": "standards-map",
+      "required": true,
+      "russian_path": "docs/normative/standards-map.ru.md",
+      "source_revision": "aom-03-r12"
+    },
+    {
+      "english_path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md",
+      "english_precedence": true,
+      "pair_id": "whitepaper",
+      "required": true,
+      "russian_path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md",
+      "source_revision": "aom-03-r12"
+    }
+  ],
+  "neutral_paths": [
+    "README.md",
+    "docs/whitepaper/CHANGELOG-en.md",
+    "docs/whitepaper/CHANGELOG-ru.md"
+  ],
+  "schema": "agent-ops.bilingual-pair-policy.v1"
+}

@@ -1,0 +1,62 @@
+{
+  "actor_role": "intent_owner",
+  "authority_scope": {
+    "actor_role": "intent_owner",
+    "blocked_action": "activate_intent",
+    "intent_ref": {
+      "id": "reduce-latency",
+      "kind": "operational_intent",
+      "namespace": "projects/example",
+      "version": "1.0.0"
+    },
+    "project_ref": {
+      "id": "example",
+      "kind": "project",
+      "namespace": "projects",
+      "version": "1.0.0"
+    },
+    "transition_id": "activate"
+  },
+  "blocked_action": "activate_intent",
+  "decision": "approve",
+  "document_schema": {
+    "id": "https://agent-ops.ru/schemas/foundation_human_decision.schema.json",
+    "media_type": "application/schema+json",
+    "sha256": "3f4727d7f3516f90afa3d7222da7dd4e8c71af9875641ef013c140bd5391baad",
+    "version": "1.0.0"
+  },
+  "expires_at": "2026-08-04T11:00:00Z",
+  "intent_ref": {
+    "id": "reduce-latency",
+    "kind": "operational_intent",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "issued_at": "2026-08-04T10:00:00Z",
+  "issuer_attestation_ref": {
+    "id": "decision-attestation",
+    "kind": "evidence_record",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "not_before": "2026-08-04T10:00:00Z",
+  "owner_ref": {
+    "id": "operator",
+    "kind": "owner",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "principal_ref": {
+    "id": "operator",
+    "kind": "owner",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "ref": {
+    "id": "activate-latency",
+    "kind": "human_decision",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "transition_id": "activate"
+}

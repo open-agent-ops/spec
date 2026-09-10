@@ -1,0 +1,132 @@
+concurrency:
+    cancel-in-progress: false
+    group: aom-release-${{ github.repository }}
+env:
+    AOM_ATTEMPT: ${{ github.run_attempt }}
+    AOM_BASE: ${{ github.event.pull_request.base.sha || github.sha }}
+    AOM_CANDIDATE: ${{ inputs.candidate_sha }}
+    AOM_EVENT: ${{ github.event_name }}
+    AOM_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+    AOM_INITIATOR: ${{ github.actor_id }}
+    AOM_REF: ${{ github.ref }}
+    AOM_REPOSITORY: ${{ github.repository }}
+    AOM_RUN: ${{ github.run_id }}
+    AOM_SHA: ${{ github.sha }}
+    AOM_VERSION: ${{ inputs.version }}
+    AOM_WORKFLOW: ${{ github.workflow_sha }}
+    GOTOOLCHAIN: local
+    GOWORK: "off"
+jobs:
+    build:
+        if: ${{ github.ref == 'refs/heads/main' && github.run_attempt == 1 && inputs.candidate_sha == github.sha }}
+        name: AOM / release-build
+        permissions:
+            contents: read
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+              with:
+                fetch-depth: 0
+                persist-credentials: false
+                ref: ${{ github.sha }}
+            - run: sh scripts/provision.sh
+            - run: go run -mod=readonly ./cmd/spec-check prepare-release
+            - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+              with:
+                if-no-files-found: error
+                include-hidden-files: true
+                name: release-candidate-${{ github.run_id }}
+                path: .aom-release/
+                retention-days: 90
+            - if: ${{ always() }}
+              name: Retain complete evidence
+              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+              with:
+                if-no-files-found: error
+                include-hidden-files: true
+                name: release-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+                path: .aom-evidence/
+                retention-days: 90
+        timeout-minutes: 45
+    mirror:
+        env:
+            AOM_MIRROR_REPOSITORY: ${{ vars.AOM_MIRROR_REPOSITORY }}
+            AOM_MIRROR_TOKEN: ${{ secrets.AOM_MIRROR_TOKEN }}
+        environment: public-mirror
+        name: AOM / mirror
+        needs:
+            - publish
+        permissions:
+            contents: read
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+              with:
+                fetch-depth: 0
+                persist-credentials: false
+                ref: ${{ github.sha }}
+            - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+              with:
+                name: release-candidate-${{ github.run_id }}
+                path: .aom-release/
+            - run: |-
+                chmod 700 .aom-release/spec-release
+                .aom-release/spec-release mirror > .aom-release/mirror-receipt.json
+            - if: ${{ always() }}
+              name: Retain publication observation
+              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+              with:
+                if-no-files-found: error
+                include-hidden-files: true
+                name: mirror-receipt-${{ github.run_id }}-${{ github.run_attempt }}
+                path: .aom-release/mirror-receipt.json
+                retention-days: 90
+        timeout-minutes: 30
+    publish:
+        env:
+            AOM_GITHUB_TOKEN: ${{ github.token }}
+            AOM_OWNER_IDS: ${{ vars.AOM_OWNER_IDS }}
+        environment: public-release
+        name: AOM / publish
+        needs:
+            - build
+        permissions:
+            actions: read
+            contents: write
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+              with:
+                fetch-depth: 0
+                persist-credentials: false
+                ref: ${{ github.sha }}
+            - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+              with:
+                name: release-candidate-${{ github.run_id }}
+                path: .aom-release/
+            - run: |-
+                chmod 700 .aom-release/spec-release
+                .aom-release/spec-release publish > .aom-release/publication-receipt.json
+            - if: ${{ always() }}
+              name: Retain publication observation
+              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+              with:
+                if-no-files-found: error
+                include-hidden-files: true
+                name: publication-receipt-${{ github.run_id }}-${{ github.run_attempt }}
+                path: .aom-release/publication-receipt.json
+                retention-days: 90
+        timeout-minutes: 30
+name: AOM release
+"on":
+    workflow_dispatch:
+        inputs:
+            candidate_sha:
+                description: Exact reviewed main commit (40 lowercase hex)
+                required: true
+                type: string
+            version:
+                description: Stable module SemVer v0.x.y or v1.x.y
+                required: true
+                type: string
+permissions: {}

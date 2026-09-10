@@ -1,0 +1,170 @@
+[
+  {
+    "path": "operational_intent/valid.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_operational_intent.schema.json",
+    "accepted": true,
+    "reason": ""
+  },
+  {
+    "path": "operational_intent/missing.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_operational_intent.schema.json",
+    "accepted": false,
+    "reason": "required"
+  },
+  {
+    "path": "operational_intent/extra.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_operational_intent.schema.json",
+    "accepted": false,
+    "reason": "additionalProperties"
+  },
+  {
+    "path": "operational_intent/type.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_operational_intent.schema.json",
+    "accepted": false,
+    "reason": "type"
+  },
+  {
+    "path": "evidence_bundle/valid.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_evidence_bundle.schema.json",
+    "accepted": true,
+    "reason": ""
+  },
+  {
+    "path": "evidence_bundle/missing.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_evidence_bundle.schema.json",
+    "accepted": false,
+    "reason": "required"
+  },
+  {
+    "path": "evidence_bundle/extra.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_evidence_bundle.schema.json",
+    "accepted": false,
+    "reason": "additionalProperties"
+  },
+  {
+    "path": "evidence_bundle/type.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_evidence_bundle.schema.json",
+    "accepted": false,
+    "reason": "type"
+  },
+  {
+    "path": "eval_result/valid.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_eval_result.schema.json",
+    "accepted": true,
+    "reason": ""
+  },
+  {
+    "path": "eval_result/missing.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_eval_result.schema.json",
+    "accepted": false,
+    "reason": "required"
+  },
+  {
+    "path": "eval_result/extra.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_eval_result.schema.json",
+    "accepted": false,
+    "reason": "additionalProperties"
+  },
+  {
+    "path": "eval_result/type.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_eval_result.schema.json",
+    "accepted": false,
+    "reason": "type"
+  },
+  {
+    "path": "governance_result/valid.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_governance_result.schema.json",
+    "accepted": true,
+    "reason": ""
+  },
+  {
+    "path": "governance_result/missing.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_governance_result.schema.json",
+    "accepted": false,
+    "reason": "required"
+  },
+  {
+    "path": "governance_result/extra.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_governance_result.schema.json",
+    "accepted": false,
+    "reason": "additionalProperties"
+  },
+  {
+    "path": "governance_result/type.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_governance_result.schema.json",
+    "accepted": false,
+    "reason": "type"
+  },
+  {
+    "path": "human_decision/valid.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_human_decision.schema.json",
+    "accepted": true,
+    "reason": ""
+  },
+  {
+    "path": "human_decision/missing.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_human_decision.schema.json",
+    "accepted": false,
+    "reason": "required"
+  },
+  {
+    "path": "human_decision/extra.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_human_decision.schema.json",
+    "accepted": false,
+    "reason": "additionalProperties"
+  },
+  {
+    "path": "human_decision/type.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_human_decision.schema.json",
+    "accepted": false,
+    "reason": "type"
+  },
+  {
+    "path": "outcome_check/valid.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_outcome_check.schema.json",
+    "accepted": true,
+    "reason": ""
+  },
+  {
+    "path": "outcome_check/missing.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_outcome_check.schema.json",
+    "accepted": false,
+    "reason": "required"
+  },
+  {
+    "path": "outcome_check/extra.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_outcome_check.schema.json",
+    "accepted": false,
+    "reason": "additionalProperties"
+  },
+  {
+    "path": "outcome_check/type.json",
+    "schema": "https://agent-ops.ru/schemas/foundation_outcome_check.schema.json",
+    "accepted": false,
+    "reason": "type"
+  },
+  {
+    "path": "run_request/valid.json",
+    "schema": "https://agent-ops.ru/schemas/run_request.schema.json",
+    "accepted": true,
+    "reason": ""
+  },
+  {
+    "path": "run_request/wrong-kind.json",
+    "schema": "https://agent-ops.ru/schemas/run_request.schema.json",
+    "accepted": false,
+    "reason": "enum"
+  },
+  {
+    "path": "run_request/wrong-version.json",
+    "schema": "https://agent-ops.ru/schemas/run_request.schema.json",
+    "accepted": false,
+    "reason": "pattern"
+  },
+  {
+    "path": "run_request/bad-digest.json",
+    "schema": "https://agent-ops.ru/schemas/run_request.schema.json",
+    "accepted": false,
+    "reason": "pattern"
+  }
+]

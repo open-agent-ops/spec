@@ -1,0 +1,79 @@
+{
+  "bundle_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "completion": [
+    {
+      "element_ids": [],
+      "mode": "present",
+      "role": "requirements_acceptance"
+    },
+    {
+      "element_ids": [],
+      "mode": "present",
+      "role": "implementation_identity"
+    },
+    {
+      "element_ids": [],
+      "mode": "present",
+      "role": "build_test_evidence"
+    },
+    {
+      "element_ids": [],
+      "mode": "present",
+      "role": "security_policy_attestations"
+    },
+    {
+      "element_ids": [],
+      "mode": "present",
+      "role": "eval_results"
+    },
+    {
+      "element_ids": [],
+      "mode": "present",
+      "role": "human_decisions"
+    },
+    {
+      "element_ids": [],
+      "mode": "present",
+      "role": "cost_usage"
+    },
+    {
+      "element_ids": [],
+      "mode": "present",
+      "role": "outcome_check"
+    }
+  ],
+  "document_schema": {
+    "id": "https://agent-ops.ru/schemas/foundation_evidence_bundle.schema.json",
+    "media_type": "application/schema+json",
+    "sha256": "316cfa34e430d27be34e39195dda237911d93f5267c606309cdac529d650e6e3",
+    "version": "1.0.0"
+  },
+  "elements": [],
+  "evaluation_subject_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "owner_ref": {
+    "id": "platform-team",
+    "kind": "owner",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "profile_ref": {
+    "id": "foundation-default",
+    "kind": "completion_profile",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "profile_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "project_ref": {
+    "id": "example",
+    "kind": "project",
+    "namespace": "projects",
+    "version": "1.0.0"
+  },
+  "ref": {
+    "id": "uow-fnd-example",
+    "kind": "evidence_bundle",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "state": "open"
+}

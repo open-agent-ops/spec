@@ -1,0 +1,11 @@
+{
+  "candidate_target": null,
+  "drift_status": "editorial_review_corrections_incorporated_pending_exact_target_review_and_build_test",
+  "english_precedence": true,
+  "pair_policy": "bilingual-pairs.json",
+  "previous_public_target": "68cc6bd41c047e59745eeb3477c381d2e3c231b7",
+  "schema": "agent-ops.bilingual-revision.v1",
+  "source_revision": "aom-03-r12",
+  "supersedes_version": "v0.3.3",
+  "version": "v0.4.0"
+}

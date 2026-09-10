@@ -1,0 +1,109 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "aom04a.publication-receipt.v1"
+    },
+    "repository": {
+      "const": "github.com/open-agent-ops/spec"
+    },
+    "candidate": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^v(0|1)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "proposal": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "canonical": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "verified",
+        "incomplete",
+        "conflict",
+        "unknown"
+      ]
+    },
+    "mirror": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "verified",
+        "incomplete",
+        "conflict",
+        "unknown"
+      ]
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "^[A-Za-z0-9_.][A-Za-z0-9_./-]*$"
+          },
+          "sha256": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 67108864
+          }
+        },
+        "required": [
+          "name",
+          "sha256",
+          "size"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 16
+    },
+    "observed_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096,
+        "pattern": "^[1-9][0-9]{0,19}$"
+      },
+      "maxItems": 1000
+    },
+    "fixture_only": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema",
+    "repository",
+    "candidate",
+    "version",
+    "proposal",
+    "canonical",
+    "mirror",
+    "assets",
+    "observed_ids",
+    "fixture_only"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-agent-ops.org/process/publication-receipt.v1"
+}

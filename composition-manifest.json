@@ -1,0 +1,1220 @@
+{
+  "maturity": "candidate-v0.4.0",
+  "paths": [
+    ".github/ISSUE_TEMPLATE/bug.yml",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/ISSUE_TEMPLATE/proposal.yml",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    "CODEOWNERS",
+    "COMPATIBILITY.md",
+    "CONTRIBUTING.md",
+    "GOVERNANCE.md",
+    "LICENSE",
+    "LICENSE-docs",
+    "NOTICE",
+    "README.md",
+    "SECURITY.md",
+    "VERSIONING.md",
+    "bilingual-pairs.json",
+    "cmd/spec-check/main.go",
+    "cmd/spec-release/main.go",
+    "composition-manifest.json",
+    "conformance/assessment.go",
+    "conformance/assessment_test.go",
+    "conformance/boundaries_test.go",
+    "conformance/compiler.go",
+    "conformance/compiler_test.go",
+    "conformance/input.go",
+    "conformance/input_test.go",
+    "conformance/properties_test.go",
+    "conformance/testdata/eval_result/extra.json",
+    "conformance/testdata/eval_result/missing.json",
+    "conformance/testdata/eval_result/type.json",
+    "conformance/testdata/eval_result/valid.json",
+    "conformance/testdata/evidence_bundle/extra.json",
+    "conformance/testdata/evidence_bundle/missing.json",
+    "conformance/testdata/evidence_bundle/type.json",
+    "conformance/testdata/evidence_bundle/valid.json",
+    "conformance/testdata/governance_result/extra.json",
+    "conformance/testdata/governance_result/missing.json",
+    "conformance/testdata/governance_result/type.json",
+    "conformance/testdata/governance_result/valid.json",
+    "conformance/testdata/human_decision/extra.json",
+    "conformance/testdata/human_decision/missing.json",
+    "conformance/testdata/human_decision/type.json",
+    "conformance/testdata/human_decision/valid.json",
+    "conformance/testdata/index.json",
+    "conformance/testdata/operational_intent/extra.json",
+    "conformance/testdata/operational_intent/missing.json",
+    "conformance/testdata/operational_intent/type.json",
+    "conformance/testdata/operational_intent/valid.json",
+    "conformance/testdata/outcome_check/extra.json",
+    "conformance/testdata/outcome_check/missing.json",
+    "conformance/testdata/outcome_check/type.json",
+    "conformance/testdata/outcome_check/valid.json",
+    "conformance/testdata/run_request/bad-digest.json",
+    "conformance/testdata/run_request/valid.json",
+    "conformance/testdata/run_request/wrong-kind.json",
+    "conformance/testdata/run_request/wrong-version.json",
+    "docs/contributing.md",
+    "docs/normative/glossary.en.md",
+    "docs/normative/glossary.ru.md",
+    "docs/normative/standards-map.en.md",
+    "docs/normative/standards-map.ru.md",
+    "docs/releasing.md",
+    "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md",
+    "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
+    "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md",
+    "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
+    "docs/whitepaper/CHANGELOG-en.md",
+    "docs/whitepaper/CHANGELOG-ru.md",
+    "docs/whitepaper/images/agent-ops-12-principles-en.png",
+    "docs/whitepaper/images/agent-ops-12-principles-ru.png",
+    "docs/whitepaper/images/agent-ops-8-steps-en.png",
+    "docs/whitepaper/images/agent-ops-8-steps-ru.png",
+    "docs/whitepaper/images/governance-plane-en.png",
+    "docs/whitepaper/images/governance-plane-ru.png",
+    "docs/whitepaper/images/independent-assurance-plane-en.png",
+    "docs/whitepaper/images/independent-assurance-plane-ru.png",
+    "docs/whitepaper/images/metric-cardinality-freshness-en.png",
+    "docs/whitepaper/images/metric-cardinality-freshness-ru.png",
+    "docs/whitepaper/images/rapid-disk-filling-scenario-en.png",
+    "docs/whitepaper/images/rapid-disk-filling-scenario-ru.png",
+    "docs/whitepaper/images/six-scales-en.png",
+    "docs/whitepaper/images/six-scales-ru.png",
+    "docs/whitepaper/images/three-planes-en.png",
+    "docs/whitepaper/images/three-planes-ru.png",
+    "go.mod",
+    "go.sum",
+    "process/policy.json",
+    "process/schemas/gate-record.schema.json",
+    "process/schemas/publication-receipt.schema.json",
+    "process/schemas/release-proposal.schema.json",
+    "process/schemas/review-decision.schema.json",
+    "process/schemas/submission.schema.json",
+    "process/toolchain.lock.json",
+    "publication-manifest.json",
+    "releaseops/attempt_log.go",
+    "releaseops/client.go",
+    "releaseops/client_test.go",
+    "releaseops/credentials.go",
+    "releaseops/github.go",
+    "releaseops/github_test.go",
+    "releaseops/mirror.go",
+    "releaseops/process_other.go",
+    "releaseops/process_unix.go",
+    "releaseops/properties_test.go",
+    "releaseops/retry.go",
+    "releaseops/retry_test.go",
+    "repocheck/contracts_test.go",
+    "repocheck/docs.go",
+    "repocheck/input.go",
+    "repocheck/policy.go",
+    "repocheck/policy_test.go",
+    "repocheck/properties_test.go",
+    "repocheck/records.go",
+    "repocheck/release_evidence.go",
+    "repocheck/release_evidence_test.go",
+    "repocheck/vulnerability.go",
+    "repocheck/vulnerability_test.go",
+    "repocheck/workflow.go",
+    "review-summary.json",
+    "revision-manifest.json",
+    "schemas/ai_agent_context.schema.json",
+    "schemas/anomaly_rule.schema.json",
+    "schemas/check_card.schema.json",
+    "schemas/check_result.schema.json",
+    "schemas/declared_inventory.schema.json",
+    "schemas/descriptor_corpus_pack.schema.json",
+    "schemas/diagnostic_report.schema.json",
+    "schemas/dialect.schema.json",
+    "schemas/drift.schema.json",
+    "schemas/embed.go",
+    "schemas/foundation_consumer_context.schema.json",
+    "schemas/foundation_contract_registry.schema.json",
+    "schemas/foundation_decision_map.schema.json",
+    "schemas/foundation_discovery_assessment.schema.json",
+    "schemas/foundation_eval_descriptor.schema.json",
+    "schemas/foundation_eval_result.schema.json",
+    "schemas/foundation_evidence_bundle.schema.json",
+    "schemas/foundation_evidence_completion_profile.schema.json",
+    "schemas/foundation_governance_policy.schema.json",
+    "schemas/foundation_governance_result.schema.json",
+    "schemas/foundation_human_decision.schema.json",
+    "schemas/foundation_object_ref.schema.json",
+    "schemas/foundation_object_ref_v1_1.schema.json",
+    "schemas/foundation_object_ref_v1_2.schema.json",
+    "schemas/foundation_object_ref_v1_3.schema.json",
+    "schemas/foundation_operational_intent.schema.json",
+    "schemas/foundation_outcome_check.schema.json",
+    "schemas/foundation_producer_attestation.schema.json",
+    "schemas/foundation_publication_index.schema.json",
+    "schemas/foundation_run_manifest.schema.json",
+    "schemas/foundation_semantic_object.schema.json",
+    "schemas/foundation_semantic_object_v1_1.schema.json",
+    "schemas/foundation_semantic_object_v1_2.schema.json",
+    "schemas/foundation_semantic_object_v1_3.schema.json",
+    "schemas/foundation_validation_result.schema.json",
+    "schemas/harness_agents.schema.json",
+    "schemas/harness_environment.schema.json",
+    "schemas/harness_fixture_lock.schema.json",
+    "schemas/harness_fixture_ownership.schema.json",
+    "schemas/harness_fixture_provenance.schema.json",
+    "schemas/harness_knowledge.schema.json",
+    "schemas/harness_manifest.schema.json",
+    "schemas/harness_observability_ref.schema.json",
+    "schemas/harness_observability_ref_v1_1.schema.json",
+    "schemas/harness_policy.schema.json",
+    "schemas/harness_project.schema.json",
+    "schemas/harness_result.schema.json",
+    "schemas/harness_runbook.schema.json",
+    "schemas/harness_source_authority.schema.json",
+    "schemas/harness_tools.schema.json",
+    "schemas/inventory.go",
+    "schemas/kubernetes_inventory.schema.json",
+    "schemas/observability_adapter_ref.schema.json",
+    "schemas/observability_candidate.schema.json",
+    "schemas/observability_discovery_envelope.schema.json",
+    "schemas/observability_inventory.schema.json",
+    "schemas/observability_readiness.schema.json",
+    "schemas/packages.schema.json",
+    "schemas/properties_test.go",
+    "schemas/recommendations.schema.json",
+    "schemas/registry_test.go",
+    "schemas/run_envelope.schema.json",
+    "schemas/run_fnd_embed.go",
+    "schemas/run_plan.schema.json",
+    "schemas/run_request.schema.json",
+    "schemas/terraform_inventory.schema.json",
+    "scripts/check.sh",
+    "scripts/provision.sh"
+  ],
+  "schema": "agent-ops.composition-manifest.v1",
+  "files": [
+    {
+      "path": "CODEOWNERS",
+      "kind": "regular",
+      "sha256": "3aace6e0cb433a7f9142c50b796fae5bfd6c6765cbc39d46d0bcc5d3b25e5092",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "COMPATIBILITY.md",
+      "kind": "regular",
+      "sha256": "6455d250d230cafb12f7d31f0752ce4c338247abed5284d9096423386ad93862",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "kind": "regular",
+      "sha256": "060febb3832c695f1b50eb63937285f92ceebfd7a0116db4882f56cba6dcd699",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "GOVERNANCE.md",
+      "kind": "regular",
+      "sha256": "a2b9297530a56a321066600e2fb5a50c297f91e335fb0a53f1a638938179a0ba",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "LICENSE",
+      "kind": "regular",
+      "sha256": "dac9efa90d5f1311cc83cc968f7d68c89a15a98af65c508e51349b09d4d55749",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "LICENSE-docs",
+      "kind": "regular",
+      "sha256": "7586cb00c75df4b76b7c1da60b3f64ca37cf16eeac3417b84daea2c8b468a768",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "NOTICE",
+      "kind": "regular",
+      "sha256": "8641f052f4b92f477be1c1f3b63a05b440a006524b3471ed6f8ce01d6f572317",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "README.md",
+      "kind": "regular",
+      "sha256": "76b2f946d2a67949ac2d8aaadb810daa0aec3ef7d16d06f177d4bff2f5cb717d",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "SECURITY.md",
+      "kind": "regular",
+      "sha256": "e210a1624ea62b253680eaba9eb3f9f1f0484d0b0b9f0a377a7a7694784b6e34",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "VERSIONING.md",
+      "kind": "regular",
+      "sha256": "bf7d75353de2c5452ccf76f69db251442a897f9c35be777ca7b86a47351d0b81",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "bilingual-pairs.json",
+      "kind": "regular",
+      "sha256": "72069a1927223bd6fb8af486cc9637467694f40a9abcf6f1c83ebfbbe9dbbc75",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "composition-manifest.json",
+      "kind": "regular",
+      "sha256": null,
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/assessment.go",
+      "kind": "regular",
+      "sha256": "f1fd4bacc1e200b030df8e2b6063e5a4414bfb2b61295ae418170189aac54185",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/assessment_test.go",
+      "kind": "regular",
+      "sha256": "e04c9661c17cfed1cf5accde3c423f61593240ef0655820a2de9ac346a940c48",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/boundaries_test.go",
+      "kind": "regular",
+      "sha256": "e56ad4989affe996de07d2d5bfd1c0cfc8516713a9b4ce49b4e9ea3a7448bc40",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/compiler.go",
+      "kind": "regular",
+      "sha256": "5aea259b95746500f8e574d98cf74e4ee8a287be7b6bc85b08d1ab24b0f23a50",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/compiler_test.go",
+      "kind": "regular",
+      "sha256": "5d274da9a6978ae0e80fb8ede8e46193d9f3dc0ad0317217c6e7bc243dea2587",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/input.go",
+      "kind": "regular",
+      "sha256": "724af573885c783f5ebcabfc5bec7dcd14151d3d6212a6b86d99707f3f5f611d",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/input_test.go",
+      "kind": "regular",
+      "sha256": "199c04bce66b5753d37d14eb4c87aa08adbc0a5e8ee111c7db88a0605d0fe509",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/properties_test.go",
+      "kind": "regular",
+      "sha256": "6329e04f95b01fd57996de41bf21bccb030278fc3c2ba6c97d02c03a86c2b78b",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/eval_result/extra.json",
+      "kind": "regular",
+      "sha256": "a65b37ded1ed0909defbc93386d0432cfd5e0144390bbea653544b45d8576285",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/eval_result/missing.json",
+      "kind": "regular",
+      "sha256": "9a034f0fdd2c97852bff9d7d36d9fc95e8c836896fe62d2120372fa9a2b66328",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/eval_result/type.json",
+      "kind": "regular",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/eval_result/valid.json",
+      "kind": "regular",
+      "sha256": "c3d81f26cde9b138cc0f439cd998ff8ccc380c3844789627ed76b1d43599e539",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/evidence_bundle/extra.json",
+      "kind": "regular",
+      "sha256": "43e99733fde12b16f435d5d68fc55fd6927b0d9229b03f9f9195956a5c69853b",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/evidence_bundle/missing.json",
+      "kind": "regular",
+      "sha256": "12988e21678f3b3d6e983eec10166401cbdab0c3240e678fbd090bf727b87719",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/evidence_bundle/type.json",
+      "kind": "regular",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/evidence_bundle/valid.json",
+      "kind": "regular",
+      "sha256": "70305ecf6e156fc73c3f79a7ed5c6afdd9f756db35fb903323d5de6d4b8e15c5",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/governance_result/extra.json",
+      "kind": "regular",
+      "sha256": "d3128f80a8f4be41a2badf70ee849b5a088c9b5f3dc1e31673bbd8d1c8c5d543",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/governance_result/missing.json",
+      "kind": "regular",
+      "sha256": "5219c6cb8a569e81696bda712609e8202cfccf062abe95e61d233ec6f89ea0d9",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/governance_result/type.json",
+      "kind": "regular",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/governance_result/valid.json",
+      "kind": "regular",
+      "sha256": "d38c5b3975e09410ec789bea114be904a6a3a2d632f5a19114b11dd656c4880a",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/human_decision/extra.json",
+      "kind": "regular",
+      "sha256": "787a1723f13ec9346c40e1044e25ebebacaaae30c2a97b466ff1ccbde54d8aba",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/human_decision/missing.json",
+      "kind": "regular",
+      "sha256": "929d89a1f5697859d6fd43ea3acf9dd89ca6ae3e693875cadc4aedbb39326dcb",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/human_decision/type.json",
+      "kind": "regular",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/human_decision/valid.json",
+      "kind": "regular",
+      "sha256": "ed7498d77416a7a5ce7d379afcda015e6bfc7301bd63164305f1e774abf55887",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/index.json",
+      "kind": "regular",
+      "sha256": "307feac8bc660dbb163c2dedfa5c4f2e047e6917dc7d23104d2e8e024781d8de",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/operational_intent/extra.json",
+      "kind": "regular",
+      "sha256": "f7dd95343abf956a11c76853210df071097503ea3701a1aba3726727640473e7",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/operational_intent/missing.json",
+      "kind": "regular",
+      "sha256": "e524d9acf68df07d34ced0a93d634859b0f61f5396fabde85fca6f3378389bd3",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/operational_intent/type.json",
+      "kind": "regular",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/operational_intent/valid.json",
+      "kind": "regular",
+      "sha256": "9605aeafcd99d657f4e474fe609697cc45cfd996bc12d02f2e394e63024e337a",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/outcome_check/extra.json",
+      "kind": "regular",
+      "sha256": "cb5736ef9575e8365fa98c8ee35302ffa2b97cf1828183dda7db0da45af61271",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/outcome_check/missing.json",
+      "kind": "regular",
+      "sha256": "eb3bcfed35cdbd7402412a2dd80c08ed8b2e06eca95fded0e216dba9a71d4312",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/outcome_check/type.json",
+      "kind": "regular",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/outcome_check/valid.json",
+      "kind": "regular",
+      "sha256": "0aa9117f312902a34758c56a8892161be20e20a0dc6d5193bfe67a7396d0c655",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/run_request/bad-digest.json",
+      "kind": "regular",
+      "sha256": "bd5e8b235bed05208452f4ed74cdfab0f611b4d9bc3fbdb626da7c061b871267",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/run_request/valid.json",
+      "kind": "regular",
+      "sha256": "79c8f3042ad75767d6827e1aaf56debd9ed832627057368441412b924e942a14",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/run_request/wrong-kind.json",
+      "kind": "regular",
+      "sha256": "c6aac2f60ad743f15f829613d6a3852181e0b23aa36541e2051e1431acc1e217",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/testdata/run_request/wrong-version.json",
+      "kind": "regular",
+      "sha256": "a52f4f4951151392147f531710dffb254a665185e92c1faa6bfb28e98ec4a5ed",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "docs/normative/glossary.en.md",
+      "kind": "regular",
+      "sha256": "de718e2625d55cf6b78abeac7caf1d28d638cc30acfe801e0e6402a3f6bedd7f",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/normative/glossary.ru.md",
+      "kind": "regular",
+      "sha256": "25faf434ef1ec63189faf23ccc6546a92d76ee1d3e3d4923fb9afab67239f55d",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/normative/standards-map.en.md",
+      "kind": "regular",
+      "sha256": "a5d709aa61151b9c6362a3d1325878cd83491f136fbadc5880ea9126677bf04d",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/normative/standards-map.ru.md",
+      "kind": "regular",
+      "sha256": "4ab2d37390e29441d4708c018c40940c9fae3a8f22f80b5fed57556731bc6030",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md",
+      "kind": "regular",
+      "sha256": "76fa0a8bf57c1c8a2ca542873893232a0cc5fc4381647ebbfaddc4d3e74d0c60",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
+      "kind": "regular",
+      "sha256": "827329a369bd53a456a75c7653eee1c56b3d46a527ef8b5a70d298d59b3e3e00",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md",
+      "kind": "regular",
+      "sha256": "9cf181d409d3d1b0464f7b98943a7ab712b024deb263b80e408698ef8ef96d18",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
+      "kind": "regular",
+      "sha256": "738377524ea8e10305c4189c4cde575d95550934232a0dfe67ca503809f88d57",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/CHANGELOG-en.md",
+      "kind": "regular",
+      "sha256": "9f93ce1be033505bf30520f759aa2eb21af9301157e1e14ce10082d36d898df3",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/CHANGELOG-ru.md",
+      "kind": "regular",
+      "sha256": "065aacf0b0328337dae072fd961fe2b9d8526547316cb61441bf9dc51b6bfeb2",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/agent-ops-12-principles-en.png",
+      "kind": "regular",
+      "sha256": "c645af9c240f83898fea3c11d840f43b102d76b55371f849018881b1254772e7",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/agent-ops-12-principles-ru.png",
+      "kind": "regular",
+      "sha256": "347a36b860782aa7efc99b891010e7ac76d4c716b7deac3898662413759bd9c7",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/agent-ops-8-steps-en.png",
+      "kind": "regular",
+      "sha256": "1c4917be9f23ae4ed28b8054175caa0453b6c91265916728e522590b0a6f122a",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/agent-ops-8-steps-ru.png",
+      "kind": "regular",
+      "sha256": "7a80aeef01c38d5f31f2641ba4830ed0ec95abbc4712c433b7d5d70f4f12e45f",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/governance-plane-en.png",
+      "kind": "regular",
+      "sha256": "2e03f41015b2009f404f4966a0d4848a9c1151a01afb43fd9144fe31fd50aaf8",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/governance-plane-ru.png",
+      "kind": "regular",
+      "sha256": "97a5ac4d7a64c20111aafd13746375bac3568815b6be5669aa90e4cc1afd549e",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/independent-assurance-plane-en.png",
+      "kind": "regular",
+      "sha256": "0b69d7a14f7fab2a7def41702001859eb111a916ab611ebdf3203bbdd9067eea",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/independent-assurance-plane-ru.png",
+      "kind": "regular",
+      "sha256": "a0983058adee254ca293f9f9e4f71c4f02e7f96cb64dbac852f31ee7d590d771",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/metric-cardinality-freshness-en.png",
+      "kind": "regular",
+      "sha256": "3db8356c2cc76ccc7b72dd6014335ce18b5829651ffd5e27abb61f5d083bbdbe",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/metric-cardinality-freshness-ru.png",
+      "kind": "regular",
+      "sha256": "12c0e5250135f8b07bbaaa76150da64e35a4044ff83170ca2b234b7b10516ec4",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/rapid-disk-filling-scenario-en.png",
+      "kind": "regular",
+      "sha256": "a925ba8257d03b417ea4ba89dac26cd6982fcfc924bdddc181c814faff4d4ca3",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/rapid-disk-filling-scenario-ru.png",
+      "kind": "regular",
+      "sha256": "85c9d47e35c22a3e4ce52d7d8143aa6b580aa8b8d3a38513ee0f4b372879efa5",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/six-scales-en.png",
+      "kind": "regular",
+      "sha256": "b395d5efca4fc1b9995246d0f2fb5e76a18a4d184fb0a1a04509f9db6b07ef81",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/six-scales-ru.png",
+      "kind": "regular",
+      "sha256": "afd1b00a42b089231d2a8d95869b6767069d32d9e1a7cc8da3d011865e59ac51",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/three-planes-en.png",
+      "kind": "regular",
+      "sha256": "db84532a1b0f36b2b2376bc47732b0d7a39ae0a6cb9cb5a14240ea1cddbbd979",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/images/three-planes-ru.png",
+      "kind": "regular",
+      "sha256": "a48ed1f78208fbd5ab9e3bedec3ee6a718c51637bb7f26817cb9143f060504a6",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "go.mod",
+      "kind": "regular",
+      "sha256": "66284d82513aabda9fd656e4e92111d37b1a083a1bc60e00cf1a3c2fe66c605f",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "go.sum",
+      "kind": "regular",
+      "sha256": "68508c54fd238f8c7fb5e4e34a3aba9c61210151372f00ad22117ea0b450b01f",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "publication-manifest.json",
+      "kind": "regular",
+      "sha256": "be7d58bece88f5f8c4ee5421859100e177cf925e4fc4b09a9ce894527b9f4fe2",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "review-summary.json",
+      "kind": "regular",
+      "sha256": "bb676fca68278ff62fb446e14ae390f6ca2446bc3b7ff4ff3176dc61d94a7539",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "revision-manifest.json",
+      "kind": "regular",
+      "sha256": "7215cc0f91daf33f7fc5884fab9a8f2fd300f0ba14a5eaa526f61dd0fdd15ddb",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/ai_agent_context.schema.json",
+      "kind": "regular",
+      "sha256": "b902939b6ef2d7ec6890dc3367a2a278e78f7c3b523c0877dec03eae92156500",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/anomaly_rule.schema.json",
+      "kind": "regular",
+      "sha256": "339ffb4a090356a06dd9431b0252841e5f3891472b7c2e75d406967cb5213459",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/check_card.schema.json",
+      "kind": "regular",
+      "sha256": "950d6a1d834f2bc8952ce7042cc520ab5bae23bf1f0c262889816f3b3005d68b",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/check_result.schema.json",
+      "kind": "regular",
+      "sha256": "ece461dffec8c908e83e0dff6a0a83660312147b53635a16feb3454f5560f2ae",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/declared_inventory.schema.json",
+      "kind": "regular",
+      "sha256": "8184567b5f9209311cc18f748924e98506c915e0e96409ad4f956fa320376da5",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/descriptor_corpus_pack.schema.json",
+      "kind": "regular",
+      "sha256": "f933876f42143e405aa63dc3256b9b3e3dae5ebf310acb38153d0097073be9a9",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/diagnostic_report.schema.json",
+      "kind": "regular",
+      "sha256": "b9e03a479494a2abf596a00095fae3417d6954fb868c93cb34f816c53c95f8e2",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/dialect.schema.json",
+      "kind": "regular",
+      "sha256": "a940424dd5f33af6a37787a99ece4db012805e2681d91c8ec823bfa6aaf4f163",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/drift.schema.json",
+      "kind": "regular",
+      "sha256": "134b54edccce139a328089ec3ba09eeebeaee2d8c319423000bfbf030bc149d8",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/embed.go",
+      "kind": "regular",
+      "sha256": "56c6c317be595b6a880b444933774a094479133d0524e6f58280141d33b070de",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_consumer_context.schema.json",
+      "kind": "regular",
+      "sha256": "7c0e856a6f09adcd4c2c40fa4e0dae73986f21cb5f337c2a9d9bdf397d752152",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_contract_registry.schema.json",
+      "kind": "regular",
+      "sha256": "def506b7f1a89d0c7fb28ded3e08d792c644ad74efea5bf44491efd7d768e32a",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_decision_map.schema.json",
+      "kind": "regular",
+      "sha256": "2902e31b1f7c17b7c975f8480c3d78ab16ba6af8152211d218dd8786710ab7f4",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_discovery_assessment.schema.json",
+      "kind": "regular",
+      "sha256": "a9ddf59a1a4ecdbf8ea1100ade35194f53efca46965059cbc495e020df9506cc",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_eval_descriptor.schema.json",
+      "kind": "regular",
+      "sha256": "98b596a9cfc2f98fcbc351bd13100a2eac285ba6c5c26cb4349c414e7c12e5ba",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_eval_result.schema.json",
+      "kind": "regular",
+      "sha256": "85b5bb30ee8e32f71eca843e914d547b750562d5ad669e9350ad060ec7052f93",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_evidence_bundle.schema.json",
+      "kind": "regular",
+      "sha256": "316cfa34e430d27be34e39195dda237911d93f5267c606309cdac529d650e6e3",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_evidence_completion_profile.schema.json",
+      "kind": "regular",
+      "sha256": "1a1001d8a89e0107ac40c855759b689acfc713e9e9d9700fbc736beccaa8a303",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_governance_policy.schema.json",
+      "kind": "regular",
+      "sha256": "65ce18ada3c510bc3bc2c06d50b5b61a36aecffcd33673f1df4cb11f60447ce9",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_governance_result.schema.json",
+      "kind": "regular",
+      "sha256": "faddfa65b208e15c19963b310e78f52cda2191577a840cd24b2a3e136d98ca0f",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_human_decision.schema.json",
+      "kind": "regular",
+      "sha256": "3f4727d7f3516f90afa3d7222da7dd4e8c71af9875641ef013c140bd5391baad",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_object_ref.schema.json",
+      "kind": "regular",
+      "sha256": "92c9559d9e384e56543aeabe1c3dbab07580d748dd07ffecb3ec7bc5073295e7",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_object_ref_v1_1.schema.json",
+      "kind": "regular",
+      "sha256": "0badd2a6cb55aea0f983b120811b30c1a61b159a49828da605aeff3104b6d6ad",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_object_ref_v1_2.schema.json",
+      "kind": "regular",
+      "sha256": "0fba8858ec4bf213320097ce7c138c6adc9f9958682699bc4dcee4ee7192f019",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_object_ref_v1_3.schema.json",
+      "kind": "regular",
+      "sha256": "a42a60cedf7a91b8639a6a085e1e28ab665d04885a2b616225a19170c31d02ff",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_operational_intent.schema.json",
+      "kind": "regular",
+      "sha256": "8d18026815ffabd75952ae278b4d6af213539da2b6b009ff3e8dd85e95700246",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_outcome_check.schema.json",
+      "kind": "regular",
+      "sha256": "6f82fa84555765cc4108a7ab19185a06ea6adee7d78e49c2d648b082fdc180e8",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_producer_attestation.schema.json",
+      "kind": "regular",
+      "sha256": "57a3f0a2dee19b87106a60fc2599ce97a89fc602c23af0520e5f89bef7a97090",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_publication_index.schema.json",
+      "kind": "regular",
+      "sha256": "75ed8503f200fd6fcad21851e7eb131d3cdb0c8526c5bbac85144ff2aca12362",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_run_manifest.schema.json",
+      "kind": "regular",
+      "sha256": "09669a2eba938a3fd992fa8f7c701bd7c6341c0f903f68540cfb5183485a8947",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_semantic_object.schema.json",
+      "kind": "regular",
+      "sha256": "a7125fa5e3cb4fc7803bba004170d18cd3325c85674a8266fd36794d1143d941",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_semantic_object_v1_1.schema.json",
+      "kind": "regular",
+      "sha256": "39ca7e5eac6160d2ffc724704379357c5a1b580a2d1fc6f06a898cc6a9b72941",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_semantic_object_v1_2.schema.json",
+      "kind": "regular",
+      "sha256": "91f398fbe6aeac3423b13850723d759cae4fe8074fecfb1a8c1bae275a28d64b",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_semantic_object_v1_3.schema.json",
+      "kind": "regular",
+      "sha256": "732044b18cdd07febb59d997515b3e0b2312cc183e241d928d0727557034aedd",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/foundation_validation_result.schema.json",
+      "kind": "regular",
+      "sha256": "26128273d307f7c8cfbb41dcd4be54e97e070af04f35cd757b733f3b94c2dd5b",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_agents.schema.json",
+      "kind": "regular",
+      "sha256": "b3d6c05db4152e3cc02706dd06adbe2bf70a27424259495056c806bffbfcf989",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_environment.schema.json",
+      "kind": "regular",
+      "sha256": "156c60e963cf20c64e64ef402b2b36735ed4b6947b77c735e4a89c5f5694c2d3",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_fixture_lock.schema.json",
+      "kind": "regular",
+      "sha256": "e9a2f9980876795a9ee07118b20cc3a0f3a32c0223da25255789e689a0fdddc9",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_fixture_ownership.schema.json",
+      "kind": "regular",
+      "sha256": "6cea4060ec6e33bb06331dc263837ed79fb78866a894e5f9040475d87d58dbcb",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_fixture_provenance.schema.json",
+      "kind": "regular",
+      "sha256": "fe8be46030b7541b4d4ef2014cb46a038d1b7e0905c6c778a9c06de57517bb74",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_knowledge.schema.json",
+      "kind": "regular",
+      "sha256": "33b7b2c8ad16fe0fc7a8ff0f0e538f2ddbbc99241ec7765000ed30d930d0edfe",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_manifest.schema.json",
+      "kind": "regular",
+      "sha256": "37288a4903b594966ab993d26f1e15ce9bba0c153517043d8d10a041be2ae520",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_observability_ref.schema.json",
+      "kind": "regular",
+      "sha256": "21f6d7b025ca33da397a603f13af11c6a1c76af9b7c7f3a9b0cda2877840742b",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_observability_ref_v1_1.schema.json",
+      "kind": "regular",
+      "sha256": "fe2421327ef17f8bc82203b5bcaa36a117789a60129cdbe7592eb7f563ac57dc",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_policy.schema.json",
+      "kind": "regular",
+      "sha256": "27a27136336b42f9a06c8ecd4cd26e477dab87a44582e2ca24c7f612a42fa797",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_project.schema.json",
+      "kind": "regular",
+      "sha256": "1a6c12c183e1fb5505f82d88ccfff6f1474db29659659f56db707f192f22beda",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_result.schema.json",
+      "kind": "regular",
+      "sha256": "e0fbacbee7f7757b1447b6b47dceaa0e9bdcfb1fcd3c40f2c78628a3dcc30a38",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_runbook.schema.json",
+      "kind": "regular",
+      "sha256": "b9ae1124b9d24e8b621918e00eb27ff3d6b2f0661d71040ab7627091eb2aebfd",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_source_authority.schema.json",
+      "kind": "regular",
+      "sha256": "e5d1d4bfa9f7fa2822dd4ce5cc1898eba4e8f23210b862b5823014ba0d1a0d38",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/harness_tools.schema.json",
+      "kind": "regular",
+      "sha256": "944e9210dabcaa8c4eab32feebf3e8bffe97583c11008fa4e09077d094faef60",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/inventory.go",
+      "kind": "regular",
+      "sha256": "368a40ff6256f44024d1dc7d3fb436b28df26d542577df4721f6cf26ed38cda9",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/kubernetes_inventory.schema.json",
+      "kind": "regular",
+      "sha256": "654df5a655a35f9937f758aab7e34e0e9907caa16fb1b26dbb9241c4cf578f71",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/observability_adapter_ref.schema.json",
+      "kind": "regular",
+      "sha256": "c7ba28703c82800a0c94265fff04585185a32646853a945bf43ec274a2c94cd7",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/observability_candidate.schema.json",
+      "kind": "regular",
+      "sha256": "de79253418137b7b457cef52b41d06e15083c3ac259b774b5f3a8ef3dfa0eaf4",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/observability_discovery_envelope.schema.json",
+      "kind": "regular",
+      "sha256": "04a5da2b7d1f90f4b17959f22bdfad242423d6f3fbe27751e19b519df133364f",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/observability_inventory.schema.json",
+      "kind": "regular",
+      "sha256": "dc323bc236aec22c935a705240d901dfdcd158587c99afa542dffb9a84a6db8e",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/observability_readiness.schema.json",
+      "kind": "regular",
+      "sha256": "dca9387f81c15b3e42fce75ab3f95839b22fdee0b131bc21c8ac951279fc63b5",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/packages.schema.json",
+      "kind": "regular",
+      "sha256": "bec40e1cb78ff7e538d5e573422f18bb773e34c24f0eb5413e31c1b723019359",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/properties_test.go",
+      "kind": "regular",
+      "sha256": "493a37228bb17c34b381cb6e9b8259dbe4b2b1f837b39af5ca59ebf2108501a7",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/recommendations.schema.json",
+      "kind": "regular",
+      "sha256": "d54b4cf7dcfe1a4f84e04c065996e050ff24504ab26685eccbe2b1e62f1afa57",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/registry_test.go",
+      "kind": "regular",
+      "sha256": "9ed0364e4a556b72bf24a2813190b42fc0ba62ac226fd54ad2cbc35129001f5a",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/run_envelope.schema.json",
+      "kind": "regular",
+      "sha256": "2c0794faa41aa412609e2b677322cefad2beeac3f3a40d7a30a5c9d554250bb9",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/run_fnd_embed.go",
+      "kind": "regular",
+      "sha256": "c60f42e79554ee53c2b765dd0dcf02933dd76a45b01cef9d3a1dd6079c1f8cbe",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/run_plan.schema.json",
+      "kind": "regular",
+      "sha256": "904417c9213725e478c99ef7e4187610538de866847e074bd52306024b74ac3e",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/run_request.schema.json",
+      "kind": "regular",
+      "sha256": "a977b2a1ab52e4516f0ebe7abd7ab864f4edaecd9206eb1b2974e5a582f7e5c8",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/terraform_inventory.schema.json",
+      "kind": "regular",
+      "sha256": "9d526c28fdff944b09c441e75181f892dfe1d04a2a25b8abbf74c97e5b2d0416",
+      "class": "schema",
+      "license": "Apache-2.0"
+    }
+  ],
+  "self_digest": "external-private-inventory"
+}

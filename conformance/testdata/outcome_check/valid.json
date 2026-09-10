@@ -1,0 +1,65 @@
+{
+  "criteria": [
+    {
+      "comparator": "lte",
+      "evidence_requirement_refs": [],
+      "expected": 500,
+      "falsification": false,
+      "id": "p95-latency",
+      "mandatory": true,
+      "observation_class": "prometheus_metric",
+      "unit": "ms"
+    }
+  ],
+  "decision_ref": {
+    "id": "activate-latency",
+    "kind": "human_decision",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "document_schema": {
+    "id": "https://agent-ops.ru/schemas/foundation_outcome_check.schema.json",
+    "media_type": "application/schema+json",
+    "sha256": "6f82fa84555765cc4108a7ab19185a06ea6adee7d78e49c2d648b082fdc180e8",
+    "version": "1.0.0"
+  },
+  "evaluation_time": "2026-08-04T11:00:00Z",
+  "evaluation_window": {
+    "end": "2026-08-04T11:00:00Z",
+    "start": "2026-08-04T10:00:00Z"
+  },
+  "evidence_refs": [
+    {
+      "id": "latency-observation",
+      "kind": "evidence_record",
+      "namespace": "projects/example",
+      "version": "1.0.0"
+    }
+  ],
+  "format_version": "1.0.0",
+  "intent_ref": {
+    "id": "reduce-latency",
+    "kind": "operational_intent",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "owner_ref": {
+    "id": "operator",
+    "kind": "owner",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "ref": {
+    "id": "latency",
+    "kind": "outcome_check",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "residual_risks": [],
+  "snapshot_ref": {
+    "id": "reduce-latency",
+    "kind": "operational_intent",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  }
+}

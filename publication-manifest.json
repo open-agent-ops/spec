@@ -1,0 +1,65 @@
+{
+  "artifacts": [
+    {
+      "language": "en",
+      "pair_id": "glossary",
+      "path": "docs/normative/glossary.en.md",
+      "sha256": "de718e2625d55cf6b78abeac7caf1d28d638cc30acfe801e0e6402a3f6bedd7f",
+      "status": "candidate"
+    },
+    {
+      "language": "ru",
+      "pair_id": "glossary",
+      "path": "docs/normative/glossary.ru.md",
+      "sha256": "25faf434ef1ec63189faf23ccc6546a92d76ee1d3e3d4923fb9afab67239f55d",
+      "status": "candidate"
+    },
+    {
+      "language": "en",
+      "pair_id": "standards-map",
+      "path": "docs/normative/standards-map.en.md",
+      "sha256": "a5d709aa61151b9c6362a3d1325878cd83491f136fbadc5880ea9126677bf04d",
+      "status": "candidate"
+    },
+    {
+      "language": "ru",
+      "pair_id": "standards-map",
+      "path": "docs/normative/standards-map.ru.md",
+      "sha256": "4ab2d37390e29441d4708c018c40940c9fae3a8f22f80b5fed57556731bc6030",
+      "status": "candidate"
+    },
+    {
+      "language": "en",
+      "pair_id": "whitepaper",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md",
+      "sha256": "76fa0a8bf57c1c8a2ca542873893232a0cc5fc4381647ebbfaddc4d3e74d0c60",
+      "status": "candidate"
+    },
+    {
+      "language": "ru",
+      "pair_id": "whitepaper",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md",
+      "sha256": "9cf181d409d3d1b0464f7b98943a7ab712b024deb263b80e408698ef8ef96d18",
+      "status": "candidate"
+    },
+    {
+      "language": "en",
+      "pair_id": "whitepaper-pdf",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
+      "sha256": "827329a369bd53a456a75c7653eee1c56b3d46a527ef8b5a70d298d59b3e3e00",
+      "status": "verified_predecessor_bytes"
+    },
+    {
+      "language": "ru",
+      "pair_id": "whitepaper-pdf",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
+      "sha256": "738377524ea8e10305c4189c4cde575d95550934232a0dfe67ca503809f88d57",
+      "status": "verified_predecessor_bytes"
+    }
+  ],
+  "english_precedence": true,
+  "release_status": "pending_external_review_and_build_test",
+  "schema": "agent-ops.publication-manifest.v1",
+  "source_revision": "aom-03-r12",
+  "version": "v0.4.0"
+}

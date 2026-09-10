@@ -1,0 +1,39 @@
+{
+  "action_catalog": {
+    "id": "agent-ops.action_catalog.read_only",
+    "sha256": "c8526c7410bb690a2ca70607a02a88772b63a916e96719fcac20520cf2063f41",
+    "version": "0.1.0"
+  },
+  "baseline_provider": {
+    "id": "baseline/disk",
+    "sha256": "48e1017f08355039aad971f218fa9ad458461b1f913373dc89e17b75313e0766",
+    "version": "0.1.0"
+  },
+  "contract": {
+    "id": "agent-ops.run_request",
+    "version": "0.1.0"
+  },
+  "environment_ref": {
+    "id": "example",
+    "kind": "environment",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "external_corpus_packs": [],
+  "harness_snapshot": {
+    "id": "agent-ops.harness.snapshot",
+    "sha256": "de3fb239c9df77fed8d6cbeb7dba663f68975e53e0a2e98ec07563e541d7a2fa",
+    "version": "0.1.0"
+  },
+  "mode": "manual",
+  "profile_ref": "agent-ops.audit-fast@0.1.0",
+  "project_ref": {
+    "id": "example",
+    "kind": "project",
+    "namespace": "projects/example",
+    "version": "next"
+  },
+  "target": {
+    "scope": "local"
+  }
+}

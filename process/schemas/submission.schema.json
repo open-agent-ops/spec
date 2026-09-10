@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "aom04a.submission.v1"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "bug",
+        "proposal",
+        "fix"
+      ]
+    },
+    "head": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "base": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096,
+        "pattern": "^[A-Za-z0-9_.][A-Za-z0-9_./-]*$"
+      },
+      "maxItems": 1000
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[1-9][0-9]{0,19}$"
+    },
+    "link": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "compatibility": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "bilingual": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "license_ack": {
+      "const": true
+    }
+  },
+  "required": [
+    "schema",
+    "kind",
+    "head",
+    "base",
+    "paths",
+    "actor",
+    "link",
+    "revision",
+    "description",
+    "compatibility",
+    "bilingual",
+    "license_ack"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-agent-ops.org/process/submission.v1"
+}

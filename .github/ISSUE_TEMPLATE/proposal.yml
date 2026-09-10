@@ -1,0 +1,47 @@
+name: Normative proposal
+description: Provide a reproducible, reviewable proposal
+body:
+  - type: textarea
+    id: kind
+    attributes:
+      label: Change type
+      description: proposal
+    validations:
+      required: true
+  - type: textarea
+    id: version
+    attributes:
+      label: Affected version
+      description: Document, schema and module versions
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Reproduction or proposal
+      description: Expected and observed result, or motivation
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility impact
+      description: Describe compatibility impact, including unchanged
+    validations:
+      required: true
+  - type: textarea
+    id: bilingual
+    attributes:
+      label: English/Russian impact
+      description: Describe EN/RU and editorial impact, including unchanged
+    validations:
+      required: true
+  - type: checkboxes
+    id: license
+    attributes:
+      label: License acknowledgement
+      options:
+        - label: I acknowledge Apache-2.0 for code/schemas/metadata and CC BY 4.0 for documentation.
+          required: true
+    validations:
+      required: true

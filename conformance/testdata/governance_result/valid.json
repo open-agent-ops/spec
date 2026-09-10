@@ -1,0 +1,44 @@
+{
+  "applied_rules": [
+    "offline-inspection"
+  ],
+  "authority": "governed_policy",
+  "autonomy": {
+    "level": "R1",
+    "reasons": [
+      "policy:offline-inspection"
+    ],
+    "state": "valid"
+  },
+  "escalations": [],
+  "evaluated_at": "2026-08-05T12:00:00Z",
+  "findings": [],
+  "format_version": "1.0.0",
+  "impact": {
+    "level": "I0",
+    "reasons": [
+      "factor:offline-read"
+    ],
+    "state": "valid"
+  },
+  "input_sha256": "17f8454cc502920ef29db9ccf086eb7df8706daaa0f49a43917e038657cce0fb",
+  "modifications": {},
+  "outcome": "deny",
+  "owner_ref": {
+    "id": "platform",
+    "kind": "owner",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "policy_sha256": "f0b955da26c93d508fe17ceea491db7a5384dc7ae0b9639633866ea0d00d1169",
+  "ref": {
+    "id": "offline-inspection-result",
+    "kind": "governance_result",
+    "namespace": "projects/example",
+    "version": "1.0.0"
+  },
+  "registry_sha256": "866eaa97267e1dc889aba87ff1fc0ef618f0b0ea0e53ac71ba38b163db95a3a1",
+  "result_sha256": "cacffb2986596218bf919636979f2a1916d4034cafba3f003460d52b40d61872",
+  "state": "valid",
+  "valid_until": "2099-01-01T00:00:00Z"
+}

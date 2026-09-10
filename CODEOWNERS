@@ -1,0 +1,19 @@
+# Intended teams; actual membership and enforcement are host-admission prerequisites.
+* @open-agent-ops/maintainers
+/docs/normative/ @open-agent-ops/owners
+/docs/whitepaper/ @open-agent-ops/owners
+/schemas/ @open-agent-ops/owners
+/COMPATIBILITY.md @open-agent-ops/owners
+/VERSIONING.md @open-agent-ops/owners
+/GOVERNANCE.md @open-agent-ops/owners
+/SECURITY.md @open-agent-ops/owners
+/CODEOWNERS @open-agent-ops/owners
+/.github/ @open-agent-ops/owners
+/process/ @open-agent-ops/owners
+/repocheck/ @open-agent-ops/owners
+/releaseops/ @open-agent-ops/owners
+/cmd/ @open-agent-ops/owners
+/scripts/ @open-agent-ops/owners
+/composition-manifest.json @open-agent-ops/owners
+/go.mod @open-agent-ops/owners
+/go.sum @open-agent-ops/owners

@@ -1,0 +1,88 @@
+name: AOM host bot approval 04
+on:
+  pull_request:
+    types: [opened]
+    branches: [aom-uow-05-host-base-04]
+permissions: {}
+jobs:
+  bot-approval:
+    if: >-
+      github.repository_id == '1345286136' &&
+      github.event.pull_request.head.repo.id == 1345286136 &&
+      github.event.pull_request.head.ref == 'aom-uow-05-host-bot-04' &&
+      github.event.pull_request.user.id == 2045697 &&
+      github.event.sender.id == 2045697 &&
+      github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Observe one bot approval refusal
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PYCODE'
+          import json, os, pathlib, urllib.request, urllib.error
+          out = pathlib.Path("bot-evidence")
+          out.mkdir()
+          event = json.loads(pathlib.Path(os.environ["GITHUB_EVENT_PATH"]).read_text())
+          p = event["pull_request"]
+          assert os.environ["GITHUB_EVENT_NAME"] == "pull_request" and event["action"] == "opened"
+          assert os.environ["GITHUB_RUN_ATTEMPT"] == "1"
+          assert event["repository"]["id"] == 1345286136
+          assert p["head"]["repo"]["id"] == p["base"]["repo"]["id"] == 1345286136
+          assert p["user"]["id"] == event["sender"]["id"] == 2045697
+          assert p["head"]["ref"] == "aom-uow-05-host-bot-04"
+          assert p["base"]["ref"] == "aom-uow-05-host-base-04"
+          assert p["base"]["sha"] == "100d10849268ff1c36ddb9568b99a9fbf9ff4dbb"
+          number = event["number"]
+          assert isinstance(number, int) and number > 0
+          root = "https://api.github.com/repos/open-agent-ops/spec/pulls/" + str(number)
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  return None
+          opener = urllib.request.build_opener(NoRedirect())
+          def request(url, method="GET", data=None):
+              req = urllib.request.Request(url, data=json.dumps(data).encode() if data else None, method=method,
+                  headers={"Authorization": "Bearer " + os.environ["GH_TOKEN"], "Accept": "application/vnd.github+json",
+                           "Content-Type": "application/json", "X-GitHub-Api-Version": "2022-11-28"})
+              try:
+                  response = opener.open(req, timeout=30)
+              except urllib.error.HTTPError as error:
+                  response = error
+              with response:
+                  raw = response.read(1000001)
+                  assert len(raw) <= 1000000
+                  return {"status": response.status, "body": json.loads(raw)}
+          before = request(root)
+          assert before["status"] == 200
+          live = before["body"]
+          assert live["state"] == "open" and not live["merged"]
+          assert live["head"]["sha"] == p["head"]["sha"] and live["base"]["sha"] == p["base"]["sha"]
+          assert live["head"]["ref"] == p["head"]["ref"] and live["base"]["ref"] == p["base"]["ref"]
+          assert live["user"]["id"] == 2045697
+          identity = {"repository_id": 1345286136, "pr": number, "head": p["head"]["sha"], "base": p["base"]["sha"],
+                      "workflow_sha": os.environ["GITHUB_WORKFLOW_SHA"], "merge_sha": os.environ["GITHUB_SHA"],
+                      "run": os.environ["GITHUB_RUN_ID"], "attempt": 1, "principal": "github-actions[bot]"}
+          (out / "identity.json").write_text(json.dumps(identity, indent=2))
+          # Exactly one write; never retry an unknown response.
+          result = request(root + "/reviews", "POST", {"event": "APPROVE", "commit_id": p["head"]["sha"]})
+          (out / "approval-response.json").write_text(json.dumps(result, indent=2))
+          reviews = request(root + "/reviews?per_page=100")
+          (out / "reviews-after.json").write_text(json.dumps(reviews, indent=2))
+          assert reviews["status"] == 200 and len(reviews["body"]) < 100
+          message = result["body"].get("message", "").lower()
+          assert result["status"] == 403 and "github actions" in message and "not permitted" in message and "approve" in message
+          assert not any(r["user"]["login"] == "github-actions[bot]" and r["state"] == "APPROVED" for r in reviews["body"])
+          print("Observed explicit GitHub Actions approval prohibition: HTTP 403")
+          PYCODE
+      - name: Retain response without credentials
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: bot-approval-${{ github.run_id }}-${{ github.run_attempt }}
+          path: bot-evidence/
+          if-no-files-found: error
+          retention-days: 90

@@ -1,10 +1,14 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"testing"
+
+	"github.com/open-agent-ops/spec/repocheck"
 
 	// Register the suite-wide replay flags used by scripts/check.sh.
 	_ "pgregory.net/rapid"
@@ -71,5 +75,23 @@ func TestSnapshotIndependentRootAndSubdirectory(t *testing.T) {
 				t.Fatal("tracked symlink accepted")
 			}
 		})
+	}
+}
+
+func TestExitCodeSeparatesVerdictsFromHostFailures(t *testing.T) {
+	cases := map[int][]error{
+		2: {repocheck.ErrInput, repocheck.Invalidf("bad %s", "input"), fmt.Errorf("ci.yml: %w", repocheck.ErrInput)},
+		3: {repocheck.ErrRejected, repocheck.Rejectedf("nope"), fmt.Errorf("gate policy: %w", repocheck.Rejectedf("x"))},
+		4: {repocheck.ErrUnknown, repocheck.Unknownf("disk"), errors.New("raw os error"), &exec.ExitError{}},
+	}
+	for want, errs := range cases {
+		for _, e := range errs {
+			if got := exitCode(e); got != want {
+				t.Fatalf("exitCode(%v)=%d, want %d", e, got, want)
+			}
+		}
+	}
+	if !errors.Is(repocheck.Rejectedf("a"), repocheck.ErrRejected) || !errors.Is(repocheck.Unknownf("a"), repocheck.ErrUnknown) {
+		t.Fatal("helpers must wrap their sentinel")
 	}
 }

@@ -147,3 +147,48 @@ func TestDeliveredFixturePinsIntegration(t *testing.T) {
 		t.Fatal("pin coverage")
 	}
 }
+
+func TestDeclaredFormatsAreAsserted(t *testing.T) {
+	v, err := New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	const id = "https://agent-ops.ru/schemas/foundation_eval_result.schema.json"
+	valid, err := os.ReadFile("testdata/eval_result/valid.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if r := v.Validate(id, valid); !r.Accepted {
+		t.Fatalf("valid fixture rejected: %v", r.Reasons)
+	}
+	broken := strings.Replace(string(valid), `"evaluated_at": "2026-08-05T00:00:00Z"`, `"evaluated_at": "not-a-date"`, 1)
+	if broken == string(valid) {
+		t.Fatal("fixture no longer carries the expected evaluated_at value")
+	}
+	r := v.Validate(id, []byte(broken))
+	if r.Accepted || len(r.Reasons) != 1 || r.Reasons[0] != "format" {
+		t.Fatalf("malformed date-time accepted or misreported: accepted=%v reasons=%v", r.Accepted, r.Reasons)
+	}
+}
+
+func TestSemanticObjectFormatVersionDispatch(t *testing.T) {
+	v, err := New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	const v13 = "https://agent-ops.ru/schemas/foundation_semantic_object_v1_3.schema.json"
+	has := func(rs []string, want string) bool {
+		for _, r := range rs {
+			if r == want {
+				return true
+			}
+		}
+		return false
+	}
+	if r := v.Validate(v13, []byte(`{"format_version":"1.3.0"}`)); has(r.Reasons, "const") {
+		t.Fatalf("v1.3 rejects its own format_version: %v", r.Reasons)
+	}
+	if r := v.Validate(v13, []byte(`{"format_version":"1.0.0"}`)); !has(r.Reasons, "const") {
+		t.Fatalf("v1.3 accepts format_version 1.0.0: %v", r.Reasons)
+	}
+}

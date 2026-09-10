@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"regexp"
 	"sort"
+	"strings"
 	"time"
 
 	"github.com/santhosh-tekuri/jsonschema/v6"
@@ -33,6 +34,16 @@ func Canonical(b []byte) ([]byte, error) {
 	return out, nil
 }
 
+func firstLine(s string) string {
+	if i := strings.IndexByte(s, '\n'); i >= 0 {
+		s = s[:i]
+	}
+	if len(s) > 200 {
+		s = s[:200] + "..."
+	}
+	return s
+}
+
 type denyLoader struct{}
 
 func (denyLoader) Load(string) (any, error) { return nil, ErrInput }
@@ -58,8 +69,8 @@ func ValidateRecord(schema, data []byte) error {
 	if e != nil {
 		return ErrInput
 	}
-	if compiled.Validate(v) != nil {
-		return ErrInput
+	if e := compiled.Validate(v); e != nil {
+		return Invalidf("record does not satisfy its process schema: %v", firstLine(e.Error()))
 	}
 	return nil
 }

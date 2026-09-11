@@ -209,15 +209,40 @@ func TestHTTPStatusClassification(t *testing.T) {
 	}
 }
 func TestGitDiagnosticClassification(t *testing.T) {
-	for _, s := range []string{"authentication failed", "SSL certificate problem", "unknown exit", "repository not found"} {
-		if _, ok := retryDelay(transientGitDiagnostic([]byte(s), false), 1); ok {
+	for _, s := range []string{
+		"authentication failed",
+		"SSL certificate problem: unable to get local issuer certificate",
+		"unknown exit",
+		"repository not found",
+		"The requested URL returned error: 403",
+		"fatal: unable to access 'https://x/': HTTP 401",
+		"could not read Username for 'https://x'",
+	} {
+		e := transientGitDiagnostic([]byte(s), false)
+		if _, ok := retryDelay(e, 1); ok {
 			t.Fatal("retry unsafe exit", s)
 		}
-	}
-	for _, s := range []string{"Connection reset by peer", "HTTP 503"} {
-		if _, ok := retryDelay(transientGitDiagnostic([]byte(s), false), 1); !ok {
-			t.Fatal("transient denied")
+		if s != "unknown exit" && !errors.Is(e, ErrAuthority) {
+			t.Fatal("authority expected", s, e)
 		}
+	}
+	for _, s := range []string{
+		"Connection reset by peer",
+		"HTTP 503",
+		// curl wording for a dropped TLS session: contains "ssl" but is a
+		// transport fault, not a certificate or authority failure.
+		"error: RPC failed; curl 56 OpenSSL SSL_read: Connection reset by peer, errno 104",
+		// digits that happen to spell a status code must not deny a retry
+		"fatal: the remote end hung up unexpectedly after 1403 bytes: connection timed out",
+	} {
+		if _, ok := retryDelay(transientGitDiagnostic([]byte(s), false), 1); !ok {
+			t.Fatal("transient denied", s)
+		}
+	}
+	// A bare status code inside unrelated text is neither transient nor an
+	// authority verdict; it stays unknown and is not retried.
+	if e := transientGitDiagnostic([]byte("received 403 objects"), false); !errors.Is(e, ErrUnknown) {
+		t.Fatal("bare digits classified", e)
 	}
 	if !errors.Is(transientGitDiagnostic(nil, true), ErrUnknown) {
 		t.Fatal("timeout")

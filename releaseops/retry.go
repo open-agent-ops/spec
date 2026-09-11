@@ -151,15 +151,21 @@ func transientGitDiagnostic(b []byte, timedOut bool) error {
 	}
 	// Raw diagnostics never leave this bounded classifier. Unknown exits are not
 	// transient, including authentication, certificate and repository failures.
+	//
+	// Transport phrases are matched first: curl reports a dropped TLS session as
+	// "OpenSSL SSL_read: Connection reset by peer", and a substring such as
+	// "ssl" or "403" inside an otherwise transient line must not turn a retryable
+	// network fault into a non-retryable authority verdict. Denied phrases are
+	// anchored to the shapes git and curl actually emit rather than bare digits.
 	s := strings.ToLower(string(b))
-	for _, deny := range []string{"authentication", "permission denied", "403", "401", "certificate", "ssl", "not found", "could not read username", "redirect"} {
-		if strings.Contains(s, deny) {
-			return ErrAuthority
-		}
-	}
 	for _, transient := range []string{"connection reset by peer", "connection timed out", "failed to connect", "temporary failure in name resolution", "http 408", "http 429", "http 500", "http 502", "http 503", "http 504"} {
 		if strings.Contains(s, transient) {
 			return temporary("git_transient")
+		}
+	}
+	for _, deny := range []string{"authentication", "permission denied", "error: 403", "http 403", "error: 401", "http 401", "certificate", "not found", "could not read username", "redirect"} {
+		if strings.Contains(s, deny) {
+			return ErrAuthority
 		}
 	}
 	return ErrUnknown

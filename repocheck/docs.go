@@ -67,14 +67,14 @@ func Docs(s Snapshot, p Policy) error {
 			wanted = "CC-BY-4.0"
 		}
 		if f.License != wanted {
-			return ErrRejected
+			return Rejectedf("docs: %s licensed %q, want %q", f.Path, f.License, wanted)
 		}
 		if !strings.HasSuffix(f.Path, ".md") {
 			continue
 		}
 		data, ok := s[f.Path]
 		if !ok {
-			return ErrRejected
+			return Rejectedf("docs: %s missing from snapshot", f.Path)
 		}
 		for _, m := range inlineLink.FindAllSubmatch(data, -1) {
 			target := strings.Trim(string(m[1]), "<>")
@@ -83,16 +83,16 @@ func Docs(s Snapshot, p Policy) error {
 			}
 			u, e := url.Parse(target)
 			if e != nil {
-				return ErrRejected
+				return Rejectedf("docs: %s has an unparsable link target", f.Path)
 			}
 			if u.IsAbs() {
 				if u.Scheme != "https" && u.Scheme != "http" && u.Scheme != "mailto" {
-					return ErrRejected
+					return Rejectedf("docs: %s links with scheme %q", f.Path, u.Scheme)
 				}
 				continue
 			}
 			if u.Host != "" || strings.HasPrefix(u.Path, "/") {
-				return ErrRejected
+				return Rejectedf("docs: %s has a host-relative or absolute-path link %q", f.Path, target)
 			}
 			dest := f.Path
 			if u.Path != "" {
@@ -100,20 +100,20 @@ func Docs(s Snapshot, p Policy) error {
 			}
 			b, ok := s[dest]
 			if !ok {
-				return ErrRejected
+				return Rejectedf("docs: %s links to missing file %s", f.Path, dest)
 			}
 			if u.Fragment != "" && strings.HasSuffix(dest, ".md") && !anchors(b)[u.Fragment] {
-				return ErrRejected
+				return Rejectedf("docs: %s links to missing anchor %s#%s", f.Path, dest, u.Fragment)
 			}
 		}
 	}
 	for _, name := range []string{"LICENSE", "LICENSE-docs", "NOTICE", "CONTRIBUTING.md", "GOVERNANCE.md", "SECURITY.md", "VERSIONING.md", "docs/contributing.md", "docs/releasing.md", ".github/PULL_REQUEST_TEMPLATE.md"} {
 		if len(s[name]) == 0 {
-			return ErrRejected
+			return Rejectedf("docs: required file missing or empty: %s", name)
 		}
 	}
 	if !strings.Contains(string(s["SECURITY.md"]), "https://github.com/open-agent-ops/spec/security/advisories/new") {
-		return ErrRejected
+		return Rejectedf("docs: SECURITY.md lacks the advisory intake URL")
 	}
 	var publication struct {
 		Version   string `json:"version"`
@@ -131,13 +131,31 @@ func Docs(s Snapshot, p Policy) error {
 		Source  string `json:"source_revision"`
 		English bool   `json:"english_precedence"`
 	}
-	if json.Unmarshal(s["publication-manifest.json"], &publication) != nil || json.Unmarshal(s["revision-manifest.json"], &revision) != nil || publication.Version != revision.Version || !Version(publication.Version) || publication.Source == "" || publication.Source != revision.Source || !publication.English || !revision.English || len(publication.Artifacts) != 8 {
-		return ErrRejected
+	if e := json.Unmarshal(s["publication-manifest.json"], &publication); e != nil {
+		return Rejectedf("publication-manifest.json: %v", e)
+	}
+	if e := json.Unmarshal(s["revision-manifest.json"], &revision); e != nil {
+		return Rejectedf("revision-manifest.json: %v", e)
+	}
+	switch {
+	case !Version(publication.Version):
+		return Rejectedf("publication-manifest.json version %q malformed", publication.Version)
+	case publication.Version != revision.Version:
+		return Rejectedf("publication version %q differs from revision version %q", publication.Version, revision.Version)
+	case publication.Source == "" || publication.Source != revision.Source:
+		return Rejectedf("publication source_revision %q differs from revision %q", publication.Source, revision.Source)
+	case !publication.English || !revision.English:
+		return Rejectedf("english_precedence must be true in publication and revision manifests")
+	case len(publication.Artifacts) != 8:
+		return Rejectedf("publication-manifest.json lists %d artifacts, want 8", len(publication.Artifacts))
 	}
 	for _, a := range publication.Artifacts {
 		b, ok := s[a.Path]
-		if !ok || Hash(b) != a.Hash {
-			return ErrRejected
+		if !ok {
+			return Rejectedf("publication artifact missing from snapshot: %s", a.Path)
+		}
+		if Hash(b) != a.Hash {
+			return Rejectedf("publication artifact digest differs: %s", a.Path)
 		}
 	}
 	var pairs struct {
@@ -149,18 +167,27 @@ func Docs(s Snapshot, p Policy) error {
 			Precedence bool   `json:"english_precedence"`
 		} `json:"entries"`
 	}
-	if json.Unmarshal(s["bilingual-pairs.json"], &pairs) != nil || len(pairs.Entries) != 3 {
-		return ErrRejected
+	if e := json.Unmarshal(s["bilingual-pairs.json"], &pairs); e != nil {
+		return Rejectedf("bilingual-pairs.json: %v", e)
+	}
+	if len(pairs.Entries) != 3 {
+		return Rejectedf("bilingual-pairs.json lists %d entries, want 3", len(pairs.Entries))
 	}
 	for _, a := range pairs.Entries {
-		if !a.Required || !a.Precedence || a.Source != revision.Source || len(s[a.English]) == 0 || len(s[a.Russian]) == 0 {
-			return ErrRejected
+		switch {
+		case !a.Required || !a.Precedence:
+			return Rejectedf("bilingual pair %s must be required with english precedence", a.English)
+		case a.Source != revision.Source:
+			return Rejectedf("bilingual pair %s source_revision %q differs from revision %q", a.English, a.Source, revision.Source)
+		case len(s[a.English]) == 0 || len(s[a.Russian]) == 0:
+			return Rejectedf("bilingual pair %s / %s: a side is missing or empty", a.English, a.Russian)
 		}
 	}
 	for _, name := range []string{"bug", "proposal"} {
-		n, e := YAML(s[".github/ISSUE_TEMPLATE/"+name+".yml"])
+		file := ".github/ISSUE_TEMPLATE/" + name + ".yml"
+		n, e := YAML(s[file])
 		if e != nil {
-			return ErrRejected
+			return Rejectedf("%s: %v", file, e)
 		}
 		var form struct {
 			Name string `yaml:"name"`
@@ -173,20 +200,23 @@ func Docs(s Snapshot, p Policy) error {
 			} `yaml:"body"`
 		}
 		if n.Decode(&form) != nil || form.Name == "" {
-			return ErrRejected
+			return Rejectedf("%s: form has no name or unexpected shape", file)
 		}
 		ids := map[string]bool{}
 		for _, f := range form.Body {
 			if f.ID != "" {
-				if ids[f.ID] || !f.Validations.Required {
-					return ErrRejected
+				if ids[f.ID] {
+					return Rejectedf("%s: field id %q duplicated", file, f.ID)
+				}
+				if !f.Validations.Required {
+					return Rejectedf("%s: field %q is not required", file, f.ID)
 				}
 				ids[f.ID] = true
 			}
 		}
 		for _, id := range []string{"kind", "version", "description", "compatibility", "bilingual", "license"} {
 			if !ids[id] {
-				return ErrRejected
+				return Rejectedf("%s: required field %q missing", file, id)
 			}
 		}
 	}

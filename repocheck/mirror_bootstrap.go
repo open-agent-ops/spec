@@ -14,11 +14,11 @@ func MirrorBootstrapWorkflow(data []byte, lock ToolLock) error {
 		return err
 	}
 	var actual map[string]any
-	if node.Decode(&actual) != nil {
-		return ErrInput
+	if e := node.Decode(&actual); e != nil {
+		return Invalidf("mirror bootstrap workflow: %v", e)
 	}
-	if !reflect.DeepEqual(actual, MirrorBootstrapModel(pins)) {
-		return ErrRejected
+	if expected := MirrorBootstrapModel(pins); !reflect.DeepEqual(actual, expected) {
+		return Rejectedf("mirror bootstrap workflow differs from the fixed model at %s", firstDifference(actual, expected, "$"))
 	}
 	return nil
 }

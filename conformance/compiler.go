@@ -33,6 +33,9 @@ func New() (*Validator, error) {
 		return nil, ErrCompile
 	}
 	c := jsonschema.NewCompiler()
+	// Formats such as date-time and uri are annotations by default in draft
+	// 2020-12; every declared format is enforced as an assertion here.
+	c.AssertFormat()
 	c.UseLoader(localLoader{r})
 	for _, e := range r.Entries() {
 		b, err := r.Lookup(e.ID)

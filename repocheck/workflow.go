@@ -3,6 +3,7 @@ package repocheck
 import (
 	"fmt"
 	"reflect"
+	"sort"
 )
 
 type ActionPin struct {
@@ -33,14 +34,77 @@ func Workflow(data []byte, lock ToolLock, release bool) error {
 		return e
 	}
 	var actual map[string]any
-	if node.Decode(&actual) != nil {
-		return ErrInput
+	if e := node.Decode(&actual); e != nil {
+		return Invalidf("workflow: %v", e)
 	}
 	expected := WorkflowModel(lock, pins, release)
 	if !reflect.DeepEqual(actual, expected) {
-		return ErrRejected
+		return Rejectedf("workflow differs from the fixed model at %s", firstDifference(actual, expected, "$"))
 	}
 	return nil
+}
+
+// firstDifference returns the JSON-ish path and both values at the first point
+// where two decoded YAML documents diverge. Values are truncated; the workflow
+// under test is repository source, not contributor prose.
+func firstDifference(actual, expected any, path string) string {
+	const limit = 80
+	show := func(v any) string {
+		s := fmt.Sprintf("%v", v)
+		if v == nil {
+			s = "<absent>"
+		}
+		if len(s) > limit {
+			s = s[:limit] + "..."
+		}
+		return s
+	}
+	switch e := expected.(type) {
+	case map[string]any:
+		a, ok := actual.(map[string]any)
+		if !ok {
+			return fmt.Sprintf("%s: got %T, want mapping", path, actual)
+		}
+		keys := make([]string, 0, len(e)+len(a))
+		for k := range e {
+			keys = append(keys, k)
+		}
+		for k := range a {
+			if _, dup := e[k]; !dup {
+				keys = append(keys, k)
+			}
+		}
+		sort.Strings(keys)
+		for _, k := range keys {
+			av, aok := a[k]
+			ev, eok := e[k]
+			switch {
+			case !aok:
+				return fmt.Sprintf("%s.%s: missing, want %s", path, k, show(ev))
+			case !eok:
+				return fmt.Sprintf("%s.%s: unexpected key", path, k)
+			case !reflect.DeepEqual(av, ev):
+				return firstDifference(av, ev, path+"."+k)
+			}
+		}
+	case []any:
+		a, ok := actual.([]any)
+		if !ok {
+			return fmt.Sprintf("%s: got %T, want sequence", path, actual)
+		}
+		for i := 0; i < len(a) && i < len(e); i++ {
+			if !reflect.DeepEqual(a[i], e[i]) {
+				return firstDifference(a[i], e[i], fmt.Sprintf("%s[%d]", path, i))
+			}
+		}
+		if len(a) != len(e) {
+			return fmt.Sprintf("%s: %d items, want %d", path, len(a), len(e))
+		}
+	}
+	if !reflect.DeepEqual(actual, expected) {
+		return fmt.Sprintf("%s: got %s, want %s", path, show(actual), show(expected))
+	}
+	return path + ": no difference"
 }
 
 // WorkflowModel is also the generator input. Independent actionlint and private
@@ -100,23 +164,23 @@ func NeedsSuccess(data []byte, full bool) error {
 	}
 	m, ok := value.(map[string]any)
 	if !ok || len(m) != 6 {
-		return ErrRejected
+		return Rejectedf("needs: expected an object with 6 jobs, got %d", len(m))
 	}
 	for _, name := range []string{"policy", "conformance", "docs", "supply-chain", "heavy", "reproducibility"} {
 		item, ok := m[name].(map[string]any)
 		if !ok {
-			return ErrRejected
+			return Rejectedf("needs: job %s missing", name)
 		}
 		result, ok := item["result"].(string)
 		if !ok {
-			return ErrRejected
+			return Rejectedf("needs: job %s has no string result", name)
 		}
 		wanted := "success"
 		if !full && (name == "heavy" || name == "reproducibility") {
 			wanted = "skipped"
 		}
 		if result != wanted {
-			return ErrRejected
+			return Rejectedf("needs: job %s result %q, want %q", name, result, wanted)
 		}
 	}
 	return nil
@@ -125,18 +189,25 @@ func CheckName(job string) string { return fmt.Sprintf("AOM / %s", job) }
 
 func workflowPins(lock ToolLock) (map[string]string, error) {
 	if lock.Schema != "aom04a.toolchain-lock.v1" || lock.GoVersion != "1.26.8" || lock.GoMinimum != "1.25.13" || lock.Execution != "github-hosted-native" {
-		return nil, ErrInput
+		return nil, Invalidf("toolchain lock header (schema %q, go %q/%q, execution %q)", lock.Schema, lock.GoVersion, lock.GoMinimum, lock.Execution)
 	}
 	pins := map[string]string{}
 	versions := map[string]string{"actions/checkout": "v7.0.1", "actions/upload-artifact": "v7.0.1", "actions/download-artifact": "v8.0.1", "actions/create-github-app-token": "v3.2.0"}
 	for _, p := range lock.Actions {
-		if versions[p.Repository] != p.Version || !Commit(p.Commit) || !Digest(p.ActionSHA256) || pins[p.Repository] != "" {
-			return nil, ErrInput
+		switch {
+		case versions[p.Repository] != p.Version:
+			return nil, Invalidf("toolchain lock action %s version %q, want %q", p.Repository, p.Version, versions[p.Repository])
+		case !Commit(p.Commit):
+			return nil, Invalidf("toolchain lock action %s commit malformed", p.Repository)
+		case !Digest(p.ActionSHA256):
+			return nil, Invalidf("toolchain lock action %s action_sha256 malformed", p.Repository)
+		case pins[p.Repository] != "":
+			return nil, Invalidf("toolchain lock action %s duplicated", p.Repository)
 		}
 		pins[p.Repository] = p.Repository + "@" + p.Commit
 	}
 	if len(pins) != 4 {
-		return nil, ErrInput
+		return nil, Invalidf("toolchain lock pins %d actions, want 4", len(pins))
 	}
 	return pins, nil
 }

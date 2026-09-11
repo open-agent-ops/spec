@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"path"
 	"strings"
@@ -22,6 +23,19 @@ const MaxString = 4096
 var ErrInput = errors.New("invalid_input")
 var ErrRejected = errors.New("rejected_incomplete")
 var ErrUnknown = errors.New("dependency_unknown")
+
+// Invalidf, Rejectedf and Unknownf attach a fixed diagnostic label to the
+// matching sentinel. Callers keep classifying with errors.Is; operators get a
+// reason. Labels name files, keys and counts, never candidate content bytes.
+func Invalidf(format string, args ...any) error {
+	return fmt.Errorf("%w: %s", ErrInput, fmt.Sprintf(format, args...))
+}
+func Rejectedf(format string, args ...any) error {
+	return fmt.Errorf("%w: %s", ErrRejected, fmt.Sprintf(format, args...))
+}
+func Unknownf(format string, args ...any) error {
+	return fmt.Errorf("%w: %s", ErrUnknown, fmt.Sprintf(format, args...))
+}
 
 // Decode rejects ambiguous JSON before closed typed decoding. It never trusts
 // encoding/json's last-key-wins behavior, unknown fields or replacement UTF-8.

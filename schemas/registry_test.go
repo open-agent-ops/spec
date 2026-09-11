@@ -2,6 +2,7 @@ package schemas_test
 
 import (
 	"bytes"
+	"encoding/json"
 	"github.com/open-agent-ops/spec/schemas"
 	"testing"
 )
@@ -79,6 +80,36 @@ func TestExactLiveDispatch(t *testing.T) {
 			if _, err := r.Resolve(family, version); err == nil {
 				t.Fatal("unsupported version")
 			}
+		}
+	}
+}
+
+// Each resolved semantic object revision must declare its own format_version;
+// a family member that only accepts 1.0.0 makes version dispatch meaningless.
+func TestResolvedSemanticObjectDeclaresItsVersion(t *testing.T) {
+	r, err := schemas.Open()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, version := range []string{"1.0.0", "1.1.0", "1.2.0", "1.3.0"} {
+		e, err := r.Resolve("foundation_semantic_object", version)
+		if err != nil {
+			t.Fatal(version, err)
+		}
+		b, err := r.Lookup(e.ID)
+		if err != nil {
+			t.Fatal(version, err)
+		}
+		var doc struct {
+			Properties struct {
+				FormatVersion struct{ Const string } `json:"format_version"`
+			}
+		}
+		if json.Unmarshal(b, &doc) != nil {
+			t.Fatal(version, "decode")
+		}
+		if doc.Properties.FormatVersion.Const != version {
+			t.Fatalf("%s resolves to %s declaring format_version %q", version, e.Name, doc.Properties.FormatVersion.Const)
 		}
 	}
 }

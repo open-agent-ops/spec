@@ -112,6 +112,7 @@
     "releaseops/retry.go",
     "releaseops/retry_test.go",
     "repocheck/contracts_test.go",
+    "repocheck/diagnostics_test.go",
     "repocheck/docs.go",
     "repocheck/input.go",
     "repocheck/mirror_bootstrap.go",

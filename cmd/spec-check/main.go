@@ -34,23 +34,42 @@ func command(name string, args ...string) ([]byte, []byte, error) {
 	cmd.Stdout = &out
 	cmd.Stderr = &errout
 	e := cmd.Run()
+	if e != nil {
+		e = repocheck.Unknownf("%s %s: %v: %s", filepath.Base(name), strings.Join(args, " "), e, excerpt(errout.Bytes()))
+	}
 	return out.Bytes(), errout.Bytes(), e
+}
+
+// excerpt keeps the first line of a tool's stderr for diagnostics. Tool output
+// is bounded process text from a pinned executable, not contributor prose.
+func excerpt(b []byte) string {
+	line := strings.TrimSpace(string(b))
+	if i := strings.IndexByte(line, '\n'); i >= 0 {
+		line = line[:i]
+	}
+	if len(line) > 200 {
+		line = line[:200] + "..."
+	}
+	return line
 }
 func snapshot(strict bool) (repocheck.Snapshot, error) {
 	// Git archive excludes VCS data and untracked CI scratch by construction.
 	top, _, gitErr := command("git", "rev-parse", "--show-toplevel")
 	if gitErr == nil && strict {
 		dirty, _, e := command("git", "status", "--porcelain", "--untracked-files=no", "--", ".")
-		if e != nil || len(dirty) != 0 {
-			return nil, repocheck.ErrRejected
-		}
-		cwd, e := os.Getwd()
 		if e != nil {
 			return nil, e
 		}
+		if len(dirty) != 0 {
+			return nil, repocheck.Rejectedf("snapshot: working tree has uncommitted tracked changes")
+		}
+		cwd, e := os.Getwd()
+		if e != nil {
+			return nil, repocheck.Unknownf("snapshot: getwd: %v", e)
+		}
 		prefix, e := filepath.Rel(strings.TrimSpace(string(top)), cwd)
 		if e != nil || strings.HasPrefix(prefix, "..") {
-			return nil, repocheck.ErrInput
+			return nil, repocheck.Invalidf("snapshot: working directory is outside the git top level")
 		}
 		ref := "HEAD^{tree}"
 		if prefix != "." {
@@ -68,20 +87,27 @@ func snapshot(strict bool) (repocheck.Snapshot, error) {
 				break
 			}
 			if e != nil {
-				return nil, e
+				return nil, repocheck.Unknownf("snapshot: git archive stream: %v", e)
 			}
 			if h.Typeflag == tar.TypeDir {
 				continue
 			}
-			if h.Typeflag != tar.TypeReg || !repocheck.ExportPath(h.Name) || len(out) >= 256 || h.Size > 32<<20 {
-				return nil, repocheck.ErrRejected
+			switch {
+			case h.Typeflag != tar.TypeReg:
+				return nil, repocheck.Rejectedf("snapshot: %s is not a regular file", h.Name)
+			case !repocheck.ExportPath(h.Name):
+				return nil, repocheck.Rejectedf("snapshot: path not exportable: %s", h.Name)
+			case len(out) >= 256:
+				return nil, repocheck.Rejectedf("snapshot: more than 256 files")
+			case h.Size > 32<<20:
+				return nil, repocheck.Rejectedf("snapshot: %s exceeds 32 MiB", h.Name)
 			}
 			b, e := io.ReadAll(io.LimitReader(tr, (32<<20)+1))
 			if e != nil {
-				return nil, e
+				return nil, repocheck.Unknownf("snapshot: reading %s: %v", h.Name, e)
 			}
 			if _, exists := out[h.Name]; exists {
-				return nil, repocheck.ErrRejected
+				return nil, repocheck.Rejectedf("snapshot: duplicate archive member: %s", h.Name)
 			}
 			out[h.Name] = b
 		}
@@ -89,32 +115,40 @@ func snapshot(strict bool) (repocheck.Snapshot, error) {
 	}
 	root, e := os.OpenRoot(".")
 	if e != nil {
-		return nil, e
+		return nil, repocheck.Unknownf("snapshot: open root: %v", e)
 	}
 	defer root.Close()
 	out := repocheck.Snapshot{}
 	e = fs.WalkDir(root.FS(), ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
-			return err
+			return repocheck.Unknownf("snapshot: walk %s: %v", path, err)
 		}
 		if d.IsDir() {
 			return nil
 		}
-		if !d.Type().IsRegular() || !repocheck.ExportPath(path) || len(out) >= 256 {
-			return repocheck.ErrRejected
+		switch {
+		case !d.Type().IsRegular():
+			return repocheck.Rejectedf("snapshot: %s is not a regular file", path)
+		case !repocheck.ExportPath(path):
+			return repocheck.Rejectedf("snapshot: path not exportable: %s", path)
+		case len(out) >= 256:
+			return repocheck.Rejectedf("snapshot: more than 256 files")
 		}
 		info, err := d.Info()
-		if err != nil || info.Size() > 32<<20 {
-			return repocheck.ErrRejected
+		if err != nil {
+			return repocheck.Unknownf("snapshot: stat %s: %v", path, err)
+		}
+		if info.Size() > 32<<20 {
+			return repocheck.Rejectedf("snapshot: %s exceeds 32 MiB", path)
 		}
 		f, err := root.Open(path)
 		if err != nil {
-			return err
+			return repocheck.Unknownf("snapshot: open %s: %v", path, err)
 		}
 		b, readErr := io.ReadAll(io.LimitReader(f, (32<<20)+1))
 		closeErr := f.Close()
 		if readErr != nil || closeErr != nil {
-			return repocheck.ErrUnknown
+			return repocheck.Unknownf("snapshot: read %s", path)
 		}
 		out[path] = b
 		return nil
@@ -124,56 +158,70 @@ func snapshot(strict bool) (repocheck.Snapshot, error) {
 func inputs(s repocheck.Snapshot) (repocheck.Policy, repocheck.ToolLock, error) {
 	var p repocheck.Policy
 	var lock repocheck.ToolLock
-	if repocheck.Decode(s["process/policy.json"], &p) != nil || p.Validate() != nil {
-		return p, lock, repocheck.ErrInput
+	if e := repocheck.Decode(s["process/policy.json"], &p); e != nil {
+		return p, lock, repocheck.Invalidf("process/policy.json: %v", e)
+	}
+	if e := p.Validate(); e != nil {
+		return p, lock, e
 	}
 	// The full lock additionally carries archive and module records; this typed
 	// projection is used only by the workflow policy, after duplicate validation.
 	if _, e := repocheck.JSON(s["process/toolchain.lock.json"]); e != nil {
-		return p, lock, e
+		return p, lock, repocheck.Invalidf("process/toolchain.lock.json: %v", e)
 	}
-	if json.Unmarshal(s["process/toolchain.lock.json"], &lock) != nil {
-		return p, lock, repocheck.ErrInput
+	if e := json.Unmarshal(s["process/toolchain.lock.json"], &lock); e != nil {
+		return p, lock, repocheck.Invalidf("process/toolchain.lock.json: %v", e)
 	}
 	return p, lock, nil
 }
 func check(name string, s repocheck.Snapshot, p repocheck.Policy, lock repocheck.ToolLock) error {
 	switch name {
 	case "policy":
-		if repocheck.Composition(s, p) != nil {
-			return repocheck.ErrRejected
+		if e := repocheck.Composition(s, p); e != nil {
+			return e
 		}
-		if repocheck.Workflow(s[".github/workflows/ci.yml"], lock, false) != nil || repocheck.Workflow(s[".github/workflows/release.yml"], lock, true) != nil || repocheck.MirrorBootstrapWorkflow(s[".github/workflows/mirror-bootstrap.yml"], lock) != nil {
-			return repocheck.ErrRejected
+		if e := repocheck.Workflow(s[".github/workflows/ci.yml"], lock, false); e != nil {
+			return fmt.Errorf("ci.yml: %w", e)
+		}
+		if e := repocheck.Workflow(s[".github/workflows/release.yml"], lock, true); e != nil {
+			return fmt.Errorf("release.yml: %w", e)
+		}
+		if e := repocheck.MirrorBootstrapWorkflow(s[".github/workflows/mirror-bootstrap.yml"], lock); e != nil {
+			return fmt.Errorf("mirror-bootstrap.yml: %w", e)
 		}
 		return repocheck.Docs(s, p)
 	case "docs":
 		return repocheck.Docs(s, p)
 	default:
-		return repocheck.ErrInput
+		return repocheck.Invalidf("unknown check %q", name)
 	}
 }
 func main() {
 	if e := run(os.Args[1:]); e != nil {
-		code := 3
-		if errors.Is(e, repocheck.ErrInput) {
-			code = 2
-		} else if errors.Is(e, repocheck.ErrUnknown) {
-			code = 4
-		}
-		fmt.Fprintln(os.Stderr, "spec_check_failed")
-		os.Exit(code)
+		fmt.Fprintln(os.Stderr, "spec_check_failed: "+e.Error())
+		os.Exit(exitCode(e))
+	}
+}
+
+// exitCode maps sentinel classes to the documented codes. An error outside the
+// three classes is an unexpected host or tool failure, never a verdict on the
+// candidate, so it reports as unknown rather than as rejected.
+func exitCode(e error) int {
+	switch {
+	case errors.Is(e, repocheck.ErrInput):
+		return 2
+	case errors.Is(e, repocheck.ErrRejected):
+		return 3
+	default:
+		return 4
 	}
 }
 func simpleRun(args []string) error {
 	if len(args) != 1 || (args[0] != "policy" && args[0] != "docs" && args[0] != "composition") {
-		return repocheck.ErrInput
+		return repocheck.Invalidf("usage: spec-check policy|docs|composition | gate <name> | prepare-release")
 	}
-	if os.Getenv("GITHUB_ACTIONS") == "true" {
-		head, _, err := command("git", "rev-parse", "HEAD")
-		if err != nil || strings.TrimSpace(string(head)) != os.Getenv("AOM_SHA") {
-			return repocheck.ErrRejected
-		}
+	if e := headMatchesCandidate(); e != nil {
+		return e
 	}
 	s, e := snapshot(true)
 	if e != nil {
@@ -192,6 +240,22 @@ func simpleRun(args []string) error {
 		return e
 	}
 	fmt.Println("spec_check_passed")
+	return nil
+}
+
+// headMatchesCandidate refuses to evaluate anything but the exact commit the
+// hosting workflow was dispatched for.
+func headMatchesCandidate() error {
+	if os.Getenv("GITHUB_ACTIONS") != "true" {
+		return nil
+	}
+	head, _, err := command("git", "rev-parse", "HEAD")
+	if err != nil {
+		return err
+	}
+	if got := strings.TrimSpace(string(head)); got != os.Getenv("AOM_SHA") {
+		return repocheck.Rejectedf("HEAD %s differs from AOM_SHA", got)
+	}
 	return nil
 }
 
@@ -230,42 +294,39 @@ func normalizedArchive(s repocheck.Snapshot) ([]byte, error) {
 	sort.Strings(names)
 	for _, n := range names {
 		h := &tar.Header{Name: n, Mode: 0644, Size: int64(len(s[n])), ModTime: time.Unix(0, 0), Format: tar.FormatUSTAR}
-		if tw.WriteHeader(h) != nil {
-			return nil, repocheck.ErrUnknown
+		if e := tw.WriteHeader(h); e != nil {
+			return nil, repocheck.Unknownf("archive header %s: %v", n, e)
 		}
 		if _, e := tw.Write(s[n]); e != nil {
-			return nil, e
+			return nil, repocheck.Unknownf("archive body %s: %v", n, e)
 		}
 	}
-	if tw.Close() != nil {
-		return nil, repocheck.ErrUnknown
+	if e := tw.Close(); e != nil {
+		return nil, repocheck.Unknownf("archive close: %v", e)
 	}
 	return b.Bytes(), nil
 }
 func gate(name string) error {
 	allowed := map[string]bool{"policy": true, "conformance": true, "docs": true, "supply-chain": true, "aggregate": true, "heavy": true, "reproducibility": true}
 	if !allowed[name] {
-		return repocheck.ErrInput
+		return repocheck.Invalidf("unknown gate %q", name)
 	}
 	dir := evidenceDir()
-	if os.MkdirAll(dir, 0700) != nil {
-		return repocheck.ErrUnknown
+	if e := os.MkdirAll(dir, 0700); e != nil {
+		return repocheck.Unknownf("evidence dir: %v", e)
 	}
 	out, e := os.Create(filepath.Join(dir, name+".stdout"))
 	if e != nil {
-		return e
+		return repocheck.Unknownf("evidence stdout: %v", e)
 	}
 	defer out.Close()
 	errout, e := os.Create(filepath.Join(dir, name+".stderr"))
 	if e != nil {
-		return e
+		return repocheck.Unknownf("evidence stderr: %v", e)
 	}
 	defer errout.Close()
-	if os.Getenv("GITHUB_ACTIONS") == "true" {
-		head, _, err := command("git", "rev-parse", "HEAD")
-		if err != nil || strings.TrimSpace(string(head)) != os.Getenv("AOM_SHA") {
-			return repocheck.ErrRejected
-		}
+	if e := headMatchesCandidate(); e != nil {
+		return e
 	}
 	s, e := snapshot(true)
 	if e != nil {
@@ -286,8 +347,12 @@ func gate(name string) error {
 		cmd.Stdout = io.MultiWriter(out, os.Stdout)
 		cmd.Stderr = io.MultiWriter(errout, os.Stderr)
 		cmd.Env = append(os.Environ(), "GOTOOLCHAIN=local", "GOWORK=off")
-		if cmd.Run() != nil {
-			return repocheck.ErrRejected
+		if e := cmd.Run(); e != nil {
+			var exit *exec.ExitError
+			if errors.As(e, &exit) {
+				return repocheck.Rejectedf("%s %s: %v", filepath.Base(binary), strings.Join(args, " "), e)
+			}
+			return repocheck.Unknownf("%s %s: %v", filepath.Base(binary), strings.Join(args, " "), e)
 		}
 		return nil
 	}
@@ -329,8 +394,10 @@ func gate(name string) error {
 			break
 		}
 		second, err := normalizedArchive(again)
-		if err != nil || !bytes.Equal(first, second) {
-			e = repocheck.ErrRejected
+		if err != nil {
+			e = err
+		} else if !bytes.Equal(first, second) {
+			e = repocheck.Rejectedf("reproducibility: two source archives of the same tree differ")
 		}
 		if e == nil {
 			fmt.Fprintln(out, "reproducible_source_sha256="+repocheck.Hash(first))
@@ -349,25 +416,25 @@ func gate(name string) error {
 		}
 	}
 	if e != nil {
-		fmt.Fprintln(errout, "gate_failed")
+		fmt.Fprintln(errout, "gate_failed: "+e.Error())
 	} else {
 		fmt.Fprintln(out, "gate_passed="+name)
 	}
 	if out.Sync() != nil || errout.Sync() != nil {
-		return repocheck.ErrUnknown
+		return repocheck.Unknownf("evidence stream sync failed")
 	}
 	if os.Getenv("GITHUB_ACTIONS") == "true" {
 		stdout, readErr := os.ReadFile(filepath.Join(dir, name+".stdout"))
 		if readErr != nil {
-			return readErr
+			return repocheck.Unknownf("evidence stdout: %v", readErr)
 		}
 		stderr, readErr := os.ReadFile(filepath.Join(dir, name+".stderr"))
 		if readErr != nil {
-			return readErr
+			return repocheck.Unknownf("evidence stderr: %v", readErr)
 		}
 		attempt, err := strconv.Atoi(os.Getenv("AOM_ATTEMPT"))
 		if err != nil {
-			return repocheck.ErrInput
+			return repocheck.Invalidf("AOM_ATTEMPT %q is not an integer", os.Getenv("AOM_ATTEMPT"))
 		}
 		result := "success"
 		if e != nil {
@@ -375,11 +442,14 @@ func gate(name string) error {
 		}
 		record := repocheck.Gate{Schema: "aom04a.gate-record.v1", Repository: repocheck.Repository, Candidate: os.Getenv("AOM_SHA"), Base: os.Getenv("AOM_BASE"), Policy: repocheck.Hash(s["process/policy.json"]), Lock: repocheck.Hash(s["process/toolchain.lock.json"]), Workflow: os.Getenv("AOM_WORKFLOW"), Run: os.Getenv("AOM_RUN"), Job: name, Attempt: attempt, Result: result, Stdout: repocheck.Hash(stdout), Stderr: repocheck.Hash(stderr)}
 		b, err := json.Marshal(record)
-		if err != nil || repocheck.ValidateRecord(s["process/schemas/gate-record.schema.json"], b) != nil {
-			return repocheck.ErrInput
+		if err != nil {
+			return repocheck.Unknownf("gate record: %v", err)
 		}
-		if os.WriteFile(filepath.Join(dir, name+".json"), append(b, '\n'), 0600) != nil {
-			return repocheck.ErrUnknown
+		if err := repocheck.ValidateRecord(s["process/schemas/gate-record.schema.json"], b); err != nil {
+			return fmt.Errorf("gate record: %w", err)
+		}
+		if err := os.WriteFile(filepath.Join(dir, name+".json"), append(b, '\n'), 0600); err != nil {
+			return repocheck.Unknownf("gate record: %v", err)
 		}
 	}
 	return e
@@ -392,8 +462,8 @@ func moduleGraph(s repocheck.Snapshot) error {
 			License            string `json:"license_sha256"`
 		} `json:"modules"`
 	}
-	if json.Unmarshal(s["process/toolchain.lock.json"], &lock) != nil {
-		return repocheck.ErrInput
+	if e := json.Unmarshal(s["process/toolchain.lock.json"], &lock); e != nil {
+		return repocheck.Invalidf("process/toolchain.lock.json modules: %v", e)
 	}
 	raw, _, e := command(tool("go"), "list", "-mod=readonly", "-m", "-json", "all")
 	if e != nil {
@@ -411,14 +481,17 @@ func moduleGraph(s repocheck.Snapshot) error {
 		if errors.Is(e, io.EOF) {
 			break
 		}
-		if e != nil || m.Replace != nil {
-			return repocheck.ErrRejected
+		if e != nil {
+			return repocheck.Unknownf("go list -m output: %v", e)
+		}
+		if m.Replace != nil {
+			return repocheck.Rejectedf("module graph: %s uses a replace directive", m.Path)
 		}
 		if m.Main {
 			continue
 		}
 		if seen[m.Path] {
-			return repocheck.ErrRejected
+			return repocheck.Rejectedf("module graph: %s listed twice", m.Path)
 		}
 		seen[m.Path] = true
 		match := false
@@ -427,44 +500,57 @@ func moduleGraph(s repocheck.Snapshot) error {
 				// Lazy module loading may omit Sum for graph-only modules. Resolve the
 				// exact pinned module outside the candidate, then verify all lock facts.
 				info, err := downloadModule(m.Path, m.Version)
-				if err != nil || info.Sum != l.Sum || info.GoModSum != l.GoModSum {
-					return repocheck.ErrRejected
+				if err != nil {
+					return err
+				}
+				if info.Sum != l.Sum || info.GoModSum != l.GoModSum {
+					return repocheck.Rejectedf("module graph: %s@%s sums differ from toolchain lock", m.Path, m.Version)
 				}
 				license, err := os.ReadFile(filepath.Join(info.Dir, "LICENSE"))
-				if err != nil || len(license) > 1<<20 || repocheck.Hash(license) != l.License {
-					return repocheck.ErrRejected
+				if err != nil {
+					return repocheck.Rejectedf("module graph: %s@%s has no readable LICENSE file", m.Path, m.Version)
+				}
+				if len(license) > 1<<20 || repocheck.Hash(license) != l.License {
+					return repocheck.Rejectedf("module graph: %s@%s LICENSE digest differs from toolchain lock", m.Path, m.Version)
 				}
 				match = true
 			}
 		}
 		if !match {
-			return repocheck.ErrRejected
+			return repocheck.Rejectedf("module graph: %s@%s is not in toolchain lock", m.Path, m.Version)
 		}
 	}
 	if len(seen) != len(lock.Modules) {
-		return repocheck.ErrRejected
+		return repocheck.Rejectedf("module graph: %d modules resolved, toolchain lock lists %d", len(seen), len(lock.Modules))
 	}
 	return nil
 }
 func prepareRelease() error {
 	candidate, version := os.Getenv("AOM_CANDIDATE"), os.Getenv("AOM_VERSION")
-	if os.Getenv("GITHUB_ACTIONS") != "true" || os.Getenv("AOM_REF") != "refs/heads/main" || os.Getenv("AOM_ATTEMPT") != "1" || candidate != os.Getenv("AOM_SHA") || candidate != os.Getenv("AOM_WORKFLOW") || !repocheck.Commit(candidate) || !repocheck.Version(version) {
-		return repocheck.ErrRejected
+	switch {
+	case os.Getenv("GITHUB_ACTIONS") != "true":
+		return repocheck.Rejectedf("prepare-release runs only under GitHub Actions")
+	case os.Getenv("AOM_REF") != "refs/heads/main":
+		return repocheck.Rejectedf("prepare-release: AOM_REF %q is not refs/heads/main", os.Getenv("AOM_REF"))
+	case os.Getenv("AOM_ATTEMPT") != "1":
+		return repocheck.Rejectedf("prepare-release: AOM_ATTEMPT %q, want 1", os.Getenv("AOM_ATTEMPT"))
+	case !repocheck.Commit(candidate):
+		return repocheck.Rejectedf("prepare-release: AOM_CANDIDATE is not a 40-hex commit")
+	case candidate != os.Getenv("AOM_SHA") || candidate != os.Getenv("AOM_WORKFLOW"):
+		return repocheck.Rejectedf("prepare-release: AOM_CANDIDATE differs from AOM_SHA or AOM_WORKFLOW")
+	case !repocheck.Version(version):
+		return repocheck.Rejectedf("prepare-release: AOM_VERSION %q is not a stable v0/v1 SemVer", version)
 	}
-	head, _, e := command("git", "rev-parse", "HEAD")
-	if e != nil || strings.TrimSpace(string(head)) != candidate {
-		return repocheck.ErrRejected
+	if e := headMatchesCandidate(); e != nil {
+		return e
 	}
 	for _, name := range []string{"policy", "conformance", "docs", "supply-chain", "heavy", "reproducibility", "aggregate"} {
-		if gate(name) != nil {
-			return repocheck.ErrRejected
+		if e := gate(name); e != nil {
+			return fmt.Errorf("gate %s: %w", name, e)
 		}
 	}
-	if os.Getenv("GITHUB_ACTIONS") == "true" {
-		head, _, err := command("git", "rev-parse", "HEAD")
-		if err != nil || strings.TrimSpace(string(head)) != os.Getenv("AOM_SHA") {
-			return repocheck.ErrRejected
-		}
+	if e := headMatchesCandidate(); e != nil {
+		return e
 	}
 	s, e := snapshot(true)
 	if e != nil {
@@ -474,18 +560,18 @@ func prepareRelease() error {
 	if e != nil {
 		return e
 	}
-	if os.MkdirAll(".aom-release", 0700) != nil {
-		return repocheck.ErrUnknown
+	if e := os.MkdirAll(".aom-release", 0700); e != nil {
+		return repocheck.Unknownf("release dir: %v", e)
 	}
-	if os.WriteFile(".aom-release/source.tar", archive, 0600) != nil {
-		return repocheck.ErrUnknown
+	if e := os.WriteFile(".aom-release/source.tar", archive, 0600); e != nil {
+		return repocheck.Unknownf("source.tar: %v", e)
 	}
 	sbom, e := releaseSBOM(s)
 	if e != nil {
 		return e
 	}
-	if os.WriteFile(".aom-release/sbom.json", sbom, 0600) != nil {
-		return repocheck.ErrUnknown
+	if e := os.WriteFile(".aom-release/sbom.json", sbom, 0600); e != nil {
+		return repocheck.Unknownf("sbom.json: %v", e)
 	}
 	_, _, e = command(tool("go"), "build", "-mod=readonly", "-trimpath", "-buildvcs=false", "-ldflags=-buildid=", "-o", ".aom-release/spec-release", "./cmd/spec-release")
 	if e != nil {
@@ -502,7 +588,7 @@ func prepareRelease() error {
 		for _, suffix := range []string{".json", ".stdout", ".stderr"} {
 			b, err := os.ReadFile(filepath.Join(evidenceDir(), name+suffix))
 			if err != nil {
-				return err
+				return repocheck.Unknownf("evidence %s%s: %v", name, suffix, err)
 			}
 			evidence[name+suffix] = b
 		}
@@ -511,22 +597,28 @@ func prepareRelease() error {
 	if err != nil {
 		return err
 	}
-	if os.WriteFile(".aom-release/evidence.tar", evidenceArchive, 0600) != nil {
-		return repocheck.ErrUnknown
+	if e := os.WriteFile(".aom-release/evidence.tar", evidenceArchive, 0600); e != nil {
+		return repocheck.Unknownf("evidence.tar: %v", e)
 	}
 	for _, name := range []string{"source.tar", "sbom.json", "spec-release", "evidence.tar"} {
 		b, e := os.ReadFile(filepath.Join(".aom-release", name))
 		if e != nil {
-			return e
+			return repocheck.Unknownf("release asset %s: %v", name, e)
 		}
 		h := sha256.Sum256(b)
 		p.Assets = append(p.Assets, repocheck.Asset{Name: name, SHA256: hex.EncodeToString(h[:]), Size: int64(len(b))})
 	}
 	b, e := json.MarshalIndent(p, "", "  ")
-	if e != nil || repocheck.ValidateRecord(s["process/schemas/release-proposal.schema.json"], b) != nil {
-		return repocheck.ErrInput
+	if e != nil {
+		return repocheck.Unknownf("proposal: %v", e)
 	}
-	return os.WriteFile(".aom-release/proposal.json", append(b, '\n'), 0600)
+	if e := repocheck.ValidateRecord(s["process/schemas/release-proposal.schema.json"], b); e != nil {
+		return fmt.Errorf("proposal: %w", e)
+	}
+	if e := os.WriteFile(".aom-release/proposal.json", append(b, '\n'), 0600); e != nil {
+		return repocheck.Unknownf("proposal.json: %v", e)
+	}
+	return nil
 }
 
 func aggregateEvidence(dir string, s repocheck.Snapshot, p repocheck.Policy) error {
@@ -539,25 +631,28 @@ func aggregateEvidence(dir string, s repocheck.Snapshot, p repocheck.Policy) err
 	records := []repocheck.Gate{}
 	for _, n := range names {
 		raw, e := os.ReadFile(filepath.Join(dir, n+".json"))
-		if e != nil || repocheck.ValidateRecord(s["process/schemas/gate-record.schema.json"], raw) != nil {
-			return repocheck.ErrRejected
+		if e != nil {
+			return repocheck.Rejectedf("aggregate: gate record %s.json not downloaded: %v", n, e)
+		}
+		if e := repocheck.ValidateRecord(s["process/schemas/gate-record.schema.json"], raw); e != nil {
+			return repocheck.Rejectedf("aggregate: %s.json: %v", n, e)
 		}
 		var record repocheck.Gate
-		if repocheck.Decode(raw, &record) != nil {
-			return repocheck.ErrRejected
+		if e := repocheck.Decode(raw, &record); e != nil {
+			return repocheck.Rejectedf("aggregate: %s.json: %v", n, e)
 		}
 		records = append(records, record)
 		for _, suffix := range []string{".stdout", ".stderr"} {
 			b, e := os.ReadFile(filepath.Join(dir, n+suffix))
 			if e != nil {
-				return repocheck.ErrRejected
+				return repocheck.Rejectedf("aggregate: stream %s%s not downloaded: %v", n, suffix, e)
 			}
 			streams[n+suffix] = b
 		}
 	}
 	attempt, e := strconv.Atoi(os.Getenv("AOM_ATTEMPT"))
 	if e != nil {
-		return repocheck.ErrRejected
+		return repocheck.Invalidf("AOM_ATTEMPT %q is not an integer", os.Getenv("AOM_ATTEMPT"))
 	}
 	b := repocheck.EvidenceBinding{Candidate: os.Getenv("AOM_SHA"), Base: os.Getenv("AOM_BASE"), Policy: repocheck.Hash(s["process/policy.json"]), Lock: repocheck.Hash(s["process/toolchain.lock.json"]), Workflow: os.Getenv("AOM_WORKFLOW"), Run: os.Getenv("AOM_RUN"), Attempt: attempt, Full: full}
 	return repocheck.PreAggregateReady(records, p, b, streams)
@@ -566,12 +661,12 @@ func aggregateEvidence(dir string, s repocheck.Snapshot, p repocheck.Policy) err
 func releaseSBOM(s repocheck.Snapshot) ([]byte, error) {
 	// Preserve the complete approved lock inventory in a single valid JSON object.
 	// Runtime module verification is performed independently before packaging.
-	if moduleGraph(s) != nil {
-		return nil, repocheck.ErrRejected
+	if e := moduleGraph(s); e != nil {
+		return nil, e
 	}
 	var lock any
-	if json.Unmarshal(s["process/toolchain.lock.json"], &lock) != nil {
-		return nil, repocheck.ErrInput
+	if e := json.Unmarshal(s["process/toolchain.lock.json"], &lock); e != nil {
+		return nil, repocheck.Invalidf("process/toolchain.lock.json: %v", e)
 	}
 	actual, _, e := command(tool("go"), "env", "GOVERSION", "GOOS", "GOARCH")
 	if e != nil {
@@ -595,22 +690,27 @@ func toolObservations() (map[string]any, error) {
 	} {
 		f, e := os.Open(tool(pin.name))
 		if e != nil {
-			return nil, repocheck.ErrUnknown
+			return nil, repocheck.Unknownf("tool %s: %v", pin.name, e)
 		}
 		st, statErr := f.Stat()
 		if statErr != nil || !st.Mode().IsRegular() || st.Size() <= 0 || st.Size() > 128<<20 {
 			f.Close()
-			return nil, repocheck.ErrInput
+			return nil, repocheck.Invalidf("tool %s is not a regular file within 128 MiB", pin.name)
 		}
 		data, readErr := io.ReadAll(io.LimitReader(f, (128<<20)+1))
 		closeErr := f.Close()
 		if readErr != nil || closeErr != nil || len(data) > 128<<20 || int64(len(data)) != st.Size() {
-			return nil, repocheck.ErrUnknown
+			return nil, repocheck.Unknownf("tool %s: read failed", pin.name)
 		}
 		info, e := buildinfo.Read(bytes.NewReader(data))
-		if e != nil || info.GoVersion != "go1.26.8" || info.Main.Replace != nil ||
-			(pin.module != "" && (info.Main.Path != pin.module || info.Main.Version != pin.version)) {
-			return nil, repocheck.ErrRejected
+		if e != nil {
+			return nil, repocheck.Rejectedf("tool %s: no Go build info: %v", pin.name, e)
+		}
+		if info.GoVersion != "go1.26.8" {
+			return nil, repocheck.Rejectedf("tool %s built with %s, want go1.26.8", pin.name, info.GoVersion)
+		}
+		if info.Main.Replace != nil || (pin.module != "" && (info.Main.Path != pin.module || info.Main.Version != pin.version)) {
+			return nil, repocheck.Rejectedf("tool %s main module %s@%s, want %s@%s", pin.name, info.Main.Path, info.Main.Version, pin.module, pin.version)
 		}
 		result[pin.name] = map[string]any{"sha256": repocheck.Hash(data), "size": len(data), "build": info}
 	}
@@ -620,11 +720,11 @@ func toolObservations() (map[string]any, error) {
 func reproducibleBinary(s repocheck.Snapshot) (digest string, result error) {
 	dir, e := os.MkdirTemp("", "aom-repro-")
 	if e != nil {
-		return "", repocheck.ErrUnknown
+		return "", repocheck.Unknownf("reproducibility: temp dir: %v", e)
 	}
 	defer func() {
-		if os.RemoveAll(dir) != nil {
-			result = repocheck.ErrUnknown
+		if e := os.RemoveAll(dir); e != nil && result == nil {
+			result = repocheck.Unknownf("reproducibility: cleanup: %v", e)
 		}
 	}()
 	var first []byte
@@ -632,11 +732,11 @@ func reproducibleBinary(s repocheck.Snapshot) (digest string, result error) {
 		root := filepath.Join(dir, copyName)
 		for n, b := range s {
 			if !repocheck.ExportPath(n) {
-				return "", repocheck.ErrRejected
+				return "", repocheck.Rejectedf("reproducibility: path not exportable: %s", n)
 			}
 			target := filepath.Join(root, filepath.FromSlash(n))
 			if os.MkdirAll(filepath.Dir(target), 0700) != nil || os.WriteFile(target, b, 0600) != nil {
-				return "", repocheck.ErrUnknown
+				return "", repocheck.Unknownf("reproducibility: cannot materialize %s", n)
 			}
 		}
 		output := filepath.Join(dir, copyName+"-spec-release")
@@ -647,16 +747,16 @@ func reproducibleBinary(s repocheck.Snapshot) (digest string, result error) {
 		e = cmd.Run()
 		cancel()
 		if e != nil {
-			return "", repocheck.ErrRejected
+			return "", repocheck.Rejectedf("reproducibility: %s build failed: %v", copyName, e)
 		}
 		b, e := os.ReadFile(output)
 		if e != nil {
-			return "", repocheck.ErrUnknown
+			return "", repocheck.Unknownf("reproducibility: read %s build: %v", copyName, e)
 		}
 		if first == nil {
 			first = b
 		} else if !bytes.Equal(first, b) {
-			return "", repocheck.ErrRejected
+			return "", repocheck.Rejectedf("reproducibility: two builds of spec-release differ")
 		}
 	}
 	return repocheck.Hash(first), nil
@@ -670,11 +770,11 @@ type moduleDownload struct {
 func downloadModule(name, version string) (result moduleDownload, resultErr error) {
 	dir, e := os.MkdirTemp("", "aom-module-check-")
 	if e != nil {
-		return result, repocheck.ErrUnknown
+		return result, repocheck.Unknownf("module download: temp dir: %v", e)
 	}
 	defer func() {
-		if os.RemoveAll(dir) != nil {
-			resultErr = repocheck.ErrUnknown
+		if e := os.RemoveAll(dir); e != nil && resultErr == nil {
+			resultErr = repocheck.Unknownf("module download: cleanup: %v", e)
 		}
 	}()
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
@@ -683,8 +783,14 @@ func downloadModule(name, version string) (result moduleDownload, resultErr erro
 	cmd.Dir = dir
 	cmd.Env = append(os.Environ(), "GOTOOLCHAIN=local", "GOWORK=off")
 	raw, e := cmd.Output()
-	if e != nil || len(raw) > 1<<20 || json.Unmarshal(raw, &result) != nil || result.Error != nil {
-		return result, repocheck.ErrRejected
+	if e != nil {
+		return result, repocheck.Unknownf("go mod download %s@%s: %v", name, version, e)
+	}
+	if len(raw) > 1<<20 || json.Unmarshal(raw, &result) != nil {
+		return result, repocheck.Unknownf("go mod download %s@%s: unreadable output", name, version)
+	}
+	if result.Error != nil {
+		return result, repocheck.Rejectedf("go mod download %s@%s: %s", name, version, result.Error.Err)
 	}
 	return result, nil
 }
@@ -705,10 +811,10 @@ func (b *captureBuffer) Write(p []byte) (int, error) {
 func vulnerabilityChecks(out, errout io.Writer) error {
 	packages, stderr, e := command(tool("go"), "list", "-mod=readonly", "-deps", "-test", "./...")
 	if _, err := errout.Write(stderr); err != nil {
-		return repocheck.ErrUnknown
+		return repocheck.Unknownf("evidence stderr: %v", err)
 	}
 	if e != nil {
-		return repocheck.ErrRejected
+		return e
 	}
 	for _, target := range []string{"source", "actionlint", "govulncheck"} {
 		args := []string{"-format=json", "./..."}
@@ -717,22 +823,24 @@ func vulnerabilityChecks(out, errout io.Writer) error {
 			args = []string{"-mode=binary", "-format=json", tool(target)}
 			symbols, stderr, err := command(tool("go"), "tool", "nm", tool(target))
 			if _, e := errout.Write(stderr); e != nil {
-				return repocheck.ErrUnknown
+				return repocheck.Unknownf("evidence stderr: %v", e)
 			}
 			if err != nil {
-				return repocheck.ErrRejected
+				return err
 			}
 			presence = string(symbols)
 		}
 		raw, stderr, err := command(tool("govulncheck"), args...)
 		if _, e := out.Write(raw); e != nil {
-			return repocheck.ErrUnknown
+			return repocheck.Unknownf("evidence stdout: %v", e)
 		}
 		if _, e := errout.Write(stderr); e != nil {
-			return repocheck.ErrUnknown
+			return repocheck.Unknownf("evidence stderr: %v", e)
 		}
 		if err != nil {
-			return repocheck.ErrRejected
+			// govulncheck exits non-zero when it reports findings; that is a verdict
+			// on the candidate, not a tool failure.
+			return repocheck.Rejectedf("govulncheck %s reported findings or failed: %v", target, err)
 		}
 		cleared, e := repocheck.AssessVulnerabilities(raw, func(path string) bool {
 			if target == "source" {
@@ -746,7 +854,7 @@ func vulnerabilityChecks(out, errout io.Writer) error {
 			return strings.Contains(presence, " "+path+".")
 		})
 		if e != nil {
-			return e
+			return fmt.Errorf("govulncheck %s: %w", target, e)
 		}
 		for _, fact := range cleared {
 			fmt.Fprintln(out, target+":"+fact)

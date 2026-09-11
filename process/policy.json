@@ -182,14 +182,14 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "5aea259b95746500f8e574d98cf74e4ee8a287be7b6bc85b08d1ab24b0f23a50"
+      "protected_hash": "ec8d5a7b70cc2b939e67422ef02fdced9c33037b8ce8845af1f5ecc0b03e3a7e"
     },
     {
       "path": "conformance/compiler_test.go",
       "class": "source",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "5d274da9a6978ae0e80fb8ede8e46193d9f3dc0ad0317217c6e7bc243dea2587"
+      "protected_hash": "6924e2bbe409143cbfb517d2b9716dffa3bab91de90f6c72086845e4f10e7ccb"
     },
     {
       "path": "conformance/input.go",
@@ -780,6 +780,13 @@
       "protected_hash": ""
     },
     {
+      "path": "repocheck/diagnostics_test.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": ""
+    },
+    {
       "path": "repocheck/docs.go",
       "class": "source",
       "license": "Apache-2.0",
@@ -1106,21 +1113,21 @@
       "class": "schema",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "39ca7e5eac6160d2ffc724704379357c5a1b580a2d1fc6f06a898cc6a9b72941"
+      "protected_hash": "12d42fbe475912c1eb930fd7871f832c600bbeb92a4b59ada57aebceb56c5fbd"
     },
     {
       "path": "schemas/foundation_semantic_object_v1_2.schema.json",
       "class": "schema",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "91f398fbe6aeac3423b13850723d759cae4fe8074fecfb1a8c1bae275a28d64b"
+      "protected_hash": "b95e0cacd65e3dde06d3750364d8ad3ac8457dc38c33dd1847192aa79c4f561e"
     },
     {
       "path": "schemas/foundation_semantic_object_v1_3.schema.json",
       "class": "schema",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "732044b18cdd07febb59d997515b3e0b2312cc183e241d928d0727557034aedd"
+      "protected_hash": "8aecb0662670626fc01d9cd443dcc5fb6cc91c944ef4e76cb6afb86165889dd4"
     },
     {
       "path": "schemas/foundation_validation_result.schema.json",
@@ -1239,7 +1246,7 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "368a40ff6256f44024d1dc7d3fb436b28df26d542577df4721f6cf26ed38cda9"
+      "protected_hash": "d5cb5c4dfaac24f24e12234392fa3b415c310c2bca8e17a87b0bdb1f45d17a9d"
     },
     {
       "path": "schemas/kubernetes_inventory.schema.json",
@@ -1309,7 +1316,7 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "9ed0364e4a556b72bf24a2813190b42fc0ba62ac226fd54ad2cbc35129001f5a"
+      "protected_hash": "4eb4f97881b18ac6d19f9f6513faaa037e728429439007011dfeecad6e56d7b3"
     },
     {
       "path": "schemas/run_envelope.schema.json",

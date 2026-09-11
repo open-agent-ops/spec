@@ -31,7 +31,9 @@ func TestDiagnosticsNameTheCause(t *testing.T) {
 	p := policy()
 	p.Files = append(p.Files, repocheck.FileRule{Path: "composition-manifest.json", Class: "metadata", License: "Apache-2.0"})
 	complete := func() repocheck.Snapshot {
-		return repocheck.Snapshot{"README.md": []byte("readme"), "GOVERNANCE.md": []byte("governance"), "composition-manifest.json": []byte(`{"paths":["README.md","GOVERNANCE.md","composition-manifest.json"]}`)}
+		s := repocheck.Snapshot{"README.md": []byte("readme"), "GOVERNANCE.md": []byte("governance"), "composition-manifest.json": []byte("placeholder")}
+		s["composition-manifest.json"] = manifest(s, p)
+		return s
 	}
 
 	s := complete()
@@ -50,6 +52,18 @@ func TestDiagnosticsNameTheCause(t *testing.T) {
 	s = complete()
 	s["composition-manifest.json"] = []byte(`{"paths":["README.md","README.md","composition-manifest.json"]}`)
 	expect(t, repocheck.Composition(s, p), repocheck.ErrRejected, "composition-manifest.json path duplicated: README.md")
+
+	s = complete()
+	s["composition-manifest.json"] = []byte(strings.Replace(string(manifest(s, p)), `"kind":"regular"`, `"kind":"symlink"`, 1))
+	expect(t, repocheck.Composition(s, p), repocheck.ErrRejected, `kind "symlink", want regular`)
+
+	s = complete()
+	s["composition-manifest.json"] = []byte(strings.Replace(string(manifest(s, p)), `"license":"CC-BY-4.0"`, `"license":"MIT"`, 1))
+	expect(t, repocheck.Composition(s, p), repocheck.ErrRejected, "differ from policy")
+
+	s = complete()
+	s["composition-manifest.json"] = []byte(strings.Replace(string(manifest(s, p)), `"sha256":null`, `"sha256":"`+strings.Repeat("0", 64)+`"`, 1))
+	expect(t, repocheck.Composition(s, p), repocheck.ErrRejected, "null digest for itself")
 
 	protected := p
 	protected.Files = append([]repocheck.FileRule(nil), p.Files...)

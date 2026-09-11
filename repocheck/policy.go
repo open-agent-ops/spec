@@ -265,6 +265,13 @@ func Composition(s Snapshot, p Policy) error {
 	var manifest struct {
 		Maturity string   `json:"maturity"`
 		Paths    []string `json:"paths"`
+		Files    []struct {
+			Path    string  `json:"path"`
+			Kind    string  `json:"kind"`
+			SHA256  *string `json:"sha256"`
+			Class   string  `json:"class"`
+			License string  `json:"license"`
+		} `json:"files"`
 	}
 	if e := json.Unmarshal(s["composition-manifest.json"], &manifest); e != nil {
 		return Rejectedf("composition-manifest.json: %v", e)
@@ -281,6 +288,44 @@ func Composition(s Snapshot, p Policy) error {
 			return Rejectedf("composition-manifest.json path duplicated: %s", path)
 		}
 		seen[path] = true
+	}
+	// The manifest publishes a digest, class and license for every file. Each
+	// record must agree with the reviewed policy and with the candidate bytes,
+	// otherwise the public inventory silently drifts from what the gate admits.
+	// The manifest cannot carry its own digest; that record is null.
+	if len(manifest.Files) != len(s) {
+		return Rejectedf("composition-manifest.json lists %d file records, snapshot has %d", len(manifest.Files), len(s))
+	}
+	rules := map[string]FileRule{}
+	for _, f := range p.Files {
+		rules[f.Path] = f
+	}
+	recorded := map[string]bool{}
+	for _, f := range manifest.Files {
+		b, ok := s[f.Path]
+		switch {
+		case !ok:
+			return Rejectedf("composition-manifest.json file record not in snapshot: %s", f.Path)
+		case recorded[f.Path]:
+			return Rejectedf("composition-manifest.json file record duplicated: %s", f.Path)
+		case f.Kind != "regular":
+			return Rejectedf("composition-manifest.json %s kind %q, want regular", f.Path, f.Kind)
+		case f.Class != rules[f.Path].Class || f.License != rules[f.Path].License:
+			return Rejectedf("composition-manifest.json %s class/license %s/%s differ from policy %s/%s", f.Path, f.Class, f.License, rules[f.Path].Class, rules[f.Path].License)
+		}
+		recorded[f.Path] = true
+		if f.Path == "composition-manifest.json" {
+			if f.SHA256 != nil {
+				return Rejectedf("composition-manifest.json must record a null digest for itself")
+			}
+			continue
+		}
+		if f.SHA256 == nil {
+			return Rejectedf("composition-manifest.json %s has no sha256", f.Path)
+		}
+		if *f.SHA256 != Hash(b) {
+			return Rejectedf("composition-manifest.json sha256 differs from candidate bytes: %s", f.Path)
+		}
 	}
 	return nil
 }

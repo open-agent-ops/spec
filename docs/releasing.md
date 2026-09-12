@@ -127,3 +127,5 @@ confirming repository ID 330883 and the exact branch SHA. Re-read the settings,
 `git ls-remote --symref` and the public code page. A branch created successfully
 with an incorrect default branch is partial progress, not complete recovery;
 retain the receipt and reconcile before authorizing another execution.
+
+<!-- AOM-UOW-05 external contributor smoke test: lerkh-di. -->

@@ -251,7 +251,7 @@
     {
       "path": "README.md",
       "kind": "regular",
-      "sha256": "76b2f946d2a67949ac2d8aaadb810daa0aec3ef7d16d06f177d4bff2f5cb717d",
+      "sha256": "89f948feb2d06847059c7f2bcfd76757ff96cd2624c0065bf80d888c1b819b5f",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -272,7 +272,7 @@
     {
       "path": "bilingual-pairs.json",
       "kind": "regular",
-      "sha256": "72069a1927223bd6fb8af486cc9637467694f40a9abcf6f1c83ebfbbe9dbbc75",
+      "sha256": "c388b6eb025941d1688e368e4e88e290ebee82aa8c4b86a10f854c3f579263ef",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -545,35 +545,35 @@
     {
       "path": "docs/normative/glossary.en.md",
       "kind": "regular",
-      "sha256": "de718e2625d55cf6b78abeac7caf1d28d638cc30acfe801e0e6402a3f6bedd7f",
+      "sha256": "465a594d60c3f3f5b1c0d7d0244991b1ea3349310986c00a45e0d700294ba83d",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/glossary.ru.md",
       "kind": "regular",
-      "sha256": "25faf434ef1ec63189faf23ccc6546a92d76ee1d3e3d4923fb9afab67239f55d",
+      "sha256": "184f85b2ac1eec4bc049aee5f64d1a238c8adc18b7212ef4a2268fecc616d129",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/standards-map.en.md",
       "kind": "regular",
-      "sha256": "a5d709aa61151b9c6362a3d1325878cd83491f136fbadc5880ea9126677bf04d",
+      "sha256": "64cd260c1ab258e5f5dc5d586e753ad3724286650a081e236063ca454d126c80",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/standards-map.ru.md",
       "kind": "regular",
-      "sha256": "4ab2d37390e29441d4708c018c40940c9fae3a8f22f80b5fed57556731bc6030",
+      "sha256": "ee801bf0a3ff64e4f7ec27eb418fcb3e685d6d4646097fee655b99c493193b3a",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md",
       "kind": "regular",
-      "sha256": "76fa0a8bf57c1c8a2ca542873893232a0cc5fc4381647ebbfaddc4d3e74d0c60",
+      "sha256": "d94e158d20276fcd6684074c7461a00ef8c5676444510aaece288268b414f954",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -587,7 +587,7 @@
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md",
       "kind": "regular",
-      "sha256": "9cf181d409d3d1b0464f7b98943a7ab712b024deb263b80e408698ef8ef96d18",
+      "sha256": "a417f8b04ec65e46a3b20ab6324a10b73573867d8347490cb4109b5f88c6c6af",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -601,14 +601,14 @@
     {
       "path": "docs/whitepaper/CHANGELOG-en.md",
       "kind": "regular",
-      "sha256": "9f93ce1be033505bf30520f759aa2eb21af9301157e1e14ce10082d36d898df3",
+      "sha256": "71fe36dbe9f49e6e4f9cee6fe8d63c3a2ba1970c5b85b5557a2c543942eb470d",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "kind": "regular",
-      "sha256": "065aacf0b0328337dae072fd961fe2b9d8526547316cb61441bf9dc51b6bfeb2",
+      "sha256": "e726f10b81eaed49fb1fcb20a127ad37b8c523fcfb1b1d8c60eb75056352d63b",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -741,7 +741,7 @@
     {
       "path": "publication-manifest.json",
       "kind": "regular",
-      "sha256": "be7d58bece88f5f8c4ee5421859100e177cf925e4fc4b09a9ce894527b9f4fe2",
+      "sha256": "fbb082622333c9d140293a11a449fe0ce75962433e19b8b75b057dfa62198579",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -755,7 +755,7 @@
     {
       "path": "revision-manifest.json",
       "kind": "regular",
-      "sha256": "7215cc0f91daf33f7fc5884fab9a8f2fd300f0ba14a5eaa526f61dd0fdd15ddb",
+      "sha256": "d2ff0a9df5f9f4346055974f54d234cd12d91f397537eba3ecb27335c2d35ca1",
       "class": "metadata",
       "license": "Apache-2.0"
     },

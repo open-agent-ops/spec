@@ -17,10 +17,11 @@ Go toolchain and dependencies. The conformance suite runs offline.
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The editorially reviewed v0.4.0 candidate uses source revision
-`aom-03-r12`. The three reviewed pairs and two verified PDFs retain the
-accepted content target identified in `review-summary.json`. Verification of
-the successor schema/conformance candidate remains pending.
+The v0.4.0 candidate uses source revision `aom-03-r13` with paired
+positioning and related-work clarifications. `review-summary.json` retains
+historical review evidence for r12; it does not approve the changed candidate.
+The two PDFs retain their predecessor bytes. Fresh exact-target review,
+bilingual attestations, and PDF Build/Test remain pending.
 `composition-manifest.json` lists the full current public file set;
 `publication-manifest.json` tracks only the six paired Markdown sources and two
 PDF artifacts. Private review decisions are represented only by the safe

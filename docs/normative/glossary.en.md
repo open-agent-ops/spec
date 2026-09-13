@@ -1,7 +1,7 @@
 # Agent-Ops Glossary
 ## Controlled vocabulary v0.4.0
 
-**Source revision aom-03-r12 | English precedence**
+**Source revision aom-03-r13 | English precedence**
 
 > Literal identifiers and schema values stay unchanged across languages; explanations may be localized.
 

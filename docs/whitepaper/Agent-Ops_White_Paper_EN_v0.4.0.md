@@ -2,7 +2,7 @@
 
 ## A Methodology for AI-Agent-Based Infrastructure Operations and Technical Support
 
-**Public normative candidate v0.4.0 | source revision aom-03-r12 | English version prevails**
+**Public normative candidate v0.4.0 | source revision aom-03-r13 | English version prevails**
 
 > Facts, conclusions, and recommendations are not authorization to change infrastructure.
 
@@ -47,6 +47,8 @@ Component names, schema fields, status values, and machine-readable identifiers 
 The edition history is maintained in a separate document, "Agent-Ops. White Paper Edition History," published alongside this white paper at agent-ops.ru.
 
 ## 1. Executive Summary
+
+This edition specifies requirements and identifies expected benefits to be tested. It does not report a controlled runtime evaluation or establish end-to-end safety of an implementation. JSON Schema validation establishes data conformance to the encoded constraints; it does not by itself enforce cross-record relationships or temporal invariants.
 
 Modern infrastructure is described as code, observed through metrics and logs, and changed through CI/CD. Yet operational knowledge still lives in engineers' heads, chat threads, disconnected runbooks, and informal exceptions. An AI agent therefore receives either too little context or excessively broad authority. Both outcomes are unsafe.
 
@@ -122,9 +124,25 @@ Agent-Ops is an operations methodology in which:
 
 Agent-Ops does not replace observability, ITSM, GitLab, or IaC. It is not a universal SSH agent with root privileges, does not promise to identify a single root cause automatically, and does not enable self-healing by default.
 
-### 3.2. Agent-Ops and the Adjacent AgentOps Discipline
+### 3.2. Agent-Ops and Uses of the Term AgentOps
 
-Agent-Ops is a self-contained methodology for infrastructure operations and technical support. In this paper, AgentOps denotes the adjacent discipline of operating AI agents and managing their lifecycle. The domains interact but are not equivalent: Agent-Ops governs the infrastructure operations loop, while AgentOps governs the quality and lifecycle of the agents participating in it.
+AgentOps is used in several senses, including operating AI-agent systems and using agents for operational tasks. [AIOpsLab (v1, 2025)](https://arxiv.org/abs/2501.06706v1) uses the term for agents operating across the incident lifecycle. This document uses Agent-Ops to name a specific governance and execution methodology for infrastructure operations and technical support. Its distinction is the proposed contract and scope, not exclusive ownership of the term.
+
+### 3.3. Related Work and Evidence Boundaries
+
+This informative comparison identifies antecedents and related approaches. It does not establish first invention, demonstrated superiority, or conformance to another system. References identify the editions used for comparison; a repository's current main branch is not evidence of the implementation used for a paper's experimental results.
+
+**Operational agents.** Agent-Ops belongs to the tradition of explicit management objectives and feedback in autonomic computing described by [Kephart (ICSE 2005)](https://research.ibm.com/publications/research-challenges-of-autonomic-computing--1). [AIOpsLab (v1, 2025)](https://arxiv.org/abs/2501.06706v1) supplies an operational-agent evaluation framework and an antecedent for the term AgentOps. [STRATUS (v2, 2026)](https://arxiv.org/abs/2506.02009v2) is a related multi-agent reliability-engineering system. Its transactional non-regression objective and authorization safety concern different properties; comparison depends on aligned assumptions about writers, observation, and undo. The lifecycle and three-plane organization in this paper are an infrastructure-operations adaptation, not a claim to have invented management feedback loops.
+
+**Runtime enforcement and authority.** Least privilege, fail-safe defaults, and complete mediation are established principles in [Saltzer and Schroeder (1975)](https://web.mit.edu/saltzer/www/publications/protection/Basic.html). [AgentSpec (ICSE 2026, camera-ready)](https://cposkitt.github.io/files/publications/agentspec_llm_enforcement_icse26.pdf) describes runtime enforcement with predicates that can use execution state. [Progent (v3, 2026)](https://arxiv.org/abs/2504.11703v3) addresses privilege control for agents. [Macaroons (IEEE S&P 2014)](https://research.google.com/pubs/archive/41892.pdf) and [Zanzibar (USENIX ATC 2019)](https://www.usenix.org/system/files/atc19-pang.pdf) provide earlier approaches to attenuated authorization and consistent authorization, respectively. Agent-Ops does not claim runtime guards or bounded authority as new mechanisms; a meaningful comparison includes stateful rules and the trusted services on which they depend.
+
+**Untrusted data and persistent context.** [CaMeL (v2, 2025)](https://arxiv.org/abs/2503.18813v2) and [Fides (v2, 2025)](https://arxiv.org/abs/2505.23643v2) address enforceable information-flow boundaries; [SPA (v1, 2026)](https://arxiv.org/abs/2608.27234v1) addresses persistent agents across queries. Preserving trust labels is not presented as an Agent-Ops invention. The context requirements in Section 20 describe the intended operational behavior; textual labels and prompt demarcation alone do not demonstrate that an implementation enforces it.
+
+**Provenance and action contracts.** [in-toto (USENIX Security 2019)](https://www.usenix.org/system/files/sec19-torres-arias.pdf) is an antecedent for verifiable artifact relationships. [PCAA (v1, 2026)](https://arxiv.org/abs/2606.04104v1) and [CAVA (v1, 2026)](https://arxiv.org/abs/2607.13716v1) are close comparisons for action governance, canonical action identity, approval binding, and receipts. [PACE (v1, 2026)](https://arxiv.org/abs/2608.17220v1) studies policy-attested execution in decentralized finance; its backend assumptions and results do not automatically transfer to infrastructure operations. Compensation has an established antecedent in [Sagas (SIGMOD 1987)](https://sigmodrecord.org/1987/12/09/sagas/). Combining these mechanisms is not by itself evidence of a new safety property.
+
+**Evaluation.** AIOpsLab and [ITBench (ICML 2025)](https://proceedings.mlr.press/v267/jha25a.html) provide operational evaluation settings. [AgentDojo (v3, 2024)](https://arxiv.org/abs/2406.13352v3) provides a comparison point for distinguishing legitimate-task utility from attacker success. Passing an internal gate, observing an authorized effect, and restoring service are different measurements. These works inform evaluation design; this edition reports no comparative Agent-Ops runtime results, and a difference in a paper's focus is not evidence that its system lacks a capability.
+
+**Methodological and engineering sources.** AI-Disrupt PDLC v2.0 supplies methodological antecedents for the R/T scales, completion Evidence Bundle, Governance Mesh, and context-management patterns; the adaptations are identified in Appendix C. Anthropic's commerce-agent report supplies implementation-pattern antecedents outside infrastructure operations. These sources are distinguished from peer-reviewed experimental or formal evidence. The cited CaMeL, Fides, Progent, SPA, PCAA, CAVA, and PACE editions are preprints; citing them acknowledges described approaches without independently validating their results. The contribution of this edition is the specification and organization of an operational methodology. Scientific novelty and improvements in safety, utility, or cost remain unestablished.
 
 ## 4. Agent-Ops Principles
 
@@ -920,6 +938,8 @@ Context sources are admitted by the assembly profile, the §16.1 trust hierarchy
 
 ## 21. Quality, Reproducibility, and AI Economics
 
+The procedures below specify how quality, reproducibility, and cost are to be assessed. Their inclusion is not evidence that an Agent-Ops implementation has passed them; this edition reports no controlled comparative runtime results.
+
 This section evaluates operational work performed under Agent-Ops. It does not prescribe how software that implements the methodology is developed or tested.
 
 ### 21.1. Quality Verification
@@ -1012,6 +1032,8 @@ Governance Mesh and Guardian are complementary. Mesh decides whether a transitio
 
 ## 23. Practical Scenario: Rapid Disk Filling
 
+This is an illustrative scenario, not a reported experiment or production measurement. Its percentages and observation window explain the lifecycle and do not establish measured improvements.
+
 ![Worked rapid-disk-filling scenario across the eight Agent-Ops steps, including an evidence-refinement loop and verification that free space rises from 8 percent to 24 percent after 24 hours.](images/rapid-disk-filling-scenario-en.png)
 
 Text alternative: Intent requires more than 20 percent free space with no deletion or downtime. Evidence shows 8 percent free and growing logs. Diagnosis identifies a `logrotate` and release hypothesis but returns for more evidence because the retention owner is unknown. The approved `R1/C2/I3` plan expands the volume first and then corrects retention. A deterministic executor applies exactly those actions. Verification after 24 hours shows 24 percent free space, working rotation, no deletion, and no SLO degradation; Learning updates the retention rule, verification, and decision log.
@@ -1078,7 +1100,9 @@ Higher completed-unit volume counts as successful methodology adoption only when
 
 ## 26. Expected Benefits and Positioning
 
-Agent-Ops should be positioned as an AI-native Server Operations Methodology and Operations-as-Code framework for safe operations and technical support of server, cloud, and Kubernetes infrastructure.
+Agent-Ops should be positioned as an AI-native Server Operations Methodology and Operations-as-Code framework intended to support safe operations and technical support of server, cloud, and Kubernetes infrastructure.
+
+The following benefits are expected, not demonstrated comparative results:
 
 - less dependence on informal knowledge held by individual engineers;
 - repeatable triage and a common standard across projects;
@@ -1087,6 +1111,8 @@ Agent-Ops should be positioned as an AI-native Server Operations Methodology and
 - verifiable change plans instead of free-form recommendations;
 - linked audit, incident, change, and postmortem artifacts;
 - managed-service scaling without universal agent privileges.
+
+No percentage improvement is claimed without measurements. Future research claims depend on comparison with a strong composition of existing mechanisms under matched assumptions. If no advantage is established, the contribution is described as an operational profile, reference implementation, or measurement methodology, according to the artifacts actually delivered. Any observed advantage is limited to the evaluated environments and fault classes.
 
 > Agent-Ops: Intent defines the result; evidence proves reality; Governance constrains; a human approves; an executor applies; Outcome verifies.
 
@@ -1100,7 +1126,7 @@ The closed publication set consists of this white paper, the standards map, and 
 
 ## 28. Status of This Edition
 
-Edition v0.4.0 incorporates the completed owner review, paired proofreading and agent-safety revisions, the external editor corrections, and eight paired infographics. It is formalized as source revision `aom-03-r12`. Release still requires deterministic PDF checks and external bilingual attestations bound to the exact r12 commit. Repository presence alone does not make the edition released.
+Edition v0.4.0, source revision `aom-03-r13`, adds paired terminology, related-work attribution, and evidence-status clarifications to the r12 candidate. These editorial changes do not establish runtime safety, measured benefits, or implementation completeness. Prior review and PDF evidence apply only to their recorded predecessor targets; release of this revision requires fresh exact-target review, bilingual attestations, and deterministic PDF checks. Repository presence alone does not make the edition released.
 
 ## Appendix A. 47 Baseline Checks
 
@@ -1158,7 +1184,7 @@ Edition v0.4.0 incorporates the completed owner review, paired proofreading and 
 
 ## Appendix C. Source Materials
 
-- AI-Disrupt PDLC, complete practical guide, version 2.0, Sber, June 2026; methodology author: Kirill Menshov. The Section 4.3 table is the source of R0-R5; Section 4.5 supplies the T1-T5 notation and sequence, adapted to the Agent-Ops independent-control boundary in Section 5: <https://aipdlc.ru/documents/en/whitepaper_full_en.pdf>.
+- AI-Disrupt PDLC, complete practical guide, version 2.0, Sber, June 2026; methodology author: Kirill Menshov. The Section 4.3 table is the source of R0-R5; Section 4.5 supplies the T1-T5 notation and sequence, adapted to the Agent-Ops independent-control boundary in Section 5. Source T5 and the separate Agent-Ops Executor are not equivalent. Section 2.11 supplies the completion Evidence Bundle pattern adapted in Section 14.3; Section 2.13 supplies the Governance Mesh antecedent for Section 18. Its context-management and Context Supply Chain patterns also inform Section 20. These are operational adaptations, not claims of invention or adoption of the source's product-development lifecycle: <https://aipdlc.ru/documents/en/whitepaper_full_en.pdf>.
 - OWASP Agentic Skills Top 10 (AST01-AST10), version 1.0, 2026 — the source of the edition 0.3.2 requirements on the skill supply chain, audit receipts, and coverage records: <https://owasp.org/www-project-agentic-skills-top-10/>.
 - Ganesh Gurudu, "Building an AI Agent That Runs Your SRE Operations - What I Learned, What Works, and How You Can Do It Too," 8 April 2026 — an informative implementation-experience source for shadow evaluation, attempt budgets, agent-runtime observability, context assembly, and integration admission; it creates no dependency on the article's architecture, risk scale, deployment topology, or technology stack: <https://blog.stackademic.com/building-an-ai-agent-that-runs-your-sre-operations-what-i-learned-what-works-and-how-you-can-do-8a3801124bdc>.
 - Ali Shazal and Matthew Koen, Anthropic, "A guide to the anatomy of effective commerce agents," 2 September 2026 — an informative source outside the operations domain for proposal-versus-approval boundaries, authoritative identifiers, serialized writes and resulting-state limits, deterministic context demarcation, and constructed-state evaluation; it creates no dependency on the article's commerce architecture, model selection, latency techniques, or deployment stack: <https://claude.com/blog/the-anatomy-of-effective-commerce-agents>.

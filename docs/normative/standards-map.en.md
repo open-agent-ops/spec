@@ -1,7 +1,7 @@
 # Agent-Ops Standards Map
 ## Informative alignment v0.4.0
 
-**Source revision aom-03-r12 | English precedence**
+**Source revision aom-03-r13 | English precedence**
 
 > This document is an informative map; the named external sources remain authoritative for their own requirements.
 

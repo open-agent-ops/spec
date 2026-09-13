@@ -4,42 +4,42 @@
       "language": "en",
       "pair_id": "glossary",
       "path": "docs/normative/glossary.en.md",
-      "sha256": "de718e2625d55cf6b78abeac7caf1d28d638cc30acfe801e0e6402a3f6bedd7f",
+      "sha256": "465a594d60c3f3f5b1c0d7d0244991b1ea3349310986c00a45e0d700294ba83d",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "glossary",
       "path": "docs/normative/glossary.ru.md",
-      "sha256": "25faf434ef1ec63189faf23ccc6546a92d76ee1d3e3d4923fb9afab67239f55d",
+      "sha256": "184f85b2ac1eec4bc049aee5f64d1a238c8adc18b7212ef4a2268fecc616d129",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "standards-map",
       "path": "docs/normative/standards-map.en.md",
-      "sha256": "a5d709aa61151b9c6362a3d1325878cd83491f136fbadc5880ea9126677bf04d",
+      "sha256": "64cd260c1ab258e5f5dc5d586e753ad3724286650a081e236063ca454d126c80",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "standards-map",
       "path": "docs/normative/standards-map.ru.md",
-      "sha256": "4ab2d37390e29441d4708c018c40940c9fae3a8f22f80b5fed57556731bc6030",
+      "sha256": "ee801bf0a3ff64e4f7ec27eb418fcb3e685d6d4646097fee655b99c493193b3a",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md",
-      "sha256": "76fa0a8bf57c1c8a2ca542873893232a0cc5fc4381647ebbfaddc4d3e74d0c60",
+      "sha256": "d94e158d20276fcd6684074c7461a00ef8c5676444510aaece288268b414f954",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md",
-      "sha256": "9cf181d409d3d1b0464f7b98943a7ab712b024deb263b80e408698ef8ef96d18",
+      "sha256": "a417f8b04ec65e46a3b20ab6324a10b73573867d8347490cb4109b5f88c6c6af",
       "status": "candidate"
     },
     {
@@ -60,6 +60,6 @@
   "english_precedence": true,
   "release_status": "pending_external_review_and_build_test",
   "schema": "agent-ops.publication-manifest.v1",
-  "source_revision": "aom-03-r12",
+  "source_revision": "aom-03-r13",
   "version": "v0.4.0"
 }

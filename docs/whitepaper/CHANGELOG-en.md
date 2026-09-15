@@ -1,5 +1,7 @@
 # Agent-Ops. White Paper Edition History
 
+Positioning clarification (aom-03-r13): acknowledge multiple uses of AgentOps, add informative related work and expanded source attribution, distinguish requirements and illustrative numbers from measured results, and condition future research claims on comparative evidence. Execution requirements and schemas are unchanged. Fresh exact-target review, bilingual attestations, and PDF Build/Test remain pending.
+
 Build/Test correction (aom-03-r12): embed PNG figures, stabilize H1/H2 bookmarks and multi-pass contents, keep captions and table headings together; pin approved pybind11 and conditional typing_extensions dependencies. Fresh exact-target review and complete Build/Test remain required.
 
 Build/Test correction (aom-03-r11): align two explicit MAY markers with the Russian edition; restore the missing Russian §17.1 roles table; correct normative-token, complete-tree link and per-image accessibility validation. Fresh exact-target external review and PDF validation remain pending.

@@ -6,6 +6,7 @@ import (
 	"go/token"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"testing"
 	"time"
@@ -16,6 +17,30 @@ import (
 
 func policy() repocheck.Policy {
 	return repocheck.Policy{Schema: "aom04a.policy.v1", Repository: repocheck.Repository, Files: []repocheck.FileRule{{Path: "README.md", Class: "documentation", License: "CC-BY-4.0"}, {Path: "GOVERNANCE.md", Class: "documentation", License: "CC-BY-4.0", Normative: true}}, Required: []string{"policy", "conformance", "docs", "supply-chain", "aggregate"}, Full: []string{"heavy", "reproducibility"}, Owners: "open-agent-ops/owners", Maintainers: "open-agent-ops/maintainers"}
+}
+
+// manifest builds a composition manifest that agrees with the snapshot bytes
+// and the policy class/license taxonomy, as the policy gate now requires.
+func manifest(s repocheck.Snapshot, p repocheck.Policy) []byte {
+	paths := make([]string, 0, len(s))
+	for n := range s {
+		paths = append(paths, n)
+	}
+	sort.Strings(paths)
+	rules := map[string]repocheck.FileRule{}
+	for _, f := range p.Files {
+		rules[f.Path] = f
+	}
+	files := []map[string]any{}
+	for _, n := range paths {
+		var digest any = repocheck.Hash(s[n])
+		if n == "composition-manifest.json" {
+			digest = nil
+		}
+		files = append(files, map[string]any{"path": n, "kind": "regular", "sha256": digest, "class": rules[n].Class, "license": rules[n].License})
+	}
+	b, _ := json.Marshal(map[string]any{"maturity": "candidate", "paths": paths, "files": files})
+	return b
 }
 func submission() repocheck.Submission {
 	return repocheck.Submission{Schema: "aom04a.submission.v1", Kind: "fix", Head: strings.Repeat("a", 40), Base: strings.Repeat("b", 40), Paths: []string{"README.md"}, Actor: "11", Link: "PR1", Revision: "v0.4.0", Description: "reproduce", Compatibility: "unchanged", Bilingual: "unchanged", LicenseAck: true}
@@ -148,13 +173,19 @@ func TestRule06(t *testing.T) {
 	p := policy()
 	s := repocheck.Snapshot{"README.md": []byte("readme"), "GOVERNANCE.md": []byte("governance")}
 	p.Files = append(p.Files, repocheck.FileRule{Path: "composition-manifest.json", Class: "metadata", License: "Apache-2.0"})
-	s["composition-manifest.json"] = []byte(`{"paths":["README.md","GOVERNANCE.md","composition-manifest.json"]}`)
-	if repocheck.Composition(s, p) != nil {
-		t.Fatal("complete snapshot")
+	s["composition-manifest.json"] = []byte("placeholder")
+	s["composition-manifest.json"] = manifest(s, p)
+	if e := repocheck.Composition(s, p); e != nil {
+		t.Fatal("complete snapshot", e)
 	}
 	s["extra"] = []byte("unknown")
 	if repocheck.Composition(s, p) == nil {
 		t.Fatal("unknown file")
+	}
+	delete(s, "extra")
+	s["README.md"] = []byte("edited after the manifest was written")
+	if e := repocheck.Composition(s, p); e == nil || !strings.Contains(e.Error(), "sha256 differs from candidate bytes: README.md") {
+		t.Fatal("stale manifest digest accepted", e)
 	}
 	for _, name := range []string{"nested/internal/x.go", "nested/review/x.json", strings.Repeat("x", 257), "nested/docs/foundation/x.md"} {
 		if repocheck.ExportPath(name) {
@@ -221,6 +252,9 @@ func TestPublisherAppAuthorityBoundaries(t *testing.T) {
 		{"builtin write", []string{"jobs", "publish", "permissions", "contents"}, "write"},
 		{"job token exposure", []string{"jobs", "publish", "env", "AOM_GITHUB_TOKEN"}, "${{ steps.publisher-token.outputs.token }}"},
 		{"build token exposure", []string{"jobs", "build", "env"}, map[string]any{"AOM_GITHUB_TOKEN": "${{ github.token }}"}},
+		{"mirror job secret exposure", []string{"jobs", "mirror", "env", "AOM_MIRROR_TOKEN"}, "${{ secrets.AOM_MIRROR_TOKEN }}"},
+		{"mirror job builtin token exposure", []string{"jobs", "mirror", "env", "AOM_GITHUB_TOKEN"}, "${{ github.token }}"},
+		{"mirror write permission", []string{"jobs", "mirror", "permissions", "contents"}, "write"},
 		{"wrong owner", []string{"token", "with", "owner"}, "other-owner"},
 		{"wrong repository", []string{"token", "with", "repositories"}, "other-repository"},
 		{"all repositories", []string{"token", "with", "repositories"}, nil},

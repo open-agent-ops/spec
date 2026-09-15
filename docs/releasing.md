@@ -70,7 +70,11 @@ store its client ID as AOM_PUBLISHER_CLIENT_ID and its private key as the
 AOM_PUBLISHER_PRIVATE_KEY secret. The pinned token action runs after independent
 environment approval, requests only this repository and these permissions, and
 revokes the installation token when the job ends. Only the publish step receives
-that token. The built-in workflow token has read permissions.
+that token. The built-in workflow token has read permissions. The mirror job
+likewise exposes `AOM_MIRROR_TOKEN` and the read-only built-in token to its
+single execution step only, never as job-level variables visible to checkout or
+artifact download; the built-in token authenticates canonical readback so it is
+rate-limited per run rather than per shared runner address.
 
 Grant the admitted App a bypass only for tag creation. Do not add a bypass to
 main protection or tag update/deletion protection. The private key can mint App

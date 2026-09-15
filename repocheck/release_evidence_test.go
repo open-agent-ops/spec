@@ -113,7 +113,8 @@ func TestReleaseEvidenceBoundary(t *testing.T) {
 func TestReleaseSourceBoundary(t *testing.T) {
 	p := policy()
 	p.Files = append(p.Files, repocheck.FileRule{Path: "composition-manifest.json", Class: "metadata", License: "Apache-2.0"})
-	trusted := repocheck.Snapshot{"README.md": []byte("reviewed readme"), "GOVERNANCE.md": []byte("reviewed governance"), "composition-manifest.json": []byte(`{"maturity":"candidate","paths":["README.md","GOVERNANCE.md","composition-manifest.json"]}`)}
+	trusted := repocheck.Snapshot{"README.md": []byte("reviewed readme"), "GOVERNANCE.md": []byte("reviewed governance"), "composition-manifest.json": []byte("placeholder")}
+	trusted["composition-manifest.json"] = manifest(trusted, p)
 	proposal := repocheck.Proposal{Inventory: repocheck.Hash(trusted["composition-manifest.json"])}
 	if repocheck.ReleaseSource(evidenceArchive(t, trusted, nil), trusted, p, proposal) != nil {
 		t.Fatal("reviewed source denied")

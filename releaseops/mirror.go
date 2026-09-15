@@ -231,7 +231,15 @@ func MirrorApproved(ctx context.Context, p repocheck.Proposal) (out repocheck.Re
 		return out, e
 	}
 	ctx = withAttemptLog(ctx, p, os.Getenv("AOM_INITIATOR"))
-	canonical := newGitHub("")
+	// Canonical readback is authenticated with the read-only built-in token so
+	// it is not subject to the anonymous per-IP rate limit shared by runners,
+	// and so a 403 rate-limit reply is recognised and retried rather than
+	// classified as an authority failure.
+	readToken, e := credential("AOM_GITHUB_TOKEN")
+	if e != nil {
+		return out, e
+	}
+	canonical := newGitHub(readToken)
 	jobCtx, cancel, e := canonical.jobContext(ctx, p, "AOM / mirror")
 	if e != nil {
 		return out, e

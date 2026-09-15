@@ -1,5 +1,7 @@
 # Agent-Ops. White Paper Edition History
 
+Limited C4 profile Stage 1 (aom-04-r1): begin the v0.5.0 successor to v0.4.0; assign stable profile identity `agent-ops.c4-human-approved-apply@1.0.0`; publish its limited test-only scope, non-goals, assumption and guarantee vocabularies, TCB and common-cause table, claim matrix, and informative formal-model plan. Temporal semantics, schemas, relation validators, runtime implementation, execution evaluation, production safety, release, and new PDFs remain pending.
+
 Positioning clarification (aom-03-r13): acknowledge multiple uses of AgentOps, add informative related work and expanded source attribution, distinguish requirements and illustrative numbers from measured results, and condition future research claims on comparative evidence. Execution requirements and schemas are unchanged. Fresh exact-target review, bilingual attestations, and PDF Build/Test remain pending.
 
 Build/Test correction (aom-03-r12): embed PNG figures, stabilize H1/H2 bookmarks and multi-pass contents, keep captions and table headings together; pin approved pybind11 and conditional typing_extensions dependencies. Fresh exact-target review and complete Build/Test remain required.
@@ -16,6 +18,7 @@ The white paper itself is normative. This file records what changed between edit
 
 | Edition | Summary |
 | --- | --- |
+| 0.5.0 | Stage 1 boundary, assumptions, guarantee vocabulary, trusted computing base, common-cause analysis, and formal-model plan for the limited C4 Human-approved Apply profile. |
 | 0.4.0 | Three-plane lifecycle structure plus scoped shadow promotion, Controlled Change attempt budgets and circuit breakers, agent-runtime observability, reproducible context assembly, and exact-integration admission. |
 | 0.3.3 | Closed bilingual normative set, explicit English precedence, paired methodology/maps/glossary/diagrams, deterministic PDF toolchain contract, and external semantic-review gate. |
 | 0.3.2 | Agent skills added to the Context Supply Chain; agent artifact inventory, admission and outcome receipts, coverage record, and a conformance mapping to external standards. Requirements sourced from the OWASP Agentic Skills Top 10. |
@@ -23,6 +26,17 @@ The white paper itself is normative. This file records what changed between edit
 | 0.3.0 | Operational Intent and Outcome Contract, Unified Evidence Bundle, separated R/C/I/S/M taxonomies, Validation Spine, Policy Hooks, and Agent Context Lifecycle. |
 
 The English edition moved directly from 0.3.0 to 0.3.2 and carries the 0.3.1 changes listed below.
+
+## Edition 0.5.0 | September 2026
+
+- Supersedes the v0.4.0 text candidate without rewriting its meaning or previously retained PDF bytes.
+- Assigns stable profile identity `agent-ops.c4-human-approved-apply@1.0.0` to one human-approved canonical change package executed by a separately human-started deterministic Gated Executor.
+- Limits the reference domain to predeclared typed operations against isolated, resettable, non-production test targets; excludes arbitrary shell, standing C5 authority, irreversible production effects, and undeclared third-party APIs.
+- Adds a stable assumption catalog covering cooperating writers, backend admission, ABA-resistant identity and versions, idempotency and fencing, durable logging and reservations, identity and keys, scoped credentials, bounded clock uncertainty, effect observation, Outcome oracles, external controllers, availability, reversibility, compromise, checkpoint refinement, canonicalization, and human authority.
+- Separates admission safety, effect knowledge, Outcome success, retry and conflict safety, continuity, and recovery; a safe stop is not represented as recovery.
+- Publishes the deployment-level TCB and common-cause requirements and makes Guardian independence depend on separated authority, credentials, evidence sources, and observation paths rather than a second model or prompt.
+- Adds an informative Stage 2 model plan with named state, actions, safety/liveness properties, and counterexample obligations tied to removed assumptions.
+- Changes no schema or Go-module identity and implements no runtime. Stage 2 and Stage 3 require later owner acceptance; exact-target owner and bilingual review and new PDF Build/Test are pending.
 
 ## Edition 0.4.0 | September 2026
 

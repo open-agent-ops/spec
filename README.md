@@ -1,6 +1,6 @@
 # Agent-Ops Specification
 
-Vendor-neutral public foundation candidate for Agent-Ops v0.4.0. The public
+Vendor-neutral public foundation candidate for Agent-Ops v0.5.0. The public
 identity is `agent-ops.ru`; `open-agent-ops` is the distribution repository
 name. Repository presence does not mean that a candidate has been released.
 
@@ -10,18 +10,19 @@ See `COMPATIBILITY.md` for the public namespace and live schema revisions.
 From this module directory, run `go test ./...` after provisioning the pinned
 Go toolchain and dependencies. The conformance suite runs offline.
 
-[English white paper](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md) ·
-[Русский white paper](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md)
+[English white paper](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md) ·
+[Русский white paper](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md)
 
 ## Normative publication set
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The v0.4.0 candidate uses source revision `aom-03-r13` with paired
-positioning and related-work clarifications. `review-summary.json` retains
-historical review evidence for r12; it does not approve the changed candidate.
-The two PDFs retain their predecessor bytes. Fresh exact-target review,
-bilingual attestations, and PDF Build/Test remain pending.
+The v0.5.0 candidate uses source revision `aom-04-r1` and supersedes the
+v0.4.0 text candidate with Stage 1 of the limited
+`agent-ops.c4-human-approved-apply@1.0.0` profile. `review-summary.json`
+retains historical review evidence for r12; it does not approve this candidate.
+The two v0.4.0 PDFs retain predecessor bytes and do not render v0.5.0. Fresh
+exact-target owner and bilingual review and new PDF Build/Test remain pending.
 `composition-manifest.json` lists the full current public file set;
 `publication-manifest.json` tracks only the six paired Markdown sources and two
 PDF artifacts. Private review decisions are represented only by the safe
@@ -34,7 +35,7 @@ outside this publication set.
 - Russian: [карта стандартов](docs/normative/standards-map.ru.md), [глоссарий](docs/normative/glossary.ru.md).
 
 Structural parity is machine-verifiable but is not semantic approval. The
-v0.4.0 successor candidate remains pending until its complete conformance,
+v0.5.0 candidate remains pending until its complete conformance,
 composition and supply-chain evidence is bound to its exact target.
 
 ## Public boundary
@@ -61,8 +62,9 @@ For the focused compiler and fixture suite, run `go test ./conformance`.
 The registry embeds exactly 61 schemas and returns defensive copies. Lookup
 uses full public resource IDs. Revision dispatch accepts the two family names
 `foundation_object_ref` and `foundation_semantic_object` with exact versions
-`1.0.0`, `1.1.0`, `1.2.0`, `1.3.0`. Text v0.4.0 and release tags are separate
-version dimensions. New private namespace aliases are rejected.
+`1.0.0`, `1.1.0`, `1.2.0`, `1.3.0`. Text v0.5.0, the independently versioned
+C4 profile, and release tags are separate version dimensions. New private
+namespace aliases are rejected.
 
 The suite compiles every schema, checks six positive and eighteen distinct
 negative core fixtures, and includes four Run Request cases. Seven declared

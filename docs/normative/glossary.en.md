@@ -1,7 +1,7 @@
 # Agent-Ops Glossary
-## Controlled vocabulary v0.4.0
+## Controlled vocabulary v0.5.0
 
-**Source revision aom-03-r13 | English precedence**
+**Source revision aom-04-r1 | English precedence**
 
 > Literal identifiers and schema values stay unchanged across languages; explanations may be localized.
 
@@ -29,6 +29,17 @@
 | RCA | Evidence-based ranking of testable hypotheses, not an unconditional assertion. |
 | Remediation Planner | A component that prepares a change proposal without applying it. |
 | Gated Executor | A separate executor for approved actions using scoped credentials. |
+| cooperating writer | A writer whose admission, conflict, version-precondition, idempotency-key, and fencing behavior is enforced by the profile's declared gateway or backend domain. |
+| enforcement domain | The exact set of writers, targets, operations, dependencies, and backend paths over which a named control can compel or reject behavior. |
+| backend admission | Acceptance of a typed mutation by a cooperating gateway or backend at its declared linearization point after checking the bound authority predicate. A pre-call check alone is not backend admission. |
+| decision-critical version | A target or dependency version whose change can invalidate the evidence, policy result, approval, or safe action selected for one decision. |
+| clock uncertainty | A declared bound around reported time; validity checks conservatively use the earliest possible expiry and latest possible `not_before`. |
+| effect knowledge | The classified knowledge `applied`, `not_applied`, `partial`, or `unknown` about target changes attributable to an attempt, together with observation coverage. It is distinct from attempt state and Outcome. |
+| unresolved effect | An admitted operation whose actual effect is `unknown` or `partial`, or whose required reconciliation, compensation, observation, or Outcome obligation is not terminally resolved. |
+| trusted computing base (TCB) | The components and people whose correct enforcement or observation is required for a stated guarantee; a TCB entry names its boundary, failure assumptions, independence, and claim limit. |
+| common-cause failure | One dependency or false fact capable of defeating controls presented as separate; shared models, evidence, credentials, canonicalizers, clocks, services, and observation paths must be disclosed. |
+| admission safety | The property that no operation is admitted at the declared enforcement point unless current authority holds for the exact package, target, attempt, epochs, and use time. |
+| recovery | Authorized terminal resolution of every admitted obligation and required service or test-state restoration under stated availability and reversibility assumptions; a safe stop alone is not recovery. |
 | Decision Log | An append-only record of decisions, approvals, expiry, evidence references, and outcomes. |
 | Process Trace | An append-only ordered record of every lifecycle step entry and exit, transition attempt, decision, and material engineer or agent message, bound to its actor, authority, evidence, output, and exact target. |
 | Agent skill | A `SKILL.md` bundle with accompanying resources that an agent discovers, loads into context, and executes with its own permissions. |

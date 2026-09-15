@@ -1,7 +1,7 @@
 # Agent-Ops Standards Map
-## Informative alignment v0.4.0
+## Informative alignment v0.5.0
 
-**Source revision aom-03-r13 | English precedence**
+**Source revision aom-04-r1 | English precedence**
 
 > This document is an informative map; the named external sources remain authoritative for their own requirements.
 
@@ -22,6 +22,7 @@ The mapping to ISO/IEC 42001 was produced by Git in Sky from the risk-to-control
 | 16.5 agent artifact inventory | A.10.3 Suppliers | AST02 Supply Chain Compromise |
 | 18 Governance Mesh, 18.1 admission and outcome receipts | A.2.2 AI policy | AST09 No Governance; Regulation (EU) 2024/1689, Article 12 |
 | 9 Plan, 11 Controlled Change and gated Executor, 20.1 credential separation | A.4.5 System and computing resources | AST06 Weak Isolation |
+| Appendix G limited C4 profile: assumption catalog, enforcement domain, TCB, common-cause boundaries, and claim matrix | A.4.5 System and computing resources; A.6.2.4 Verification and validation; A.6.2.6 Operation and monitoring | NIST AI RMF GOVERN; AISVS C5 and C9; AST06 Weak Isolation; Regulation (EU) 2024/1689, Article 12 |
 | 20.1 applied security controls and no-mutation invariant | A.6.2.4 Verification and validation | AST01 Malicious Skills; AST10 Cross-Platform Reuse |
 
 ## 3. Standards and regulations

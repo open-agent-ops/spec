@@ -1,7 +1,7 @@
 # Agent-Ops Glossary
 ## Controlled vocabulary v0.5.0
 
-**Source revision aom-04-r1 | English precedence**
+**Source revision aom-04-r2 | English precedence**
 
 > Literal identifiers and schema values stay unchanged across languages; explanations may be localized.
 
@@ -16,6 +16,16 @@
 | exact target | Immutable content identity evaluated by evidence. |
 | evidence | Verifiable, target-bound fact or source reference with producer and result identity. |
 | Evidence Bundle | An immutable package of identity, evidence, decisions, and outcome references. |
+| Evidence Requirement | A consumer-specific statement of what must be known, for which exact target and epoch, from which sources and window, with what authority, coverage, freshness, independence, and blocking semantics. |
+| Collection Profile | A versioned, digest-bound contract for the collector, source and target binding, permissions, bounds, retry and error handling, parsing, transformation, coverage, and reproducibility. |
+| Collection Attempt / Receipt | An immutable record of one collection attempt, including request identity, transport and parser states, actual coverage, exclusions, truncation, dropped data, and transformations; a retry creates another receipt. |
+| Evidence Artifact | Exact retained bytes or a protected reference bound to one collection receipt and its transformation lineage. |
+| Evidence Assertion | A scoped statement that an artifact `supports`, `refutes`, `does_not_test`, `conflicts`, or leaves `unknown` a named claim. |
+| evidence sufficiency | A consumer-specific result of evaluating required quality axes against an Evidence Requirement; it is not a global artifact property and grants no authority. |
+| acquisition validity | Whether the declared collector, query, permissions, bounds, parser, and error rules actually governed the collection attempt. |
+| transformation fidelity | Whether parsing, normalization, aggregation, redaction, or projection preserved claim-relevant meaning and limitations. |
+| detection capability | The declared and evidenced ability of an observation path to detect the event or state addressed by a requirement within its coverage boundary. |
+| assertion disposition | One of `supports`, `refutes`, `does_not_test`, `conflicts`, or `unknown` for an exact claim and consumer boundary. |
 | admitted identifier | A target, resource, or object identifier issued or authoritatively confirmed by a non-model system, admitted into the current target-bound Evidence Bundle by a deterministic resolver, and fresh at the point of use. |
 | oracle | A declared rule that evaluates an obligation. |
 | unit of work | A bounded change with design, implementation, verification, and closure. |
@@ -50,7 +60,7 @@
 | Injection resistance | Resistance to executing instructions that arrive as data; a property of the executing model, not of the artifact. |
 | Admission receipt | A signed record of a decision, produced before a potentially dangerous step. |
 | Outcome receipt | A signed record of an execution result, linked to its admission receipt. |
-| Coverage record | A record of what a scan examined, what it skipped, and where it was interrupted. |
+| Coverage record | A record of what a scan examined, what it skipped, where it was interrupted, and which detection capability applied. |
 | Manifest stripping | Loss of declared constraints when an artifact is ported between runtimes. |
 | mutation conflict domain | A policy-defined set of overlapping target-mutation scopes whose attempts are mutually serialized until Verification or terminal release. |
 | constructed-state evaluation | An evaluation that starts from an exact validated prior state, appends one stimulus, and grades the resulting artifacts and decision; it does not prove the transitions that created the prior state. |

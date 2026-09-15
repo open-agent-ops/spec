@@ -63,7 +63,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "a32cbb0c9c1054d8923d5b54e64615b9caa6230b40ac847d5b41d89e62d722a3"
+      "protected_hash": "ffd2e8f74793828e1c107bce76f72fbc57be446f6d6316c05df725dad92100f0"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -126,7 +126,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "afb3be2cc69da6caedf0598235a291128c01afd1922b9d4b589e6cbb3de16d6f"
+      "protected_hash": "c1323ded7302d665ae840e64093b5025b3843a5e9963c30fa883a249d5e5a709"
     },
     {
       "path": "cmd/spec-check/main.go",
@@ -427,28 +427,28 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "9829a85b3e9f51b5794ba24ddd04f648822405d5c56a35b7a4e730a0e50fbb57"
+      "protected_hash": "87f8cb94dcf1ec61d28ad746031e8afe12832054df8b640ae53251ecebd6d99f"
     },
     {
       "path": "docs/normative/glossary.ru.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "a0ef6ce6ec3db8cdc7dc21f9de28d7c6cefbe46643e99a494080fff464d4c1ab"
+      "protected_hash": "ef2e6d1b89a4c5921074f5d5f9f98a7d3908aa44a51c71e1527beeb1bcdfe004"
     },
     {
       "path": "docs/normative/standards-map.en.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "d2558771e7ea79894885dfbcb4de79f36028ae30d6d16f93be7860bc90672fac"
+      "protected_hash": "1bcb87161dfeb9e0f4c3ec80720001bf6774ef301f012e66405463b842e16030"
     },
     {
       "path": "docs/normative/standards-map.ru.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "47e62bc4b5eb294e08ed5dcfad39b1ec6fcaca3f08c7ba71423fa3b3a067194b"
+      "protected_hash": "57d78945bb473908ef5e2d74d15b303272861d2f4c97eb6f4e60346de6eace18"
     },
     {
       "path": "docs/releasing.md",
@@ -462,7 +462,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "392964e98883a322a5fb6ce6e11d8b39db8408437a44433e05328daa029cb66b"
+      "protected_hash": "316c5d32f429bd4035a2271ba0752f634b41ca51e4e42e488e4550e53843f035"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
@@ -476,7 +476,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "6dd8387b26499c6bedf9998b876a67fbc9412f9f9374671712deaef57848a6d5"
+      "protected_hash": "7712e1214ce846b816bfc76da5ea2f8b658ca80c57c7e518738f7b2d2ee48b14"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
@@ -490,14 +490,14 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "1e74ad69987969545a5729267abf429a60a89609805724a5fb05a7847613106a"
+      "protected_hash": "12bfe74168a863cbaf98ac586a8093d95f11e6df712ec541953d32309a5cdfab"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "61df7ceb0e829febab1bb164c7dd8829cc9685312782857be93c642384378dd0"
+      "protected_hash": "87da9af3a5018899c23bc6a60490d2c32283bef1f50bfb6db8872fce01db314e"
     },
     {
       "path": "docs/whitepaper/images/agent-ops-12-principles-en.png",
@@ -679,7 +679,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "8b1d472c3c22fc86c05941350e26f8093e112cc35594fb86de7b0364309213e1"
+      "protected_hash": "f55609e743c9ea80e9b2dbef5b257daaeba948bce534149cfa634d18d6f0ce6c"
     },
     {
       "path": "releaseops/attempt_log.go",
@@ -889,7 +889,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "c71af3a84c6555ec540a0994e7d9fd3c811a182b936bd404e8bd109d365d78c4"
+      "protected_hash": "7292e342272f5a4447340c86de1cd9c28ff539e4e8b77c4b56b327d06df22ccb"
     },
     {
       "path": "schemas/ai_agent_context.schema.json",

@@ -17,9 +17,12 @@ Go toolchain and dependencies. The conformance suite runs offline.
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The v0.5.0 candidate uses source revision `aom-04-r1` and supersedes the
-v0.4.0 text candidate with Stage 1 of the limited
-`agent-ops.c4-human-approved-apply@1.0.0` profile. `review-summary.json`
+The v0.5.0 candidate uses source revision `aom-04-r2` and supersedes the
+v0.4.0 text candidate with Stage 1 of the independently versioned
+`agent-ops.c4-human-approved-apply@1.0.0` and
+`agent-ops.evidence-acquisition@1.0.0` profiles. Their Stage 2 models will
+compose through a small versioned semantic interface while preserving separate
+authority and evidence-quality domains. `review-summary.json`
 retains historical review evidence for r12; it does not approve this candidate.
 The two v0.4.0 PDFs retain predecessor bytes and do not render v0.5.0. Fresh
 exact-target owner and bilingual review and new PDF Build/Test remain pending.
@@ -63,7 +66,8 @@ The registry embeds exactly 61 schemas and returns defensive copies. Lookup
 uses full public resource IDs. Revision dispatch accepts the two family names
 `foundation_object_ref` and `foundation_semantic_object` with exact versions
 `1.0.0`, `1.1.0`, `1.2.0`, `1.3.0`. Text v0.5.0, the independently versioned
-C4 profile, and release tags are separate version dimensions. New private
+C4 and Evidence Acquisition profiles, and release tags are separate version
+dimensions. New private
 namespace aliases are rejected.
 
 The suite compiles every schema, checks six positive and eighteen distinct

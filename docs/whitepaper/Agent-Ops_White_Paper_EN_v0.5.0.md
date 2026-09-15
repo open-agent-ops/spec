@@ -2,7 +2,7 @@
 
 ## A Methodology for AI-Agent-Based Infrastructure Operations and Technical Support
 
-**Public normative candidate v0.5.0 | source revision aom-04-r1 | English version prevails**
+**Public normative candidate v0.5.0 | source revision aom-04-r2 | English version prevails**
 
 > Facts, conclusions, and recommendations are not authorization to change infrastructure.
 
@@ -351,6 +351,8 @@ Intent may transition to Evidence only when its goal, scope, source authority, s
 
 Evidence records declared and observed reality before interpretation. Collection must not silently become either a diagnosis or permission to act.
 
+The independently versioned `agent-ops.evidence-acquisition@1.0.0` profile defines the Stage 1 acquisition boundary in [Appendix H](#appendix-h-evidence-acquisition-profile-100). It separates requirements, collection attempts, artifacts, assertions, and bundles; establishes independent evidence-quality axes; and defines how collection failures remain visible. It introduces no new JSON fields in this edition and does not change the meaning of Evidence Bundle v1.
+
 | Type card | Contract |
 | --- | --- |
 | Type | `EvidenceRecord / EvidenceBundle` |
@@ -419,6 +421,8 @@ Text alternative: with two services and three environments, stable labels create
 Unique run IDs and timestamps therefore remain in JSON artifacts, not metric labels. The numbers illustrate the distinction and do not set a universal cardinality limit.
 
 Freshness is a separate property: it states how recently evidence was observed and whether its permitted time-to-live (TTL) has expired. A dataset may have only six series and still be too old to support a decision. Stale evidence cannot justify a risky change without fresh collection.
+
+For the Evidence Acquisition profile, freshness is evaluated by the consumer at use time against the evidence requirement, target identity, source identity, observation interval, clock uncertainty, and every decision-critical version. A TTL is one input, not a universal proof of fitness. A version change, target-generation change, uncovered interval, or unbounded clock uncertainty makes the dependent assertion `unknown` until the requirement is satisfied by current evidence.
 
 For the limited C4 profile, freshness is decision-relative rather than a TTL-only property. Observation time, receipt time, use time, declared clock uncertainty, exact target UID, and every decision-critical resource version are distinct inputs. An unexpired TTL does not establish freshness after a decision-critical version changes. The Stage 1 assumptions and claim boundary are specified in [Appendix G](#appendix-g-limited-c4-human-approved-apply-profile-100); the temporal invalidation relation is reserved for Stage 2.
 
@@ -603,6 +607,8 @@ This section defines the data plane's cross-cutting contract: all eight steps re
 | Contract status | A standalone normative `LifecycleEvent` JSON Schema does not yet exist. |
 
 A Unified Evidence Bundle is an immutable, content-addressed package for a task, incident, or change proposal. It links facts and decisions without unnecessarily copying sensitive raw data.
+
+The existing `foundation_evidence_bundle` v1 contract retains its local meaning in this edition. It may carry references produced under the Evidence Acquisition profile, but its digest, sealing, or schema validity does not by itself establish source authority, acquisition validity, coverage, freshness, independence, claim support, or execution authority. A stronger bundle contract, if required after the Stage 2 relation models are accepted, will use a new incompatible schema identity or major version with an explicit migration note.
 
 | Group | Contents |
 | --- | --- |
@@ -958,6 +964,8 @@ The procedures below specify how quality, reproducibility, and cost are to be as
 
 For `agent-ops.c4-human-approved-apply@1.0.0`, Stage 1 publishes assumptions and an informative formal-model plan only. No runtime evaluation may be represented as profile conformance until the Stage 2 temporal model and Stage 3 schemas, relation validators, and negative traces have been accepted. Gate pass rate is not a substitute for authority safety, actual-effect measurement, Outcome success, or observation completeness.
 
+For `agent-ops.evidence-acquisition@1.0.0`, evidence quality is not one score. Authority, identity and binding, integrity and provenance, acquisition validity, coverage and completeness, freshness, transformation fidelity, independence, claim support, and reproducibility are evaluated separately as specified in Appendix H. A missing, conflicting, or unverified required axis remains `unknown` or incomplete; an aggregate score cannot compensate for a failure of authority, target binding, integrity, or blocking coverage.
+
 This section evaluates operational work performed under Agent-Ops. It does not prescribe how software that implements the methodology is developed or tested.
 
 ### 21.1. Quality Verification
@@ -1144,7 +1152,7 @@ The closed publication set consists of this white paper, the standards map, and 
 
 ## 28. Status of This Edition
 
-Edition v0.5.0, source revision `aom-04-r1`, supersedes the v0.4.0 text candidate and publishes Stage 1 of the limited C4 profile: its stable identity, scope, explicit non-goals, assumption and guarantee vocabularies, trusted computing base, common-cause boundaries, and informative formal-model plan. It does not define the Stage 2 temporal state machine, provide the Stage 3 schemas or relation validators, implement an execution runtime, report an evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
+Edition v0.5.0, source revision `aom-04-r2`, supersedes the v0.4.0 text candidate and publishes Stage 1 of two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, and coordinated formal-model plan are normative here. This edition does not define the Stage 2 models or relation catalogs, provide the Stage 3 schemas or validators, implement a runtime, report an evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
 
 ## Appendix A. 47 Baseline Checks
 
@@ -1219,7 +1227,7 @@ Every check produces an independent schema-backed result. Summary, Prometheus ex
 | status | Exactly one of ok, info, warning, critical, unknown, not_applicable, or error. |
 | severity | Normative S0-S5 scale; not autonomy, impact, or maturity. |
 | applicable | Explicit applicability; a missing provider does not automatically mean not_applicable. |
-| evidence_refs | Verifiable references with source, timestamp, freshness, authority, and digest. |
+| evidence_refs | Verifiable references with source, timestamp, freshness, authority, and digest. A reference proves neither that its acquisition was valid nor that it is sufficient for the consuming claim unless the applicable evidence requirement is evaluated. |
 | policy_source | Applied rule, version, owner, and digest. |
 | recommendation | Plan-only proposal; never approval or execution authority. |
 | completeness / truncation | Completeness, physical limits, dropped items, and compaction reason. |
@@ -1357,7 +1365,7 @@ Guardian MAY block, redirect, or request separately authorized remediation. It M
 
 ### G.7. Informative formal-model plan
 
-Stage 2 is to introduce one executable, versioned model before schemas are fixed. The planned state includes canonical package digest and version, target UID and decision-critical versions, approval and policy epochs, bounded time interval, human approval and start events, attempt budget and consumed attempts, idempotency key, conflict domain, reservation and fence, admission state, effect knowledge, Outcome state, reconciliation or compensation obligations, observer coverage, and checkpoint lineage.
+Before schemas are fixed, Stage 2 is to introduce two compositional executable, versioned models: the C4 authority-and-effect model described here and the Evidence Acquisition assertion-and-sufficiency model described in Appendix H. A small versioned semantic interface connects them without merging their authority domains. The planned C4 state includes canonical package digest and version, target UID and decision-critical versions, approval and policy epochs, bounded time interval, human approval and start events, attempt budget and consumed attempts, idempotency key, conflict domain, reservation and fence, admission state, effect knowledge, Outcome state, reconciliation or compensation obligations, observer coverage, and checkpoint lineage.
 
 Planned actions include package creation, human approval, revocation, human start, reservation, admission or denial at the gateway/backend linearization point, effect observation, response loss, retry request, lease expiry, fence rejection, reconciliation, compensation, Outcome evaluation, checkpoint, restart, and terminal release. The model will separate safety from liveness, include explicit unavailable and compromised-boundary abstractions, use named event barriers rather than unbounded wall-clock waits, and preserve `unknown` as a first-class state.
 
@@ -1374,10 +1382,89 @@ Each proposed property requires at least one counterexample produced by removing
 | P7 Outcome success is not inferred from admission or effect | remove C4-A12 | The requested mutation occurs but the original Intent criterion fails while the attempt is labeled successful. |
 | L1 Every admitted obligation eventually reaches an authorized terminal disposition | remove C4-A14 or C4-A15 | The observer/control plane remains unavailable or an irreversible residual effect has no authorized reconciliation path. |
 
-The Stage 2 acceptance record must identify the model checker, exact version, configuration, bounds, fairness assumptions, seeds where applicable, checked properties, complete output, and retained minimized counterexamples. A bounded model can falsify a universal claim; successful bounded checking does not prove production safety.
+The Stage 2 acceptance record must identify both model checkers or executable specifications, exact versions, configurations, bounds, fairness assumptions, seeds where applicable, checked properties, complete outputs, and retained minimized counterexamples. It must also identify the interface version and the independently versioned C4 and Evidence relation catalogs. A bounded model can falsify a universal claim; successful bounded checking does not prove production safety.
 
 ### G.8. Stage boundary and next decision
 
-Stage 1 is complete only when the accountable owner accepts the exact profile boundary, assumption catalog, TCB table, guarantee vocabulary, common-cause treatment, non-goals, and model plan on the current candidate. Stage 2 may then define temporal and authority semantics; it MUST NOT be inferred from this appendix. Stage 3 may begin only after the Stage 2 model and relationship catalog are accepted. Runtime gateway, log, observer, backend adapters, execution evaluation, production deployment, paid evaluation, human-subject research, and release each require the separately applicable decision and evidence.
+Stage 1 is complete only when the accountable owner accepts the exact C4 and Evidence profile boundaries, assumption catalogs, TCB tables, claim vocabularies, common-cause treatment, non-goals, and coordinated model plan on the current candidate. Stage 2 may then define temporal, authority, acquisition, assertion, and sufficiency semantics; those semantics MUST NOT be inferred from these appendices. Stage 3 may begin only after both Stage 2 models, their small versioned interface, and both independently versioned relation catalogs are accepted. Runtime gateway, log, observer, collectors, backend adapters, execution evaluation, production deployment, paid evaluation, human-subject research, and release each require the separately applicable decision and evidence.
+
+## Appendix H. Evidence Acquisition Profile 1.0.0
+
+### H.1. Status, identity, scope, and non-goals
+
+The stable public identity of this profile is `agent-ops.evidence-acquisition@1.0.0`. This appendix is its normative Stage 1 contract for acquisition boundaries, quality axes, failure semantics, trusted computing base, common-cause treatment, and the interface with the limited C4 profile. It intentionally defines no Stage 2 relation identifiers, temporal state machine, Stage 3 JSON fields, schemas, public validator contract, runtime implementation, or claim of production conformance.
+
+The profile governs evidence collected for one explicit consumer and use: what must be known, about which exact target and epoch, from which source classes, within which observation window, with what coverage, authority, independence, freshness, negative-observation semantics, and blocking behavior. It neither grants execution authority nor turns successful transport, a digest, a signature, a sealed bundle, or a fluent interpretation into proof of truth or sufficiency.
+
+### H.2. Controlled acquisition chain
+
+The controlled chain is:
+
+> `EvidenceRequirement -> CollectionProfile -> CollectionAttempt/Receipt -> EvidenceArtifact -> EvidenceAssertion -> EvidenceBundle`
+
+| Object | Stage 1 meaning |
+| --- | --- |
+| `EvidenceRequirement` | States the consumer, intended claim or decision, exact target and epoch, required sources, time and coverage bounds, authority, independence, freshness, negative-observation semantics, and the result of missing or conflicting evidence. |
+| `CollectionProfile` | Versioned and digest-bound collector contract: tool and configuration, permissions and read-only boundary, source and target binding, population or sampling and seed, limits, retry and error rules, parser, normalization, redaction, raw references, coverage, common-cause dependencies, and reproducibility inputs. |
+| `CollectionAttempt/Receipt` | Immutable record of every attempt, including failures: request and query digest, transport and parser states, retries and interruption, actual coverage, included and excluded items, counts, truncation, dropped data, and transformations. A retry creates a new receipt. |
+| `EvidenceArtifact` | Exact retained bytes or protected reference bound to one receipt, with content identity and transformation lineage. |
+| `EvidenceAssertion` | A scoped statement that an artifact `supports`, `refutes`, `does_not_test`, `conflicts`, or leaves `unknown` a named claim. It distinguishes an observed negative from missing data. |
+| `EvidenceBundle` | A content-addressed package of references and lineage. Packaging or sealing creates neither authority nor evidence quality. Existing Bundle v1 semantics remain unchanged. |
+
+Each link MUST preserve the identities and limitations of the preceding link. A derived representation cannot silently widen scope, improve trust class, erase exclusions, replace an exact target, or convert `unknown` into success.
+
+### H.3. Independent quality axes and claim rule
+
+| Quality axis | Required question |
+| --- | --- |
+| Authority | Is the source recognized for this exact fact, scope, and time? |
+| Identity and binding | Are consumer, target, source, epoch, and artifact unambiguously bound? |
+| Integrity and provenance | Can the examined bytes and every transformation be traced without an unexplained gap? |
+| Acquisition validity | Did the declared collector, query, permissions, bounds, parser, and error rules actually govern the attempt? |
+| Coverage and completeness | What population, interval, surfaces, inclusions, exclusions, truncation, and dropped data were actually covered? |
+| Freshness | Is the evidence fit at use time for the target and every decision-critical version? |
+| Transformation fidelity | Did parsing, normalization, aggregation, redaction, or projection preserve the claim-relevant meaning and limitations? |
+| Independence | Which sources, credentials, collectors, parsers, stores, clocks, paths, models, or prompts are shared? |
+| Claim support | Does the assertion support or refute the exact claim, merely fail to test it, conflict, or remain unknown? |
+| Reproducibility | Can a reviewer recover the inputs, profile, receipts, artifacts, transformations, and bounded result? |
+
+The consumer evaluates sufficiency against its own `EvidenceRequirement`; evidence is not globally sufficient. Every required axis MUST be explicit. Missing, conflicted, failed, or unverified blocking axes yield `unknown` or incomplete. An aggregate score MUST NOT compensate for failed authority, identity binding, integrity, or blocking coverage. Evidence may justify a factual claim only within the evaluated boundary; it MUST NOT grant approval, execution authority, or source authority.
+
+### H.4. Trusted computing base
+
+| Component | Required responsibility and claim limit |
+| --- | --- |
+| Source authority | Establishes which source may speak for which fact; does not prove the source correct. |
+| Collector or tool | Executes the bound read contract and exposes failures and limits; successful transport does not prove completeness or truth. |
+| Target/source identity service | Resolves exact identities and epochs; aliases alone do not prove binding. |
+| Time/version source | Supplies bounded time and decision-critical versions; shared or uncertain sources limit freshness claims. |
+| Raw evidence store | Retains exact artifacts or protected references; storage does not create authority. |
+| Transformation pipeline | Parses, normalizes, aggregates, and redacts with recorded lineage; it cannot improve source quality. |
+| Canonicalizer and digest function | Bind canonical bytes under one accepted algorithm and version; they do not prove semantics. |
+| Bundle writer | Packages references and limitations without rewriting them; sealing does not establish sufficiency. |
+| Relation validator | Future Stage 3 component that checks accepted Stage 2 relations; it cannot infer missing facts or authority. |
+| Evaluator or oracle | Applies the consumer requirement to assertions; its correctness and coverage remain named assumptions. |
+
+### H.5. Failure and negative-evidence semantics
+
+Transport failure, permission denial, timeout, parser failure, truncation, sampling shortfall, redaction loss, source conflict, and target or version mismatch are distinct outcomes and MUST remain recorded. A successful request or non-empty artifact does not erase them. A retry is another attempt with another receipt; it does not rewrite the prior attempt.
+
+`not_observed` is evidence of absence only when the requirement defines the population and window and the receipt demonstrates complete applicable coverage and detection capability. Otherwise the assertion is `does_not_test` or `unknown`, not a negative fact. Conflicting authoritative sources remain conflicted until a declared resolution rule is applied; selection by convenience is not resolution.
+
+### H.6. Interface with the limited C4 profile
+
+C4 MUST use this profile when it claims knowledge of an actual effect, including `not_applied`; classifies Outcome against the original Intent; or claims evidence sufficiency at admission or use time. The C4 effect observer and Outcome oracle act as evidence producers and consumers under explicit requirements. Their receipts, coverage, detection capability, freshness, assertion disposition, and common-cause references constrain C4-G05 and C4-G06.
+
+The profiles remain independent. Evidence never grants approval or execution authority, and C4 admission authority never proves evidence true, complete, current, or sufficient. A validly authorized operation may have `unknown` effect or Outcome; a well-supported observation may describe an unauthorized operation without authorizing it. The Stage 2 interface will carry applicability requirement, consumer, exact target and epoch, use-time freshness with decision-critical versions, observation coverage and detection capability, assertion disposition, consumer-specific sufficiency, and provenance and common-cause references. This paragraph defines semantics only; it reserves all relation identifiers and serializations.
+
+### H.7. Common-cause boundaries and counterexamples
+
+An implementation record MUST enumerate shared sources, credentials, collectors, parsers, storage, clocks, network paths, models, prompts, canonicalizers, identity services, and target APIs. Two assertions derived through one defective dependency are not independent evidence of that dependency. Different process, model, or prompt names do not establish independence when the authority, data, credentials, or observation path remains shared.
+
+Stage 2 MUST retain minimized counterexamples showing at least: a TTL-valid artifact after a decision-critical version change; `not_applied` inferred from incomplete coverage; a successful transport with truncated or unparsable content; a sealed bundle with an unauthorized source; two apparently independent assertions sharing one false source; a correct effect observation incorrectly treated as Outcome success; and valid C4 authority incorrectly treated as evidence truth.
+
+### H.8. Stage boundary and next decision
+
+Stage 2 must define an executable, versioned Evidence Acquisition model, compose it through the small semantic interface with the separate C4 model, and publish an independently versioned Evidence relation catalog. Its acceptance record must identify exact tools, versions, configurations, bounds, properties, seeds where applicable, full outputs, and retained minimized counterexamples. Stage 3 schemas and public validators may begin only after both models, the interface, and both relation catalogs are accepted. Existing Evidence Bundle v1 remains unchanged until an explicit incompatible successor and migration are accepted.
 
 > Note: this white paper describes the methodology and does not replace normative machine-readable schemas, specifications, policies, or implementation documentation.

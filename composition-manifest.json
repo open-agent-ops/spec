@@ -209,7 +209,7 @@
     {
       "path": "COMPATIBILITY.md",
       "kind": "regular",
-      "sha256": "a32cbb0c9c1054d8923d5b54e64615b9caa6230b40ac847d5b41d89e62d722a3",
+      "sha256": "ffd2e8f74793828e1c107bce76f72fbc57be446f6d6316c05df725dad92100f0",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -251,7 +251,7 @@
     {
       "path": "README.md",
       "kind": "regular",
-      "sha256": "862d7536fc4bf3b73615c3624d36d99f5c5ffbc83f444fc544669f1b5d064d51",
+      "sha256": "173fffe4af036a87a40231d749e08447b1d4255a6543fecc8e2e159fd2302c5e",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -265,14 +265,14 @@
     {
       "path": "VERSIONING.md",
       "kind": "regular",
-      "sha256": "be990ca5d2d30b03d883c205ced6046a71b118d93b532c8ee0c9f2f0f8b2dc68",
+      "sha256": "643af5c9e4eac613e5312c3bcf32035bfb389c0b38f9777d4dd282398e0fb138",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "bilingual-pairs.json",
       "kind": "regular",
-      "sha256": "afb3be2cc69da6caedf0598235a291128c01afd1922b9d4b589e6cbb3de16d6f",
+      "sha256": "c1323ded7302d665ae840e64093b5025b3843a5e9963c30fa883a249d5e5a709",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -545,35 +545,35 @@
     {
       "path": "docs/normative/glossary.en.md",
       "kind": "regular",
-      "sha256": "9829a85b3e9f51b5794ba24ddd04f648822405d5c56a35b7a4e730a0e50fbb57",
+      "sha256": "87f8cb94dcf1ec61d28ad746031e8afe12832054df8b640ae53251ecebd6d99f",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/glossary.ru.md",
       "kind": "regular",
-      "sha256": "a0ef6ce6ec3db8cdc7dc21f9de28d7c6cefbe46643e99a494080fff464d4c1ab",
+      "sha256": "ef2e6d1b89a4c5921074f5d5f9f98a7d3908aa44a51c71e1527beeb1bcdfe004",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/standards-map.en.md",
       "kind": "regular",
-      "sha256": "d2558771e7ea79894885dfbcb4de79f36028ae30d6d16f93be7860bc90672fac",
+      "sha256": "1bcb87161dfeb9e0f4c3ec80720001bf6774ef301f012e66405463b842e16030",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/standards-map.ru.md",
       "kind": "regular",
-      "sha256": "47e62bc4b5eb294e08ed5dcfad39b1ec6fcaca3f08c7ba71423fa3b3a067194b",
+      "sha256": "57d78945bb473908ef5e2d74d15b303272861d2f4c97eb6f4e60346de6eace18",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
       "kind": "regular",
-      "sha256": "392964e98883a322a5fb6ce6e11d8b39db8408437a44433e05328daa029cb66b",
+      "sha256": "316c5d32f429bd4035a2271ba0752f634b41ca51e4e42e488e4550e53843f035",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -587,7 +587,7 @@
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
       "kind": "regular",
-      "sha256": "6dd8387b26499c6bedf9998b876a67fbc9412f9f9374671712deaef57848a6d5",
+      "sha256": "7712e1214ce846b816bfc76da5ea2f8b658ca80c57c7e518738f7b2d2ee48b14",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -601,14 +601,14 @@
     {
       "path": "docs/whitepaper/CHANGELOG-en.md",
       "kind": "regular",
-      "sha256": "1e74ad69987969545a5729267abf429a60a89609805724a5fb05a7847613106a",
+      "sha256": "12bfe74168a863cbaf98ac586a8093d95f11e6df712ec541953d32309a5cdfab",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "kind": "regular",
-      "sha256": "61df7ceb0e829febab1bb164c7dd8829cc9685312782857be93c642384378dd0",
+      "sha256": "87da9af3a5018899c23bc6a60490d2c32283bef1f50bfb6db8872fce01db314e",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -741,7 +741,7 @@
     {
       "path": "publication-manifest.json",
       "kind": "regular",
-      "sha256": "8b1d472c3c22fc86c05941350e26f8093e112cc35594fb86de7b0364309213e1",
+      "sha256": "f55609e743c9ea80e9b2dbef5b257daaeba948bce534149cfa634d18d6f0ce6c",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -755,7 +755,7 @@
     {
       "path": "revision-manifest.json",
       "kind": "regular",
-      "sha256": "c71af3a84c6555ec540a0994e7d9fd3c811a182b936bd404e8bd109d365d78c4",
+      "sha256": "7292e342272f5a4447340c86de1cd9c28ff539e4e8b77c4b56b327d06df22ccb",
       "class": "metadata",
       "license": "Apache-2.0"
     },

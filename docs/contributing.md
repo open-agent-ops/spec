@@ -26,9 +26,9 @@
 
    ```sh
    jq -c '.files[]|[.path,.class,.license]' process/policy.json | while read -r r; do
-     p=$(jq -r '.[0]' <<<"$r")
+     p=$(printf '%s\n' "$r" | jq -r '.[0]')
      h=$([ "$p" = composition-manifest.json ] && echo null || printf '"%s"' "$(shasum -a 256 "$p" | cut -d' ' -f1)")
-     jq -c --argjson h "$h" '{path:.[0],kind:"regular",sha256:$h,class:.[1],license:.[2]}' <<<"$r"
+     printf '%s\n' "$r" | jq -c --argjson h "$h" '{path:.[0],kind:"regular",sha256:$h,class:.[1],license:.[2]}'
    done | jq -s . > files.tmp
    jq --indent 2 --slurpfile f files.tmp '.files=$f[0]' composition-manifest.json > m.tmp
    mv m.tmp composition-manifest.json && rm files.tmp

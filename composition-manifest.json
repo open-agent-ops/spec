@@ -615,7 +615,7 @@
     {
       "path": "docs/contributing.md",
       "kind": "regular",
-      "sha256": "b8e28f628b98054fc446fbc9fc9781ae9d70f120884024dfbd8929f186a3e241",
+      "sha256": "2d88a131ca2a59f63174c4ca4619552b42bc2ebc3dda1a19790c2cecb05734c2",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },

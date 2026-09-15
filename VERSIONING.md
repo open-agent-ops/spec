@@ -6,12 +6,20 @@ See [compatibility](COMPATIBILITY.md) for the current schema family versions.
 
 Profile identifiers are independently versioned contracts of the form
 `agent-ops.<profile-name>@MAJOR.MINOR.PATCH`. The limited C4 profile begins as
-`agent-ops.c4-human-approved-apply@1.0.0`; changing the white-paper edition,
-schema revision, Go module, or release tag does not silently change that profile.
+`agent-ops.c4-human-approved-apply@1.0.0`; the Evidence Acquisition profile
+begins as `agent-ops.evidence-acquisition@1.0.0`. Changing the white-paper
+edition, schema revision, Go module, release tag, or the other profile does not
+silently change either profile.
 An incompatible profile boundary, assumption, guarantee, enforcement domain, or
 required relation needs a new profile major version and an accepted owner
 proposal. Compatible additions and clarifications use the applicable minor or
 patch version and still require the governed review for normative text.
+
+Stage 2 relation catalogs and the small semantic interface between the two
+profiles are independently versioned. Their acceptance does not silently
+change Evidence Bundle v1. A stronger bundle with incompatible acquisition or
+sufficiency semantics requires a new schema identity or major version and an
+explicit migration note.
 
 Release input is stable SemVer `vMAJOR.MINOR.PATCH`, with no leading zeroes,
 prerelease or build suffix. This module admits major 0 or 1. Major 2 requires a

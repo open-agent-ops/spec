@@ -4,42 +4,42 @@
       "language": "en",
       "pair_id": "glossary",
       "path": "docs/normative/glossary.en.md",
-      "sha256": "9829a85b3e9f51b5794ba24ddd04f648822405d5c56a35b7a4e730a0e50fbb57",
+      "sha256": "87f8cb94dcf1ec61d28ad746031e8afe12832054df8b640ae53251ecebd6d99f",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "glossary",
       "path": "docs/normative/glossary.ru.md",
-      "sha256": "a0ef6ce6ec3db8cdc7dc21f9de28d7c6cefbe46643e99a494080fff464d4c1ab",
+      "sha256": "ef2e6d1b89a4c5921074f5d5f9f98a7d3908aa44a51c71e1527beeb1bcdfe004",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "standards-map",
       "path": "docs/normative/standards-map.en.md",
-      "sha256": "d2558771e7ea79894885dfbcb4de79f36028ae30d6d16f93be7860bc90672fac",
+      "sha256": "1bcb87161dfeb9e0f4c3ec80720001bf6774ef301f012e66405463b842e16030",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "standards-map",
       "path": "docs/normative/standards-map.ru.md",
-      "sha256": "47e62bc4b5eb294e08ed5dcfad39b1ec6fcaca3f08c7ba71423fa3b3a067194b",
+      "sha256": "57d78945bb473908ef5e2d74d15b303272861d2f4c97eb6f4e60346de6eace18",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
-      "sha256": "392964e98883a322a5fb6ce6e11d8b39db8408437a44433e05328daa029cb66b",
+      "sha256": "316c5d32f429bd4035a2271ba0752f634b41ca51e4e42e488e4550e53843f035",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
-      "sha256": "6dd8387b26499c6bedf9998b876a67fbc9412f9f9374671712deaef57848a6d5",
+      "sha256": "7712e1214ce846b816bfc76da5ea2f8b658ca80c57c7e518738f7b2d2ee48b14",
       "status": "candidate"
     },
     {
@@ -60,6 +60,6 @@
   "english_precedence": true,
   "release_status": "pending_exact_target_owner_bilingual_review_and_new_pdf_build_test",
   "schema": "agent-ops.publication-manifest.v1",
-  "source_revision": "aom-04-r1",
+  "source_revision": "aom-04-r2",
   "version": "v0.5.0"
 }

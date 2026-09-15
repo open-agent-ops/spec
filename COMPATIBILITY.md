@@ -38,9 +38,16 @@ records, not Agent-Ops objects, and are outside the public contract.
 
 Two families are versioned and dispatched by `Registry.Resolve(family, version)`.
 Dispatch accepts only the exact versions below. A version that is not listed,
-including a range or a prefix, is unknown. Each revision declares its own
-`format_version` constant, so a document is admitted only by the revision it
-names.
+including a range or a prefix, is unknown. The two families select a revision
+differently:
+
+- `foundation_semantic_object` documents carry a revision discriminator. Each
+  revision declares its own `format_version` constant, so a document is
+  admitted only by the revision it names.
+- `foundation_object_ref` documents carry no discriminator. The revision is
+  selected out of band: a consumer pins it, or an embedding schema names it by
+  `$ref`, and passes that version to `Registry.Resolve`. A reference that is
+  valid under 1.0.0 is also valid under every later revision.
 
 ### `foundation_object_ref`
 
@@ -51,7 +58,8 @@ names.
 | 1.2.0 | `foundation_object_ref_v1_2.schema.json` | adds `completion_profile`, `eval_descriptor`, `eval_result` |
 | 1.3.0 | `foundation_object_ref_v1_3.schema.json` | adds `governance_result` |
 
-`id`, `namespace`, `version` and their patterns are unchanged across revisions.
+`id`, `namespace`, `version` and their patterns are unchanged across revisions;
+`version` is the referenced object's version, not the schema revision.
 `run_request.schema.json` references revision 1.0.0 by `$ref`.
 
 ### `foundation_semantic_object`
@@ -65,26 +73,46 @@ names.
 
 ### Other revised schemas
 
-`harness_observability_ref.schema.json` and
-`harness_observability_ref_v1_1.schema.json` are both embedded and compiled but
-are not dispatched by `Registry.Resolve`; consumers select them by full `$id`.
-Revision 1.1 adds the `freshness`, `queries` and `telemetry` definitions and
-the `paging` and `exception_ref` properties, renames the identifier definition
-and relaxes `runbook_ref` from a local reference to a token. It is not a
-drop-in replacement for 1.0.
+`harness_observability_ref.schema.json` (`schema_version` `1.0.0`) and
+`harness_observability_ref_v1_1.schema.json` (`schema_version` `1.1.0`) are both
+embedded and compiled but are not dispatched by `Registry.Resolve`; consumers
+select them by full `$id`. Revision 1.1 is not a drop-in replacement for 1.0.
+A document valid under 1.0 is rejected by 1.1 unless it is changed as follows:
+
+| Location | 1.0.0 | 1.1.0 |
+| --- | --- | --- |
+| root `criticality` | absent | required, enumerated |
+| root `freshness` | absent | required object with `max_age_days` (1..3650) |
+| root `queries` | `log_query_ref`, `trace_query_ref`: single token each, both required | `log_query_refs`, `trace_query_refs`: arrays of tokens, both required |
+| alert `paging` | absent | required boolean |
+| alert `runbook_ref` | required local reference (no `..`) | optional token |
+| alert `exception_ref` | absent | optional token |
+| identifier definition | `identifier` | renamed `id`; same shape |
+
+Adding the required fields and renaming the two query keys is sufficient to
+move a 1.0 document to 1.1; nothing else valid in 1.0 is rejected.
 
 All remaining schemas exist in a single revision under their unversioned `$id`.
 
 ## Compatibility rules
 
-- Within a family, a later minor revision only adds enumeration values or
-  properties. It never removes or narrows what an earlier revision admits.
-- A document that names `format_version` `X.Y.0` is validated against revision
-  `X.Y.0` and against nothing else. Validating it against another revision is a
-  consumer error, not a compatibility failure.
-- Consumers pin the exact revision they read. A producer moving to a newer
-  revision changes `format_version`; consumers that have not adopted it reject
-  the document as unknown rather than reading it partially.
+- Within a dispatched family, a later minor revision only adds enumeration
+  values, properties or capacity to the payload constraints. It never removes
+  or narrows a payload constraint of an earlier revision. The schema identity
+  and, where present, the `format_version` discriminator are excluded from
+  this guarantee: they change with every revision by definition.
+- For `foundation_object_ref`, the additive rule means a reference valid under
+  revision X is valid under every later revision. Consumers pin the revision
+  they read and pass it to `Registry.Resolve`; an embedding schema fixes it by
+  `$ref`.
+- For `foundation_semantic_object`, a document that names `format_version`
+  `X.Y.0` is validated against revision `X.Y.0` and against nothing else.
+  Validating it against another revision is a consumer error, not a
+  compatibility failure. A producer moving to a newer revision changes
+  `format_version`; consumers that have not adopted it reject the document as
+  unknown rather than reading it partially.
+- `harness_observability_ref` revisions are independent contracts selected by
+  `$id`; the table above lists what moves a document between them.
 - Changing a schema `$id`, removing a revision, or changing what an existing
   revision admits is a normative change. It requires an accepted owner proposal
   and current review, and a new registry digest.

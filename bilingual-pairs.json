@@ -6,7 +6,7 @@
       "pair_id": "glossary",
       "required": true,
       "russian_path": "docs/normative/glossary.ru.md",
-      "source_revision": "aom-03-r13"
+      "source_revision": "aom-04-r1"
     },
     {
       "english_path": "docs/normative/standards-map.en.md",
@@ -14,15 +14,15 @@
       "pair_id": "standards-map",
       "required": true,
       "russian_path": "docs/normative/standards-map.ru.md",
-      "source_revision": "aom-03-r13"
+      "source_revision": "aom-04-r1"
     },
     {
-      "english_path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md",
+      "english_path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
       "english_precedence": true,
       "pair_id": "whitepaper",
       "required": true,
-      "russian_path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md",
-      "source_revision": "aom-03-r13"
+      "russian_path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
+      "source_revision": "aom-04-r1"
     }
   ],
   "neutral_paths": [

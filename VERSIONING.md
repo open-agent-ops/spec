@@ -1,8 +1,17 @@
 # Versioning
 
 Document, schema, contract, Go module and release versions are separate dimensions.
-Text v0.4.0 does not imply a released module or change every schema revision.
+Text v0.5.0 does not imply a released module or change every schema revision.
 See [compatibility](COMPATIBILITY.md) for the current schema family versions.
+
+Profile identifiers are independently versioned contracts of the form
+`agent-ops.<profile-name>@MAJOR.MINOR.PATCH`. The limited C4 profile begins as
+`agent-ops.c4-human-approved-apply@1.0.0`; changing the white-paper edition,
+schema revision, Go module, or release tag does not silently change that profile.
+An incompatible profile boundary, assumption, guarantee, enforcement domain, or
+required relation needs a new profile major version and an accepted owner
+proposal. Compatible additions and clarifications use the applicable minor or
+patch version and still require the governed review for normative text.
 
 Release input is stable SemVer `vMAJOR.MINOR.PATCH`, with no leading zeroes,
 prerelease or build suffix. This module admits major 0 or 1. Major 2 requires a

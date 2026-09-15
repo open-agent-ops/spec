@@ -4,42 +4,42 @@
       "language": "en",
       "pair_id": "glossary",
       "path": "docs/normative/glossary.en.md",
-      "sha256": "465a594d60c3f3f5b1c0d7d0244991b1ea3349310986c00a45e0d700294ba83d",
+      "sha256": "9829a85b3e9f51b5794ba24ddd04f648822405d5c56a35b7a4e730a0e50fbb57",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "glossary",
       "path": "docs/normative/glossary.ru.md",
-      "sha256": "184f85b2ac1eec4bc049aee5f64d1a238c8adc18b7212ef4a2268fecc616d129",
+      "sha256": "a0ef6ce6ec3db8cdc7dc21f9de28d7c6cefbe46643e99a494080fff464d4c1ab",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "standards-map",
       "path": "docs/normative/standards-map.en.md",
-      "sha256": "64cd260c1ab258e5f5dc5d586e753ad3724286650a081e236063ca454d126c80",
+      "sha256": "d2558771e7ea79894885dfbcb4de79f36028ae30d6d16f93be7860bc90672fac",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "standards-map",
       "path": "docs/normative/standards-map.ru.md",
-      "sha256": "ee801bf0a3ff64e4f7ec27eb418fcb3e685d6d4646097fee655b99c493193b3a",
+      "sha256": "47e62bc4b5eb294e08ed5dcfad39b1ec6fcaca3f08c7ba71423fa3b3a067194b",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "whitepaper",
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.md",
-      "sha256": "d94e158d20276fcd6684074c7461a00ef8c5676444510aaece288268b414f954",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
+      "sha256": "392964e98883a322a5fb6ce6e11d8b39db8408437a44433e05328daa029cb66b",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper",
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.md",
-      "sha256": "a417f8b04ec65e46a3b20ab6324a10b73573867d8347490cb4109b5f88c6c6af",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
+      "sha256": "6dd8387b26499c6bedf9998b876a67fbc9412f9f9374671712deaef57848a6d5",
       "status": "candidate"
     },
     {
@@ -58,8 +58,8 @@
     }
   ],
   "english_precedence": true,
-  "release_status": "pending_external_review_and_build_test",
+  "release_status": "pending_exact_target_owner_bilingual_review_and_new_pdf_build_test",
   "schema": "agent-ops.publication-manifest.v1",
-  "source_revision": "aom-03-r13",
-  "version": "v0.4.0"
+  "source_revision": "aom-04-r1",
+  "version": "v0.5.0"
 }

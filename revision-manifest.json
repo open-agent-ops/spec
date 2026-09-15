@@ -1,11 +1,11 @@
 {
   "candidate_target": null,
-  "drift_status": "positioning_clarifications_incorporated_pending_exact_target_review_and_build_test",
+  "drift_status": "c4_stage1_contract_incorporated_pending_exact_target_owner_bilingual_review_and_new_pdf_build_test",
   "english_precedence": true,
   "pair_policy": "bilingual-pairs.json",
   "previous_public_target": "68cc6bd41c047e59745eeb3477c381d2e3c231b7",
   "schema": "agent-ops.bilingual-revision.v1",
-  "source_revision": "aom-03-r13",
-  "supersedes_version": "v0.3.3",
-  "version": "v0.4.0"
+  "source_revision": "aom-04-r1",
+  "supersedes_version": "v0.4.0",
+  "version": "v0.5.0"
 }

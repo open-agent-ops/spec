@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/open-agent-ops/spec/formal"
+	_ "pgregory.net/rapid"
 )
 
 func TestCatalogs(t *testing.T) {

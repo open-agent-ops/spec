@@ -1,0 +1,153 @@
+{
+  "format": "agent-ops.evidence-relation-traces@1.0.0",
+  "base": {
+    "requirement": {
+      "schema_version": "1.0.0",
+      "kind": "agent-ops.evidence-requirement",
+      "requirement_id": "effect-observation",
+      "consumer_rule": "c4-effect-rule@1.0.0",
+      "decision_time": "2026-09-16T10:00:00Z",
+      "target": {"project": "project-1", "environment": "test", "service": "service-1", "uid": "target-1", "generation": 1, "policy_epoch": 1, "profile_epoch": 1, "critical_versions_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+      "source_id": "observer-1",
+      "profile_id": "effect-profile",
+      "mandatory_roles": ["effect", "outcome"],
+      "max_age_seconds": 600
+    },
+    "profile": {
+      "schema_version": "1.0.0",
+      "kind": "agent-ops.evidence-collection-profile",
+      "profile_id": "effect-profile",
+      "profile_version": "1.0.0",
+      "authorized": true,
+      "authorized_by": "source-owner-1",
+      "valid_at": "2026-09-16T09:00:00Z",
+      "target": {"project": "project-1", "environment": "test", "service": "service-1", "uid": "target-1", "generation": 1, "policy_epoch": 1, "profile_epoch": 1, "critical_versions_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+      "source_id": "observer-1",
+      "collector_version": "1.0.0",
+      "query_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "parameters_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "detection_capable": true,
+      "expected_coverage": "complete",
+      "allow_not_applicable": false,
+      "mandatory_roles": ["effect", "outcome"]
+    },
+    "receipts": [
+      {
+        "schema_version": "1.0.0",
+        "kind": "agent-ops.evidence-collection-receipt",
+        "receipt_id": "receipt-1",
+        "requirement_id": "effect-observation",
+        "profile_id": "effect-profile",
+        "profile_sha256": "cf3fa09417bdb8d0fdbafc5afe999bf7e1aa92953b2131bf1986a0a576559b93",
+        "target": {"project": "project-1", "environment": "test", "service": "service-1", "uid": "target-1", "generation": 1, "policy_epoch": 1, "profile_epoch": 1, "critical_versions_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+        "source_id": "observer-1",
+        "attempt_sequence": 1,
+        "previous_receipt_id": "",
+        "collector_version": "1.0.0",
+        "query_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "parameters_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "started_at": "2026-09-16T09:54:00Z",
+        "completed_at": "2026-09-16T09:55:00Z",
+        "received_at": "2026-09-16T09:55:01Z",
+        "transport": "success",
+        "parse": "success",
+        "collection": "complete",
+        "error_code": "",
+        "artifact": {
+          "artifact_id": "artifact-1",
+          "content": "observed-ok",
+          "sha256": "c750d2ad5eaf7876f4ef50fe2523db4abe6f806990a97b244b1da86bc203d7a2",
+          "coverage": "complete",
+          "sampled": false,
+          "truncated": false,
+          "dropped_items": 0,
+          "redaction_loss_fields": [],
+          "lineage_complete": true,
+          "input_artifact_ids": [],
+          "common_cause_ids": ["observer-path-1"],
+          "producer_kind": "collector"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "schema_version": "1.0.0",
+        "kind": "agent-ops.evidence-assertion",
+        "assertion_id": "assertion-1",
+        "requirement_id": "effect-observation",
+        "receipt_ids": ["receipt-1"],
+        "target": {"project": "project-1", "environment": "test", "service": "service-1", "uid": "target-1", "generation": 1, "policy_epoch": 1, "profile_epoch": 1, "critical_versions_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+        "source_id": "observer-1",
+        "disposition": "supported",
+        "negative": false,
+        "coverage": "complete",
+        "detection_capable": true,
+        "fresh_at_use": true,
+        "checked_at": "2026-09-16T09:55:01Z",
+        "decision_time": "2026-09-16T10:00:00Z",
+        "lineage_complete": true,
+        "common_causes_disclosed": true,
+        "independent": true,
+        "conflict_visible": true,
+        "sufficiency": "sufficient"
+      }
+    ],
+    "bundle": {
+      "schema_version": "2.0.0",
+      "kind": "agent-ops.evidence-bundle",
+      "bundle_id": "bundle-2",
+      "requirement_id": "effect-observation",
+      "profile_id": "effect-profile",
+      "consumer_rule": "c4-effect-rule@1.0.0",
+      "target": {"project": "project-1", "environment": "test", "service": "service-1", "uid": "target-1", "generation": 1, "policy_epoch": 1, "profile_epoch": 1, "critical_versions_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+      "state": "sealed",
+      "elements": [
+        {"element_id": "effect-element", "role": "effect", "assertion_id": "assertion-1"},
+        {"element_id": "outcome-element", "role": "outcome", "assertion_id": "assertion-1"}
+      ],
+      "completion": [
+        {"role": "effect", "mode": "present", "element_ids": ["effect-element"], "owner_ref": "", "decision_ref": "", "reason_code": ""},
+        {"role": "outcome", "mode": "present", "element_ids": ["outcome-element"], "owner_ref": "", "decision_ref": "", "reason_code": ""}
+      ],
+      "receipt_ids": ["receipt-1"],
+      "computed_complete": true,
+      "sufficiency": "sufficient",
+      "unresolved_states": [],
+      "bundle_sha256": "0d977d8fef8a8418974ab391b3c6607e361d6cc6c5521e879eda38e4c63c4343",
+      "sealed_at": "2026-09-16T10:00:00Z",
+      "supersedes_id": ""
+    }
+  },
+  "relation_cases": [
+    {"id": "sealed-empty-elements", "positive_id": "sealed-nonempty-elements", "mutations": [{"pointer": "/bundle/elements", "value": []}], "code": "completion_element_invalid", "relation": "EVD-R11", "level": "relation"},
+    {"id": "present-empty", "positive_id": "present-linked-element", "mutations": [{"pointer": "/bundle/completion/0/element_ids", "value": []}], "code": "completion_element_invalid", "relation": "EVD-R11", "level": "relation"},
+    {"id": "present-dangling", "positive_id": "present-resolved-element", "mutations": [{"pointer": "/bundle/completion/0/element_ids", "value": ["missing-element"]}], "code": "completion_element_invalid", "relation": "EVD-R11", "level": "relation"},
+    {"id": "present-wrong-role", "positive_id": "present-correct-role", "mutations": [{"pointer": "/bundle/completion/0/element_ids", "value": ["outcome-element"]}], "code": "completion_element_invalid", "relation": "EVD-R11", "level": "relation"},
+    {"id": "duplicate-completion-role", "positive_id": "unique-completion-roles", "mutations": [{"pointer": "/bundle/completion/1/role", "value": "effect"}], "code": "completion_role_invalid", "relation": "EVD-R11", "level": "relation"},
+    {"id": "missing-mandatory-role", "positive_id": "all-mandatory-roles", "mutations": [{"pointer": "/bundle/completion", "value": [{"role": "effect", "mode": "present", "element_ids": ["effect-element"], "owner_ref": "", "decision_ref": "", "reason_code": ""}]}], "code": "completion_role_invalid", "relation": "EVD-R11", "level": "relation"},
+    {"id": "not-applicable-without-authority", "positive_id": "present-instead-of-unapproved-exclusion", "mutations": [{"pointer": "/bundle/completion/0", "value": {"role": "effect", "mode": "not_applicable", "element_ids": [], "owner_ref": "", "decision_ref": "", "reason_code": ""}}], "code": "not_applicable_unauthorized", "relation": "EVD-R11", "level": "relation"},
+    {"id": "assertion-missing-requirement", "positive_id": "assertion-bound-requirement", "mutations": [{"pointer": "/assertions/0/requirement_id", "value": "other-requirement"}], "code": "assertion_unsupported", "relation": "EVD-R07", "level": "relation"},
+    {"id": "artifact-wrong-target", "positive_id": "artifact-exact-target", "mutations": [{"pointer": "/receipts/0/target/generation", "value": 2}], "code": "receipt_binding_mismatch", "relation": "EVD-R04", "level": "relation"},
+    {"id": "ttl-valid-critical-version-changed", "positive_id": "fresh-exact-critical-version", "mutations": [{"pointer": "/assertions/0/target/critical_versions_sha256", "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}], "code": "evidence_stale_at_use", "relation": "EVD-R09", "level": "sufficiency"},
+    {"id": "parser-failure-claimed-complete", "positive_id": "parser-success-complete", "mutations": [{"pointer": "/receipts/0/parse", "value": "failed"}], "code": "acquisition_incomplete", "relation": "EVD-R05", "level": "relation"},
+    {"id": "partial-sample-claimed-complete", "positive_id": "complete-unsampled-observation", "mutations": [{"pointer": "/receipts/0/artifact/sampled", "value": true}], "code": "acquisition_incomplete", "relation": "EVD-R05", "level": "relation"},
+    {"id": "collection-failure-without-error", "positive_id": "successful-collection-without-error", "mutations": [{"pointer": "/receipts/0/collection", "value": "interrupted"}], "code": "acquisition_failure_hidden", "relation": "EVD-R04", "level": "relation"},
+    {"id": "method-changed-without-new-receipt", "positive_id": "receipt-bound-method", "mutations": [{"pointer": "/receipts/0/query_sha256", "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}], "code": "profile_binding_mismatch", "relation": "EVD-R02", "level": "relation"},
+    {"id": "derived-claim-broken-lineage", "positive_id": "complete-claim-lineage", "mutations": [{"pointer": "/receipts/0/artifact/lineage_complete", "value": false}], "code": "lineage_incomplete", "relation": "EVD-R06", "level": "relation"},
+    {"id": "redaction-removes-required-field", "positive_id": "non-lossy-redaction", "mutations": [{"pointer": "/receipts/0/artifact/redaction_loss_fields", "value": ["status"]}], "code": "redaction_loss_hidden", "relation": "EVD-R06", "level": "relation"},
+    {"id": "negative-without-detection", "positive_id": "positive-supported-observation", "mutations": [{"pointer": "/assertions/0/negative", "value": true}, {"pointer": "/assertions/0/detection_capable", "value": false}], "code": "negative_observation_invalid", "relation": "EVD-R08", "level": "relation"},
+    {"id": "executor-response-as-effect-proof", "positive_id": "independent-observer-artifact", "mutations": [{"pointer": "/receipts/0/artifact/producer_kind", "value": "executor_response"}], "code": "executor_response_not_effect_proof", "relation": "EVD-R10", "level": "relation"},
+    {"id": "common-cause-hidden", "positive_id": "common-causes-disclosed", "mutations": [{"pointer": "/assertions/0/common_causes_disclosed", "value": false}], "code": "independence_unsupported", "relation": "EVD-R10", "level": "relation"},
+    {"id": "authoritative-conflict-hidden", "positive_id": "supported-nonconflicting-assertion", "mutations": [{"pointer": "/assertions/0/disposition", "value": "conflicted"}, {"pointer": "/assertions/0/conflict_visible", "value": false}], "code": "conflict_hidden", "relation": "EVD-R07", "level": "relation"},
+    {"id": "evidence-reused-across-epoch", "positive_id": "evidence-bound-current-epoch", "mutations": [{"pointer": "/assertions/0/target/policy_epoch", "value": 2}], "code": "invalidation_not_propagated", "relation": "EVD-R14", "level": "sufficiency"},
+    {"id": "bundle-digest-mismatch", "positive_id": "bundle-canonical-digest", "mutations": [{"pointer": "/bundle/bundle_sha256", "value": "0000000000000000000000000000000000000000000000000000000000000000"}], "code": "bundle_digest_mismatch", "relation": "EVD-R12", "level": "relation"},
+    {"id": "supersession-hides-history", "positive_id": "sealed-complete-history", "mutations": [{"pointer": "/bundle/supersedes_id", "value": "bundle-1"}], "code": "bundle_history_incomplete", "relation": "EVD-R11", "level": "relation"}
+  ],
+  "schema_cases": [
+    {"id": "requirement-extra", "pointer": "/requirement/extra"},
+    {"id": "profile-extra", "pointer": "/profile/extra"},
+    {"id": "receipt-extra", "pointer": "/receipts/0/extra"},
+    {"id": "assertion-extra", "pointer": "/assertions/0/extra"},
+    {"id": "bundle-extra", "pointer": "/bundle/extra"}
+  ]
+}

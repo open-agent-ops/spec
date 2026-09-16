@@ -1,0 +1,852 @@
+{
+  "format": "agent-ops.relation-traces@1.0.0",
+  "base": {
+    "change_package": {
+      "format_version": "1.0.0",
+      "document_schema": {
+        "id": "https://agent-ops.ru/schemas/c4_change_package.schema.json",
+        "version": "1.0.0",
+        "sha256": "db93b003315f7a1a01e360fb720ad967435ec44280c66a90fdec1641c59828f7",
+        "media_type": "application/schema+json"
+      },
+      "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+      "relation_catalog_id": "agent-ops.c4-relations@1.0.0",
+      "interface_id": "agent-ops.c4-evidence-interface@1.0.0",
+      "canonicalization_id": "agent-ops.c4-json-canonicalization@1.0.0",
+      "package_id": "latency-change-1",
+      "intent_id": "reduce-latency",
+      "outcome_id": "latency-outcome-1",
+      "target": {
+        "uid": "target-1",
+        "generation": 1,
+        "versions": {
+          "resource": "resource-1",
+          "policy": "policy-1",
+          "profile": "profile-1"
+        }
+      },
+      "operation": {
+        "class": "set-rate-limit",
+        "arguments_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "backend_contract_id": "test-backend-1",
+        "idempotent_same_key": true,
+        "supports_fencing": true,
+        "supports_reconciliation": true
+      },
+      "evidence_requirements": [
+        {
+          "id": "effect-observation",
+          "consumer_rule": "c4-effect-rule-1",
+          "decision_time": "admission",
+          "target": {
+            "uid": "target-1",
+            "generation": 1,
+            "versions": {
+              "resource": "resource-1",
+              "policy": "policy-1",
+              "profile": "profile-1"
+            }
+          }
+        }
+      ],
+      "policy_epoch": 1,
+      "approval_epoch": 1,
+      "not_before": "2026-08-04T10:00:00Z",
+      "expires_at": "2026-08-04T11:00:00Z",
+      "attempt_budget": 2,
+      "conflict_domain_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "decision_ref": "activate-latency",
+      "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+      "axes": {
+        "autonomy": "R1",
+        "impact": "I1",
+        "capability": "C4",
+        "guardian": "T4"
+      }
+    },
+    "human_decision": {
+      "actor_role": "intent_owner",
+      "authority_scope": {
+        "actor_role": "intent_owner",
+        "blocked_action": "c4-package-sha256:be4f2eb22556c0a6aa342871108415c49f4ddea15305bc6989205fdaaddf0440",
+        "intent_ref": {
+          "id": "reduce-latency",
+          "kind": "operational_intent",
+          "namespace": "projects/example",
+          "version": "1.0.0"
+        },
+        "project_ref": {
+          "id": "example",
+          "kind": "project",
+          "namespace": "projects",
+          "version": "1.0.0"
+        },
+        "transition_id": "c4_apply_change_package"
+      },
+      "blocked_action": "c4-package-sha256:be4f2eb22556c0a6aa342871108415c49f4ddea15305bc6989205fdaaddf0440",
+      "decision": "approve",
+      "document_schema": {
+        "id": "https://agent-ops.ru/schemas/foundation_human_decision.schema.json",
+        "media_type": "application/schema+json",
+        "sha256": "3f4727d7f3516f90afa3d7222da7dd4e8c71af9875641ef013c140bd5391baad",
+        "version": "1.0.0"
+      },
+      "expires_at": "2026-08-04T11:00:00Z",
+      "format_version": "1.0.0",
+      "intent_ref": {
+        "id": "reduce-latency",
+        "kind": "operational_intent",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "issued_at": "2026-08-04T10:00:00Z",
+      "issuer_attestation_ref": {
+        "id": "decision-attestation",
+        "kind": "evidence_record",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "not_before": "2026-08-04T10:00:00Z",
+      "owner_ref": {
+        "id": "operator",
+        "kind": "owner",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "principal_ref": {
+        "id": "operator",
+        "kind": "owner",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "ref": {
+        "id": "activate-latency",
+        "kind": "human_decision",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "transition_id": "c4_apply_change_package"
+    },
+    "execution_records": [
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_execution_record.schema.json",
+          "version": "1.0.0",
+          "sha256": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "execution_id": "execution-1",
+        "package_id": "latency-change-1",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "intent_id": "reduce-latency",
+        "outcome_id": "latency-outcome-1",
+        "target": {
+          "uid": "target-1",
+          "generation": 1,
+          "versions": {
+            "resource": "resource-1",
+            "policy": "policy-1",
+            "profile": "profile-1"
+          }
+        },
+        "axes": {
+          "autonomy": "R1",
+          "impact": "I1",
+          "capability": "C4",
+          "guardian": "T4"
+        },
+        "decision_ref": "activate-latency",
+        "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+        "human_start": {
+          "id": "human-start-1",
+          "principal_id": "operator",
+          "occurred_at": "2026-08-04T10:05:00Z",
+          "authenticated": true
+        },
+        "reservation": {
+          "id": "reservation-1",
+          "conflict_domain_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+          "fence": 1,
+          "held_at_admission": true
+        },
+        "attempt": {
+          "id": "attempt-1",
+          "sequence": 1,
+          "idempotency_key": "key-1",
+          "retry_basis": "initial"
+        },
+        "admission": {
+          "authorized": true,
+          "linearized_at": "2026-08-04T10:10:00Z",
+          "policy_epoch": 1,
+          "approval_epoch": 1
+        },
+        "evidence_facts": [
+          {
+            "id": "effect-observation",
+            "interface_id": "agent-ops.c4-evidence-interface@1.0.0",
+            "consumer_rule": "c4-effect-rule-1",
+            "applicable": true,
+            "target": {
+              "uid": "target-1",
+              "generation": 1,
+              "versions": {
+                "resource": "resource-1",
+                "policy": "policy-1",
+                "profile": "profile-1"
+              }
+            },
+            "checked_at": "2026-08-04T10:10:00Z",
+            "fresh_at_use": true,
+            "coverage": "complete",
+            "detection_capable": true,
+            "disposition": "supported",
+            "sufficiency": "sufficient",
+            "provenance_bound": true,
+            "common_causes_disclosed": true
+          }
+        ],
+        "effect": {
+          "state": "unknown",
+          "evidence_requirement_id": "effect-observation",
+          "observed_at": "2026-08-04T10:11:00Z"
+        },
+        "open_obligation_ids": [
+          "attempt-1-effect"
+        ]
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_execution_record.schema.json",
+          "version": "1.0.0",
+          "sha256": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "execution_id": "execution-2",
+        "package_id": "latency-change-1",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "intent_id": "reduce-latency",
+        "outcome_id": "latency-outcome-1",
+        "target": {
+          "uid": "target-1",
+          "generation": 1,
+          "versions": {
+            "resource": "resource-1",
+            "policy": "policy-1",
+            "profile": "profile-1"
+          }
+        },
+        "axes": {
+          "autonomy": "R1",
+          "impact": "I1",
+          "capability": "C4",
+          "guardian": "T4"
+        },
+        "decision_ref": "activate-latency",
+        "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+        "human_start": {
+          "id": "human-start-1",
+          "principal_id": "operator",
+          "occurred_at": "2026-08-04T10:05:00Z",
+          "authenticated": true
+        },
+        "reservation": {
+          "id": "reservation-1",
+          "conflict_domain_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+          "fence": 1,
+          "held_at_admission": true
+        },
+        "attempt": {
+          "id": "attempt-2",
+          "sequence": 2,
+          "idempotency_key": "key-2",
+          "retry_of": "attempt-1",
+          "retry_basis": "authorized_reconciliation",
+          "reconciliation_ref": "reconciliation-1"
+        },
+        "admission": {
+          "authorized": true,
+          "linearized_at": "2026-08-04T10:20:00Z",
+          "policy_epoch": 1,
+          "approval_epoch": 1
+        },
+        "evidence_facts": [
+          {
+            "id": "effect-observation",
+            "interface_id": "agent-ops.c4-evidence-interface@1.0.0",
+            "consumer_rule": "c4-effect-rule-1",
+            "applicable": true,
+            "target": {
+              "uid": "target-1",
+              "generation": 1,
+              "versions": {
+                "resource": "resource-1",
+                "policy": "policy-1",
+                "profile": "profile-1"
+              }
+            },
+            "checked_at": "2026-08-04T10:20:00Z",
+            "fresh_at_use": true,
+            "coverage": "complete",
+            "detection_capable": true,
+            "disposition": "supported",
+            "sufficiency": "sufficient",
+            "provenance_bound": true,
+            "common_causes_disclosed": true
+          }
+        ],
+        "effect": {
+          "state": "applied",
+          "evidence_requirement_id": "effect-observation",
+          "observed_at": "2026-08-04T10:21:00Z"
+        },
+        "open_obligation_ids": [
+          "outcome-verification"
+        ]
+      }
+    ],
+    "authority_receipts": [
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_authority_receipt.schema.json",
+          "version": "1.0.0",
+          "sha256": "e010b35da58cab7d992ebd9dac01c3e79465dc7a457ed2f37615537c586affe1",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "receipt_id": "receipt-1",
+        "execution_id": "execution-1",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "decision_ref": "activate-latency",
+        "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+        "human_start_id": "human-start-1",
+        "target": {
+          "uid": "target-1",
+          "generation": 1,
+          "versions": {
+            "resource": "resource-1",
+            "policy": "policy-1",
+            "profile": "profile-1"
+          }
+        },
+        "policy_epoch": 1,
+        "approval_epoch": 1,
+        "reservation_id": "reservation-1",
+        "fence": 1,
+        "authorized": true,
+        "admitted_at": "2026-08-04T10:10:00Z",
+        "relation_ids": [
+          "C4-R01",
+          "C4-R02",
+          "C4-R03",
+          "C4-R04",
+          "C4-R05",
+          "C4-R06"
+        ]
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_authority_receipt.schema.json",
+          "version": "1.0.0",
+          "sha256": "e010b35da58cab7d992ebd9dac01c3e79465dc7a457ed2f37615537c586affe1",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "receipt_id": "receipt-2",
+        "execution_id": "execution-2",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "decision_ref": "activate-latency",
+        "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+        "human_start_id": "human-start-1",
+        "target": {
+          "uid": "target-1",
+          "generation": 1,
+          "versions": {
+            "resource": "resource-1",
+            "policy": "policy-1",
+            "profile": "profile-1"
+          }
+        },
+        "policy_epoch": 1,
+        "approval_epoch": 1,
+        "reservation_id": "reservation-1",
+        "fence": 1,
+        "authorized": true,
+        "admitted_at": "2026-08-04T10:20:00Z",
+        "relation_ids": [
+          "C4-R01",
+          "C4-R02",
+          "C4-R03",
+          "C4-R04",
+          "C4-R05",
+          "C4-R06"
+        ]
+      }
+    ],
+    "outcome": {
+      "format_version": "1.0.0",
+      "document_schema": {
+        "id": "https://agent-ops.ru/schemas/c4_outcome.schema.json",
+        "version": "1.0.0",
+        "sha256": "e8ac821fa6be54fd5da226576f740b07e8b0ef752604344b9c79288b6fecb55c",
+        "media_type": "application/schema+json"
+      },
+      "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+      "outcome_id": "latency-outcome-1",
+      "intent_id": "reduce-latency",
+      "execution_id": "execution-2",
+      "target": {
+        "uid": "target-1",
+        "generation": 1,
+        "versions": {
+          "resource": "resource-1",
+          "policy": "policy-1",
+          "profile": "profile-1"
+        }
+      },
+      "effect_state": "applied",
+      "state": "unknown",
+      "completeness": "complete",
+      "evidence_fact_ids": [
+        "effect-observation"
+      ],
+      "outcome_check_ref": "latency",
+      "outcome_check_sha256": "b06814477ec6ef021b66e47d734b390c0793c0763524b29736aa69dde783592e",
+      "evaluated_at": "2026-08-04T10:25:00Z",
+      "open_obligation_ids": [
+        "outcome-verification"
+      ]
+    },
+    "outcome_check": {
+      "criteria": [
+        {
+          "comparator": "lte",
+          "evidence_requirement_refs": [],
+          "expected": 500,
+          "falsification": false,
+          "id": "p95-latency",
+          "mandatory": true,
+          "observation_class": "prometheus_metric",
+          "unit": "ms"
+        }
+      ],
+      "decision_ref": {
+        "id": "activate-latency",
+        "kind": "human_decision",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "document_schema": {
+        "id": "https://agent-ops.ru/schemas/foundation_outcome_check.schema.json",
+        "media_type": "application/schema+json",
+        "sha256": "6f82fa84555765cc4108a7ab19185a06ea6adee7d78e49c2d648b082fdc180e8",
+        "version": "1.0.0"
+      },
+      "evaluation_time": "2026-08-04T11:00:00Z",
+      "evaluation_window": {
+        "end": "2026-08-04T11:00:00Z",
+        "start": "2026-08-04T10:00:00Z"
+      },
+      "evidence_refs": [
+        {
+          "id": "latency-observation",
+          "kind": "evidence_record",
+          "namespace": "projects/example",
+          "version": "1.0.0"
+        }
+      ],
+      "format_version": "1.0.0",
+      "intent_ref": {
+        "id": "reduce-latency",
+        "kind": "operational_intent",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "owner_ref": {
+        "id": "operator",
+        "kind": "owner",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "ref": {
+        "id": "latency",
+        "kind": "outcome_check",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      },
+      "residual_risks": [],
+      "snapshot_ref": {
+        "id": "reduce-latency",
+        "kind": "operational_intent",
+        "namespace": "projects/example",
+        "version": "1.0.0"
+      }
+    },
+    "lifecycle_events": [
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-1",
+        "sequence": 1,
+        "previous_event_sha256": null,
+        "occurred_at": "2026-08-04T10:00:00Z",
+        "type": "package_created",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "details_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-2",
+        "sequence": 2,
+        "previous_event_sha256": "15c20fd7c3c86a2ea796cac3c56967daf6bb9c28d44781058b4e93ae317a83f9",
+        "occurred_at": "2026-08-04T10:01:00Z",
+        "type": "approval_bound",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "details_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-3",
+        "sequence": 3,
+        "previous_event_sha256": "ae137e6be9d3af1699ea08304851515758c599a78de87111eff4790252e7783f",
+        "occurred_at": "2026-08-04T10:05:00Z",
+        "type": "human_started",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "details_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-4",
+        "sequence": 4,
+        "previous_event_sha256": "b304ec2212cb958e5f50b77103b43807bea5bf5cf32e591ff5418f5bbfaf6664",
+        "occurred_at": "2026-08-04T10:06:00Z",
+        "type": "reservation_acquired",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "fence": 1,
+        "details_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-5",
+        "sequence": 5,
+        "previous_event_sha256": "141014dc376ce5cda0b7a0913f008182a2fd2767908356fa5d4bc9496291101c",
+        "occurred_at": "2026-08-04T10:10:00Z",
+        "type": "attempt_admitted",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "execution_id": "execution-1",
+        "attempt_sequence": 1,
+        "fence": 1,
+        "details_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-6",
+        "sequence": 6,
+        "previous_event_sha256": "cb72e5b89700ce87dcb7192c2f2af18ce61b5fe41a4870b8c2da2e4b38060607",
+        "occurred_at": "2026-08-04T10:11:00Z",
+        "type": "obligation_opened",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "execution_id": "execution-1",
+        "obligation_id": "attempt-1-effect",
+        "details_sha256": "6666666666666666666666666666666666666666666666666666666666666666"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-7",
+        "sequence": 7,
+        "previous_event_sha256": "9d73684f16bb3f5a2aa941c651def1e07c48059bf2aba68eb43a336b020b239a",
+        "occurred_at": "2026-08-04T10:19:00Z",
+        "type": "obligation_resolved",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "execution_id": "execution-1",
+        "obligation_id": "attempt-1-effect",
+        "details_sha256": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-8",
+        "sequence": 8,
+        "previous_event_sha256": "8efb3eb22ff24dd63d1bffe6b65d0e6cda2524a056496cc2d8c83af977d65cd2",
+        "occurred_at": "2026-08-04T10:20:00Z",
+        "type": "attempt_admitted",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "execution_id": "execution-2",
+        "attempt_sequence": 2,
+        "fence": 1,
+        "details_sha256": "8888888888888888888888888888888888888888888888888888888888888888"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-9",
+        "sequence": 9,
+        "previous_event_sha256": "248a45a003930ff01774ed488c3fd61022bda53d14dbbec512b0b1041aac9e9c",
+        "occurred_at": "2026-08-04T10:20:30Z",
+        "type": "obligation_opened",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "execution_id": "execution-2",
+        "obligation_id": "outcome-verification",
+        "details_sha256": "9999999999999999999999999999999999999999999999999999999999999999"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-10",
+        "sequence": 10,
+        "previous_event_sha256": "dd15e92c39781bb396b3fc33d01326a79ad550439f90984041874288310131a5",
+        "occurred_at": "2026-08-04T10:21:00Z",
+        "type": "effect_observed",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "execution_id": "execution-2",
+        "details_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "format_version": "1.0.0",
+        "document_schema": {
+          "id": "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json",
+          "version": "1.0.0",
+          "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+          "media_type": "application/schema+json"
+        },
+        "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+        "event_id": "event-11",
+        "sequence": 11,
+        "previous_event_sha256": "e8f4c003bafb55a92e70f8b52ec96cc1f41bfadf3423e4c5c6442884e9fc00d0",
+        "occurred_at": "2026-08-04T10:25:00Z",
+        "type": "outcome_classified",
+        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "execution_id": "execution-2",
+        "details_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ],
+    "checkpoint": {
+      "format_version": "1.0.0",
+      "document_schema": {
+        "id": "https://agent-ops.ru/schemas/c4_checkpoint.schema.json",
+        "version": "1.0.0",
+        "sha256": "5d03eb94ddd96fb6337b50350e2bae32d6d48b4925df6e32c6b74d8c9b8c63b1",
+        "media_type": "application/schema+json"
+      },
+      "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+      "checkpoint_id": "checkpoint-1",
+      "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+      "log_tail_sequence": 11,
+      "log_tail_sha256": "f4a3ba37c22b8119bec25b1ec3752bf78dbc58747d56c47cca14538f5577216e",
+      "attempts_consumed": 2,
+      "policy_epoch": 1,
+      "approval_epoch": 1,
+      "current_fence": 1,
+      "reservation_held": true,
+      "open_obligation_ids": [
+        "outcome-verification"
+      ],
+      "state_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "created_at": "2026-08-04T10:26:00Z"
+    }
+  },
+  "relation_cases": [
+    {
+      "id": "valid",
+      "pointer": "",
+      "value": null,
+      "accepted": true,
+      "code": "",
+      "relation": ""
+    },
+    {
+      "id": "package-substitution",
+      "pointer": "/execution_records/1/package_sha256",
+      "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "accepted": false,
+      "code": "package_digest_mismatch",
+      "relation": "C4-R01"
+    },
+    {
+      "id": "package-content-not-approved",
+      "pointer": "/change_package/attempt_budget",
+      "value": 3,
+      "accepted": false,
+      "code": "decision_binding_mismatch",
+      "relation": "C4-R02"
+    },
+    {
+      "id": "target-aba",
+      "pointer": "/execution_records/1/target/generation",
+      "value": 2,
+      "accepted": false,
+      "code": "target_binding_mismatch",
+      "relation": "C4-R01"
+    },
+    {
+      "id": "stale-epoch",
+      "pointer": "/execution_records/1/admission/policy_epoch",
+      "value": 2,
+      "accepted": false,
+      "code": "authority_epoch_stale",
+      "relation": "C4-R02"
+    },
+    {
+      "id": "evidence-invalid-at-use",
+      "pointer": "/execution_records/1/evidence_facts/0/fresh_at_use",
+      "value": false,
+      "accepted": false,
+      "code": "evidence_invalid_at_use",
+      "relation": "CEI-R02"
+    },
+    {
+      "id": "unsafe-retry",
+      "pointer": "/execution_records/1/attempt/retry_basis",
+      "value": "compensation",
+      "accepted": false,
+      "code": "retry_unsafe",
+      "relation": "C4-R08"
+    },
+    {
+      "id": "reservation-lost",
+      "pointer": "/execution_records/1/reservation/held_at_admission",
+      "value": false,
+      "accepted": false,
+      "code": "reservation_not_held",
+      "relation": "C4-R04"
+    },
+    {
+      "id": "fence-lost",
+      "pointer": "/execution_records/1/reservation/fence",
+      "value": 2,
+      "accepted": false,
+      "code": "fence_stale",
+      "relation": "C4-R05"
+    },
+    {
+      "id": "attempt-budget-reset",
+      "pointer": "/checkpoint/attempts_consumed",
+      "value": 0,
+      "accepted": false,
+      "code": "attempt_budget_reset",
+      "relation": "C4-R07"
+    },
+    {
+      "id": "checkpoint-omits-obligation",
+      "pointer": "/checkpoint/open_obligation_ids",
+      "value": [],
+      "accepted": false,
+      "code": "checkpoint_obligation_omitted",
+      "relation": "C4-R11"
+    },
+    {
+      "id": "lifecycle-link-broken",
+      "pointer": "/lifecycle_events/10/previous_event_sha256",
+      "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "accepted": false,
+      "code": "lifecycle_chain_invalid",
+      "relation": "C4-R12"
+    },
+    {
+      "id": "outcome-conflates-effect-with-success",
+      "pointer": "/outcome/state",
+      "value": "succeeded",
+      "accepted": false,
+      "code": "outcome_unsupported",
+      "relation": "C4-R10"
+    }
+  ],
+  "schema_cases": [
+    {
+      "id": "change-package-extra",
+      "pointer": "/change_package/unexpected"
+    },
+    {
+      "id": "execution-record-extra",
+      "pointer": "/execution_records/0/unexpected"
+    },
+    {
+      "id": "authority-receipt-extra",
+      "pointer": "/authority_receipts/0/unexpected"
+    },
+    {
+      "id": "outcome-extra",
+      "pointer": "/outcome/unexpected"
+    },
+    {
+      "id": "lifecycle-event-extra",
+      "pointer": "/lifecycle_events/0/unexpected"
+    },
+    {
+      "id": "checkpoint-extra",
+      "pointer": "/checkpoint/unexpected"
+    }
+  ]
+}

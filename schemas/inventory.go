@@ -4,6 +4,12 @@ package schemas
 var approved = [...]Entry{
 	{Name: "ai_agent_context.schema.json", ID: "https://agent-ops.ru/schemas/ai_agent_context.schema.json", SHA256: "b902939b6ef2d7ec6890dc3367a2a278e78f7c3b523c0877dec03eae92156500"},
 	{Name: "anomaly_rule.schema.json", ID: "https://agent-ops.ru/schemas/anomaly_rule.schema.json", SHA256: "339ffb4a090356a06dd9431b0252841e5f3891472b7c2e75d406967cb5213459"},
+	{Name: "c4_authority_receipt.schema.json", ID: "https://agent-ops.ru/schemas/c4_authority_receipt.schema.json", SHA256: "e010b35da58cab7d992ebd9dac01c3e79465dc7a457ed2f37615537c586affe1"},
+	{Name: "c4_change_package.schema.json", ID: "https://agent-ops.ru/schemas/c4_change_package.schema.json", SHA256: "db93b003315f7a1a01e360fb720ad967435ec44280c66a90fdec1641c59828f7"},
+	{Name: "c4_checkpoint.schema.json", ID: "https://agent-ops.ru/schemas/c4_checkpoint.schema.json", SHA256: "5d03eb94ddd96fb6337b50350e2bae32d6d48b4925df6e32c6b74d8c9b8c63b1"},
+	{Name: "c4_execution_record.schema.json", ID: "https://agent-ops.ru/schemas/c4_execution_record.schema.json", SHA256: "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52"},
+	{Name: "c4_lifecycle_event.schema.json", ID: "https://agent-ops.ru/schemas/c4_lifecycle_event.schema.json", SHA256: "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f"},
+	{Name: "c4_outcome.schema.json", ID: "https://agent-ops.ru/schemas/c4_outcome.schema.json", SHA256: "e8ac821fa6be54fd5da226576f740b07e8b0ef752604344b9c79288b6fecb55c"},
 	{Name: "check_card.schema.json", ID: "https://agent-ops.ru/schemas/check_card.schema.json", SHA256: "950d6a1d834f2bc8952ce7042cc520ab5bae23bf1f0c262889816f3b3005d68b"},
 	{Name: "check_result.schema.json", ID: "https://agent-ops.ru/schemas/check_result.schema.json", SHA256: "ece461dffec8c908e83e0dff6a0a83660312147b53635a16feb3454f5560f2ae"},
 	{Name: "declared_inventory.schema.json", ID: "https://agent-ops.ru/schemas/declared_inventory.schema.json", SHA256: "8184567b5f9209311cc18f748924e98506c915e0e96409ad4f956fa320376da5"},

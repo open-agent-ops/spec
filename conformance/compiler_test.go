@@ -15,7 +15,7 @@ func TestAllSchemasCompileOffline(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(v.compiled) != 61 {
+	if len(v.compiled) != 67 {
 		t.Fatal("incomplete compilation")
 	}
 	r, err := schemas.Open()

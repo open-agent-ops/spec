@@ -1,0 +1,67 @@
+{
+  "$defs": {
+    "digest": {"pattern": "^[a-f0-9]{64}$", "type": "string"},
+    "document_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {"const": "https://agent-ops.ru/schemas/c4_authority_receipt.schema.json"},
+        "media_type": {"const": "application/schema+json"},
+        "sha256": {"$ref": "#/$defs/digest"},
+        "version": {"const": "1.0.0"}
+      },
+      "required": ["id", "version", "sha256", "media_type"],
+      "type": "object"
+    },
+    "id": {"pattern": "^[a-z0-9][a-z0-9._-]{0,127}$", "type": "string"},
+    "target": {
+      "additionalProperties": false,
+      "properties": {
+        "generation": {"minimum": 1, "type": "integer"},
+        "uid": {"$ref": "#/$defs/id"},
+        "versions": {
+          "additionalProperties": false,
+          "properties": {
+            "policy": {"$ref": "#/$defs/id"},
+            "profile": {"$ref": "#/$defs/id"},
+            "resource": {"$ref": "#/$defs/id"}
+          },
+          "required": ["resource", "policy", "profile"],
+          "type": "object"
+        }
+      },
+      "required": ["uid", "generation", "versions"],
+      "type": "object"
+    }
+  },
+  "$id": "https://agent-ops.ru/schemas/c4_authority_receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "admitted_at": {"format": "date-time", "type": "string"},
+    "approval_epoch": {"minimum": 1, "type": "integer"},
+    "authorized": {"type": "boolean"},
+    "decision_ref": {"$ref": "#/$defs/id"},
+    "decision_sha256": {"$ref": "#/$defs/digest"},
+    "document_schema": {"$ref": "#/$defs/document_schema"},
+    "execution_id": {"$ref": "#/$defs/id"},
+    "fence": {"minimum": 1, "type": "integer"},
+    "format_version": {"const": "1.0.0"},
+    "human_start_id": {"$ref": "#/$defs/id"},
+    "package_sha256": {"$ref": "#/$defs/digest"},
+    "policy_epoch": {"minimum": 1, "type": "integer"},
+    "profile_id": {"const": "agent-ops.c4-human-approved-apply@1.0.0"},
+    "receipt_id": {"$ref": "#/$defs/id"},
+    "relation_ids": {
+      "items": {"enum": ["C4-R01", "C4-R02", "C4-R03", "C4-R04", "C4-R05", "C4-R06"]},
+      "maxItems": 6,
+      "minItems": 6,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "reservation_id": {"$ref": "#/$defs/id"},
+    "target": {"$ref": "#/$defs/target"}
+  },
+  "required": ["format_version", "document_schema", "profile_id", "receipt_id", "execution_id", "package_sha256", "decision_ref", "decision_sha256", "human_start_id", "target", "policy_epoch", "approval_epoch", "reservation_id", "fence", "authorized", "admitted_at", "relation_ids"],
+  "title": "Agent-Ops C4 Authority and Admission Receipt",
+  "type": "object"
+}

@@ -1,0 +1,27 @@
+{
+  "catalog_id": "agent-ops.relation-validation@1.0.0",
+  "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+  "c4_relations": "agent-ops.c4-relations@1.0.0",
+  "evidence_relations": "agent-ops.evidence-relations@1.0.0",
+  "interface_id": "agent-ops.c4-evidence-interface@1.0.0",
+  "constraint_levels": [
+    {"level": 1, "name": "local_schema", "meaning": "Local JSON syntax, field, bound, and enum constraints."},
+    {"level": 2, "name": "reference_integrity", "meaning": "Cross-record identity, digest, target, and immutable binding constraints."},
+    {"level": 3, "name": "authority_and_admission", "meaning": "Current approval, human start, reservation, fence, and atomic admission predicates."},
+    {"level": 4, "name": "temporal_continuity", "meaning": "Time, epoch, retry, attempt-budget, lifecycle-log, obligation, and checkpoint invariants."},
+    {"level": 5, "name": "independent_observation", "meaning": "Evidence-at-use, actual-effect, Outcome, and completeness remain separate observable dimensions."}
+  ],
+  "validators": [
+    {"id": "AOM-C4-SCHEMA-001", "level": 1, "relations": [], "codes": ["schema_invalid", "trace_incomplete"]},
+    {"id": "AOM-C4-REL-001", "level": 2, "relations": ["C4-R01"], "codes": ["package_digest_mismatch", "target_binding_mismatch", "axis_binding_mismatch"]},
+    {"id": "AOM-C4-REL-002", "level": 3, "relations": ["C4-R02", "C4-R03", "C4-R06"], "codes": ["decision_binding_mismatch", "authority_epoch_stale", "authority_time_invalid", "human_start_invalid", "admission_unauthorized"]},
+    {"id": "AOM-C4-REL-003", "level": 3, "relations": ["C4-R04", "C4-R05"], "codes": ["reservation_not_held", "fence_stale"]},
+    {"id": "AOM-C4-REL-004", "level": 5, "relations": ["C4-R09", "EVD-R09", "EVD-R13", "EVD-R14", "CEI-R01", "CEI-R02", "CEI-R03", "CEI-R04", "CEI-R05", "CEI-R06", "CEI-R07"], "codes": ["evidence_invalid_at_use"]},
+    {"id": "AOM-C4-REL-005", "level": 4, "relations": ["C4-R08"], "codes": ["retry_unsafe"]},
+    {"id": "AOM-C4-REL-006", "level": 4, "relations": ["C4-R07"], "codes": ["attempt_budget_exceeded", "attempt_budget_reset"]},
+    {"id": "AOM-C4-REL-007", "level": 4, "relations": ["C4-R07", "C4-R12"], "codes": ["lifecycle_sequence_invalid", "lifecycle_chain_invalid"]},
+    {"id": "AOM-C4-REL-008", "level": 4, "relations": ["C4-R11", "C4-R12"], "codes": ["checkpoint_tail_mismatch", "checkpoint_obligation_omitted", "checkpoint_state_mismatch"]},
+    {"id": "AOM-C4-REL-009", "level": 5, "relations": ["C4-R09", "C4-R10", "C4-R13"], "codes": ["outcome_binding_mismatch", "outcome_unsupported", "terminal_release_with_obligation"]}
+  ],
+  "claim": "Offline validation of the named schema and relation slice only; no runtime, provenance-authentication, production-safety, or full lifecycle conformance claim."
+}

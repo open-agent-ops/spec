@@ -1,0 +1,103 @@
+{
+  "$defs": {
+    "axes": {
+      "additionalProperties": false,
+      "properties": {
+        "autonomy": {"enum": ["R0", "R1", "R2", "R3", "R4", "R5"]},
+        "capability": {"enum": ["C0", "C1", "C2", "C3", "C4", "C5"]},
+        "guardian": {"enum": ["T1", "T2", "T3", "T4", "T5"]},
+        "impact": {"enum": ["I0", "I1", "I2", "I3", "I4", "I5"]}
+      },
+      "required": ["autonomy", "impact", "capability", "guardian"],
+      "type": "object"
+    },
+    "digest": {"pattern": "^[a-f0-9]{64}$", "type": "string"},
+    "document_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {"const": "https://agent-ops.ru/schemas/c4_change_package.schema.json"},
+        "media_type": {"const": "application/schema+json"},
+        "sha256": {"$ref": "#/$defs/digest"},
+        "version": {"const": "1.0.0"}
+      },
+      "required": ["id", "version", "sha256", "media_type"],
+      "type": "object"
+    },
+    "id": {"pattern": "^[a-z0-9][a-z0-9._-]{0,127}$", "type": "string"},
+    "target": {
+      "additionalProperties": false,
+      "properties": {
+        "generation": {"minimum": 1, "type": "integer"},
+        "uid": {"$ref": "#/$defs/id"},
+        "versions": {
+          "additionalProperties": false,
+          "properties": {
+            "policy": {"$ref": "#/$defs/id"},
+            "profile": {"$ref": "#/$defs/id"},
+            "resource": {"$ref": "#/$defs/id"}
+          },
+          "required": ["resource", "policy", "profile"],
+          "type": "object"
+        }
+      },
+      "required": ["uid", "generation", "versions"],
+      "type": "object"
+    }
+  },
+  "$id": "https://agent-ops.ru/schemas/c4_change_package.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approval_epoch": {"minimum": 1, "type": "integer"},
+    "attempt_budget": {"maximum": 16, "minimum": 1, "type": "integer"},
+    "axes": {"$ref": "#/$defs/axes"},
+    "canonicalization_id": {"const": "agent-ops.c4-json-canonicalization@1.0.0"},
+    "conflict_domain_sha256": {"$ref": "#/$defs/digest"},
+    "decision_ref": {"$ref": "#/$defs/id"},
+    "decision_sha256": {"$ref": "#/$defs/digest"},
+    "document_schema": {"$ref": "#/$defs/document_schema"},
+    "evidence_requirements": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "consumer_rule": {"$ref": "#/$defs/id"},
+          "decision_time": {"enum": ["admission", "effect", "outcome"]},
+          "id": {"$ref": "#/$defs/id"},
+          "target": {"$ref": "#/$defs/target"}
+        },
+        "required": ["id", "consumer_rule", "decision_time", "target"],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "expires_at": {"format": "date-time", "type": "string"},
+    "format_version": {"const": "1.0.0"},
+    "interface_id": {"const": "agent-ops.c4-evidence-interface@1.0.0"},
+    "intent_id": {"$ref": "#/$defs/id"},
+    "not_before": {"format": "date-time", "type": "string"},
+    "operation": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments_sha256": {"$ref": "#/$defs/digest"},
+        "backend_contract_id": {"$ref": "#/$defs/id"},
+        "class": {"$ref": "#/$defs/id"},
+        "idempotent_same_key": {"type": "boolean"},
+        "supports_fencing": {"type": "boolean"},
+        "supports_reconciliation": {"type": "boolean"}
+      },
+      "required": ["class", "arguments_sha256", "backend_contract_id", "idempotent_same_key", "supports_fencing", "supports_reconciliation"],
+      "type": "object"
+    },
+    "outcome_id": {"$ref": "#/$defs/id"},
+    "package_id": {"$ref": "#/$defs/id"},
+    "policy_epoch": {"minimum": 1, "type": "integer"},
+    "profile_id": {"const": "agent-ops.c4-human-approved-apply@1.0.0"},
+    "relation_catalog_id": {"const": "agent-ops.c4-relations@1.0.0"},
+    "target": {"$ref": "#/$defs/target"}
+  },
+  "required": ["format_version", "document_schema", "profile_id", "relation_catalog_id", "interface_id", "canonicalization_id", "package_id", "intent_id", "outcome_id", "target", "operation", "evidence_requirements", "policy_epoch", "approval_epoch", "not_before", "expires_at", "attempt_budget", "conflict_domain_sha256", "decision_ref", "decision_sha256", "axes"],
+  "title": "Agent-Ops C4 Change Package",
+  "type": "object"
+}

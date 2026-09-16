@@ -1,0 +1,40 @@
+{
+  "$defs": {
+    "digest": {"pattern": "^[a-f0-9]{64}$", "type": "string"},
+    "document_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {"const": "https://agent-ops.ru/schemas/c4_checkpoint.schema.json"},
+        "media_type": {"const": "application/schema+json"},
+        "sha256": {"$ref": "#/$defs/digest"},
+        "version": {"const": "1.0.0"}
+      },
+      "required": ["id", "version", "sha256", "media_type"],
+      "type": "object"
+    },
+    "id": {"pattern": "^[a-z0-9][a-z0-9._-]{0,127}$", "type": "string"}
+  },
+  "$id": "https://agent-ops.ru/schemas/c4_checkpoint.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approval_epoch": {"minimum": 1, "type": "integer"},
+    "attempts_consumed": {"maximum": 16, "minimum": 0, "type": "integer"},
+    "checkpoint_id": {"$ref": "#/$defs/id"},
+    "created_at": {"format": "date-time", "type": "string"},
+    "current_fence": {"minimum": 1, "type": "integer"},
+    "document_schema": {"$ref": "#/$defs/document_schema"},
+    "format_version": {"const": "1.0.0"},
+    "log_tail_sequence": {"minimum": 1, "type": "integer"},
+    "log_tail_sha256": {"$ref": "#/$defs/digest"},
+    "open_obligation_ids": {"items": {"$ref": "#/$defs/id"}, "maxItems": 64, "type": "array", "uniqueItems": true},
+    "package_sha256": {"$ref": "#/$defs/digest"},
+    "policy_epoch": {"minimum": 1, "type": "integer"},
+    "profile_id": {"const": "agent-ops.c4-human-approved-apply@1.0.0"},
+    "reservation_held": {"type": "boolean"},
+    "state_sha256": {"$ref": "#/$defs/digest"}
+  },
+  "required": ["format_version", "document_schema", "profile_id", "checkpoint_id", "package_sha256", "log_tail_sequence", "log_tail_sha256", "attempts_consumed", "policy_epoch", "approval_epoch", "current_fence", "reservation_held", "open_obligation_ids", "state_sha256", "created_at"],
+  "title": "Agent-Ops C4 Checkpoint Reference",
+  "type": "object"
+}

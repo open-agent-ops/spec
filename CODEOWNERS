@@ -3,6 +3,7 @@
 /docs/normative/ @open-agent-ops/owners
 /docs/whitepaper/ @open-agent-ops/owners
 /formal/ @open-agent-ops/owners
+/conformance/ @open-agent-ops/owners
 /schemas/ @open-agent-ops/owners
 /COMPATIBILITY.md @open-agent-ops/owners
 /VERSIONING.md @open-agent-ops/owners

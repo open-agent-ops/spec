@@ -2,7 +2,7 @@
 
 ## A Methodology for AI-Agent-Based Infrastructure Operations and Technical Support
 
-**Public normative candidate v0.5.0 | source revision aom-04-r3 | English version prevails**
+**Public normative candidate v0.5.0 | source revision aom-04-r4 | English version prevails**
 
 > Facts, conclusions, and recommendations are not authorization to change infrastructure.
 
@@ -516,8 +516,8 @@ The initial reference scope of `agent-ops.c4-human-approved-apply@1.0.0` is limi
 | Input | Unchanged Intent, ChangePlan, HumanDecision, Governance Result, scoped credentials, and pre-change evidence. |
 | Output | A record of actions actually performed or rejected, terminal state, and references to after-state collection. |
 | Key fields | `case_ref`, `attempt_id`, `attempt_budget`, `attempt_index`, `idempotency_key`, `retry_disposition`, `failure_class`, `cooldown_until`, `breaker_state`, `stop_reason`, `escalation_ref`, `action_ref`, `parent_action_ref`, `target_ref`, `evidence_bundle_ref`, `admitted_identifier_set_ref`, `resolver_ref`, `conflict_domain`, `serialization_lease_ref`, `resulting_state_ref`, `in_flight_effect_refs`, `evaluated_impact`, `package_digest`, `approval_ref`, `policy_ref`, `executor_ref`, `started_at`, `actions`, `results`, `terminal_state`, `rollback_or_compensation_ref`. |
-| Schema | Admission and outcome receipts are described in Section 18; the existing [`run_plan.schema.json`](../../schemas/run_plan.schema.json) concerns collection and does not substitute for a change package. |
-| Contract status | Normative `ChangePackage`, `ExecutionRecord`, and receipt JSON Schemas do not yet exist. |
+| Schema | [`c4_change_package.schema.json`](../../schemas/c4_change_package.schema.json), [`c4_execution_record.schema.json`](../../schemas/c4_execution_record.schema.json), and [`c4_authority_receipt.schema.json`](../../schemas/c4_authority_receipt.schema.json). The existing [`run_plan.schema.json`](../../schemas/run_plan.schema.json) concerns collection and does not substitute for a change package. |
+| Contract status | Normative schemas cover the bounded C4 record slice. They do not implement a gateway, authenticate provenance, or prove runtime safety. |
 
 Reading and writing the target system are performed by deterministic tools wherever possible, without an agent or human in the execution path. The Executor does not reinterpret Plan, raise autonomy, or continue when digest, scope, authority, or preconditions differ. An irreversible action requires an approved compensation plan and is not disguised as rollback.
 
@@ -535,7 +535,7 @@ When the budget is exhausted, a failure in a prohibited class occurs, or the req
 
 Attempts whose mutation scopes overlap within a policy-defined mutation conflict domain are serialized until Verification completes or policy terminally releases the reservation. Competing cases are admitted by deterministic policy, never by arrival order. Before each admission, impact and blast radius are re-evaluated against the resulting state projected by the action, including committed state and relevant unresolved or in-flight effects. If that state would exceed the permitted `I` band, the attempt is denied or escalated. This result consumes an attempt or opens the circuit breaker only when the applicable policy declares the corresponding denial, prohibited failure class, or attempt condition; impact band and attempt budget are not interchangeable.
 
-The fields in the Controlled Change card define the required record semantics. A standalone normative attempt-budget, serialization, resulting-state, and circuit-breaker schema does not yet exist.
+The bounded schemas and cross-record validator enforce attempt-budget monotonicity, reservation and fencing continuity, resulting-state bindings, and safe-retry preconditions. They do not define a standalone general circuit-breaker contract or prove that a backend implements those controls.
 
 ## 12. Verification
 
@@ -547,8 +547,8 @@ Verification compares after-state evidence with Intent criteria and creates Outc
 | Input | Intent, ChangePlan, HumanDecision, ExecutionRecord, and after-state evidence. |
 | Output | An explicit `succeeded`, `failed`, or `unknown` outcome, evidence for every criterion, and residual risks. |
 | Key fields | `outcome_ref`, `intent_ref`, `execution_ref`, `snapshot_ref`, `decision_ref`, `criteria`, `evidence_refs`, `evaluation_time`, `evaluation_window`, `residual_risks`, `status`. |
-| Schema | [`foundation_outcome_check.schema.json`](../../schemas/foundation_outcome_check.schema.json) defines the check input; [`foundation_validation_result.schema.json`](../../schemas/foundation_validation_result.schema.json) defines a generic validation result. |
-| Contract status | A separate normative `Outcome` record JSON Schema does not yet exist. |
+| Schema | [`foundation_outcome_check.schema.json`](../../schemas/foundation_outcome_check.schema.json) defines the check input; [`c4_outcome.schema.json`](../../schemas/c4_outcome.schema.json) records the bounded C4 result; [`foundation_validation_result.schema.json`](../../schemas/foundation_validation_result.schema.json) defines a generic validation result. |
+| Contract status | The C4 `Outcome` schema keeps actual effect, Intent-relative Outcome, and evidence completeness independent. It is not a universal lifecycle Outcome contract. |
 
 ### 12.1. Outcome Verification
 
@@ -604,8 +604,8 @@ This section defines the data plane's cross-cutting contract: all eight steps re
 | Input | Pre-transition state, input refs, governance decision, and independent-assurance result. |
 | Output | An append-only transition-attempt record and a new Bundle version. |
 | Key fields | `case_id`, `transition_id`, `from_step`, `to_step`, `attempted_at`, `actor_ref`, `input_refs`, `policy_decision_ref`, `human_decision_ref`, `assurance_ref`, `result`, `output_refs`, `next_allowed_transitions`, `event_digest`. |
-| Schema | [`foundation_evidence_bundle.schema.json`](../../schemas/foundation_evidence_bundle.schema.json) defines the Bundle. |
-| Contract status | A standalone normative `LifecycleEvent` JSON Schema does not yet exist. |
+| Schema | [`foundation_evidence_bundle.schema.json`](../../schemas/foundation_evidence_bundle.schema.json) defines the Bundle; [`c4_lifecycle_event.schema.json`](../../schemas/c4_lifecycle_event.schema.json) and [`c4_checkpoint.schema.json`](../../schemas/c4_checkpoint.schema.json) define the bounded C4 trace and checkpoint records. |
+| Contract status | The C4 schemas cover the named profile slice, not a universal Agent-Ops lifecycle contract. |
 
 A Unified Evidence Bundle is an immutable, content-addressed package for a task, incident, or change proposal. It links facts and decisions without unnecessarily copying sensitive raw data.
 
@@ -963,7 +963,7 @@ A checkpoint is a derived summary, never the authority source for C4. It may ref
 
 The procedures below specify how quality, reproducibility, and cost are to be assessed. Their inclusion is not evidence that an Agent-Ops implementation has passed them; this edition reports no controlled comparative runtime results.
 
-For `agent-ops.c4-human-approved-apply@1.0.0`, the profile publishes assumptions and claim boundaries, and this source revision includes the bounded executable specification. No runtime evaluation may be represented as profile conformance until the exact candidate, required schemas, relation validators, and negative traces have been accepted. A bounded check of the formal state-transition model is not a substitute for authority safety, actual-effect measurement, Outcome success, observation completeness, or production evidence.
+For `agent-ops.c4-human-approved-apply@1.0.0`, the profile publishes assumptions and claim boundaries, and this source revision includes the bounded executable specification, six C4 record schemas, the public relation-validator catalog, and relation-negative traces. Acceptance of these offline artifacts is not runtime conformance. A bounded check of the formal state-transition model or cross-record fixtures is not a substitute for authority safety, actual-effect measurement, Outcome success, observation completeness, or production evidence.
 
 For `agent-ops.evidence-acquisition@1.0.0`, evidence quality is not one score. Authority, identity and binding, integrity and provenance, acquisition validity, coverage and completeness, freshness, transformation fidelity, independence, claim support, and reproducibility are evaluated separately as specified in Appendix H. A missing, conflicting, or unverified required axis remains `unknown` or incomplete; an aggregate score cannot compensate for a failure of authority, target binding, integrity, or blocking coverage.
 
@@ -1153,7 +1153,7 @@ The closed publication set consists of this white paper, the standards map, and 
 
 ## 28. Status of This Edition
 
-Edition v0.5.0, source revision `aom-04-r3`, supersedes the v0.4.0 text candidate and publishes two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable formal state-transition models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition does not provide implementation schemas or public relation validators, implement a runtime, report a runtime evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
+Edition v0.5.0, source revision `aom-04-r4`, supersedes the v0.4.0 text candidate and publishes two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable formal state-transition models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition also publishes a bounded C4 implementation slice: six record schemas, `agent-ops.relation-validation@1.0.0`, and positive, schema-negative, and relation-negative fixtures. It does not implement a runtime, provide a complete lifecycle validator, report a runtime evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
 
 ## Appendix A. 47 Baseline Checks
 
@@ -1269,7 +1269,7 @@ External sources and conformance mappings formerly carried in Appendix J are mai
 
 ### G.1. Status, identity, and scope
 
-The stable public identifier of this profile is `agent-ops.c4-human-approved-apply@1.0.0`. This appendix is the normative contract for its boundary, assumptions, claim vocabulary, and trusted computing base and, together with the versioned artifacts in `formal/`, defines the bounded executable candidate. It deliberately does not define implementation schemas and public relation validators. An implementation MUST NOT claim runtime conformance to this profile from this appendix or the bounded formal state-transition model alone.
+The stable public identifier of this profile is `agent-ops.c4-human-approved-apply@1.0.0`. This appendix is the normative contract for its boundary, assumptions, claim vocabulary, and trusted computing base and, together with the versioned artifacts in `formal/`, defines the bounded executable candidate. The six C4 schemas and public relation validator implement only the named offline cross-record slice. An implementation MUST NOT claim runtime conformance to this profile from this appendix, the bounded formal state-transition model, schema-valid records, or passing fixtures alone.
 
 The profile covers one human-approved application of one canonical `ChangePackage` by a separately human-started deterministic Gated Executor. The package binds one Intent and canonical Outcome identity, exact target UID, typed operation, canonical arguments, decision-critical dependencies, validity interval, policy and approval epochs, and attempt budget. Planner and Guardian have no target-write credentials. The trusted gateway or cooperating backend adapter checks authority at use and admits or rejects the operation at a declared linearization point. An authoritative durable log preserves lifecycle events; a read-only effect observer classifies actual target changes and observation completeness independently of the Executor.
 
@@ -1430,9 +1430,13 @@ Each proposed property requires at least one counterexample produced by removing
 
 The executable checker uses pinned Go 1.26.8, deterministic exhaustive exploration to depth 8, no random seed, and the finite event sets in `formal/check.go`. On this candidate it visits 1,233 C4 states over 6,014 accepted transitions and 332 Evidence states over 2,325 accepted transitions. `formal/counterexamples.json` retains minimized traces tied to named removed assumptions, including the three required combined traces. A bounded formal state-transition model can falsify a universal claim; successful bounded checking does not prove production safety. Exact acceptance remains an owner decision on the reviewed candidate.
 
-### G.8. Candidate boundary and next decision
+### G.8. Public schema and relation-validation slice
 
-This source revision supplies the exact candidate for temporal, authority, acquisition, assertion, and sufficiency semantics. Work on implementation schemas and public relation validators may begin only after the accountable owner accepts both executable formal state-transition models, `agent-ops.c4-evidence-interface@1.0.0`, and both independently versioned relation catalogs on the exact reviewed target. Runtime gateway, log, observer, collectors, backend adapters, execution evaluation, production deployment, paid evaluation, human-subject research, and release each require the separately applicable decision and evidence.
+This source revision publishes six versioned schemas for `ChangePackage`, `ExecutionRecord`, authority/admission receipt, `Outcome`, immutable C4 lifecycle event, and checkpoint. The schemas reuse the existing `HumanDecision` and `OutcomeCheck` contracts through exact versioned references and canonical digests. `agent-ops.relation-validation@1.0.0` checks five ordered constraint levels: local schema validity; reference and digest integrity; authority and admission; temporal, budget, conflict, and checkpoint invariants; and independent effect, Outcome, and completeness semantics.
+
+Every relation validator has a negative trace whose individual records still pass their JSON Schemas. The corpus rejects package or target substitution, target UID/generation reuse, stale authority epochs, evidence invalid at use, unsafe retry, reservation or fence loss, attempt-budget reset, broken lifecycle linkage, and omitted checkpoint obligations. The relation catalogs pair each service identifier with a reader-facing name, while validator findings expose stable error codes and relation identifiers. Canonicalization is fixed by `agent-ops.c4-json-canonicalization@1.0.0`; `HumanDecision.blocked_action` binds the canonical package approval subject with the two decision-link fields omitted to avoid a circular digest, and a lifecycle link likewise hashes the canonical event with its predecessor-link field omitted.
+
+The validator is an offline checker for this exact record slice. It does not authenticate signatures or provenance, operate the gateway, log, observer, collector, or backend, establish complete lifecycle conformance, evaluate a deployed system, or prove production safety. Runtime implementation, execution evaluation, production deployment, paid evaluation, human-subject research, and release each require the separately applicable decision and evidence.
 
 ## Appendix H. Evidence Acquisition Profile 1.0.0
 
@@ -1488,7 +1492,7 @@ The consumer evaluates sufficiency against its own `EvidenceRequirement`; eviden
 | Transformation pipeline | Parses, normalizes, aggregates, and redacts with recorded lineage; it cannot improve source quality. |
 | Canonicalizer and digest function | Bind canonical bytes under one accepted algorithm and version; they do not prove semantics. |
 | Bundle writer | Packages references and limitations without rewriting them; sealing does not establish sufficiency. |
-| Relation validator | Future component that checks accepted relations; it cannot infer missing facts or authority. |
+| Relation validator | The published C4 validator checks only its accepted cross-record slice; it cannot infer missing facts or authority, and no general Evidence Acquisition validator is claimed. |
 | Evaluator or oracle | Applies the consumer requirement to assertions; its correctness and coverage remain named assumptions. |
 
 ### H.5. Failure and negative-evidence semantics
@@ -1501,7 +1505,7 @@ Transport failure, permission denial, timeout, parser failure, truncation, sampl
 
 C4 MUST use this profile when it claims knowledge of an actual effect, including `not_applied`; classifies Outcome against the original Intent; or claims evidence sufficiency at admission or use time. The C4 effect observer and Outcome oracle act as evidence producers and consumers under explicit requirements. Their receipts, coverage, detection capability, freshness, assertion disposition, and common-cause references constrain C4-G05 and C4-G06.
 
-The profiles remain independent. Evidence never grants approval or execution authority, and C4 admission authority never proves evidence true, complete, current, or sufficient. A validly authorized operation may have `unknown` effect or Outcome; a well-supported observation may describe an unauthorized operation without authorizing it. `agent-ops.c4-evidence-interface@1.0.0` carries requirement applicability and consumer, exact target and epoch, use-time freshness with decision-critical versions, observation coverage and detection capability, assertion disposition, consumer-specific sufficiency, provenance binding, and common-cause disclosure. These interface relations (`CEI-R01`-`CEI-R07`) are mapped individually in the G.7 relation index. Serialization into machine-readable implementation records remains reserved.
+The profiles remain independent. Evidence never grants approval or execution authority, and C4 admission authority never proves evidence true, complete, current, or sufficient. A validly authorized operation may have `unknown` effect or Outcome; a well-supported observation may describe an unauthorized operation without authorizing it. `agent-ops.c4-evidence-interface@1.0.0` carries requirement applicability and consumer, exact target and epoch, use-time freshness with decision-critical versions, observation coverage and detection capability, assertion disposition, consumer-specific sufficiency, provenance binding, and common-cause disclosure. These interface relations (`CEI-R01`-`CEI-R07`) are mapped individually in the G.7 relation index. The bounded C4 `ExecutionRecord` serializes the facts consumed by this interface; it is not a standalone Evidence Acquisition record family or validator.
 
 ### H.7. Common-cause boundaries and counterexamples
 
@@ -1521,8 +1525,8 @@ The Evidence checker names the following properties:
 | E6 | Attempts, receipts, failures, conflicts, and pending obligations are append-only across checkpoint and restart. |
 | E7 | C4 approval or admission authority cannot establish evidence truth or sufficiency. |
 
-### H.8. Candidate boundary and next decision
+### H.8. Candidate boundary
 
-This candidate defines the executable formal Evidence Acquisition state-transition model, composes it through `agent-ops.c4-evidence-interface@1.0.0` with the separate formal C4 state-transition model, and publishes `agent-ops.evidence-relations@1.0.0`. The deterministic checker record and retained counterexamples are specified in G.7 and `formal/README.md`. Implementation schemas and public validators may be developed only after both formal models, the interface, and both relation catalogs are accepted on the exact reviewed target. Existing Evidence Bundle v1 remains unchanged until an explicit incompatible successor and migration are accepted.
+This candidate defines the executable formal Evidence Acquisition state-transition model, composes it through `agent-ops.c4-evidence-interface@1.0.0` with the separate formal C4 state-transition model, and publishes `agent-ops.evidence-relations@1.0.0`. The deterministic checker record and retained counterexamples are specified in G.7 and `formal/README.md`. The bounded C4 record slice validates Evidence facts at their C4 use point but does not provide a standalone Evidence Acquisition schema family or general Evidence relation validator. Existing Evidence Bundle v1 remains unchanged until an explicit incompatible successor and migration are accepted.
 
 > Note: this white paper describes the methodology and does not replace normative machine-readable schemas, specifications, policies, or implementation documentation.

@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "axes": {
+      "additionalProperties": false,
+      "properties": {
+        "autonomy": {"enum": ["R0", "R1", "R2", "R3", "R4", "R5"]},
+        "capability": {"enum": ["C0", "C1", "C2", "C3", "C4", "C5"]},
+        "guardian": {"enum": ["T1", "T2", "T3", "T4", "T5"]},
+        "impact": {"enum": ["I0", "I1", "I2", "I3", "I4", "I5"]}
+      },
+      "required": ["autonomy", "impact", "capability", "guardian"],
+      "type": "object"
+    },
+    "digest": {"pattern": "^[a-f0-9]{64}$", "type": "string"},
+    "document_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {"const": "https://agent-ops.ru/schemas/c4_execution_record.schema.json"},
+        "media_type": {"const": "application/schema+json"},
+        "sha256": {"$ref": "#/$defs/digest"},
+        "version": {"const": "1.0.0"}
+      },
+      "required": ["id", "version", "sha256", "media_type"],
+      "type": "object"
+    },
+    "id": {"pattern": "^[a-z0-9][a-z0-9._-]{0,127}$", "type": "string"},
+    "target": {
+      "additionalProperties": false,
+      "properties": {
+        "generation": {"minimum": 1, "type": "integer"},
+        "uid": {"$ref": "#/$defs/id"},
+        "versions": {
+          "additionalProperties": false,
+          "properties": {
+            "policy": {"$ref": "#/$defs/id"},
+            "profile": {"$ref": "#/$defs/id"},
+            "resource": {"$ref": "#/$defs/id"}
+          },
+          "required": ["resource", "policy", "profile"],
+          "type": "object"
+        }
+      },
+      "required": ["uid", "generation", "versions"],
+      "type": "object"
+    }
+  },
+  "$id": "https://agent-ops.ru/schemas/c4_execution_record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "admission": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_epoch": {"minimum": 1, "type": "integer"},
+        "authorized": {"type": "boolean"},
+        "linearized_at": {"format": "date-time", "type": "string"},
+        "policy_epoch": {"minimum": 1, "type": "integer"}
+      },
+      "required": ["authorized", "linearized_at", "policy_epoch", "approval_epoch"],
+      "type": "object"
+    },
+    "attempt": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "idempotency_key": {"$ref": "#/$defs/id"},
+        "reconciliation_ref": {"$ref": "#/$defs/id"},
+        "retry_basis": {"enum": ["initial", "same_key", "complete_not_applied", "authorized_reconciliation", "compensation"]},
+        "retry_of": {"$ref": "#/$defs/id"},
+        "sequence": {"maximum": 16, "minimum": 1, "type": "integer"}
+      },
+      "required": ["id", "sequence", "idempotency_key", "retry_basis"],
+      "type": "object"
+    },
+    "axes": {"$ref": "#/$defs/axes"},
+    "decision_ref": {"$ref": "#/$defs/id"},
+    "decision_sha256": {"$ref": "#/$defs/digest"},
+    "document_schema": {"$ref": "#/$defs/document_schema"},
+    "effect": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_requirement_id": {"$ref": "#/$defs/id"},
+        "observed_at": {"format": "date-time", "type": "string"},
+        "state": {"enum": ["unknown", "applied", "not_applied", "partial"]}
+      },
+      "required": ["state", "evidence_requirement_id", "observed_at"],
+      "type": "object"
+    },
+    "evidence_facts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "applicable": {"type": "boolean"},
+          "checked_at": {"format": "date-time", "type": "string"},
+          "common_causes_disclosed": {"type": "boolean"},
+          "consumer_rule": {"$ref": "#/$defs/id"},
+          "coverage": {"enum": ["unknown", "partial", "complete"]},
+          "detection_capable": {"type": "boolean"},
+          "disposition": {"enum": ["unknown", "supported", "refuted", "does_not_test", "conflicted"]},
+          "fresh_at_use": {"type": "boolean"},
+          "id": {"$ref": "#/$defs/id"},
+          "interface_id": {"const": "agent-ops.c4-evidence-interface@1.0.0"},
+          "provenance_bound": {"type": "boolean"},
+          "sufficiency": {"enum": ["unknown", "insufficient", "sufficient"]},
+          "target": {"$ref": "#/$defs/target"}
+        },
+        "required": ["id", "interface_id", "consumer_rule", "applicable", "target", "checked_at", "fresh_at_use", "coverage", "detection_capable", "disposition", "sufficiency", "provenance_bound", "common_causes_disclosed"],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "execution_id": {"$ref": "#/$defs/id"},
+    "format_version": {"const": "1.0.0"},
+    "human_start": {
+      "additionalProperties": false,
+      "properties": {
+        "authenticated": {"type": "boolean"},
+        "id": {"$ref": "#/$defs/id"},
+        "occurred_at": {"format": "date-time", "type": "string"},
+        "principal_id": {"$ref": "#/$defs/id"}
+      },
+      "required": ["id", "principal_id", "occurred_at", "authenticated"],
+      "type": "object"
+    },
+    "intent_id": {"$ref": "#/$defs/id"},
+    "open_obligation_ids": {"items": {"$ref": "#/$defs/id"}, "maxItems": 64, "type": "array", "uniqueItems": true},
+    "outcome_id": {"$ref": "#/$defs/id"},
+    "package_id": {"$ref": "#/$defs/id"},
+    "package_sha256": {"$ref": "#/$defs/digest"},
+    "profile_id": {"const": "agent-ops.c4-human-approved-apply@1.0.0"},
+    "reservation": {
+      "additionalProperties": false,
+      "properties": {
+        "conflict_domain_sha256": {"$ref": "#/$defs/digest"},
+        "fence": {"minimum": 1, "type": "integer"},
+        "held_at_admission": {"type": "boolean"},
+        "id": {"$ref": "#/$defs/id"}
+      },
+      "required": ["id", "conflict_domain_sha256", "fence", "held_at_admission"],
+      "type": "object"
+    },
+    "target": {"$ref": "#/$defs/target"}
+  },
+  "required": ["format_version", "document_schema", "profile_id", "execution_id", "package_id", "package_sha256", "intent_id", "outcome_id", "target", "axes", "decision_ref", "decision_sha256", "human_start", "reservation", "attempt", "admission", "evidence_facts", "effect", "open_obligation_ids"],
+  "title": "Agent-Ops C4 Execution Record",
+  "type": "object"
+}

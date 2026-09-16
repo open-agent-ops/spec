@@ -1,0 +1,138 @@
+{
+  "format": "agent-ops.formal-counterexamples@1.0.0",
+  "cases": [
+    {
+      "id": "c4-p1-non-atomic-revocation",
+      "model": "c4",
+      "removed_assumptions": ["C4-A03"],
+      "events": ["create_package", "approve", "human_start", "reserve", "revoke", "admit"],
+      "violates": ["P1"]
+    },
+    {
+      "id": "c4-p2-target-aba",
+      "model": "c4",
+      "removed_assumptions": ["C4-A04"],
+      "events": ["create_package", "approve", "human_start", "reserve", "target_aba", "admit"],
+      "violates": ["P2"]
+    },
+    {
+      "id": "c4-p3-checkpoint-omits-obligation",
+      "model": "c4",
+      "removed_assumptions": ["C4-A17"],
+      "events": ["create_package", "approve", "human_start", "reserve", "admit", "lose_response", "checkpoint_omit"],
+      "violates": ["P3"]
+    },
+    {
+      "id": "c4-p4-stale-writer-after-lease",
+      "model": "c4",
+      "removed_assumptions": ["C4-A07"],
+      "events": ["create_package", "approve", "human_start", "reserve", "admit", "lease_expire", "stale_writer_effect"],
+      "violates": ["P4"]
+    },
+    {
+      "id": "c4-p5-partial-negative-observation",
+      "model": "c4",
+      "removed_assumptions": ["C4-A11"],
+      "events": ["create_package", "approve", "human_start", "reserve", "admit", "lose_response", "observe_not_applied_partial"],
+      "violates": ["P5"]
+    },
+    {
+      "id": "c4-p6-expired-authority",
+      "model": "c4",
+      "removed_assumptions": ["C4-A10"],
+      "events": ["create_package", "approve", "human_start", "reserve", "advance_past_expiry", "admit"],
+      "violates": ["P6"]
+    },
+    {
+      "id": "c4-p7-effect-is-not-outcome",
+      "model": "c4",
+      "removed_assumptions": ["C4-A12"],
+      "events": ["create_package", "approve", "human_start", "reserve", "admit", "observe_applied", "outcome_success_false_intent"],
+      "violates": ["P7"]
+    },
+    {
+      "id": "c4-l1-unavailable-control-plane",
+      "model": "c4",
+      "removed_assumptions": ["C4-A14"],
+      "events": ["create_package", "approve", "human_start", "reserve", "admit", "lose_response"],
+      "violates": ["L1"]
+    },
+    {
+      "id": "c4-g03-unsafe-retry-after-lost-response",
+      "model": "c4",
+      "removed_assumptions": ["C4-A05"],
+      "events": ["create_package", "approve", "human_start", "reserve", "admit", "lose_response", "retry"],
+      "violates": ["C4-G03"]
+    },
+    {
+      "id": "evidence-e1-ttl-after-version-change",
+      "model": "evidence",
+      "removed_assumptions": ["EVD-A01-decision-version-binding"],
+      "events": ["declare_requirement", "bind_profile", "attempt_complete", "record_artifact", "assert_positive", "target_version_change"],
+      "violates": ["E1"]
+    },
+    {
+      "id": "evidence-e2-negative-under-partial-coverage",
+      "model": "evidence",
+      "removed_assumptions": ["EVD-A02-negative-coverage"],
+      "events": ["declare_requirement", "bind_profile", "attempt_partial", "record_artifact", "assert_negative"],
+      "violates": ["E2"]
+    },
+    {
+      "id": "evidence-e3-hidden-truncation",
+      "model": "evidence",
+      "removed_assumptions": ["EVD-A03-acquisition-failure-visibility"],
+      "events": ["declare_requirement", "bind_profile", "attempt_truncated", "record_artifact", "assert_positive"],
+      "violates": ["E3"]
+    },
+    {
+      "id": "evidence-e4-unauthorized-source",
+      "model": "evidence",
+      "removed_assumptions": ["EVD-A04-source-authority"],
+      "events": ["declare_requirement", "bind_profile", "attempt_unauthorized", "record_artifact", "assert_positive", "seal"],
+      "violates": ["E4"]
+    },
+    {
+      "id": "evidence-e5-false-independence",
+      "model": "evidence",
+      "removed_assumptions": ["EVD-A05-common-cause-disclosure"],
+      "events": ["declare_requirement", "bind_profile", "attempt_complete", "record_artifact", "assert_positive", "share_common_cause"],
+      "violates": ["E5"]
+    },
+    {
+      "id": "evidence-e6-checkpoint-erases-attempt",
+      "model": "evidence",
+      "removed_assumptions": ["EVD-A06-append-only-lineage"],
+      "events": ["declare_requirement", "bind_profile", "attempt_complete", "checkpoint_omit_attempt"],
+      "violates": ["E6"]
+    },
+    {
+      "id": "evidence-e7-c4-authority-as-truth",
+      "model": "evidence",
+      "removed_assumptions": ["EVD-A07-authority-separation"],
+      "events": ["declare_requirement", "bind_profile", "attempt_complete", "record_artifact", "assert_positive", "borrow_c4_authority"],
+      "violates": ["E7"]
+    },
+    {
+      "id": "cross-lost-response-partial-observation-retry",
+      "model": "c4",
+      "removed_assumptions": ["C4-A05", "C4-A11"],
+      "events": ["create_package", "approve", "human_start", "reserve", "admit", "lose_response", "observe_not_applied_partial", "retry"],
+      "violates": ["C4-G03", "P5"]
+    },
+    {
+      "id": "cross-target-aba-with-stale-evidence",
+      "model": "cross",
+      "removed_assumptions": ["C4-A04", "C4-A11", "EVD-A01-decision-version-binding"],
+      "events": ["evidence:declare_requirement", "evidence:bind_profile", "evidence:attempt_complete", "evidence:record_artifact", "evidence:assert_negative", "evidence:target_version_change", "c4:create_package", "c4:approve", "c4:human_start", "c4:reserve", "c4:target_aba", "c4:admit", "c4:observe_not_applied_from_evidence"],
+      "violates": ["E1", "P2", "P5"]
+    },
+    {
+      "id": "cross-checkpoint-erases-unknowns",
+      "model": "cross",
+      "removed_assumptions": ["C4-A17", "EVD-A06-append-only-lineage"],
+      "events": ["evidence:declare_requirement", "evidence:bind_profile", "evidence:attempt_parse_failed", "evidence:checkpoint_omit_attempt", "c4:create_package", "c4:approve", "c4:human_start", "c4:reserve", "c4:admit", "c4:lose_response", "c4:checkpoint_omit"],
+      "violates": ["E6", "P3"]
+    }
+  ]
+}

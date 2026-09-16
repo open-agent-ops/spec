@@ -2,7 +2,7 @@
 
 ## A Methodology for AI-Agent-Based Infrastructure Operations and Technical Support
 
-**Public normative candidate v0.5.0 | source revision aom-04-r2 | English version prevails**
+**Public normative candidate v0.5.0 | source revision aom-04-r3 | English version prevails**
 
 > Facts, conclusions, and recommendations are not authorization to change infrastructure.
 
@@ -424,7 +424,7 @@ Freshness is a separate property: it states how recently evidence was observed a
 
 For the Evidence Acquisition profile, freshness is evaluated by the consumer at use time against the evidence requirement, target identity, source identity, observation interval, clock uncertainty, and every decision-critical version. A TTL is one input, not a universal proof of fitness. A version change, target-generation change, uncovered interval, or unbounded clock uncertainty makes the dependent assertion `unknown` until the requirement is satisfied by current evidence.
 
-For the limited C4 profile, freshness is decision-relative rather than a TTL-only property. Observation time, receipt time, use time, declared clock uncertainty, exact target UID, and every decision-critical resource version are distinct inputs. An unexpired TTL does not establish freshness after a decision-critical version changes. The Stage 1 assumptions and claim boundary are specified in [Appendix G](#appendix-g-limited-c4-human-approved-apply-profile-100); the temporal invalidation relation is reserved for Stage 2.
+For the limited C4 profile, freshness is decision-relative rather than a TTL-only property. Observation time, receipt time, use time, declared clock uncertainty, exact target UID, and every decision-critical resource version are distinct inputs. An unexpired TTL does not establish freshness after a decision-critical version changes. The Stage 1 assumptions and claim boundary are specified in [Appendix G](#appendix-g-limited-c4-human-approved-apply-profile-100); Stage 2 fixes use-time freshness and invalidation as EVD-R09, EVD-R14, and CEI-R02.
 
 ### 7.7. Stable Observability Identities
 
@@ -501,7 +501,7 @@ In the data plane, Approval is not a UI gesture or a sentence in a conversation.
 
 Approval changes no target system and does not expand the Plan's scope. It is valid only for the named transition, exact target, unchanged inputs, and validity window. A missing, expired, revoked, or wrong-target decision means that no permission exists.
 
-The limited C4 contract has the stable profile identifier `agent-ops.c4-human-approved-apply@1.0.0`. Under this profile, a human decision approves one canonical change package and a human separately starts its deterministic Executor. Approval alone is not backend admission, does not prove an effect, and does not authorize a package variant. Appendix G fixes the Stage 1 scope and assumptions; the exact admission and revocation relation is reserved for Stage 2.
+The limited C4 contract has the stable profile identifier `agent-ops.c4-human-approved-apply@1.0.0`. Under this profile, a human decision approves one canonical change package and a human separately starts its deterministic Executor. Approval alone is not backend admission, does not prove an effect, and does not authorize a package variant. Appendix G fixes the Stage 1 scope and assumptions; Stage 2 fixes package, current-approval, start, and admission relations C4-R01 through C4-R03 and C4-R06.
 
 ## 11. Controlled Change
 
@@ -528,7 +528,7 @@ Legacy `auto_remediation.allowed` and `mode=confirm` fields, along with the `rem
 
 ### 11.2. Controlled Change Attempt Budget and Circuit Breaker
 
-Every case has a policy-defined attempt budget shared by all Controlled Change attempts for the same Intent and operational outcome. A revised Diagnosis or Plan does not reset that budget. A failed or `unknown` Verification consumes an attempt. Compensation is a separately recorded effect and is not evidence that a lost-response operation was unapplied or is safe to repeat. The limited C4 profile therefore makes no retry-safety claim until Stage 2 defines the predicates for backend idempotency, complete independent observation, or authorized reconciliation.
+Every case has a policy-defined attempt budget shared by all Controlled Change attempts for the same Intent and operational outcome. A revised Diagnosis or Plan does not reset that budget. A failed or `unknown` Verification consumes an attempt. Compensation is a separately recorded effect and is not evidence that a lost-response operation was unapplied or is safe to repeat. Stage 2 relation C4-R08 permits retry only from the declared operation contract and backend key, complete applicable Evidence of `not_applied`, or separately authorized reconciliation; a runtime retry-safety claim still requires Stage 3 validation and implementation evidence.
 
 When the budget is exhausted, a failure in a prohibited class occurs, or the required cooldown has not elapsed, the circuit breaker opens. It blocks leasing or using Executor authority and credentials for the affected case and action class and creates an escalation; the Planner and Executor cannot close or reset it. Re-enablement requires the policy-defined evidence and, where required, a new HumanDecision. Every retry decision, attempt consumption, breaker transition, cooldown, stop reason, and escalation is appended to the mandatory process trace.
 
@@ -954,7 +954,7 @@ Context sources are admitted by the assembly profile, the §16.1 trust hierarchy
 | Compaction | Compaction creates a successor version and preserves source and version references, selection rules, excluded categories, authority constraints, budgets, remaining work, and a pointer to the predecessor. A summary remains derived. | A smaller package whose omissions and lineage are explicit and whose authority has not increased. |
 | Checkpoint, handoff, and resume | A checkpoint records monotonically increasing, non-reusable session and checkpoint identifiers, environment-restoration instructions, completed, in-progress, and blocked work states, machine-readable remaining work, token, time, and attempt limits, history, and the current Evidence Bundle pointer. The receiver revalidates integrity, freshness, current policy, authority references, budgets, and tool-call idempotency or compensation state before deterministic warm-up. | Resume continues from an authenticated successor state; handoff never expands authority or resets limits. |
 
-A checkpoint is a derived summary, never the authority source for C4. It may refine only the authoritative durable log and reservation state: it cannot delete a consumed attempt, admitted or unresolved effect, pending reconciliation or compensation, current approval or policy epoch, reservation, fence, or observation-completeness limitation. The exact refinement relation and counterexamples are Stage 2 model obligations listed in Appendix G.
+A checkpoint is a derived summary, never the authority source for C4. It may refine only the authoritative durable log and reservation state: it cannot delete a consumed attempt, admitted or unresolved effect, pending reconciliation or compensation, current approval or policy epoch, reservation, fence, or observation-completeness limitation. Stage 2 fixes this as C4-R12 and retains the assumption-removal and combined omission counterexamples listed in Appendix G.
 | Refresh and revocation | Source, policy, approval, model, tool, connector, or expiry changes invalidate the affected package. A new manifest is assembled and linked as a successor; the previous version remains immutable and cannot silently become current again. | Consumers can distinguish current, expired, superseded, and revoked context and refuse invalid versions. |
 | Closure, retention, and disposal | Closure records the final state, Outcome and Evidence Bundle references, retained manifest and handoff lineage, retention rule, and disposition. Ephemeral decrypted values, credential leases, and temporary sensitive caches are revoked or destroyed without erasing the audit trace. | The case can be reviewed without leaving reusable authority or unnecessary sensitive context behind. |
 
@@ -962,7 +962,7 @@ A checkpoint is a derived summary, never the authority source for C4. It may ref
 
 The procedures below specify how quality, reproducibility, and cost are to be assessed. Their inclusion is not evidence that an Agent-Ops implementation has passed them; this edition reports no controlled comparative runtime results.
 
-For `agent-ops.c4-human-approved-apply@1.0.0`, Stage 1 publishes assumptions and an informative formal-model plan only. No runtime evaluation may be represented as profile conformance until the Stage 2 temporal model and Stage 3 schemas, relation validators, and negative traces have been accepted. Gate pass rate is not a substitute for authority safety, actual-effect measurement, Outcome success, or observation completeness.
+For `agent-ops.c4-human-approved-apply@1.0.0`, Stage 1 publishes assumptions and claim boundaries and this source revision adds the bounded executable Stage 2 specification. No runtime evaluation may be represented as profile conformance until the exact Stage 2 candidate and the later Stage 3 schemas, relation validators, and negative traces have been accepted. A bounded model-check pass is not a substitute for authority safety, actual-effect measurement, Outcome success, observation completeness, or production evidence.
 
 For `agent-ops.evidence-acquisition@1.0.0`, evidence quality is not one score. Authority, identity and binding, integrity and provenance, acquisition validity, coverage and completeness, freshness, transformation fidelity, independence, claim support, and reproducibility are evaluated separately as specified in Appendix H. A missing, conflicting, or unverified required axis remains `unknown` or incomplete; an aggregate score cannot compensate for a failure of authority, target binding, integrity, or blocking coverage.
 
@@ -1152,7 +1152,7 @@ The closed publication set consists of this white paper, the standards map, and 
 
 ## 28. Status of This Edition
 
-Edition v0.5.0, source revision `aom-04-r2`, supersedes the v0.4.0 text candidate and publishes Stage 1 of two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, and coordinated formal-model plan are normative here. This edition does not define the Stage 2 models or relation catalogs, provide the Stage 3 schemas or validators, implement a runtime, report an evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
+Edition v0.5.0, source revision `aom-04-r3`, supersedes the v0.4.0 text candidate and publishes Stage 1 boundaries plus a Stage 2 candidate for two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition does not provide the Stage 3 schemas or validators, implement a runtime, report a runtime evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
 
 ## Appendix A. 47 Baseline Checks
 
@@ -1268,7 +1268,7 @@ External sources and conformance mappings formerly carried in Appendix J are mai
 
 ### G.1. Status, identity, and scope
 
-The stable public identifier of this profile is `agent-ops.c4-human-approved-apply@1.0.0`. This appendix is the normative Stage 1 contract for its boundary, assumptions, claim vocabulary, and trusted computing base. It deliberately does not define the Stage 2 temporal state machine or the Stage 3 schemas and relation validators. An implementation MUST NOT claim conformance to this profile from this appendix alone.
+The stable public identifier of this profile is `agent-ops.c4-human-approved-apply@1.0.0`. This appendix is the normative Stage 1 contract for its boundary, assumptions, claim vocabulary, and trusted computing base and, together with the versioned artifacts in `formal/`, defines the Stage 2 candidate. It deliberately does not define the Stage 3 schemas and relation validators. An implementation MUST NOT claim runtime conformance to this profile from this appendix or the bounded model alone.
 
 The profile covers one human-approved application of one canonical `ChangePackage` by a separately human-started deterministic Gated Executor. The package binds one Intent and canonical Outcome identity, exact target UID, typed operation, canonical arguments, decision-critical dependencies, validity interval, policy and approval epochs, and attempt budget. Planner and Guardian have no target-write credentials. The trusted gateway or cooperating backend adapter checks authority at use and admits or rejects the operation at a declared linearization point. An authoritative durable log preserves lifecycle events; a read-only effect observer classifies actual target changes and observation completeness independently of the Executor.
 
@@ -1300,7 +1300,7 @@ The following terms are not interchangeable:
 
 Safety and liveness claims MUST be stated separately. A claim MUST name its profile version, assumptions, trusted components, enforcement domain, exact operation family and target class, observation coverage, and validation evidence. Removing or failing an assumption narrows or invalidates the claim; it MUST NOT be hidden by an aggregate success rate. `unknown`, partial effects, timeouts, and incomplete observation remain visible.
 
-Stage 1 establishes only this vocabulary and the assumptions below. The proposed properties in G.7 become claimable guarantees only after their Stage 2 definitions and Stage 3 conformance obligations are accepted and the exact implementation supplies current evidence.
+Stage 1 establishes this vocabulary and the assumptions below. G.7 supplies the bounded Stage 2 definitions; they become claimable runtime guarantees only after the exact Stage 2 candidate and Stage 3 conformance obligations are accepted and the exact implementation supplies current evidence.
 
 ### G.3. Assumption catalog
 
@@ -1349,25 +1349,25 @@ Planner and model output are untrusted proposal inputs and are not in the admiss
 
 The deployment record MUST enumerate shared models, prompts, evidence producers, credentials, keys, canonicalizers, clocks, version services, policy and identity services, logs, storage systems, network paths, target APIs, observers, and Outcome data sources. Two checks that depend on the same failing fact are not independent evidence for that fact. Diversity of model name, prompt wording, process, or host MAY improve detection but does not establish independence unless authority, credentials, sources, and observation paths are also separated for the claimed failure class.
 
-Guardian MAY block, redirect, or request separately authorized remediation. It MUST NOT approve on behalf of a human, mint or widen an Executor credential, modify the target, rewrite the authoritative record, conceal `unknown`, or repair the evaluated artifact outside the logged lifecycle. A common false proof supplied to both Planner and Guardian is a required Stage 3 negative trace.
+Guardian MAY block, redirect, or request separately authorized remediation. It MUST NOT approve on behalf of a human, mint or widen an Executor credential, modify the target, rewrite the authoritative record, conceal `unknown`, or repair the evaluated artifact outside the logged lifecycle. A common false proof supplied to both Planner and Guardian is retained as a Stage 2 counterexample and remains a required Stage 3 negative fixture.
 
 ### G.6. Claim matrix
 
 | Claim | Kind | Required assumptions and trusted components | Enforcement domain and present status |
 | --- | --- | --- | --- |
-| C4-G01 Exact-package admission safety | safety | C4-A02-A04, C4-A08-A10, C4-A18-A19; identity/policy authority, signer, canonicalizer, gateway/backend, time/version sources | Cooperating gateway/backend and exact typed operation only; definition reserved for Stage 2 and not yet claimable. |
-| C4-G02 Conflict and stale-writer safety | safety | C4-A02, C4-A04-A07, C4-A13; reservation/fence store and cooperating backend | Declared conflict domain and cooperating writers only; definition reserved for Stage 2. |
-| C4-G03 Retry safety | safety | C4-A05-A07, C4-A11, C4-A15; backend, log, observer, and authorized reconciler | Registered operation family only; compensation alone is insufficient; definition reserved for Stage 2. |
-| C4-G04 Authority and budget continuity | safety | C4-A06-A10, C4-A17-A18; log, reservation store, identity/policy, canonicalizer, time/version sources | Checkpoint, handoff, restart, and lease-expiry transitions; definition reserved for Stage 2. |
-| C4-G05 Honest effect knowledge | epistemic safety | C4-A06, C4-A11, C4-A13; log and effect observer | Declared observation surface only; incomplete coverage requires `unknown`; definition reserved for Stage 2. |
-| C4-G06 Outcome classification integrity | epistemic safety | C4-A06, C4-A12-A13; log and Outcome oracle | Original Intent and declared oracle coverage only; definition reserved for Stage 2. |
-| C4-G07 Eventual obligation resolution | liveness | C4-A01, C4-A05-A07, C4-A11-A15, C4-A17; all required control-plane services and human escalation path | Only while stated availability, reversibility, fairness, and response assumptions hold; plan reserved for Stage 2. |
+| C4-G01 Exact-package admission safety | safety | C4-A02-A04, C4-A08-A10, C4-A18-A19; identity/policy authority, signer, canonicalizer, gateway/backend, time/version sources | Cooperating gateway/backend and exact typed operation only; bounded by C4-R01 through C4-R06 and P1/P2/P6; not yet a runtime claim. |
+| C4-G02 Conflict and stale-writer safety | safety | C4-A02, C4-A04-A07, C4-A13; reservation/fence store and cooperating backend | Declared conflict domain and cooperating writers only; bounded by C4-R04/C4-R05 and P4. |
+| C4-G03 Retry safety | safety | C4-A05-A07, C4-A11, C4-A15; backend, log, observer, and authorized reconciler | Registered operation family only; C4-R08 requires a backend key, complete negative Evidence, or authorized reconciliation; compensation alone is insufficient. |
+| C4-G04 Authority and budget continuity | safety | C4-A06-A10, C4-A17-A18; log, reservation store, identity/policy, canonicalizer, time/version sources | Checkpoint, handoff, restart, and lease-expiry transitions; bounded by C4-R07/C4-R12 and P3. |
+| C4-G05 Honest effect knowledge | epistemic safety | C4-A06, C4-A11, C4-A13; log and effect observer | Declared observation surface only; C4-R09 and CEI-R01-R07 require incomplete coverage to remain `unknown`; bounded by P5. |
+| C4-G06 Outcome classification integrity | epistemic safety | C4-A06, C4-A12-A13; log and Outcome oracle | Original Intent and declared oracle coverage only; bounded by C4-R10 and P7. |
+| C4-G07 Eventual obligation resolution | liveness | C4-A01, C4-A05-A07, C4-A11-A15, C4-A17; all required control-plane services and human escalation path | C4-R11/C4-R13 and L1 check an authorized bounded resolution path under availability and reversibility; unbounded liveness is not proved. |
 
-### G.7. Informative formal-model plan
+### G.7. Stage 2 executable model and relation catalog
 
-Before schemas are fixed, Stage 2 is to introduce two compositional executable, versioned models: the C4 authority-and-effect model described here and the Evidence Acquisition assertion-and-sufficiency model described in Appendix H. A small versioned semantic interface connects them without merging their authority domains. The planned C4 state includes canonical package digest and version, target UID and decision-critical versions, approval and policy epochs, bounded time interval, human approval and start events, attempt budget and consumed attempts, idempotency key, conflict domain, reservation and fence, admission state, effect knowledge, Outcome state, reconciliation or compensation obligations, observer coverage, and checkpoint lineage.
+Stage 2 defines two compositional executable, versioned models: the C4 authority-and-effect model in `formal/c4.go` and the Evidence Acquisition assertion-and-sufficiency model in `formal/evidence.go`. `agent-ops.c4-evidence-interface@1.0.0` connects them without merging their authority domains. The independently versioned C4 catalog is `agent-ops.c4-relations@1.0.0`; every relation names its authority, check time, and failure disposition. The C4 state includes canonical package digest and version, target UID and decision-critical versions, approval and policy epochs, bounded time interval, human approval and start events, attempt budget and consumed attempts, conflict domain, reservation and fence, admission state, effect knowledge, Outcome state, reconciliation or compensation obligations, and checkpoint lineage.
 
-Planned actions include package creation, human approval, revocation, human start, reservation, admission or denial at the gateway/backend linearization point, effect observation, response loss, retry request, lease expiry, fence rejection, reconciliation, compensation, Outcome evaluation, checkpoint, restart, and terminal release. The model will separate safety from liveness, include explicit unavailable and compromised-boundary abstractions, use named event barriers rather than unbounded wall-clock waits, and preserve `unknown` as a first-class state.
+Model actions include package creation, human approval, revocation, human start, reservation, admission or denial at the gateway/backend linearization point, effect observation, response loss, retry request, lease expiry, fence rejection, reconciliation, compensation, Outcome evaluation, checkpoint, restart, and terminal release. The model separates safety from bounded resolution-path analysis, represents unavailable or removed assumptions explicitly, uses named events rather than unbounded wall-clock waits, and preserves `unknown` as a first-class state.
 
 Each proposed property requires at least one counterexample produced by removing a named assumption:
 
@@ -1382,17 +1382,17 @@ Each proposed property requires at least one counterexample produced by removing
 | P7 Outcome success is not inferred from admission or effect | remove C4-A12 | The requested mutation occurs but the original Intent criterion fails while the attempt is labeled successful. |
 | L1 Every admitted obligation eventually reaches an authorized terminal disposition | remove C4-A14 or C4-A15 | The observer/control plane remains unavailable or an irreversible residual effect has no authorized reconciliation path. |
 
-The Stage 2 acceptance record must identify both model checkers or executable specifications, exact versions, configurations, bounds, fairness assumptions, seeds where applicable, checked properties, complete outputs, and retained minimized counterexamples. It must also identify the interface version and the independently versioned C4 and Evidence relation catalogs. A bounded model can falsify a universal claim; successful bounded checking does not prove production safety.
+The executable checker uses pinned Go 1.26.8, deterministic exhaustive exploration to depth 8, no random seed, and the finite event sets in `formal/check.go`. On this candidate it visits 1,233 C4 states over 6,014 accepted transitions and 332 Evidence states over 2,325 accepted transitions. `formal/counterexamples.json` retains minimized traces tied to named removed assumptions, including the three required combined traces. A bounded model can falsify a universal claim; successful bounded checking does not prove production safety. Exact acceptance remains an owner decision on the reviewed candidate.
 
 ### G.8. Stage boundary and next decision
 
-Stage 1 is complete only when the accountable owner accepts the exact C4 and Evidence profile boundaries, assumption catalogs, TCB tables, claim vocabularies, common-cause treatment, non-goals, and coordinated model plan on the current candidate. Stage 2 may then define temporal, authority, acquisition, assertion, and sufficiency semantics; those semantics MUST NOT be inferred from these appendices. Stage 3 may begin only after both Stage 2 models, their small versioned interface, and both independently versioned relation catalogs are accepted. Runtime gateway, log, observer, collectors, backend adapters, execution evaluation, production deployment, paid evaluation, human-subject research, and release each require the separately applicable decision and evidence.
+Stage 1 is complete. This source revision supplies the exact Stage 2 candidate for temporal, authority, acquisition, assertion, and sufficiency semantics. Stage 3 may begin only after the accountable owner accepts both executable models, `agent-ops.c4-evidence-interface@1.0.0`, and both independently versioned relation catalogs on the exact reviewed target. Runtime gateway, log, observer, collectors, backend adapters, execution evaluation, production deployment, paid evaluation, human-subject research, and release each require the separately applicable decision and evidence.
 
 ## Appendix H. Evidence Acquisition Profile 1.0.0
 
 ### H.1. Status, identity, scope, and non-goals
 
-The stable public identity of this profile is `agent-ops.evidence-acquisition@1.0.0`. This appendix is its normative Stage 1 contract for acquisition boundaries, quality axes, failure semantics, trusted computing base, common-cause treatment, and the interface with the limited C4 profile. It intentionally defines no Stage 2 relation identifiers, temporal state machine, Stage 3 JSON fields, schemas, public validator contract, runtime implementation, or claim of production conformance.
+The stable public identity of this profile is `agent-ops.evidence-acquisition@1.0.0`. This appendix is its normative Stage 1 contract for acquisition boundaries, quality axes, failure semantics, trusted computing base, and common-cause treatment and, together with `formal/`, defines the Stage 2 relation and transition candidate. It intentionally defines no Stage 3 JSON fields, schemas, public validator contract, runtime implementation, or claim of production conformance.
 
 The profile governs evidence collected for one explicit consumer and use: what must be known, about which exact target and epoch, from which source classes, within which observation window, with what coverage, authority, independence, freshness, negative-observation semantics, and blocking behavior. It neither grants execution authority nor turns successful transport, a digest, a signature, a sealed bundle, or a fluent interpretation into proof of truth or sufficiency.
 
@@ -1455,16 +1455,28 @@ Transport failure, permission denial, timeout, parser failure, truncation, sampl
 
 C4 MUST use this profile when it claims knowledge of an actual effect, including `not_applied`; classifies Outcome against the original Intent; or claims evidence sufficiency at admission or use time. The C4 effect observer and Outcome oracle act as evidence producers and consumers under explicit requirements. Their receipts, coverage, detection capability, freshness, assertion disposition, and common-cause references constrain C4-G05 and C4-G06.
 
-The profiles remain independent. Evidence never grants approval or execution authority, and C4 admission authority never proves evidence true, complete, current, or sufficient. A validly authorized operation may have `unknown` effect or Outcome; a well-supported observation may describe an unauthorized operation without authorizing it. The Stage 2 interface will carry applicability requirement, consumer, exact target and epoch, use-time freshness with decision-critical versions, observation coverage and detection capability, assertion disposition, consumer-specific sufficiency, and provenance and common-cause references. This paragraph defines semantics only; it reserves all relation identifiers and serializations.
+The profiles remain independent. Evidence never grants approval or execution authority, and C4 admission authority never proves evidence true, complete, current, or sufficient. A validly authorized operation may have `unknown` effect or Outcome; a well-supported observation may describe an unauthorized operation without authorizing it. `agent-ops.c4-evidence-interface@1.0.0` carries requirement applicability and consumer, exact target and epoch, use-time freshness with decision-critical versions, observation coverage and detection capability, assertion disposition, consumer-specific sufficiency, provenance binding, and common-cause disclosure. Its relation identifiers are CEI-R01 through CEI-R07. Serialization into Stage 3 records remains reserved.
 
 ### H.7. Common-cause boundaries and counterexamples
 
 An implementation record MUST enumerate shared sources, credentials, collectors, parsers, storage, clocks, network paths, models, prompts, canonicalizers, identity services, and target APIs. Two assertions derived through one defective dependency are not independent evidence of that dependency. Different process, model, or prompt names do not establish independence when the authority, data, credentials, or observation path remains shared.
 
-Stage 2 MUST retain minimized counterexamples showing at least: a TTL-valid artifact after a decision-critical version change; `not_applied` inferred from incomplete coverage; a successful transport with truncated or unparsable content; a sealed bundle with an unauthorized source; two apparently independent assertions sharing one false source; a correct effect observation incorrectly treated as Outcome success; and valid C4 authority incorrectly treated as evidence truth.
+Stage 2 retains minimized counterexamples showing at least: a TTL-valid artifact after a decision-critical version change; `not_applied` inferred from incomplete coverage; a successful transport with truncated or unparsable content; a sealed bundle with an unauthorized source; two apparently independent assertions sharing one false source; a correct effect observation incorrectly treated as Outcome success; and valid C4 authority incorrectly treated as evidence truth. They are executable entries in `formal/counterexamples.json`.
+
+The Evidence checker names the following properties:
+
+| Property | Required invariant |
+| --- | --- |
+| E1 | Freshness requires exact target, epoch, and decision-critical version binding at use. |
+| E2 | A supported negative assertion requires complete applicable coverage and detection capability. |
+| E3 | Transport, parse, truncation, sampling, or transformation loss remains visible and blocks sufficiency. |
+| E4 | An unauthorized source cannot produce a sufficient or sealed result. |
+| E5 | Shared or undisclosed common causes cannot be counted as independent evidence. |
+| E6 | Attempts, receipts, failures, conflicts, and pending obligations are append-only across checkpoint and restart. |
+| E7 | C4 approval or admission authority cannot establish evidence truth or sufficiency. |
 
 ### H.8. Stage boundary and next decision
 
-Stage 2 must define an executable, versioned Evidence Acquisition model, compose it through the small semantic interface with the separate C4 model, and publish an independently versioned Evidence relation catalog. Its acceptance record must identify exact tools, versions, configurations, bounds, properties, seeds where applicable, full outputs, and retained minimized counterexamples. Stage 3 schemas and public validators may begin only after both models, the interface, and both relation catalogs are accepted. Existing Evidence Bundle v1 remains unchanged until an explicit incompatible successor and migration are accepted.
+This candidate defines the executable Evidence Acquisition model, composes it through `agent-ops.c4-evidence-interface@1.0.0` with the separate C4 model, and publishes `agent-ops.evidence-relations@1.0.0`. The deterministic checker record and retained counterexamples are specified in G.7 and `formal/README.md`. Stage 3 schemas and public validators may begin only after both models, the interface, and both relation catalogs are accepted on the exact reviewed target. Existing Evidence Bundle v1 remains unchanged until an explicit incompatible successor and migration are accepted.
 
 > Note: this white paper describes the methodology and does not replace normative machine-readable schemas, specifications, policies, or implementation documentation.

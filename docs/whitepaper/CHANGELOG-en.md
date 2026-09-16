@@ -1,5 +1,7 @@
 # Agent-Ops. White Paper Edition History
 
+Formal semantics Stage 2 (aom-04-r3): publish separate bounded executable C4 and Evidence Acquisition models; fix `agent-ops.c4-relations@1.0.0`, `agent-ops.evidence-relations@1.0.0`, and `agent-ops.c4-evidence-interface@1.0.0`; check C4 P1-P7/L1 and Evidence E1-E7 at depth 8; and retain minimized assumption-removal and cross-boundary counterexamples. The models are specifications, not runtime implementations or production-safety proofs. Evidence Bundle v1, all existing schema identities, Stage 3 schemas and validators, evaluation, release, and new PDFs remain unchanged or pending.
+
 Evidence Acquisition Stage 1 and C4 reconciliation (aom-04-r2): add independently versioned profile `agent-ops.evidence-acquisition@1.0.0`; define the requirement-to-bundle acquisition chain, ten independent quality axes, failure and negative-evidence semantics, TCB, common-cause boundaries, and consumer-specific sufficiency; keep Evidence Bundle v1 unchanged; require Evidence for C4 effect, Outcome, and sufficiency claims; and replace the single-model Stage 2 plan with two compositional models, a small versioned semantic interface, and independently versioned relation catalogs. Stage 2 identifiers and models, Stage 3 schemas and validators, runtime implementation, evaluation, release, and new PDFs remain pending.
 
 Limited C4 profile Stage 1 (aom-04-r1): begin the v0.5.0 successor to v0.4.0; assign stable profile identity `agent-ops.c4-human-approved-apply@1.0.0`; publish its limited test-only scope, non-goals, assumption and guarantee vocabularies, TCB and common-cause table, claim matrix, and informative formal-model plan. Temporal semantics, schemas, relation validators, runtime implementation, execution evaluation, production safety, release, and new PDFs remain pending.
@@ -20,7 +22,7 @@ The white paper itself is normative. This file records what changed between edit
 
 | Edition | Summary |
 | --- | --- |
-| 0.5.0 | Stage 1 boundary, assumptions, guarantee vocabulary, trusted computing base, common-cause analysis, and formal-model plan for the limited C4 Human-approved Apply profile. |
+| 0.5.0 | Stage 1 boundaries plus Stage 2 bounded executable C4 and Evidence models, versioned relation catalogs and interface, and retained counterexamples. |
 | 0.4.0 | Three-plane lifecycle structure plus scoped shadow promotion, Controlled Change attempt budgets and circuit breakers, agent-runtime observability, reproducible context assembly, and exact-integration admission. |
 | 0.3.3 | Closed bilingual normative set, explicit English precedence, paired methodology/maps/glossary/diagrams, deterministic PDF toolchain contract, and external semantic-review gate. |
 | 0.3.2 | Agent skills added to the Context Supply Chain; agent artifact inventory, admission and outcome receipts, coverage record, and a conformance mapping to external standards. Requirements sourced from the OWASP Agentic Skills Top 10. |
@@ -38,7 +40,9 @@ The English edition moved directly from 0.3.0 to 0.3.2 and carries the 0.3.1 cha
 - Separates admission safety, effect knowledge, Outcome success, retry and conflict safety, continuity, and recovery; a safe stop is not represented as recovery.
 - Publishes the deployment-level TCB and common-cause requirements and makes Guardian independence depend on separated authority, credentials, evidence sources, and observation paths rather than a second model or prompt.
 - Adds an informative Stage 2 model plan with named state, actions, safety/liveness properties, and counterexample obligations tied to removed assumptions.
-- Changes no schema or Go-module identity and implements no runtime. Stage 2 and Stage 3 require later owner acceptance; exact-target owner and bilingual review and new PDF Build/Test are pending.
+- Publishes separate bounded executable C4 and Evidence models, the independently versioned C4 and Evidence relation catalogs, and the small cross-profile interface without merging authority domains.
+- Checks C4 P1-P7/L1 and Evidence E1-E7 with deterministic depth-8 exploration and retains minimized assumption-removal and combined counterexamples.
+- Changes no schema or Go-module identity and implements no runtime. Stage 3, runtime evaluation, exact-target owner and bilingual review, and new PDF Build/Test remain pending.
 
 ## Edition 0.4.0 | September 2026
 

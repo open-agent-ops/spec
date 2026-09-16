@@ -20,11 +20,14 @@ proves source authority, complete acquisition, claim support, evidence
 sufficiency, or execution authority. Sufficiency is consumer-specific and
 missing blocking quality axes remain unknown or incomplete.
 
-The Stage 1 text fixes scope, assumptions, claim vocabulary, TCBs, quality
-axes, and the coordinated formal-model plan. It supplies no complete runtime
-conformance target. Stage 2 requires two compositional models, a small versioned
-semantic interface, and independently versioned C4 and Evidence relation
-catalogs. Stage 3 schemas and relation validators require later accepted
-changes. Existing schema resource IDs retain their current meanings, including
-`foundation_evidence_bundle` v1; an incompatible field or semantic change
-requires a new schema revision or ID and an explicit migration note.
+Stage 1 fixes scope, assumptions, claim vocabulary, TCBs, quality axes, and the
+coordinated model boundary. Stage 2 adds two bounded compositional executable
+models, `agent-ops.c4-evidence-interface@1.0.0`, and independently versioned
+`agent-ops.c4-relations@1.0.0` and
+`agent-ops.evidence-relations@1.0.0` catalogs. These artifacts can falsify a
+property inside their stated bound; they supply no complete runtime conformance
+target or production-safety proof. Stage 3 schemas and relation validators
+require later accepted changes. Existing schema resource IDs retain their
+current meanings, including `foundation_evidence_bundle` v1; an incompatible
+field or semantic change requires a new schema revision or ID and an explicit
+migration note.

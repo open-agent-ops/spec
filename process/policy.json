@@ -3,6 +3,13 @@
   "repository": "github.com/open-agent-ops/spec",
   "files": [
     {
+      "path": ".gitattributes",
+      "class": "metadata",
+      "license": "Apache-2.0",
+      "normative": false,
+      "protected_hash": ""
+    },
+    {
       "path": ".github/ISSUE_TEMPLATE/bug.yml",
       "class": "metadata",
       "license": "Apache-2.0",
@@ -63,7 +70,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "054be0add83ee1c704741c4852afaecef45d9f7754bc12cdbf88451fc4554672"
+      "protected_hash": "741a2b5dce8c60f866af70902dd90d0616fab3b9b30d5bed9d48eb9616a92019"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -126,7 +133,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "72c49493e5aef0163c6c5d523267b9449785395e94c0e09370185938962ac425"
+      "protected_hash": "537c14486cc946ae43de5a0f13601952ecb4a4d9073e953f7260cae6e8478990"
     },
     {
       "path": "cmd/spec-check/main.go",
@@ -584,46 +591,67 @@
       "protected_hash": ""
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "827329a369bd53a456a75c7653eee1c56b3d46a527ef8b5a70d298d59b3e3e00"
+      "protected_hash": "ec62299769c985b03146f8fcbba2b85bfb209c81ffc0cc25965e4abe1bb981ca"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "a7c39d26cbc3c1e8cf79b95898c1d970f6d9cadadfef7eed155bb921e428b46c"
+      "protected_hash": "2f0efd2d41ab0582fb853c131da8f4749a22bf904f931103b09d2b525e60eda8"
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "738377524ea8e10305c4189c4cde575d95550934232a0dfe67ca503809f88d57"
+      "protected_hash": "55f2ad763cd4a78f2da100d9500bdc4b946a2bf4c2a412b0f94460e67fa71403"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "5546cbcbeb619cd460b019c32684aa093d96180f6fd141f0d4358a0aaa56ed18"
+      "protected_hash": "0089bc02a23ed3a976a6d6e79ceeb3ec08ea7c65577015dedc13acfafd765ff1"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-en.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "dbde4dffa98bee4bcdbc6da7a16008cc4c29dff7400261b4145bef6aadd744c9"
+      "protected_hash": "c7d845e13e6ebdd8803920401efd8ed6bc3851a2dee2722ff8d542c33ee0523e"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "0e0fff5245ce3eb76d234ae2cc74dc6236c644a345654408afd62b26c850c16f"
+      "protected_hash": "afda1a96790400b55e3ffee7a49dc6da9587708c094956c7c66cbdd1397d9ea5"
+    },
+    {
+      "path": "docs/whitepaper/PDF-BUILD-TEST-v0.5.0.json",
+      "class": "documentation",
+      "license": "CC-BY-4.0",
+      "normative": false,
+      "protected_hash": "a0fa96c62d0c590a9b265c29109dcca67e2cfed960e86bacf4e3bf2039175321"
+    },
+    {
+      "path": "docs/whitepaper/RELEASE-NOTES-v0.5.0.en.md",
+      "class": "documentation",
+      "license": "CC-BY-4.0",
+      "normative": false,
+      "protected_hash": "aad13d42c4ed36520cec1e6a00ce8c36c6374f703fda30222220152826c832dc"
+    },
+    {
+      "path": "docs/whitepaper/RELEASE-NOTES-v0.5.0.ru.md",
+      "class": "documentation",
+      "license": "CC-BY-4.0",
+      "normative": false,
+      "protected_hash": "13caf17fc07b6287295e07153e8e7e0797666012a9d147858c1945e060e05895"
     },
     {
       "path": "docs/whitepaper/images/agent-ops-12-principles-en.png",
@@ -903,7 +931,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "2ce8c6fe40dd86d7e99f18e018d529240f465858415f116dd685816ef6750f3b"
+      "protected_hash": "e43cf46011403b7203c827aab8381df3be8d0ce752cda9c54783a695cbbf3e02"
     },
     {
       "path": "releaseops/attempt_log.go",
@@ -1113,7 +1141,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "1d7dd9b4bce8d40b61520d3ce91a955e3147d41d7d521df082fc92120cc30c9c"
+      "protected_hash": "5fb745282b3e30c6767a657120ef3dcf7dfd61af1df982f64327cced5992aa1b"
     },
     {
       "path": "schemas/ai_agent_context.schema.json",

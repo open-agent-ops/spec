@@ -1,0 +1,60 @@
+{
+  "artifacts": [
+    {
+      "bookmarks": 112,
+      "embedded_images": 8,
+      "language": "en",
+      "page_count": 65,
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf",
+      "sha256": "ec62299769c985b03146f8fcbba2b85bfb209c81ffc0cc25965e4abe1bb981ca",
+      "source_path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
+      "source_sha256": "2f0efd2d41ab0582fb853c131da8f4749a22bf904f931103b09d2b525e60eda8"
+    },
+    {
+      "bookmarks": 112,
+      "embedded_images": 8,
+      "language": "ru",
+      "page_count": 78,
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf",
+      "sha256": "55f2ad763cd4a78f2da100d9500bdc4b946a2bf4c2a412b0f94460e67fa71403",
+      "source_path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
+      "source_sha256": "0089bc02a23ed3a976a6d6e79ceeb3ec08ea7c65577015dedc13acfafd765ff1"
+    }
+  ],
+  "build": {
+    "builder_distribution": "local_excluded_tool",
+    "builder_sha256": "3871dec10ec4ca3ce9fcd02f21b8da9e306c2393a47a9b8a3559eee1f325eb33",
+    "deterministic_rebuild": "byte_identical",
+    "fixed_creation_date": "D:20000101000000+00'00'",
+    "font_archive": {
+      "name": "liberation-fonts-ttf-2.1.5.tar.gz",
+      "sha256": "7191c669bf38899f73a2094ed00f7b800553364f90e2637010a69c0e268f25d0",
+      "source": "https://github.com/liberationfonts/liberation-fonts/files/7261482/liberation-fonts-ttf-2.1.5.tar.gz"
+    },
+    "reportlab": "4.4.4"
+  },
+  "claim_limit": "The generator is intentionally excluded from the public tree. This record proves byte-identical repeat builds and bounded inspection in the recorded local environment; it does not by itself provide an independently executable public build recipe or authorize release.",
+  "inspection": {
+    "blank_pages": 0,
+    "contact_sheet_pages_reviewed": 143,
+    "out_of_media_box_text_blocks": 0,
+    "pillow": "11.3.0",
+    "pymupdf": "1.26.4",
+    "pypdf": "6.1.1",
+    "render_scale": 2,
+    "selected_full_resolution_pages_reviewed": [
+      "en:1",
+      "en:45",
+      "en:56",
+      "en:65",
+      "ru:1",
+      "ru:45",
+      "ru:68",
+      "ru:78"
+    ],
+    "visual_result": "pass"
+  },
+  "schema": "agent-ops.pdf-build-test-evidence.v1",
+  "source_revision": "aom-04-r7",
+  "version": "v0.5.0"
+}

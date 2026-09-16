@@ -72,3 +72,10 @@ changes the two C4 schema bytes and their pinned hashes without changing their
 resource IDs or record meaning. Producers of this candidate must regenerate
 records against the current pinned schema hashes rather than carrying forward
 the superseded candidate hashes.
+
+Source revision `aom-04-r7` consolidates the v0.5.0 publication surfaces and
+replaces the retained predecessor PDFs with paired PDFs of the current text. It
+changes no normative profile, schema, relation catalog, semantic interface,
+fixture, Go-module, or release-tag identity. The migration path therefore
+remains the v1-to-v2 Evidence Bundle procedure above; no additional record or
+runtime migration is introduced by this publication-only revision.

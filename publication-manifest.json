@@ -32,34 +32,34 @@
       "language": "en",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
-      "sha256": "a7c39d26cbc3c1e8cf79b95898c1d970f6d9cadadfef7eed155bb921e428b46c",
+      "sha256": "2f0efd2d41ab0582fb853c131da8f4749a22bf904f931103b09d2b525e60eda8",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
-      "sha256": "5546cbcbeb619cd460b019c32684aa093d96180f6fd141f0d4358a0aaa56ed18",
+      "sha256": "0089bc02a23ed3a976a6d6e79ceeb3ec08ea7c65577015dedc13acfafd765ff1",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "whitepaper-pdf",
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
-      "sha256": "827329a369bd53a456a75c7653eee1c56b3d46a527ef8b5a70d298d59b3e3e00",
-      "status": "verified_predecessor_bytes"
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf",
+      "sha256": "ec62299769c985b03146f8fcbba2b85bfb209c81ffc0cc25965e4abe1bb981ca",
+      "status": "candidate_build_test_passed"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper-pdf",
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
-      "sha256": "738377524ea8e10305c4189c4cde575d95550934232a0dfe67ca503809f88d57",
-      "status": "verified_predecessor_bytes"
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf",
+      "sha256": "55f2ad763cd4a78f2da100d9500bdc4b946a2bf4c2a412b0f94460e67fa71403",
+      "status": "candidate_build_test_passed"
     }
   ],
   "english_precedence": true,
-  "release_status": "integrated_conformance_candidate_pending_exact_target_owner_bilingual_review_and_new_pdf_build_test",
+  "release_status": "release_candidate_pending_exact_target_owner_bilingual_review_release_reproducibility_evidence_and_authorization",
   "schema": "agent-ops.publication-manifest.v1",
-  "source_revision": "aom-04-r6",
+  "source_revision": "aom-04-r7",
   "version": "v0.5.0"
 }

@@ -32,14 +32,14 @@
       "language": "en",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
-      "sha256": "cf43d549a3ff28add5c4c8136f1c8330e4d379341558a01f1e822e567537d908",
+      "sha256": "755b0645171eb066489304496596b0b13795e7251a69e978aa9030938f5ce292",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
-      "sha256": "e4c1dc2e70d7d9bbb1d7f80d7cd9261cc1e47e6ae58ebb9e0258ff0ad75ad878",
+      "sha256": "f6f8c24a8f0fe4f5565c22673e53db66c12a70aa0998c7dbdb49ece4fdadc25e",
       "status": "candidate"
     },
     {

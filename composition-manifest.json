@@ -587,7 +587,7 @@
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
       "kind": "regular",
-      "sha256": "316c5d32f429bd4035a2271ba0752f634b41ca51e4e42e488e4550e53843f035",
+      "sha256": "755b0645171eb066489304496596b0b13795e7251a69e978aa9030938f5ce292",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -601,7 +601,7 @@
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
       "kind": "regular",
-      "sha256": "7712e1214ce846b816bfc76da5ea2f8b658ca80c57c7e518738f7b2d2ee48b14",
+      "sha256": "f6f8c24a8f0fe4f5565c22673e53db66c12a70aa0998c7dbdb49ece4fdadc25e",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -755,7 +755,7 @@
     {
       "path": "publication-manifest.json",
       "kind": "regular",
-      "sha256": "f55609e743c9ea80e9b2dbef5b257daaeba948bce534149cfa634d18d6f0ce6c",
+      "sha256": "7b4ee9ecc1d800d32ee280220f1398caf576e1dbd29acb697e61143438ad9d78",
       "class": "metadata",
       "license": "Apache-2.0"
     },

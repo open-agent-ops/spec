@@ -462,7 +462,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "cf43d549a3ff28add5c4c8136f1c8330e4d379341558a01f1e822e567537d908"
+      "protected_hash": "755b0645171eb066489304496596b0b13795e7251a69e978aa9030938f5ce292"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
@@ -476,7 +476,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "e4c1dc2e70d7d9bbb1d7f80d7cd9261cc1e47e6ae58ebb9e0258ff0ad75ad878"
+      "protected_hash": "f6f8c24a8f0fe4f5565c22673e53db66c12a70aa0998c7dbdb49ece4fdadc25e"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
@@ -777,7 +777,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "a0212599bdf1f6dcb10535e7b457585e04b8b3b1ead16e334d1618f99cd35a39"
+      "protected_hash": "7b4ee9ecc1d800d32ee280220f1398caf576e1dbd29acb697e61143438ad9d78"
     },
     {
       "path": "releaseops/attempt_log.go",

@@ -32,14 +32,14 @@
       "language": "en",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
-      "sha256": "df03578ea297a107aef0a547edf751119bd7fa16dee6e5a54b96e8c2676075b6",
+      "sha256": "a7c39d26cbc3c1e8cf79b95898c1d970f6d9cadadfef7eed155bb921e428b46c",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper",
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
-      "sha256": "de749f35cc5ba1073ceceb034a5fa5f4b362e59c3ea7b2ec1156c03970472d96",
+      "sha256": "5546cbcbeb619cd460b019c32684aa093d96180f6fd141f0d4358a0aaa56ed18",
       "status": "candidate"
     },
     {
@@ -58,8 +58,8 @@
     }
   ],
   "english_precedence": true,
-  "release_status": "evidence_relation_validation_candidate_pending_exact_target_owner_bilingual_review_and_new_pdf_build_test",
+  "release_status": "integrated_conformance_candidate_pending_exact_target_owner_bilingual_review_and_new_pdf_build_test",
   "schema": "agent-ops.publication-manifest.v1",
-  "source_revision": "aom-04-r5",
+  "source_revision": "aom-04-r6",
   "version": "v0.5.0"
 }

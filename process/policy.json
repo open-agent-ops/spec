@@ -63,7 +63,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "f17b5d1c23a99834b19ec48b2dc86121d1f3bfc3e56ef201ab23e6fb1c4b847c"
+      "protected_hash": "054be0add83ee1c704741c4852afaecef45d9f7754bc12cdbf88451fc4554672"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -126,7 +126,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "6c1906258b0842c70adb83f3f9fa69a0d43e41cae6906afb065b53eb27401e34"
+      "protected_hash": "72c49493e5aef0163c6c5d523267b9449785395e94c0e09370185938962ac425"
     },
     {
       "path": "cmd/spec-check/main.go",
@@ -157,6 +157,13 @@
       "protected_hash": ""
     },
     {
+      "path": "conformance/README.md",
+      "class": "documentation",
+      "license": "CC-BY-4.0",
+      "normative": true,
+      "protected_hash": "80d3cc8ca210039cd20554de0a3c186b0035dc8b71c98f5032ede4154d34f7b9"
+    },
+    {
       "path": "conformance/assessment.go",
       "class": "source",
       "license": "Apache-2.0",
@@ -178,11 +185,25 @@
       "protected_hash": "e56ad4989affe996de07d2d5bfd1c0cfc8516713a9b4ce49b4e9ea3a7448bc40"
     },
     {
+      "path": "conformance/catalogs/evaluation-reproducibility-v1.0.0.json",
+      "class": "metadata",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "557bfeb7d3c88b5fb54809aa92f732100491ed45169df1d278ce7ed27e5ca8a3"
+    },
+    {
       "path": "conformance/catalogs/evidence-relation-validation-v1.0.0.json",
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": true,
       "protected_hash": "091910fb7617c8e082621be07d85f769504e98760ae9c36882d652dc43c2d55f"
+    },
+    {
+      "path": "conformance/catalogs/integrated-conformance-v1.0.0.json",
+      "class": "metadata",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "af4c9c9202b89fa51cbf9a683d09d4514e2f0892c22a24ee86588842aa0f79b0"
     },
     {
       "path": "conformance/catalogs/relation-validation-v1.0.0.json",
@@ -204,6 +225,13 @@
       "license": "Apache-2.0",
       "normative": false,
       "protected_hash": "dbcec0fef0d5f128ccfb8c77c366fb44c0008cb6aaf59bbfbf8aa367e5c95261"
+    },
+    {
+      "path": "conformance/evaluation_protocol.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "be74540f8ddabb3a020bb157caa97b3a055617bf273de06dbf14c3a9aaf71530"
     },
     {
       "path": "conformance/evidence_catalog.go",
@@ -248,6 +276,34 @@
       "protected_hash": "199c04bce66b5753d37d14eb4c87aa08adbc0a5e8ee111c7db88a0605d0fe509"
     },
     {
+      "path": "conformance/integrated.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "8e26017d7630db6f85fc5157bb9fe9c452c8e44f3c0aea36676b828343a5e26a"
+    },
+    {
+      "path": "conformance/integrated_catalog.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "ce5630a165f2803c76e62a4dbfa355b88b6f3cc945baf0a59c7c8ec0480d96aa"
+    },
+    {
+      "path": "conformance/integrated_test.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": false,
+      "protected_hash": "4595422ebef5c5f2b8962568a1181998a076b02ea2986b911fc760a9b3e8d9be"
+    },
+    {
+      "path": "conformance/integratedtestdata/traces.json",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "c524cec54138022ed222c6261bcd4772c2c46293f9118efb59dc49dd3629e435"
+    },
+    {
       "path": "conformance/properties_test.go",
       "class": "source",
       "license": "Apache-2.0",
@@ -280,7 +336,7 @@
       "class": "conformance-fixture",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "b297c5092e2a2572b59216802d53e6f76b33dc64be08689614a6c3e4aecae3c4"
+      "protected_hash": "4b7cbfd28d47a55ab839d6d6abd0e714bc6e8c768713643a9fe2c5e47bece504"
     },
     {
       "path": "conformance/testdata/eval_result/extra.json",
@@ -539,7 +595,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "df03578ea297a107aef0a547edf751119bd7fa16dee6e5a54b96e8c2676075b6"
+      "protected_hash": "a7c39d26cbc3c1e8cf79b95898c1d970f6d9cadadfef7eed155bb921e428b46c"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
@@ -553,21 +609,21 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "de749f35cc5ba1073ceceb034a5fa5f4b362e59c3ea7b2ec1156c03970472d96"
+      "protected_hash": "5546cbcbeb619cd460b019c32684aa093d96180f6fd141f0d4358a0aaa56ed18"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-en.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "11d32f2940689b91e8a9245637eadaa77ff8f6e6d98521958020e4e752cdaabe"
+      "protected_hash": "dbde4dffa98bee4bcdbc6da7a16008cc4c29dff7400261b4145bef6aadd744c9"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "4a645af20e4854c00e53b841134f31c0530f3a211d3917483fe29b49ec4f267e"
+      "protected_hash": "0e0fff5245ce3eb76d234ae2cc74dc6236c644a345654408afd62b26c850c16f"
     },
     {
       "path": "docs/whitepaper/images/agent-ops-12-principles-en.png",
@@ -847,7 +903,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "657e2c923b4e5990110fa912df2fdbc7630fe22bd97726af0b21ab15b434fad6"
+      "protected_hash": "2ce8c6fe40dd86d7e99f18e018d529240f465858415f116dd685816ef6750f3b"
     },
     {
       "path": "releaseops/attempt_log.go",
@@ -1057,7 +1113,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "5a39a4c759f5c66a4e47e87f65022b7624d5071f7c344da5068f1c64f5c8f03f"
+      "protected_hash": "1d7dd9b4bce8d40b61520d3ce91a955e3147d41d7d521df082fc92120cc30c9c"
     },
     {
       "path": "schemas/ai_agent_context.schema.json",
@@ -1085,7 +1141,7 @@
       "class": "schema",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "db93b003315f7a1a01e360fb720ad967435ec44280c66a90fdec1641c59828f7"
+      "protected_hash": "727531f265e951aac29d3a883156ed86466445d89f5480f9f802dc470d94141d"
     },
     {
       "path": "schemas/c4_checkpoint.schema.json",
@@ -1099,7 +1155,7 @@
       "class": "schema",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52"
+      "protected_hash": "cf481e5fefb7f7fbbdb9a5e98accddd48ba8ac4c537efa0cc8581b869804c5bd"
     },
     {
       "path": "schemas/c4_lifecycle_event.schema.json",
@@ -1491,7 +1547,7 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "34b8717bcf11bd6ce75402b7b4c9952b2d89e56bc8cfb14b177bc7706fb78fe1"
+      "protected_hash": "d6e1b060f1c4a953bcfd4718ef18ed33a69803d30686b306cc771b70aa73f726"
     },
     {
       "path": "schemas/kubernetes_inventory.schema.json",

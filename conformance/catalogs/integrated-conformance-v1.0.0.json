@@ -1,0 +1,40 @@
+{
+  "catalog_id": "agent-ops.integrated-conformance@1.0.0",
+  "profile_id": "agent-ops.c4-evidence-integrated@1.0.0",
+  "c4_profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
+  "evidence_profile_id": "agent-ops.evidence-acquisition@1.0.0",
+  "c4_validator_id": "agent-ops.relation-validation@1.0.0",
+  "evidence_validator_id": "agent-ops.evidence-relation-validation@1.0.0",
+  "interface_id": "agent-ops.c4-evidence-interface@1.0.0",
+  "evaluation_protocol_id": "agent-ops.c4-evidence-evaluation@1.0.0",
+  "validators": [
+    {
+      "id": "AOM-INT-REL-001",
+      "level": 2,
+      "relations": ["CEI-R01", "CEI-R02", "CEI-R03", "CEI-R04", "CEI-R05", "CEI-R06", "CEI-R07"],
+      "codes": [
+        "interface_binding_mismatch",
+        "evidence_applicability_mismatch",
+        "evidence_freshness_mismatch",
+        "observation_coverage_mismatch",
+        "assertion_disposition_mismatch",
+        "evidence_sufficiency_mismatch",
+        "provenance_binding_mismatch",
+        "common_cause_disclosure_mismatch"
+      ]
+    },
+    {
+      "id": "AOM-INT-REL-002",
+      "level": 5,
+      "relations": ["C4-R08", "C4-R09", "C4-R10", "C4-R11", "C4-R12", "EVD-R03", "EVD-R08", "EVD-R10", "EVD-R11", "EVD-R13", "CEI-R03", "CEI-R05", "CEI-R06"],
+      "codes": [
+        "executor_response_effect_claim",
+        "negative_effect_observation_incomplete",
+        "outcome_evidence_insufficient",
+        "retry_evidence_insufficient",
+        "cross_boundary_history_incomplete"
+      ]
+    }
+  ],
+  "claim": "Offline composition of the exact bounded C4 and Evidence validator results plus the named cross-boundary relations only; no runtime execution, source authentication, production evaluation, or safety claim."
+}

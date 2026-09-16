@@ -60,7 +60,7 @@
       "items": {
         "additionalProperties": false,
         "properties": {
-          "consumer_rule": {"$ref": "#/$defs/id"},
+          "consumer_rule": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*@[0-9]+\\.[0-9]+\\.[0-9]+$"},
           "decision_time": {"enum": ["admission", "effect", "outcome"]},
           "id": {"$ref": "#/$defs/id"},
           "target": {"$ref": "#/$defs/target"}

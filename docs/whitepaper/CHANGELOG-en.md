@@ -1,5 +1,7 @@
 # Agent-Ops. White Paper Edition History
 
+Integrated C4/Evidence conformance slice (aom-04-r6): publish `agent-ops.c4-evidence-integrated@1.0.0` with one composed validator that preserves separate syntax, C4-relation, Evidence-relation, Evidence-sufficiency, cross-boundary, and consuming-decision results. Add paired negative fixtures for effect proof, partial coverage, stale or insufficient Outcome evidence, retry from incomplete negative observation, and supersession or checkpoint masking. Freeze the pre-runtime evaluation and reproducibility protocol, including seed, barriers, exact version pins, denominators, metrics, required artifacts, blocking rule, and claim limits. Align the two C4 `consumer_rule` fields with the already-versioned Evidence contract. This remains an offline bounded conformance candidate, not runtime, pilot, or production evidence.
+
 Bounded Evidence Acquisition schema and relation-validation slice (aom-04-r5): add `EvidenceRequirement`, `CollectionProfile`, `CollectionReceipt` with an artifact record, and `EvidenceAssertion` schemas at `1.0.0`; add the separate incompatible `evidence_bundle_v2.schema.json` identity at `2.0.0`; publish `agent-ops.evidence-relation-validation@1.0.0`; and retain Evidence Bundle v1 unchanged under its original local contract. The validator reports syntax, cross-record relations, and consumer-specific sufficiency separately. Twenty-three schema-valid negative fixtures each have an explicit valid pair, and five additional fixtures fail at the schema level. Migration creates new v2 lineage and never rewrites or promotes v1 bytes. This remains an offline bounded slice, not a collector runtime, source authentication, execution authority, production validation, or truth proof.
 
 Bounded C4 schema and relation-validation slice (aom-04-r4): add six versioned schemas for `ChangePackage`, `ExecutionRecord`, authority/admission receipt, `Outcome`, immutable C4 lifecycle event, and checkpoint; publish `agent-ops.relation-validation@1.0.0`; reuse `HumanDecision` and `OutcomeCheck` through exact versioned digest bindings; and add schema-negative and relation-negative fixtures. The validator covers five ordered constraint levels and rejects substitution, stale authority, invalid Evidence at use, unsafe retry, lost reservation or fence, budget reset, broken lifecycle linkage, and omitted checkpoint obligations. It remains an offline bounded slice, not a runtime, complete lifecycle validator, or production-safety proof.
@@ -26,7 +28,7 @@ The white paper itself is normative. This file records what changed between edit
 
 | Edition | Summary |
 | --- | --- |
-| 0.5.0 | C4 and Evidence profile boundaries, bounded executable models, versioned relation catalogs and interface, retained counterexamples, and bounded C4 and Evidence schema/validator slices. |
+| 0.5.0 | C4 and Evidence profile boundaries, bounded executable models, versioned relation catalogs and interface, retained counterexamples, bounded component validators, and integrated C4/Evidence conformance with a frozen evaluation protocol. |
 | 0.4.0 | Three-plane lifecycle structure plus scoped shadow promotion, Controlled Change attempt budgets and circuit breakers, agent-runtime observability, reproducible context assembly, and exact-integration admission. |
 | 0.3.3 | Closed bilingual normative set, explicit English precedence, paired methodology/maps/glossary/diagrams, deterministic PDF toolchain contract, and external semantic-review gate. |
 | 0.3.2 | Agent skills added to the Context Supply Chain; agent artifact inventory, admission and outcome receipts, coverage record, and a conformance mapping to external standards. Requirements sourced from the OWASP Agentic Skills Top 10. |
@@ -48,6 +50,7 @@ The English edition moved directly from 0.3.0 to 0.3.2 and carries the 0.3.1 cha
 - Checks C4 P1-P7/L1 and Evidence E1-E7 with deterministic depth-8 exploration and retains minimized assumption-removal and combined counterexamples.
 - Adds six new C4 schema identities and `agent-ops.relation-validation@1.0.0` without changing pre-existing schema or Go-module identities; it implements no runtime. Runtime evaluation, exact-target owner and bilingual review, and new PDF Build/Test remain pending.
 - Adds five new Evidence Acquisition schema identities and `agent-ops.evidence-relation-validation@1.0.0`; keeps Evidence Bundle v1 unchanged, defines reconstruction-only migration to Bundle v2, and makes no collector-runtime or production-validity claim.
+- Publishes `agent-ops.c4-evidence-integrated@1.0.0`, five paired cross-boundary negative cases, order-invariance and unknown-monotonicity properties, and a frozen pre-runtime evaluation protocol; it adds no runtime, pilot, or production claim.
 
 ## Edition 0.4.0 | September 2026
 

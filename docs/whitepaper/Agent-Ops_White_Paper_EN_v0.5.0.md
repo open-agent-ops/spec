@@ -2,7 +2,7 @@
 
 ## A Methodology for AI-Agent-Based Infrastructure Operations and Technical Support
 
-**Public normative candidate v0.5.0 | source revision aom-04-r6 | English version prevails**
+**Public normative release candidate v0.5.0 | source revision aom-04-r7 | English version prevails**
 
 > Facts, conclusions, and recommendations are not authorization to change infrastructure.
 
@@ -1153,7 +1153,7 @@ The closed publication set consists of this white paper, the standards map, and 
 
 ## 28. Status of This Edition
 
-Edition v0.5.0, source revision `aom-04-r6`, supersedes the v0.4.0 text candidate and publishes two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable formal state-transition models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition also publishes bounded implementation slices: six C4 record schemas and `agent-ops.relation-validation@1.0.0`, five Evidence Acquisition schemas and `agent-ops.evidence-relation-validation@1.0.0`, and their composed `agent-ops.integrated-conformance@1.0.0` checker with a frozen pre-runtime evaluation protocol. Positive, schema-negative, relation-negative, and paired cross-boundary fixtures remain synthetic and offline. The edition does not implement a runtime, provide a complete lifecycle validator, report a runtime evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
+Edition v0.5.0, source revision `aom-04-r7`, supersedes the v0.4.0 text candidate and publishes two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable formal state-transition models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition also publishes bounded implementation slices: six C4 record schemas and `agent-ops.relation-validation@1.0.0`, five Evidence Acquisition schemas and `agent-ops.evidence-relation-validation@1.0.0`, and their composed `agent-ops.integrated-conformance@1.0.0` checker with a frozen pre-runtime evaluation protocol. Positive, schema-negative, relation-negative, and paired cross-boundary fixtures remain synthetic and offline. The edition does not implement a runtime, provide a complete lifecycle validator, report a runtime evaluation, or establish production safety. The paired v0.5.0 PDFs render this source revision and have deterministic Build/Test evidence, but neither those artifacts nor earlier reviews approve the successor. Release still requires fresh exact-target owner and bilingual review, complete release and reproducibility evidence, and separate authorization for the protected release environment. Repository presence alone does not make the edition released.
 
 ## Appendix A. 47 Baseline Checks
 

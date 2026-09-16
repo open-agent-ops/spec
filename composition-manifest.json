@@ -1,6 +1,7 @@
 {
   "maturity": "candidate-v0.5.0",
   "paths": [
+    ".gitattributes",
     ".github/ISSUE_TEMPLATE/bug.yml",
     ".github/ISSUE_TEMPLATE/config.yml",
     ".github/ISSUE_TEMPLATE/proposal.yml",
@@ -84,12 +85,15 @@
     "docs/normative/standards-map.en.md",
     "docs/normative/standards-map.ru.md",
     "docs/releasing.md",
-    "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
+    "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf",
     "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
-    "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
+    "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf",
     "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
     "docs/whitepaper/CHANGELOG-en.md",
     "docs/whitepaper/CHANGELOG-ru.md",
+    "docs/whitepaper/PDF-BUILD-TEST-v0.5.0.json",
+    "docs/whitepaper/RELEASE-NOTES-v0.5.0.en.md",
+    "docs/whitepaper/RELEASE-NOTES-v0.5.0.ru.md",
     "docs/whitepaper/images/agent-ops-12-principles-en.png",
     "docs/whitepaper/images/agent-ops-12-principles-ru.png",
     "docs/whitepaper/images/agent-ops-8-steps-en.png",
@@ -243,6 +247,13 @@
   "schema": "agent-ops.composition-manifest.v1",
   "files": [
     {
+      "path": ".gitattributes",
+      "kind": "regular",
+      "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
       "path": "CODEOWNERS",
       "kind": "regular",
       "sha256": "24cdc364411a6aec0fec174e32b5b418d12894e496db1dac7b9368b332b309c8",
@@ -252,7 +263,7 @@
     {
       "path": "COMPATIBILITY.md",
       "kind": "regular",
-      "sha256": "b40511f3e9f902986220dc52b7b1f66f15df998406e621de9505e0b87d2f5fe5",
+      "sha256": "741a2b5dce8c60f866af70902dd90d0616fab3b9b30d5bed9d48eb9616a92019",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -294,7 +305,7 @@
     {
       "path": "README.md",
       "kind": "regular",
-      "sha256": "8422f1e4af8f1b9c5510ed31604108d5a1e3812851b9f3dd8a3ab6b8d4e5300e",
+      "sha256": "1a3b1d6299e8fecd9829684878c3620d051133e5b9c229e83b61fc14755930a6",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -308,14 +319,14 @@
     {
       "path": "VERSIONING.md",
       "kind": "regular",
-      "sha256": "9e01853fe83a0e92a922276714543f98dda0c0da441f4ca937cdda0051ead30b",
+      "sha256": "fa3a2a9523cbd124519ce2636d1b970f2be006c21083a6c359052fe7d4224882",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "bilingual-pairs.json",
       "kind": "regular",
-      "sha256": "2c7f5e818e4781901f15cdf346d915ada4dc0c0bfd72350699f053888f1c2076",
+      "sha256": "537c14486cc946ae43de5a0f13601952ecb4a4d9073e953f7260cae6e8478990",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -616,42 +627,63 @@
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
       "kind": "regular",
-      "sha256": "a036e741c5515e5a935dabff6dfe43084c8de8c5e6e0815e4ea5ab86e3530344",
+      "sha256": "2f0efd2d41ab0582fb853c131da8f4749a22bf904f931103b09d2b525e60eda8",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf",
       "kind": "regular",
-      "sha256": "827329a369bd53a456a75c7653eee1c56b3d46a527ef8b5a70d298d59b3e3e00",
+      "sha256": "ec62299769c985b03146f8fcbba2b85bfb209c81ffc0cc25965e4abe1bb981ca",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
       "kind": "regular",
-      "sha256": "28aaaa8731154994d691ebed0da3c6f6ce81c79a905c85a87afac82091423e19",
+      "sha256": "0089bc02a23ed3a976a6d6e79ceeb3ec08ea7c65577015dedc13acfafd765ff1",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf",
       "kind": "regular",
-      "sha256": "738377524ea8e10305c4189c4cde575d95550934232a0dfe67ca503809f88d57",
+      "sha256": "55f2ad763cd4a78f2da100d9500bdc4b946a2bf4c2a412b0f94460e67fa71403",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-en.md",
       "kind": "regular",
-      "sha256": "78d6f1e7f4e54530f1aeef257496de987eead92817ddbfcc6700433e822acbed",
+      "sha256": "c7d845e13e6ebdd8803920401efd8ed6bc3851a2dee2722ff8d542c33ee0523e",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "kind": "regular",
-      "sha256": "d8e77b1ed00643ce4c8d1f56e6f0b58bffcaeb7e5f26a4b93bbb76eaa5669800",
+      "sha256": "afda1a96790400b55e3ffee7a49dc6da9587708c094956c7c66cbdd1397d9ea5",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/PDF-BUILD-TEST-v0.5.0.json",
+      "kind": "regular",
+      "sha256": "a0fa96c62d0c590a9b265c29109dcca67e2cfed960e86bacf4e3bf2039175321",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/RELEASE-NOTES-v0.5.0.en.md",
+      "kind": "regular",
+      "sha256": "aad13d42c4ed36520cec1e6a00ce8c36c6374f703fda30222220152826c832dc",
+      "class": "documentation",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "path": "docs/whitepaper/RELEASE-NOTES-v0.5.0.ru.md",
+      "kind": "regular",
+      "sha256": "13caf17fc07b6287295e07153e8e7e0797666012a9d147858c1945e060e05895",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -784,7 +816,7 @@
     {
       "path": "publication-manifest.json",
       "kind": "regular",
-      "sha256": "c7b183f70cf48d58148ec7cfe0294cd901458aa8f4d8b05d31979a1ca22e21ef",
+      "sha256": "e43cf46011403b7203c827aab8381df3be8d0ce752cda9c54783a695cbbf3e02",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -798,7 +830,7 @@
     {
       "path": "revision-manifest.json",
       "kind": "regular",
-      "sha256": "e35a062b843e148bfeacdbc660e7c8c77bef10f01f5c7a36526cd67d255bbb04",
+      "sha256": "5fb745282b3e30c6767a657120ef3dcf7dfd61af1df982f64327cced5992aa1b",
       "class": "metadata",
       "license": "Apache-2.0"
     },

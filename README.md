@@ -13,11 +13,17 @@ Go toolchain and dependencies. The conformance suite runs offline.
 [English white paper](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md) ·
 [Русский white paper](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md)
 
+[English PDF](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf) ·
+[Русский PDF](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf) ·
+[release notes](docs/whitepaper/RELEASE-NOTES-v0.5.0.en.md) ·
+[примечания к выпуску](docs/whitepaper/RELEASE-NOTES-v0.5.0.ru.md) ·
+[PDF Build/Test evidence](docs/whitepaper/PDF-BUILD-TEST-v0.5.0.json)
+
 ## Normative publication set
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The v0.5.0 candidate uses source revision `aom-04-r6` and supersedes the
+The v0.5.0 release candidate uses source revision `aom-04-r7` and supersedes the
 v0.4.0 text candidate with independently versioned
 `agent-ops.c4-human-approved-apply@1.0.0` and
 `agent-ops.evidence-acquisition@1.0.0` profiles. Their separate executable
@@ -33,8 +39,10 @@ The frozen `agent-ops.c4-evidence-evaluation@1.0.0` protocol defines how a futur
 separately authorized runtime evaluation must be measured but reports no such
 result. `review-summary.json`
 retains historical review evidence for r12; it does not approve this candidate.
-The two v0.4.0 PDFs retain predecessor bytes and do not render v0.5.0. Fresh
-exact-target owner and bilingual review and new PDF Build/Test remain pending.
+The two v0.5.0 PDFs render source revision `aom-04-r7`; their deterministic
+build and inspection record is published with the candidate. Fresh exact-target
+owner and bilingual review remain pending, as does a separately authorized
+release from an exact clean main SHA.
 `composition-manifest.json` lists the full current public file set;
 `publication-manifest.json` tracks only the six paired Markdown sources and two
 PDF artifacts. Private review decisions are represented only by the safe
@@ -47,8 +55,9 @@ outside this publication set.
 - Russian: [карта стандартов](docs/normative/standards-map.ru.md), [глоссарий](docs/normative/glossary.ru.md).
 
 Structural parity is machine-verifiable but is not semantic approval. The
-v0.5.0 candidate remains pending until its complete conformance,
-composition and supply-chain evidence is bound to its exact target.
+v0.5.0 release candidate remains pending until its complete conformance,
+composition and supply-chain evidence and independent reviews are bound to its
+exact target.
 
 ## Public boundary
 

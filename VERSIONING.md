@@ -60,3 +60,8 @@ An exact reviewed main SHA is bound to one release run and proposal. Rebuilding
 or changing a version, source, asset, lock or policy invalidates approval. Tags
 and assets are immutable: a differing existing object is a conflict. Recovery
 uses a previous immutable release or a new reviewed fix, never a moved tag.
+
+The v0.5.0 release candidate is source revision `aom-04-r7`. That revision is a
+publication consolidation: it does not advance any profile, schema, catalog,
+interface, Go-module, or release-tag version. The candidate becomes a release
+only after exact-target review and release evidence satisfy the governed gates.

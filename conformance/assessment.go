@@ -50,7 +50,7 @@ func (v *Validator) Assess(cases []Case, properties []PropertyResult) Assessment
 	}
 	out.Registry = v.registry
 	out.Compiled = len(v.compiled)
-	complete := out.Compiled == 67 && len(cases) == 28 && len(properties) == 7
+	complete := out.Compiled == 72 && len(cases) == 28 && len(properties) == 7
 	seen := map[string]bool{}
 	families := map[string][2]int{}
 	reasonClasses := map[string]bool{}

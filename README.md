@@ -17,15 +17,16 @@ Go toolchain and dependencies. The conformance suite runs offline.
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The v0.5.0 candidate uses source revision `aom-04-r4` and supersedes the
+The v0.5.0 candidate uses source revision `aom-04-r5` and supersedes the
 v0.4.0 text candidate with independently versioned
 `agent-ops.c4-human-approved-apply@1.0.0` and
 `agent-ops.evidence-acquisition@1.0.0` profiles. Their separate executable
 models compose through `agent-ops.c4-evidence-interface@1.0.0` and the
 independently versioned C4 and Evidence relation catalogs in
 [`formal/`](formal/README.md), while preserving separate authority and
-evidence-quality domains. A bounded C4 implementation slice adds six schemas
-and `agent-ops.relation-validation@1.0.0`; it validates exact cross-record
+evidence-quality domains. Bounded implementation slices add six C4 schemas,
+five Evidence Acquisition schemas, `agent-ops.relation-validation@1.0.0`, and
+`agent-ops.evidence-relation-validation@1.0.0`; they validate exact cross-record
 bindings without claiming a complete lifecycle implementation. `review-summary.json`
 retains historical review evidence for r12; it does not approve this candidate.
 The two v0.4.0 PDFs retain predecessor bytes and do not render v0.5.0. Fresh
@@ -66,7 +67,7 @@ To replay generated cases, pass `-rapid.seed=30404 -rapid.checks=100` to
 `go test ./...`; failure output retains the seed and minimized counterexample.
 For the focused compiler and fixture suite, run `go test ./conformance`.
 
-The registry embeds exactly 67 schemas and returns defensive copies. Lookup
+The registry embeds exactly 72 schemas and returns defensive copies. Lookup
 uses full public resource IDs. Revision dispatch accepts the two family names
 `foundation_object_ref` and `foundation_semantic_object` with exact versions
 `1.0.0`, `1.1.0`, `1.2.0`, `1.3.0`. Text v0.5.0, the independently versioned
@@ -83,7 +84,10 @@ The suite compiles every schema, checks six positive and eighteen distinct
 negative core fixtures, and includes four Run Request cases. The C4 relation
 slice additionally checks one valid cross-record trace, twelve relation-negative
 traces whose individual records remain schema-valid, schema-negative fixtures,
-and independent mutation of the R/I/C/T axes. Seven declared
+and independent mutation of the R/I/C/T axes. The Evidence slice checks
+twenty-three schema-valid negative traces, an explicit positive pair for each,
+five schema-negative traces, and separate syntax, relation, and consumer-
+sufficiency dispositions. Seven declared
 properties are verified across public and private release checks; private
 review-authentication and export checks are not part of this public module.
 Public schema checks do not authenticate provenance, grant authority or prove

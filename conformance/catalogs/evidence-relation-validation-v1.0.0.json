@@ -1,0 +1,24 @@
+{
+  "catalog_id": "agent-ops.evidence-relation-validation@1.0.0",
+  "profile_id": "agent-ops.evidence-acquisition@1.0.0",
+  "relations": "agent-ops.evidence-relations@1.0.0",
+  "constraint_levels": [
+    {"level": 1, "name": "syntax", "meaning": "Every supplied record validates against its exact schema identity."},
+    {"level": 2, "name": "applicability", "meaning": "The requirement and authorized collection profile bind the exact consumer, source, and target."},
+    {"level": 3, "name": "acquisition", "meaning": "Attempts, receipts, artifacts, integrity, and derivation lineage remain append-only and explicit."},
+    {"level": 4, "name": "claim-and-completion", "meaning": "Assertions, negative observations, independence, computed completion, and sealing satisfy their named relations."},
+    {"level": 5, "name": "consumer-sufficiency", "meaning": "Freshness, invalidation, and consumer-specific sufficiency hold at the exact decision."}
+  ],
+  "validators": [
+    {"id": "AOM-EVD-SCHEMA-001", "level": 1, "relations": [], "codes": ["schema_invalid", "trace_incomplete"]},
+    {"id": "AOM-EVD-REL-001", "level": 2, "relations": ["EVD-R01", "EVD-R02"], "codes": ["requirement_not_applicable", "profile_unauthorized", "profile_binding_mismatch"]},
+    {"id": "AOM-EVD-REL-002", "level": 3, "relations": ["EVD-R03", "EVD-R04"], "codes": ["attempt_history_invalid", "receipt_binding_mismatch", "acquisition_failure_hidden"]},
+    {"id": "AOM-EVD-REL-003", "level": 3, "relations": ["EVD-R05", "EVD-R06"], "codes": ["artifact_digest_mismatch", "acquisition_incomplete", "lineage_incomplete", "redaction_loss_hidden"]},
+    {"id": "AOM-EVD-REL-004", "level": 4, "relations": ["EVD-R07", "EVD-R08"], "codes": ["assertion_unsupported", "negative_observation_invalid", "conflict_hidden"]},
+    {"id": "AOM-EVD-REL-005", "level": 5, "relations": ["EVD-R09", "EVD-R14"], "codes": ["evidence_stale_at_use", "invalidation_not_propagated"]},
+    {"id": "AOM-EVD-REL-006", "level": 4, "relations": ["EVD-R10"], "codes": ["independence_unsupported", "executor_response_not_effect_proof"]},
+    {"id": "AOM-EVD-REL-007", "level": 4, "relations": ["EVD-R11", "EVD-R12"], "codes": ["completion_role_invalid", "completion_element_invalid", "not_applicable_unauthorized", "bundle_history_incomplete", "bundle_digest_mismatch", "bundle_seal_invalid"]},
+    {"id": "AOM-EVD-REL-008", "level": 5, "relations": ["EVD-R13"], "codes": ["consumer_sufficiency_invalid"]}
+  ],
+  "claim": "Offline bounded Evidence Acquisition records only; no source authentication, collector runtime, execution authority, production validity, or universal truth claim."
+}

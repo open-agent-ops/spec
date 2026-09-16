@@ -37,3 +37,22 @@ change any existing schema resource ID, including `foundation_evidence_bundle`
 v1, and do not establish full lifecycle or runtime conformance. An incompatible
 field, relation, or semantic change requires a new schema revision or ID and an
 explicit migration note.
+
+The bounded Evidence Acquisition slice adds `EvidenceRequirement`,
+`CollectionProfile`, `CollectionReceipt` with its artifact record, and
+`EvidenceAssertion` schemas at `1.0.0`, plus the distinct
+`evidence_bundle_v2.schema.json` identity at `2.0.0` and
+`agent-ops.evidence-relation-validation@1.0.0`. Its result reports local syntax,
+cross-record relation validity, and consumer-specific sufficiency separately.
+Evidence Bundle v1 remains valid only under its original local contract and is
+not an input to the new validator.
+
+Migration never rewrites an existing v1 bundle. A producer creates new
+requirement, profile, receipt/artifact, and assertion records, then creates a
+new v2 bundle whose receipt history, computed completion, sealing relation, and
+consumer rule validate under the exact v2 schema and validator catalog. The v2
+bundle may retain the v1 bundle identity as external provenance, but no v1
+`present`, digest, or `sealed` value is promoted to v2 completeness or
+sufficiency. Failed attempts, exclusions, `partial`, `unknown`, and conflicts
+must be reconstructed explicitly; if they cannot be, migration remains
+insufficient rather than inventing the missing lineage.

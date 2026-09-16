@@ -63,7 +63,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "b40511f3e9f902986220dc52b7b1f66f15df998406e621de9505e0b87d2f5fe5"
+      "protected_hash": "f17b5d1c23a99834b19ec48b2dc86121d1f3bfc3e56ef201ab23e6fb1c4b847c"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -126,7 +126,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "2c7f5e818e4781901f15cdf346d915ada4dc0c0bfd72350699f053888f1c2076"
+      "protected_hash": "6c1906258b0842c70adb83f3f9fa69a0d43e41cae6906afb065b53eb27401e34"
     },
     {
       "path": "cmd/spec-check/main.go",
@@ -161,14 +161,14 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "c28b26a834c65a8b83d572d3e34349a42ee093e76102c7819aceafeb5fb36ef8"
+      "protected_hash": "e7e72859c1d793cf7718c5da197ebf73fb3503227ab0a398ef6b92926ead20a1"
     },
     {
       "path": "conformance/assessment_test.go",
       "class": "source",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "283b3d56ead06bf097e0b21b59751d2d5099629bd175e105cba1f47ef9c84e85"
+      "protected_hash": "1588eee9e83bc36bbadf334c718518e37d864cb4026979c739e78da85f645452"
     },
     {
       "path": "conformance/boundaries_test.go",
@@ -176,6 +176,20 @@
       "license": "Apache-2.0",
       "normative": false,
       "protected_hash": "e56ad4989affe996de07d2d5bfd1c0cfc8516713a9b4ce49b4e9ea3a7448bc40"
+    },
+    {
+      "path": "conformance/catalogs/evidence-relation-validation-v1.0.0.json",
+      "class": "metadata",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "091910fb7617c8e082621be07d85f769504e98760ae9c36882d652dc43c2d55f"
+    },
+    {
+      "path": "conformance/catalogs/relation-validation-v1.0.0.json",
+      "class": "metadata",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "52a07c97a4428557b6f6091cf8d6096915fa2c388733dc61349b775cab0fcc11"
     },
     {
       "path": "conformance/compiler.go",
@@ -189,7 +203,35 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "34a40c7ba3607d4f3481b5f03c25e780930240e738e9f4ec3f8fdb00b618cee6"
+      "protected_hash": "dbcec0fef0d5f128ccfb8c77c366fb44c0008cb6aaf59bbfbf8aa367e5c95261"
+    },
+    {
+      "path": "conformance/evidence_catalog.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "b30c69318c46661585fddf018c1e9097a1a406974ab3b44202a5aee04e2b0401"
+    },
+    {
+      "path": "conformance/evidence_relations.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "957c9f79f3606017c0276a86f821499feaf36e78776436dc177a3f25d6d87b62"
+    },
+    {
+      "path": "conformance/evidence_relations_test.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": false,
+      "protected_hash": "7ebad2e6b591c6a9d57fe156173ee9738ce5b5d40402a9f1e2b061a3e0e56435"
+    },
+    {
+      "path": "conformance/evidencetestdata/traces.json",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "ea3163fbeeb2ba1c7d1fd405f37bb70d008f5d3ed500ba8b8a023c421bec5f4f"
     },
     {
       "path": "conformance/input.go",
@@ -211,6 +253,34 @@
       "license": "Apache-2.0",
       "normative": false,
       "protected_hash": "6329e04f95b01fd57996de41bf21bccb030278fc3c2ba6c97d02c03a86c2b78b"
+    },
+    {
+      "path": "conformance/relation_catalog.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "4971b0dc5dcb32cf775c6ec8b1e1cdad7c8b72d28ab637b81454c9263aa7c27d"
+    },
+    {
+      "path": "conformance/relations.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "6a69648b157ca69a14a1eb30ed1eef0b55564022d6a1d460bf46c0ec837a640d"
+    },
+    {
+      "path": "conformance/relations_test.go",
+      "class": "source",
+      "license": "Apache-2.0",
+      "normative": false,
+      "protected_hash": "56c2fdda8df40de196b834ded1549b1fc3fe1974da3f6c8697b32acc71eead37"
+    },
+    {
+      "path": "conformance/relationtestdata/traces.json",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "b297c5092e2a2572b59216802d53e6f76b33dc64be08689614a6c3e4aecae3c4"
     },
     {
       "path": "conformance/testdata/eval_result/extra.json",
@@ -458,13 +528,6 @@
       "protected_hash": ""
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
-      "class": "documentation",
-      "license": "CC-BY-4.0",
-      "normative": true,
-      "protected_hash": "a036e741c5515e5a935dabff6dfe43084c8de8c5e6e0815e4ea5ab86e3530344"
-    },
-    {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.4.0.pdf",
       "class": "documentation",
       "license": "CC-BY-4.0",
@@ -472,11 +535,11 @@
       "protected_hash": "827329a369bd53a456a75c7653eee1c56b3d46a527ef8b5a70d298d59b3e3e00"
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "28aaaa8731154994d691ebed0da3c6f6ce81c79a905c85a87afac82091423e19"
+      "protected_hash": "df03578ea297a107aef0a547edf751119bd7fa16dee6e5a54b96e8c2676075b6"
     },
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.4.0.pdf",
@@ -486,18 +549,25 @@
       "protected_hash": "738377524ea8e10305c4189c4cde575d95550934232a0dfe67ca503809f88d57"
     },
     {
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
+      "class": "documentation",
+      "license": "CC-BY-4.0",
+      "normative": true,
+      "protected_hash": "de749f35cc5ba1073ceceb034a5fa5f4b362e59c3ea7b2ec1156c03970472d96"
+    },
+    {
       "path": "docs/whitepaper/CHANGELOG-en.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "78d6f1e7f4e54530f1aeef257496de987eead92817ddbfcc6700433e822acbed"
+      "protected_hash": "11d32f2940689b91e8a9245637eadaa77ff8f6e6d98521958020e4e752cdaabe"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "d8e77b1ed00643ce4c8d1f56e6f0b58bffcaeb7e5f26a4b93bbb76eaa5669800"
+      "protected_hash": "4a645af20e4854c00e53b841134f31c0530f3a211d3917483fe29b49ec4f267e"
     },
     {
       "path": "docs/whitepaper/images/agent-ops-12-principles-en.png",
@@ -616,7 +686,7 @@
       "class": "documentation",
       "license": "CC-BY-4.0",
       "normative": true,
-      "protected_hash": "08f73ff1bb01094a48b27c71693bbb5fb6fd1490c8eafb1c17c31e9df3710d5f"
+      "protected_hash": "972fc241e0a4e4f4f4d4a6be3a2c2654c9616f66d1dda8ebe6d5cb30a29c1679"
     },
     {
       "path": "formal/assumptions.go",
@@ -777,7 +847,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "c7b183f70cf48d58148ec7cfe0294cd901458aa8f4d8b05d31979a1ca22e21ef"
+      "protected_hash": "657e2c923b4e5990110fa912df2fdbc7630fe22bd97726af0b21ab15b434fad6"
     },
     {
       "path": "releaseops/attempt_log.go",
@@ -987,7 +1057,7 @@
       "class": "metadata",
       "license": "Apache-2.0",
       "normative": false,
-      "protected_hash": "e35a062b843e148bfeacdbc660e7c8c77bef10f01f5c7a36526cd67d255bbb04"
+      "protected_hash": "5a39a4c759f5c66a4e47e87f65022b7624d5071f7c344da5068f1c64f5c8f03f"
     },
     {
       "path": "schemas/ai_agent_context.schema.json",
@@ -1002,6 +1072,48 @@
       "license": "Apache-2.0",
       "normative": true,
       "protected_hash": "339ffb4a090356a06dd9431b0252841e5f3891472b7c2e75d406967cb5213459"
+    },
+    {
+      "path": "schemas/c4_authority_receipt.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "e010b35da58cab7d992ebd9dac01c3e79465dc7a457ed2f37615537c586affe1"
+    },
+    {
+      "path": "schemas/c4_change_package.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "db93b003315f7a1a01e360fb720ad967435ec44280c66a90fdec1641c59828f7"
+    },
+    {
+      "path": "schemas/c4_checkpoint.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "5d03eb94ddd96fb6337b50350e2bae32d6d48b4925df6e32c6b74d8c9b8c63b1"
+    },
+    {
+      "path": "schemas/c4_execution_record.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52"
+    },
+    {
+      "path": "schemas/c4_lifecycle_event.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f"
+    },
+    {
+      "path": "schemas/c4_outcome.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "e8ac821fa6be54fd5da226576f740b07e8b0ef752604344b9c79288b6fecb55c"
     },
     {
       "path": "schemas/check_card.schema.json",
@@ -1058,6 +1170,41 @@
       "license": "Apache-2.0",
       "normative": true,
       "protected_hash": "56c6c317be595b6a880b444933774a094479133d0524e6f58280141d33b070de"
+    },
+    {
+      "path": "schemas/evidence_assertion.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "a9384aacf9a6b02e49f353c11446a476b2db6992e43781c76a9ea6b8cc109bf3"
+    },
+    {
+      "path": "schemas/evidence_bundle_v2.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "a1b94762d851ece60fcf8f0a7ba7ef8b422dfd3b8f229ba80d7d822fedd1b664"
+    },
+    {
+      "path": "schemas/evidence_collection_profile.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "924c380e0514765822a920daa2e9a2d4d1ad57f57f4241b3bf497ce0fb16ccf8"
+    },
+    {
+      "path": "schemas/evidence_collection_receipt.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "3a420c9e78d73e54c99f5fc7ba9d983e196719ab1b52b020339b40553a3d62c2"
+    },
+    {
+      "path": "schemas/evidence_requirement.schema.json",
+      "class": "schema",
+      "license": "Apache-2.0",
+      "normative": true,
+      "protected_hash": "045c876884cc1dd8588e23d127a0e8cd9d8ee1113fa2b7ad956699659053d85e"
     },
     {
       "path": "schemas/foundation_consumer_context.schema.json",
@@ -1344,7 +1491,7 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "11edc758c2ce75e22599ebd6b8c49a42811eb2b3e797d36bccbd5da8d8756f66"
+      "protected_hash": "34b8717bcf11bd6ce75402b7b4c9952b2d89e56bc8cfb14b177bc7706fb78fe1"
     },
     {
       "path": "schemas/kubernetes_inventory.schema.json",
@@ -1414,7 +1561,7 @@
       "class": "source",
       "license": "Apache-2.0",
       "normative": true,
-      "protected_hash": "e02bc5cc7b0acad573509ae447f7c6cc38cd84c034439ccc3cad0100893d23ee"
+      "protected_hash": "74b8afd3e9581911a6722befaf07dc50fd296d1639e704d70c89a65bae0fa28e"
     },
     {
       "path": "schemas/run_envelope.schema.json",
@@ -1464,83 +1611,6 @@
       "license": "Apache-2.0",
       "normative": true,
       "protected_hash": ""
-    },
-    {
-      "path": "conformance/catalogs/relation-validation-v1.0.0.json",
-      "class": "metadata",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "52a07c97a4428557b6f6091cf8d6096915fa2c388733dc61349b775cab0fcc11"
-    },
-    {
-      "path": "conformance/relation_catalog.go",
-      "class": "source",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "4971b0dc5dcb32cf775c6ec8b1e1cdad7c8b72d28ab637b81454c9263aa7c27d"
-    },
-    {
-      "path": "conformance/relations.go",
-      "class": "source",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "6a69648b157ca69a14a1eb30ed1eef0b55564022d6a1d460bf46c0ec837a640d"
-    },
-    {
-      "path": "conformance/relations_test.go",
-      "class": "source",
-      "license": "Apache-2.0",
-      "normative": false,
-      "protected_hash": "56c2fdda8df40de196b834ded1549b1fc3fe1974da3f6c8697b32acc71eead37"
-    },
-    {
-      "path": "conformance/relationtestdata/traces.json",
-      "class": "conformance-fixture",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "b297c5092e2a2572b59216802d53e6f76b33dc64be08689614a6c3e4aecae3c4"
-    },
-    {
-      "path": "schemas/c4_authority_receipt.schema.json",
-      "class": "schema",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "e010b35da58cab7d992ebd9dac01c3e79465dc7a457ed2f37615537c586affe1"
-    },
-    {
-      "path": "schemas/c4_change_package.schema.json",
-      "class": "schema",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "db93b003315f7a1a01e360fb720ad967435ec44280c66a90fdec1641c59828f7"
-    },
-    {
-      "path": "schemas/c4_checkpoint.schema.json",
-      "class": "schema",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "5d03eb94ddd96fb6337b50350e2bae32d6d48b4925df6e32c6b74d8c9b8c63b1"
-    },
-    {
-      "path": "schemas/c4_execution_record.schema.json",
-      "class": "schema",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52"
-    },
-    {
-      "path": "schemas/c4_lifecycle_event.schema.json",
-      "class": "schema",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f"
-    },
-    {
-      "path": "schemas/c4_outcome.schema.json",
-      "class": "schema",
-      "license": "Apache-2.0",
-      "normative": true,
-      "protected_hash": "e8ac821fa6be54fd5da226576f740b07e8b0ef752604344b9c79288b6fecb55c"
     }
   ],
   "required": [

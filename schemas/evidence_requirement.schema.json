@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-ops.ru/schemas/evidence_requirement.schema.json",
+  "title": "Agent-Ops Evidence Requirement",
+  "description": "A bounded consumer-specific Evidence requirement. Local validity does not establish applicability or sufficiency.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project": {"$ref": "#/$defs/id"},
+        "environment": {"$ref": "#/$defs/id"},
+        "service": {"$ref": "#/$defs/id"},
+        "uid": {"$ref": "#/$defs/id"},
+        "generation": {"type": "integer", "minimum": 1},
+        "policy_epoch": {"type": "integer", "minimum": 1},
+        "profile_epoch": {"type": "integer", "minimum": 1},
+        "critical_versions_sha256": {"$ref": "#/$defs/digest"}
+      },
+      "required": ["project", "environment", "service", "uid", "generation", "policy_epoch", "profile_epoch", "critical_versions_sha256"]
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "kind": {"const": "agent-ops.evidence-requirement"},
+    "requirement_id": {"$ref": "#/$defs/id"},
+    "consumer_rule": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*@[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "decision_time": {"type": "string", "format": "date-time"},
+    "target": {"$ref": "#/$defs/target"},
+    "source_id": {"$ref": "#/$defs/id"},
+    "profile_id": {"$ref": "#/$defs/id"},
+    "mandatory_roles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "max_age_seconds": {"type": "integer", "minimum": 0, "maximum": 86400}
+  },
+  "required": ["schema_version", "kind", "requirement_id", "consumer_rule", "decision_time", "target", "source_id", "profile_id", "mandatory_roles", "max_age_seconds"]
+}

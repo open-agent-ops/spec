@@ -32,6 +32,15 @@ binding, authority, temporal, retry, budget, checkpoint, effect, Outcome, or
 completeness semantics requires the applicable new major version and an
 accepted owner proposal. Compatible additions still require governed review.
 
+The bounded Evidence Acquisition implementation slice begins with four record
+schema identities at revision `1.0.0`, the incompatible
+`evidence_bundle_v2.schema.json` identity at revision `2.0.0`, and
+`agent-ops.evidence-relation-validation@1.0.0`. Evidence Bundle v1 retains its
+existing identity and semantics. An incompatible change to applicability,
+acquisition lineage, freshness, independence, completion, sealing,
+invalidation, or consumer sufficiency requires the applicable new major
+version and an accepted owner proposal.
+
 Release input is stable SemVer `vMAJOR.MINOR.PATCH`, with no leading zeroes,
 prerelease or build suffix. This module admits major 0 or 1. Major 2 requires a
 separately reviewed module-path migration. Changes to normative text, schema

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-ops.ru/schemas/evidence_assertion.schema.json",
+  "title": "Agent-Ops Evidence Assertion",
+  "description": "A bounded assertion disposition derived from named Evidence receipts.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "target": {"type": "object", "additionalProperties": false, "properties": {
+      "project": {"$ref": "#/$defs/id"}, "environment": {"$ref": "#/$defs/id"}, "service": {"$ref": "#/$defs/id"}, "uid": {"$ref": "#/$defs/id"},
+      "generation": {"type": "integer", "minimum": 1}, "policy_epoch": {"type": "integer", "minimum": 1}, "profile_epoch": {"type": "integer", "minimum": 1}, "critical_versions_sha256": {"$ref": "#/$defs/digest"}
+    }, "required": ["project", "environment", "service", "uid", "generation", "policy_epoch", "profile_epoch", "critical_versions_sha256"]}
+  },
+  "properties": {
+    "schema_version": {"const": "1.0.0"}, "kind": {"const": "agent-ops.evidence-assertion"},
+    "assertion_id": {"$ref": "#/$defs/id"}, "requirement_id": {"$ref": "#/$defs/id"},
+    "receipt_ids": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "target": {"$ref": "#/$defs/target"}, "source_id": {"$ref": "#/$defs/id"},
+    "disposition": {"enum": ["supported", "refuted", "does_not_test", "conflicted", "unknown"]}, "negative": {"type": "boolean"},
+    "coverage": {"enum": ["complete", "partial", "unknown"]}, "detection_capable": {"type": "boolean"}, "fresh_at_use": {"type": "boolean"},
+    "checked_at": {"type": "string", "format": "date-time"}, "decision_time": {"type": "string", "format": "date-time"},
+    "lineage_complete": {"type": "boolean"}, "common_causes_disclosed": {"type": "boolean"}, "independent": {"type": "boolean"},
+    "conflict_visible": {"type": "boolean"}, "sufficiency": {"enum": ["sufficient", "insufficient", "unknown"]}
+  },
+  "required": ["schema_version", "kind", "assertion_id", "requirement_id", "receipt_ids", "target", "source_id", "disposition", "negative", "coverage", "detection_capable", "fresh_at_use", "checked_at", "decision_time", "lineage_complete", "common_causes_disclosed", "independent", "conflict_visible", "sufficiency"]
+}

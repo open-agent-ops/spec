@@ -6,9 +6,11 @@ This directory contains the executable formal specification for
 models connected only by `agent-ops.c4-evidence-interface@1.0.0`.
 
 The package is not a production gateway, collector, or backend adapter. The
-separate `conformance/` package and `schemas/` directory contain the bounded C4
-schema and relation-validation slice. Neither artifact set changes Evidence
-Bundle v1 or establishes full runtime conformance or production safety.
+separate `conformance/` package and `schemas/` directory contain bounded C4 and
+Evidence schema and relation-validation slices. Evidence Bundle v1 remains
+byte-for-byte unchanged; the incompatible Evidence Acquisition contract uses
+the separate `evidence_bundle_v2.schema.json` identity. Neither artifact set
+establishes full runtime conformance or production safety.
 
 ## Versioned contracts
 
@@ -71,6 +73,7 @@ failure and an unresolved effect.
 
 These bounded results can falsify a universal claim when they find a trace.
 Their success does not prove an implementation, an unbounded environment, or a
-production system safe. The published C4 schemas and relation validators cover
-only the named offline cross-record slice; runtime gateway, effect observation,
-production evaluation, and complete lifecycle conformance remain outside it.
+production system safe. The published C4 and Evidence schemas and relation
+validators cover only the named offline cross-record slices; runtime gateway,
+collector, effect observation, production evaluation, and complete lifecycle
+conformance remain outside them.

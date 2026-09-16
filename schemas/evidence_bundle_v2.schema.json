@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-ops.ru/schemas/evidence_bundle_v2.schema.json",
+  "title": "Agent-Ops Evidence Bundle v2",
+  "description": "An immutable computed Evidence bundle for the Evidence Acquisition profile. Sealing does not establish truth or execution authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"}, "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "target": {"type": "object", "additionalProperties": false, "properties": {
+      "project": {"$ref": "#/$defs/id"}, "environment": {"$ref": "#/$defs/id"}, "service": {"$ref": "#/$defs/id"}, "uid": {"$ref": "#/$defs/id"},
+      "generation": {"type": "integer", "minimum": 1}, "policy_epoch": {"type": "integer", "minimum": 1}, "profile_epoch": {"type": "integer", "minimum": 1}, "critical_versions_sha256": {"$ref": "#/$defs/digest"}
+    }, "required": ["project", "environment", "service", "uid", "generation", "policy_epoch", "profile_epoch", "critical_versions_sha256"]},
+    "element": {"type": "object", "additionalProperties": false, "properties": {
+      "element_id": {"$ref": "#/$defs/id"}, "role": {"$ref": "#/$defs/id"}, "assertion_id": {"$ref": "#/$defs/id"}
+    }, "required": ["element_id", "role", "assertion_id"]},
+    "completion": {"type": "object", "additionalProperties": false, "properties": {
+      "role": {"$ref": "#/$defs/id"}, "mode": {"enum": ["present", "not_applicable"]},
+      "element_ids": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+      "owner_ref": {"type": "string", "maxLength": 128}, "decision_ref": {"type": "string", "maxLength": 128}, "reason_code": {"type": "string", "maxLength": 128}
+    }, "required": ["role", "mode", "element_ids", "owner_ref", "decision_ref", "reason_code"]}
+  },
+  "properties": {
+    "schema_version": {"const": "2.0.0"}, "kind": {"const": "agent-ops.evidence-bundle"},
+    "bundle_id": {"$ref": "#/$defs/id"}, "requirement_id": {"$ref": "#/$defs/id"}, "profile_id": {"$ref": "#/$defs/id"},
+    "consumer_rule": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*@[0-9]+\\.[0-9]+\\.[0-9]+$"}, "target": {"$ref": "#/$defs/target"},
+    "state": {"enum": ["open", "sealed", "superseded", "invalidated"]},
+    "elements": {"type": "array", "maxItems": 1024, "items": {"$ref": "#/$defs/element"}},
+    "completion": {"type": "array", "maxItems": 16, "items": {"$ref": "#/$defs/completion"}},
+    "receipt_ids": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "computed_complete": {"type": "boolean"}, "sufficiency": {"enum": ["sufficient", "insufficient", "unknown"]},
+    "unresolved_states": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"enum": ["failed_attempt", "partial", "unknown", "exclusion", "conflict"]}},
+    "bundle_sha256": {"$ref": "#/$defs/digest"}, "sealed_at": {"type": "string", "format": "date-time"}, "supersedes_id": {"type": "string", "maxLength": 128}
+  },
+  "required": ["schema_version", "kind", "bundle_id", "requirement_id", "profile_id", "consumer_rule", "target", "state", "elements", "completion", "receipt_ids", "computed_complete", "sufficiency", "unresolved_states", "bundle_sha256", "sealed_at", "supersedes_id"]
+}

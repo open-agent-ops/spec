@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-ops.ru/schemas/evidence_collection_profile.schema.json",
+  "title": "Agent-Ops Evidence Collection Profile",
+  "description": "A versioned collection method authorization. It grants no C4 execution authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project": {"$ref": "#/$defs/id"}, "environment": {"$ref": "#/$defs/id"}, "service": {"$ref": "#/$defs/id"},
+        "uid": {"$ref": "#/$defs/id"}, "generation": {"type": "integer", "minimum": 1},
+        "policy_epoch": {"type": "integer", "minimum": 1}, "profile_epoch": {"type": "integer", "minimum": 1},
+        "critical_versions_sha256": {"$ref": "#/$defs/digest"}
+      },
+      "required": ["project", "environment", "service", "uid", "generation", "policy_epoch", "profile_epoch", "critical_versions_sha256"]
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "kind": {"const": "agent-ops.evidence-collection-profile"},
+    "profile_id": {"$ref": "#/$defs/id"},
+    "profile_version": {"const": "1.0.0"},
+    "authorized": {"type": "boolean"},
+    "authorized_by": {"$ref": "#/$defs/id"},
+    "valid_at": {"type": "string", "format": "date-time"},
+    "target": {"$ref": "#/$defs/target"},
+    "source_id": {"$ref": "#/$defs/id"},
+    "collector_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "query_sha256": {"$ref": "#/$defs/digest"},
+    "parameters_sha256": {"$ref": "#/$defs/digest"},
+    "detection_capable": {"type": "boolean"},
+    "expected_coverage": {"enum": ["complete", "partial", "unknown"]},
+    "allow_not_applicable": {"type": "boolean"},
+    "mandatory_roles": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+  },
+  "required": ["schema_version", "kind", "profile_id", "profile_version", "authorized", "authorized_by", "valid_at", "target", "source_id", "collector_version", "query_sha256", "parameters_sha256", "detection_capable", "expected_coverage", "allow_not_applicable", "mandatory_roles"]
+}

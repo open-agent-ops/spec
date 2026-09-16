@@ -2,7 +2,7 @@
 
 ## A Methodology for AI-Agent-Based Infrastructure Operations and Technical Support
 
-**Public normative candidate v0.5.0 | source revision aom-04-r4 | English version prevails**
+**Public normative candidate v0.5.0 | source revision aom-04-r5 | English version prevails**
 
 > Facts, conclusions, and recommendations are not authorization to change infrastructure.
 
@@ -352,7 +352,7 @@ Intent may transition to Evidence only when its goal, scope, source authority, s
 
 Evidence records declared and observed reality before interpretation. Collection must not silently become either a diagnosis or permission to act.
 
-The independently versioned `agent-ops.evidence-acquisition@1.0.0` profile defines the acquisition boundary in [Appendix H](#appendix-h-evidence-acquisition-profile-100). It separates requirements, collection attempts, artifacts, assertions, and bundles; establishes independent evidence-quality axes; and defines how collection failures remain visible. It introduces no new JSON fields in this edition and does not change the meaning of Evidence Bundle v1.
+The independently versioned `agent-ops.evidence-acquisition@1.0.0` profile defines the acquisition boundary in [Appendix H](#appendix-h-evidence-acquisition-profile-100). It separates requirements, collection attempts, artifacts, assertions, and bundles; establishes independent evidence-quality axes; and defines how collection failures remain visible. Its bounded record family uses new schema identities and Evidence Bundle v2; it does not change the meaning of Evidence Bundle v1.
 
 | Type card | Contract |
 | --- | --- |
@@ -1153,7 +1153,7 @@ The closed publication set consists of this white paper, the standards map, and 
 
 ## 28. Status of This Edition
 
-Edition v0.5.0, source revision `aom-04-r4`, supersedes the v0.4.0 text candidate and publishes two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable formal state-transition models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition also publishes a bounded C4 implementation slice: six record schemas, `agent-ops.relation-validation@1.0.0`, and positive, schema-negative, and relation-negative fixtures. It does not implement a runtime, provide a complete lifecycle validator, report a runtime evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
+Edition v0.5.0, source revision `aom-04-r5`, supersedes the v0.4.0 text candidate and publishes two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable formal state-transition models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition also publishes bounded implementation slices: six C4 record schemas and `agent-ops.relation-validation@1.0.0`, plus five Evidence Acquisition schemas and `agent-ops.evidence-relation-validation@1.0.0`, with positive, schema-negative, and relation-negative fixtures. It does not implement a runtime, provide a complete lifecycle validator, report a runtime evaluation, or establish production safety. Earlier reviews and the retained v0.4.0 PDF bytes do not approve or render this successor. Release requires fresh exact-target owner and bilingual review plus new deterministic PDF Build/Test evidence. Repository presence alone does not make the edition released.
 
 ## Appendix A. 47 Baseline Checks
 
@@ -1442,7 +1442,7 @@ The validator is an offline checker for this exact record slice. It does not aut
 
 ### H.1. Status, identity, scope, and non-goals
 
-The stable public identity of this profile is `agent-ops.evidence-acquisition@1.0.0`. This appendix is its normative contract for acquisition boundaries, quality axes, failure semantics, trusted computing base, and common-cause treatment and, together with `formal/`, defines the executable relation and transition candidate. It intentionally defines no implementation JSON fields, schemas, public validator contract, runtime implementation, or claim of production conformance.
+The stable public identity of this profile is `agent-ops.evidence-acquisition@1.0.0`. This appendix is its normative contract for acquisition boundaries, quality axes, failure semantics, trusted computing base, and common-cause treatment and, together with `formal/`, defines the executable relations and transitions. The bounded public record family and validator described in H.8 implement only this named offline slice; they are not a runtime collector or a claim of production conformance.
 
 The profile governs evidence collected for one explicit consumer and use: what must be known, about which exact target and epoch, from which source classes, within which observation window, with what coverage, authority, independence, freshness, negative-observation semantics, and blocking behavior. It neither grants execution authority nor turns successful transport, a digest, a signature, a sealed bundle, or a fluent interpretation into proof of truth or sufficiency.
 
@@ -1459,7 +1459,7 @@ The controlled chain is:
 | `CollectionAttempt/Receipt` | Immutable record of every attempt, including failures: request and query digest, transport and parser states, retries and interruption, actual coverage, included and excluded items, counts, truncation, dropped data, and transformations. A retry creates a new receipt. |
 | `EvidenceArtifact` | Exact retained bytes or protected reference bound to one receipt, with content identity and transformation lineage. |
 | `EvidenceAssertion` | A scoped statement that an artifact `supports`, `refutes`, `does_not_test`, `conflicts`, or leaves `unknown` a named claim. It distinguishes an observed negative from missing data. |
-| `EvidenceBundle` | A content-addressed package of references and lineage. Packaging or sealing creates neither authority nor evidence quality. Existing Bundle v1 semantics remain unchanged. |
+| `EvidenceBundle` | A content-addressed package of references and lineage. Packaging or sealing creates neither authority nor evidence quality. Existing Bundle v1 semantics remain unchanged; the incompatible acquisition contract uses the separate Bundle v2 schema identity. |
 
 Each link MUST preserve the identities and limitations of the preceding link. A derived representation cannot silently widen scope, improve trust class, erase exclusions, replace an exact target, or convert `unknown` into success.
 
@@ -1527,6 +1527,10 @@ The Evidence checker names the following properties:
 
 ### H.8. Candidate boundary
 
-This candidate defines the executable formal Evidence Acquisition state-transition model, composes it through `agent-ops.c4-evidence-interface@1.0.0` with the separate formal C4 state-transition model, and publishes `agent-ops.evidence-relations@1.0.0`. The deterministic checker record and retained counterexamples are specified in G.7 and `formal/README.md`. The bounded C4 record slice validates Evidence facts at their C4 use point but does not provide a standalone Evidence Acquisition schema family or general Evidence relation validator. Existing Evidence Bundle v1 remains unchanged until an explicit incompatible successor and migration are accepted.
+This candidate defines the executable formal Evidence Acquisition state-transition model, composes it through `agent-ops.c4-evidence-interface@1.0.0` with the separate formal C4 state-transition model, and publishes `agent-ops.evidence-relations@1.0.0`. The deterministic checker record and retained counterexamples are specified in G.7 and `formal/README.md`.
+
+The bounded public implementation adds `EvidenceRequirement`, `CollectionProfile`, `CollectionReceipt` with its artifact record, and `EvidenceAssertion` schemas at `1.0.0`, the separate `evidence_bundle_v2.schema.json` identity at `2.0.0`, and `agent-ops.evidence-relation-validation@1.0.0`. Its result reports local schema validity, cross-record relation validity, and consumer-specific sufficiency separately. The fixture corpus pairs every negative case with a valid baseline and covers empty or misbound completion, hidden acquisition loss, wrong targets or epochs, stale critical versions, broken lineage, invalid negative observations, false independence, hidden conflicts, digest mismatch, and lost history.
+
+Evidence Bundle v1 remains valid only under its original local contract. Migration creates new requirement, profile, receipt/artifact, assertion, and v2 bundle records; it never rewrites v1 bytes or promotes v1 `present`, digest, or `sealed` fields to v2 completeness or sufficiency. Missing attempt, exclusion, partial, unknown, or conflict history makes migration insufficient. The validator does not authenticate sources, collect evidence, grant execution authority, establish general truth, or prove production safety.
 
 > Note: this white paper describes the methodology and does not replace normative machine-readable schemas, specifications, policies, or implementation documentation.

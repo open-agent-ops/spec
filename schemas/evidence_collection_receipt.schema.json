@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-ops.ru/schemas/evidence_collection_receipt.schema.json",
+  "title": "Agent-Ops Evidence Collection Receipt",
+  "description": "An append-only acquisition attempt and its bounded artifact record.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "project": {"$ref": "#/$defs/id"}, "environment": {"$ref": "#/$defs/id"}, "service": {"$ref": "#/$defs/id"}, "uid": {"$ref": "#/$defs/id"},
+        "generation": {"type": "integer", "minimum": 1}, "policy_epoch": {"type": "integer", "minimum": 1}, "profile_epoch": {"type": "integer", "minimum": 1},
+        "critical_versions_sha256": {"$ref": "#/$defs/digest"}
+      },
+      "required": ["project", "environment", "service", "uid", "generation", "policy_epoch", "profile_epoch", "critical_versions_sha256"]
+    },
+    "artifact": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "artifact_id": {"$ref": "#/$defs/id"},
+        "content": {"type": "string", "maxLength": 16384},
+        "sha256": {"$ref": "#/$defs/digest"},
+        "coverage": {"enum": ["complete", "partial", "unknown"]},
+        "sampled": {"type": "boolean"}, "truncated": {"type": "boolean"}, "dropped_items": {"type": "integer", "minimum": 0},
+        "redaction_loss_fields": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "lineage_complete": {"type": "boolean"},
+        "input_artifact_ids": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "common_cause_ids": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "producer_kind": {"enum": ["collector", "transform", "executor_response"]}
+      },
+      "required": ["artifact_id", "content", "sha256", "coverage", "sampled", "truncated", "dropped_items", "redaction_loss_fields", "lineage_complete", "input_artifact_ids", "common_cause_ids", "producer_kind"]
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "1.0.0"}, "kind": {"const": "agent-ops.evidence-collection-receipt"},
+    "receipt_id": {"$ref": "#/$defs/id"}, "requirement_id": {"$ref": "#/$defs/id"}, "profile_id": {"$ref": "#/$defs/id"}, "profile_sha256": {"$ref": "#/$defs/digest"},
+    "target": {"$ref": "#/$defs/target"}, "source_id": {"$ref": "#/$defs/id"},
+    "attempt_sequence": {"type": "integer", "minimum": 1, "maximum": 64}, "previous_receipt_id": {"type": "string", "maxLength": 128},
+    "collector_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}, "query_sha256": {"$ref": "#/$defs/digest"}, "parameters_sha256": {"$ref": "#/$defs/digest"},
+    "started_at": {"type": "string", "format": "date-time"}, "completed_at": {"type": "string", "format": "date-time"}, "received_at": {"type": "string", "format": "date-time"},
+    "transport": {"enum": ["success", "failed", "timeout", "permission_denied"]}, "parse": {"enum": ["success", "failed", "not_attempted"]},
+    "collection": {"enum": ["complete", "partial", "interrupted", "unavailable"]}, "error_code": {"type": "string", "maxLength": 128},
+    "artifact": {"$ref": "#/$defs/artifact"}
+  },
+  "required": ["schema_version", "kind", "receipt_id", "requirement_id", "profile_id", "profile_sha256", "target", "source_id", "attempt_sequence", "previous_receipt_id", "collector_version", "query_sha256", "parameters_sha256", "started_at", "completed_at", "received_at", "transport", "parse", "collection", "error_code", "artifact"]
+}

@@ -75,7 +75,7 @@ func TestConformanceCaseEvidence(t *testing.T) {
 		cases = append(cases, Case{f.Path, f.Schema, b, f.Accepted, f.Reason})
 	}
 	a := v.Assess(cases, nil)
-	if a.Compiled != 67 || len(a.Cases) != 28 || a.Status != "partial" {
+	if a.Compiled != 72 || len(a.Cases) != 28 || a.Status != "partial" {
 		t.Fatal("case evidence incomplete")
 	}
 	for _, c := range a.Cases {

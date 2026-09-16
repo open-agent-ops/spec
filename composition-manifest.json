@@ -276,7 +276,7 @@
     {
       "path": "README.md",
       "kind": "regular",
-      "sha256": "8d360d0cee288506b8a8a3db4f6e79fcdb7978797998d4bb33b2e9fbefa31945",
+      "sha256": "8422f1e4af8f1b9c5510ed31604108d5a1e3812851b9f3dd8a3ab6b8d4e5300e",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -304,7 +304,7 @@
     {
       "path": "composition-manifest.json",
       "kind": "regular",
-      "sha256": "41545aceaf9ef39b62ef436afdb5c985480ec12cf9d66bcd37d606b06fa718ac",
+      "sha256": "379a764a07d61c4288fcf92d9d66f74adaf30e326d271d1f0946ac1045ace013",
       "class": "metadata",
       "license": "Apache-2.0"
     },

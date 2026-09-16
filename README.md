@@ -81,7 +81,7 @@ specification check, not a runtime or production-safety claim. Run
 
 The suite compiles every schema, checks six positive and eighteen distinct
 negative core fixtures, and includes four Run Request cases. The C4 relation
-slice additionally checks one valid cross-record trace, eight relation-negative
+slice additionally checks one valid cross-record trace, twelve relation-negative
 traces whose individual records remain schema-valid, schema-negative fixtures,
 and independent mutation of the R/I/C/T axes. Seven declared
 properties are verified across public and private release checks; private

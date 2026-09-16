@@ -17,12 +17,15 @@ Go toolchain and dependencies. The conformance suite runs offline.
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The v0.5.0 candidate uses source revision `aom-04-r2` and supersedes the
-v0.4.0 text candidate with Stage 1 of the independently versioned
+The v0.5.0 candidate uses source revision `aom-04-r3` and supersedes the
+v0.4.0 text candidate with Stage 2 of the independently versioned
 `agent-ops.c4-human-approved-apply@1.0.0` and
-`agent-ops.evidence-acquisition@1.0.0` profiles. Their Stage 2 models will
-compose through a small versioned semantic interface while preserving separate
-authority and evidence-quality domains. `review-summary.json`
+`agent-ops.evidence-acquisition@1.0.0` profiles. Their separate executable
+models compose through `agent-ops.c4-evidence-interface@1.0.0` and the
+independently versioned C4 and Evidence relation catalogs in
+[`formal/`](formal/README.md), while preserving separate authority and
+evidence-quality domains. Stage 3 schemas and public relation validators remain
+pending. `review-summary.json`
 retains historical review evidence for r12; it does not approve this candidate.
 The two v0.4.0 PDFs retain predecessor bytes and do not render v0.5.0. Fresh
 exact-target owner and bilingual review and new PDF Build/Test remain pending.
@@ -69,6 +72,11 @@ uses full public resource IDs. Revision dispatch accepts the two family names
 C4 and Evidence Acquisition profiles, and release tags are separate version
 dimensions. New private
 namespace aliases are rejected.
+
+The Stage 2 checker exhaustively explores the bounded event sets for both
+formal models and replays retained minimized counterexamples. It is a
+specification check, not a runtime or production-safety claim. Run
+`go test ./formal` for the focused model and catalog suite.
 
 The suite compiles every schema, checks six positive and eighteen distinct
 negative core fixtures, and includes four Run Request cases. Seven declared

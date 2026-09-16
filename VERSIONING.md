@@ -15,11 +15,15 @@ required relation needs a new profile major version and an accepted owner
 proposal. Compatible additions and clarifications use the applicable minor or
 patch version and still require the governed review for normative text.
 
-Stage 2 relation catalogs and the small semantic interface between the two
-profiles are independently versioned. Their acceptance does not silently
-change Evidence Bundle v1. A stronger bundle with incompatible acquisition or
-sufficiency semantics requires a new schema identity or major version and an
-explicit migration note.
+Stage 2 fixes independently versioned contracts
+`agent-ops.c4-relations@1.0.0`,
+`agent-ops.evidence-relations@1.0.0`, and
+`agent-ops.c4-evidence-interface@1.0.0`. Changing one does not silently change
+either profile, the other catalogs, or Evidence Bundle v1. An incompatible
+relation, interface fact, authority, check time, or failure disposition needs a
+new applicable major version and an accepted owner proposal. A stronger bundle
+with incompatible acquisition or sufficiency semantics requires a new schema
+identity or major version and an explicit migration note.
 
 Release input is stable SemVer `vMAJOR.MINOR.PATCH`, with no leading zeroes,
 prerelease or build suffix. This module admits major 0 or 1. Major 2 requires a

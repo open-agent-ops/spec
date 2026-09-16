@@ -1,0 +1,106 @@
+{
+  "catalog_id": "agent-ops.evidence-relations@1.0.0",
+  "applies_to": [
+    "agent-ops.evidence-acquisition@1.0.0"
+  ],
+  "relations": [
+    {
+      "id": "EVD-R01",
+      "name": "requirement_applicable",
+      "authority": "named consumer requirement",
+      "check_time": "collection planning and consumer use",
+      "failure": "not_applicable_or_unknown"
+    },
+    {
+      "id": "EVD-R02",
+      "name": "collection_profile_authorized",
+      "authority": "source authority and versioned collection profile",
+      "check_time": "before each collection attempt",
+      "failure": "reject_attempt"
+    },
+    {
+      "id": "EVD-R03",
+      "name": "attempt_append_only",
+      "authority": "authoritative attempt log",
+      "check_time": "attempt, retry, checkpoint, and restart",
+      "failure": "retain_unknown_and_failed_attempt"
+    },
+    {
+      "id": "EVD-R04",
+      "name": "receipt_bound",
+      "authority": "collector receipt and target/source identity services",
+      "check_time": "receipt creation",
+      "failure": "acquisition_unknown"
+    },
+    {
+      "id": "EVD-R05",
+      "name": "artifact_integrity",
+      "authority": "raw store, canonicalizer, and digest implementation",
+      "check_time": "artifact admission and consumer use",
+      "failure": "artifact_rejected"
+    },
+    {
+      "id": "EVD-R06",
+      "name": "derivation_lineage_complete",
+      "authority": "transformation pipeline and provenance log",
+      "check_time": "derived artifact or assertion creation",
+      "failure": "claim_unknown"
+    },
+    {
+      "id": "EVD-R07",
+      "name": "assertion_disposition",
+      "authority": "bounded evaluator or oracle",
+      "check_time": "assertion evaluation",
+      "failure": "assertion_unknown"
+    },
+    {
+      "id": "EVD-R08",
+      "name": "negative_observation_valid",
+      "authority": "requirement, receipt, and detection-capability record",
+      "check_time": "negative assertion evaluation",
+      "failure": "does_not_test_or_unknown"
+    },
+    {
+      "id": "EVD-R09",
+      "name": "fresh_at_use",
+      "authority": "target/source identity, time, and version sources",
+      "check_time": "consumer decision time",
+      "failure": "freshness_unknown"
+    },
+    {
+      "id": "EVD-R10",
+      "name": "independence_supported",
+      "authority": "declared common-cause dependency record",
+      "check_time": "aggregation and sufficiency evaluation",
+      "failure": "independence_unknown"
+    },
+    {
+      "id": "EVD-R11",
+      "name": "completion_computed",
+      "authority": "consumer requirement and complete acquisition lineage",
+      "check_time": "bundle completion evaluation",
+      "failure": "bundle_incomplete"
+    },
+    {
+      "id": "EVD-R12",
+      "name": "bundle_sealed",
+      "authority": "bundle writer over computed completion",
+      "check_time": "bundle sealing",
+      "failure": "seal_rejected"
+    },
+    {
+      "id": "EVD-R13",
+      "name": "consumer_sufficient",
+      "authority": "named consumer rule version",
+      "check_time": "consumer decision",
+      "failure": "insufficient_or_unknown"
+    },
+    {
+      "id": "EVD-R14",
+      "name": "invalidation_propagated",
+      "authority": "target/source/profile/policy version sources",
+      "check_time": "version change and consumer use",
+      "failure": "dependent_facts_unknown"
+    }
+  ]
+}

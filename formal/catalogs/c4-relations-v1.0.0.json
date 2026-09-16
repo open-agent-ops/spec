@@ -1,0 +1,99 @@
+{
+  "catalog_id": "agent-ops.c4-relations@1.0.0",
+  "applies_to": [
+    "agent-ops.c4-human-approved-apply@1.0.0"
+  ],
+  "relations": [
+    {
+      "id": "C4-R01",
+      "name": "package_bound",
+      "authority": "canonical package, target identity, and version sources",
+      "check_time": "human approval and backend admission",
+      "failure": "reject_package_or_target_mismatch"
+    },
+    {
+      "id": "C4-R02",
+      "name": "approval_current",
+      "authority": "identity and policy authority plus signed human decision",
+      "check_time": "backend admission linearization point",
+      "failure": "deny_admission"
+    },
+    {
+      "id": "C4-R03",
+      "name": "human_start_current",
+      "authority": "authenticated human-start event",
+      "check_time": "before the first attempt is admitted",
+      "failure": "deny_admission"
+    },
+    {
+      "id": "C4-R04",
+      "name": "reservation_held",
+      "authority": "authoritative reservation store",
+      "check_time": "reservation and admission",
+      "failure": "deny_or_conflict"
+    },
+    {
+      "id": "C4-R05",
+      "name": "fence_current",
+      "authority": "reservation store and cooperating backend",
+      "check_time": "backend mutation linearization point",
+      "failure": "reject_stale_writer"
+    },
+    {
+      "id": "C4-R06",
+      "name": "admission_authorized",
+      "authority": "cooperating gateway or backend adapter",
+      "check_time": "declared atomic admission point",
+      "failure": "deny_admission"
+    },
+    {
+      "id": "C4-R07",
+      "name": "attempt_budget_monotonic",
+      "authority": "authoritative durable lifecycle log",
+      "check_time": "attempt creation, checkpoint, and restart",
+      "failure": "reject_attempt_or_checkpoint"
+    },
+    {
+      "id": "C4-R08",
+      "name": "retry_safe",
+      "authority": "operation contract, backend key, Evidence facts, and authorized reconciler",
+      "check_time": "retry request",
+      "failure": "require_reconciliation"
+    },
+    {
+      "id": "C4-R09",
+      "name": "effect_knowledge_supported",
+      "authority": "Evidence interface from the declared effect observer",
+      "check_time": "effect classification",
+      "failure": "effect_unknown"
+    },
+    {
+      "id": "C4-R10",
+      "name": "outcome_classified",
+      "authority": "canonical Outcome oracle and Evidence interface",
+      "check_time": "Outcome evaluation",
+      "failure": "outcome_unknown"
+    },
+    {
+      "id": "C4-R11",
+      "name": "obligation_resolved",
+      "authority": "durable log and separately authorized reconciliation or compensation",
+      "check_time": "terminal disposition",
+      "failure": "retain_pending_obligation"
+    },
+    {
+      "id": "C4-R12",
+      "name": "checkpoint_refines",
+      "authority": "authoritative log and reservation state",
+      "check_time": "checkpoint, handoff, and restart",
+      "failure": "reject_checkpoint"
+    },
+    {
+      "id": "C4-R13",
+      "name": "terminal_release_allowed",
+      "authority": "authoritative lifecycle state",
+      "check_time": "terminal release",
+      "failure": "retain_case"
+    }
+  ]
+}

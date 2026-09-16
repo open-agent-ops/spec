@@ -1,0 +1,58 @@
+{
+  "catalog_id": "agent-ops.c4-evidence-interface@1.0.0",
+  "applies_to": [
+    "agent-ops.c4-human-approved-apply@1.0.0",
+    "agent-ops.evidence-acquisition@1.0.0"
+  ],
+  "relations": [
+    {
+      "id": "CEI-R01",
+      "name": "evidence_applicable",
+      "authority": "named EvidenceRequirement",
+      "check_time": "C4 admission, effect, or Outcome decision",
+      "failure": "consumer_fact_unknown"
+    },
+    {
+      "id": "CEI-R02",
+      "name": "evidence_fresh_at_use",
+      "authority": "Evidence relation catalog",
+      "check_time": "exact C4 consumer decision time",
+      "failure": "consumer_fact_unknown"
+    },
+    {
+      "id": "CEI-R03",
+      "name": "observation_coverage",
+      "authority": "Evidence receipt and requirement",
+      "check_time": "effect classification",
+      "failure": "effect_unknown"
+    },
+    {
+      "id": "CEI-R04",
+      "name": "assertion_disposition",
+      "authority": "Evidence assertion evaluator",
+      "check_time": "effect or Outcome classification",
+      "failure": "classification_unknown"
+    },
+    {
+      "id": "CEI-R05",
+      "name": "evidence_sufficient",
+      "authority": "named Evidence consumer rule version",
+      "check_time": "exact C4 consumer decision",
+      "failure": "decision_blocked"
+    },
+    {
+      "id": "CEI-R06",
+      "name": "provenance_bound",
+      "authority": "Evidence acquisition and derivation lineage",
+      "check_time": "interface fact publication and use",
+      "failure": "consumer_fact_unknown"
+    },
+    {
+      "id": "CEI-R07",
+      "name": "common_causes_disclosed",
+      "authority": "deployment common-cause record",
+      "check_time": "independence and sufficiency evaluation",
+      "failure": "independence_unknown"
+    }
+  ]
+}

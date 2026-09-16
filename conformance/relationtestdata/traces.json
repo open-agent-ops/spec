@@ -6,7 +6,7 @@
       "document_schema": {
         "id": "https://agent-ops.ru/schemas/c4_change_package.schema.json",
         "version": "1.0.0",
-        "sha256": "db93b003315f7a1a01e360fb720ad967435ec44280c66a90fdec1641c59828f7",
+        "sha256": "727531f265e951aac29d3a883156ed86466445d89f5480f9f802dc470d94141d",
         "media_type": "application/schema+json"
       },
       "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
@@ -36,7 +36,7 @@
       "evidence_requirements": [
         {
           "id": "effect-observation",
-          "consumer_rule": "c4-effect-rule-1",
+          "consumer_rule": "c4-effect-rule@1.0.0",
           "decision_time": "admission",
           "target": {
             "uid": "target-1",
@@ -56,7 +56,7 @@
       "attempt_budget": 2,
       "conflict_domain_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
       "decision_ref": "activate-latency",
-      "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+      "decision_sha256": "1884385a19075279f4c5f88d596da3312a8f612b6727922b0deba6acd07ea4c3",
       "axes": {
         "autonomy": "R1",
         "impact": "I1",
@@ -68,7 +68,7 @@
       "actor_role": "intent_owner",
       "authority_scope": {
         "actor_role": "intent_owner",
-        "blocked_action": "c4-package-sha256:be4f2eb22556c0a6aa342871108415c49f4ddea15305bc6989205fdaaddf0440",
+        "blocked_action": "c4-package-sha256:93605dfb440f5494269fc910e360459912adc3a9ea82d2bb6a49bc880928e8f5",
         "intent_ref": {
           "id": "reduce-latency",
           "kind": "operational_intent",
@@ -83,7 +83,7 @@
         },
         "transition_id": "c4_apply_change_package"
       },
-      "blocked_action": "c4-package-sha256:be4f2eb22556c0a6aa342871108415c49f4ddea15305bc6989205fdaaddf0440",
+      "blocked_action": "c4-package-sha256:93605dfb440f5494269fc910e360459912adc3a9ea82d2bb6a49bc880928e8f5",
       "decision": "approve",
       "document_schema": {
         "id": "https://agent-ops.ru/schemas/foundation_human_decision.schema.json",
@@ -133,13 +133,13 @@
         "document_schema": {
           "id": "https://agent-ops.ru/schemas/c4_execution_record.schema.json",
           "version": "1.0.0",
-          "sha256": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52",
+          "sha256": "cf481e5fefb7f7fbbdb9a5e98accddd48ba8ac4c537efa0cc8581b869804c5bd",
           "media_type": "application/schema+json"
         },
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "execution_id": "execution-1",
         "package_id": "latency-change-1",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "intent_id": "reduce-latency",
         "outcome_id": "latency-outcome-1",
         "target": {
@@ -158,7 +158,7 @@
           "guardian": "T4"
         },
         "decision_ref": "activate-latency",
-        "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+        "decision_sha256": "1884385a19075279f4c5f88d596da3312a8f612b6727922b0deba6acd07ea4c3",
         "human_start": {
           "id": "human-start-1",
           "principal_id": "operator",
@@ -187,7 +187,7 @@
           {
             "id": "effect-observation",
             "interface_id": "agent-ops.c4-evidence-interface@1.0.0",
-            "consumer_rule": "c4-effect-rule-1",
+            "consumer_rule": "c4-effect-rule@1.0.0",
             "applicable": true,
             "target": {
               "uid": "target-1",
@@ -222,13 +222,13 @@
         "document_schema": {
           "id": "https://agent-ops.ru/schemas/c4_execution_record.schema.json",
           "version": "1.0.0",
-          "sha256": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52",
+          "sha256": "cf481e5fefb7f7fbbdb9a5e98accddd48ba8ac4c537efa0cc8581b869804c5bd",
           "media_type": "application/schema+json"
         },
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "execution_id": "execution-2",
         "package_id": "latency-change-1",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "intent_id": "reduce-latency",
         "outcome_id": "latency-outcome-1",
         "target": {
@@ -247,7 +247,7 @@
           "guardian": "T4"
         },
         "decision_ref": "activate-latency",
-        "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+        "decision_sha256": "1884385a19075279f4c5f88d596da3312a8f612b6727922b0deba6acd07ea4c3",
         "human_start": {
           "id": "human-start-1",
           "principal_id": "operator",
@@ -278,7 +278,7 @@
           {
             "id": "effect-observation",
             "interface_id": "agent-ops.c4-evidence-interface@1.0.0",
-            "consumer_rule": "c4-effect-rule-1",
+            "consumer_rule": "c4-effect-rule@1.0.0",
             "applicable": true,
             "target": {
               "uid": "target-1",
@@ -321,9 +321,9 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "receipt_id": "receipt-1",
         "execution_id": "execution-1",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "decision_ref": "activate-latency",
-        "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+        "decision_sha256": "1884385a19075279f4c5f88d596da3312a8f612b6727922b0deba6acd07ea4c3",
         "human_start_id": "human-start-1",
         "target": {
           "uid": "target-1",
@@ -360,9 +360,9 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "receipt_id": "receipt-2",
         "execution_id": "execution-2",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "decision_ref": "activate-latency",
-        "decision_sha256": "a6255a485266158a797dbed7914a2eb9eee769ca2f8fbb6e97a909e780d37b24",
+        "decision_sha256": "1884385a19075279f4c5f88d596da3312a8f612b6727922b0deba6acd07ea4c3",
         "human_start_id": "human-start-1",
         "target": {
           "uid": "target-1",
@@ -503,7 +503,7 @@
         "previous_event_sha256": null,
         "occurred_at": "2026-08-04T10:00:00Z",
         "type": "package_created",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "details_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
       },
       {
@@ -517,10 +517,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-2",
         "sequence": 2,
-        "previous_event_sha256": "15c20fd7c3c86a2ea796cac3c56967daf6bb9c28d44781058b4e93ae317a83f9",
+        "previous_event_sha256": "17732c280d79c840995202379ae57d35c884daf89ec71fbd8720678bf36f8413",
         "occurred_at": "2026-08-04T10:01:00Z",
         "type": "approval_bound",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "details_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
       },
       {
@@ -534,10 +534,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-3",
         "sequence": 3,
-        "previous_event_sha256": "ae137e6be9d3af1699ea08304851515758c599a78de87111eff4790252e7783f",
+        "previous_event_sha256": "3a701657c2e4cb5d3be3818377af8dc8b33160ec16b6d2a8ae3ef2d3b644d61f",
         "occurred_at": "2026-08-04T10:05:00Z",
         "type": "human_started",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "details_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
       },
       {
@@ -551,10 +551,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-4",
         "sequence": 4,
-        "previous_event_sha256": "b304ec2212cb958e5f50b77103b43807bea5bf5cf32e591ff5418f5bbfaf6664",
+        "previous_event_sha256": "f75aee5e53a520efdecf48367d544c3f8b3dae0ac30d3a554b8e99c5b1915f3b",
         "occurred_at": "2026-08-04T10:06:00Z",
         "type": "reservation_acquired",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "fence": 1,
         "details_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
       },
@@ -569,10 +569,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-5",
         "sequence": 5,
-        "previous_event_sha256": "141014dc376ce5cda0b7a0913f008182a2fd2767908356fa5d4bc9496291101c",
+        "previous_event_sha256": "b87d01c31b0b05c5c90dbb8b125ecd5dd751ac7853ed52b93ccb4fba38f13a5c",
         "occurred_at": "2026-08-04T10:10:00Z",
         "type": "attempt_admitted",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "execution_id": "execution-1",
         "attempt_sequence": 1,
         "fence": 1,
@@ -589,10 +589,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-6",
         "sequence": 6,
-        "previous_event_sha256": "cb72e5b89700ce87dcb7192c2f2af18ce61b5fe41a4870b8c2da2e4b38060607",
+        "previous_event_sha256": "cb9990803847cfc67f75aecd2c4deb06a7c86585c846a8aab7b5a1aa8fab932e",
         "occurred_at": "2026-08-04T10:11:00Z",
         "type": "obligation_opened",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "execution_id": "execution-1",
         "obligation_id": "attempt-1-effect",
         "details_sha256": "6666666666666666666666666666666666666666666666666666666666666666"
@@ -608,10 +608,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-7",
         "sequence": 7,
-        "previous_event_sha256": "9d73684f16bb3f5a2aa941c651def1e07c48059bf2aba68eb43a336b020b239a",
+        "previous_event_sha256": "6937aea16785323af4a5a429d3275d53f18e554a8ec059bad785d2395b875d07",
         "occurred_at": "2026-08-04T10:19:00Z",
         "type": "obligation_resolved",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "execution_id": "execution-1",
         "obligation_id": "attempt-1-effect",
         "details_sha256": "7777777777777777777777777777777777777777777777777777777777777777"
@@ -627,10 +627,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-8",
         "sequence": 8,
-        "previous_event_sha256": "8efb3eb22ff24dd63d1bffe6b65d0e6cda2524a056496cc2d8c83af977d65cd2",
+        "previous_event_sha256": "e7749c350c5f1021393a831e2d58d192fcc65de60184235ea637ae040646b481",
         "occurred_at": "2026-08-04T10:20:00Z",
         "type": "attempt_admitted",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "execution_id": "execution-2",
         "attempt_sequence": 2,
         "fence": 1,
@@ -647,10 +647,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-9",
         "sequence": 9,
-        "previous_event_sha256": "248a45a003930ff01774ed488c3fd61022bda53d14dbbec512b0b1041aac9e9c",
+        "previous_event_sha256": "02472024e7303453e256cca85b898964174de2e7cdc95e89ce78580bcfac4020",
         "occurred_at": "2026-08-04T10:20:30Z",
         "type": "obligation_opened",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "execution_id": "execution-2",
         "obligation_id": "outcome-verification",
         "details_sha256": "9999999999999999999999999999999999999999999999999999999999999999"
@@ -666,10 +666,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-10",
         "sequence": 10,
-        "previous_event_sha256": "dd15e92c39781bb396b3fc33d01326a79ad550439f90984041874288310131a5",
+        "previous_event_sha256": "3540070db957a73674d2c7b2f8b9f3425936ac7448e84959b90b0de0a04216f7",
         "occurred_at": "2026-08-04T10:21:00Z",
         "type": "effect_observed",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "execution_id": "execution-2",
         "details_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
@@ -684,10 +684,10 @@
         "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
         "event_id": "event-11",
         "sequence": 11,
-        "previous_event_sha256": "e8f4c003bafb55a92e70f8b52ec96cc1f41bfadf3423e4c5c6442884e9fc00d0",
+        "previous_event_sha256": "ac2f4f8450876549d8c7373c54259e38fd8e4b072dd58b5834806afd2470870d",
         "occurred_at": "2026-08-04T10:25:00Z",
         "type": "outcome_classified",
-        "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+        "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
         "execution_id": "execution-2",
         "details_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
       }
@@ -702,9 +702,9 @@
       },
       "profile_id": "agent-ops.c4-human-approved-apply@1.0.0",
       "checkpoint_id": "checkpoint-1",
-      "package_sha256": "c156ad0b9e8ee4011d4494bfaba679100bf0219ee40cf4bcc95a42b2d30db743",
+      "package_sha256": "5ae1b8319f93696ed4149ed3d3cfb96c266675bba1e026e4410053747c6ae3a5",
       "log_tail_sequence": 11,
-      "log_tail_sha256": "f4a3ba37c22b8119bec25b1ec3752bf78dbc58747d56c47cca14538f5577216e",
+      "log_tail_sha256": "0441ba050699704fb04c53cdae1f820d162bc6a4b6f033d669121b0662acae24",
       "attempts_consumed": 2,
       "policy_epoch": 1,
       "approval_epoch": 1,

@@ -1,0 +1,109 @@
+{
+  "format": "agent-ops.integrated-conformance-traces@1.0.0",
+  "base_consumer_execution_id": "execution-2",
+  "base_c4_mutations": [
+    {"pointer": "/change_package/evidence_requirements/0/consumer_rule", "value": "c4-effect-rule@1.0.0"},
+    {"pointer": "/execution_records/0/evidence_facts/0/consumer_rule", "value": "c4-effect-rule@1.0.0"},
+    {"pointer": "/execution_records/1/evidence_facts/0/consumer_rule", "value": "c4-effect-rule@1.0.0"}
+  ],
+  "base_evidence_mutations": [
+    {"pointer": "/requirement/consumer_rule", "value": "c4-effect-rule@1.0.0"},
+    {"pointer": "/requirement/decision_time", "value": "2026-08-04T10:20:00Z"},
+    {"pointer": "/profile/valid_at", "value": "2026-08-04T10:00:00Z"},
+    {"pointer": "/receipts/0/started_at", "value": "2026-08-04T10:18:00Z"},
+    {"pointer": "/receipts/0/completed_at", "value": "2026-08-04T10:19:00Z"},
+    {"pointer": "/receipts/0/received_at", "value": "2026-08-04T10:19:01Z"},
+    {"pointer": "/assertions/0/checked_at", "value": "2026-08-04T10:20:00Z"},
+    {"pointer": "/assertions/0/decision_time", "value": "2026-08-04T10:20:00Z"},
+    {"pointer": "/bundle/consumer_rule", "value": "c4-effect-rule@1.0.0"},
+    {"pointer": "/bundle/sealed_at", "value": "2026-08-04T10:20:00Z"}
+  ],
+  "cases": [
+    {
+      "id": "executor-response-as-effect-proof",
+      "positive_id": "independent-observer-effect-proof",
+      "consumer_execution_id": "execution-2",
+      "c4_mutations": [],
+      "evidence_mutations": [
+        {"pointer": "/receipts/0/artifact/producer_kind", "value": "executor_response"}
+      ],
+      "code": "executor_response_effect_claim",
+      "relation": "CEI-R06"
+    },
+    {
+      "id": "not-applied-under-partial-coverage",
+      "positive_id": "not-applied-under-complete-coverage",
+      "consumer_execution_id": "execution-2",
+      "c4_mutations": [
+        {"pointer": "/execution_records/1/effect/state", "value": "not_applied"},
+        {"pointer": "/execution_records/1/evidence_facts/0/coverage", "value": "partial"},
+        {"pointer": "/outcome/effect_state", "value": "not_applied"}
+      ],
+      "evidence_mutations": [
+        {"pointer": "/receipts/0/artifact/coverage", "value": "partial"},
+        {"pointer": "/assertions/0/negative", "value": true},
+        {"pointer": "/assertions/0/coverage", "value": "partial"}
+      ],
+      "code": "negative_effect_observation_incomplete",
+      "relation": "CEI-R03"
+    },
+    {
+      "id": "outcome-success-from-stale-insufficient-evidence",
+      "positive_id": "unknown-outcome-with-current-sufficient-evidence",
+      "consumer_execution_id": "execution-2",
+      "c4_mutations": [
+        {"pointer": "/outcome/state", "value": "succeeded"},
+        {"pointer": "/execution_records/1/evidence_facts/0/fresh_at_use", "value": false},
+        {"pointer": "/execution_records/1/evidence_facts/0/sufficiency", "value": "insufficient"}
+      ],
+      "evidence_mutations": [
+        {"pointer": "/assertions/0/fresh_at_use", "value": false},
+        {"pointer": "/assertions/0/sufficiency", "value": "insufficient"},
+        {"pointer": "/bundle/sufficiency", "value": "insufficient"}
+      ],
+      "code": "outcome_evidence_insufficient",
+      "relation": "CEI-R05"
+    },
+    {
+      "id": "retry-from-incomplete-negative-observation",
+      "positive_id": "reconciliation-retry-with-current-evidence",
+      "consumer_execution_id": "execution-1",
+      "setup_c4_mutations": [],
+      "setup_evidence_mutations": [
+        {"pointer": "/requirement/decision_time", "value": "2026-08-04T10:10:00Z"},
+        {"pointer": "/assertions/0/checked_at", "value": "2026-08-04T10:10:00Z"},
+        {"pointer": "/assertions/0/decision_time", "value": "2026-08-04T10:10:00Z"},
+        {"pointer": "/bundle/sealed_at", "value": "2026-08-04T10:10:00Z"}
+      ],
+      "c4_mutations": [
+        {"pointer": "/execution_records/0/effect/state", "value": "not_applied"},
+        {"pointer": "/execution_records/0/evidence_facts/0/coverage", "value": "partial"},
+        {"pointer": "/execution_records/1/attempt/retry_basis", "value": "complete_not_applied"}
+      ],
+      "evidence_mutations": [
+        {"pointer": "/assertions/0/negative", "value": true},
+        {"pointer": "/assertions/0/coverage", "value": "partial"},
+        {"pointer": "/receipts/0/artifact/coverage", "value": "partial"}
+      ],
+      "code": "retry_evidence_insufficient",
+      "relation": "C4-R08"
+    },
+    {
+      "id": "checkpoint-and-supersession-hide-history",
+      "positive_id": "checkpoint-and-bundle-preserve-history",
+      "consumer_execution_id": "execution-2",
+      "c4_mutations": [
+        {"pointer": "/checkpoint/open_obligation_ids", "value": []}
+      ],
+      "evidence_mutations": [
+        {"pointer": "/receipts/0/transport", "value": "timeout"},
+        {"pointer": "/receipts/0/collection", "value": "unavailable"},
+        {"pointer": "/receipts/0/error_code", "value": "timeout"},
+        {"pointer": "/bundle/supersedes_id", "value": "bundle-1"},
+        {"pointer": "/bundle/unresolved_states", "value": []}
+      ],
+      "code": "cross_boundary_history_incomplete",
+      "relation": "C4-R12"
+    }
+  ]
+}

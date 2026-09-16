@@ -41,6 +41,15 @@ acquisition lineage, freshness, independence, completion, sealing,
 invalidation, or consumer sufficiency requires the applicable new major
 version and an accepted owner proposal.
 
+The composed offline profile begins as
+`agent-ops.c4-evidence-integrated@1.0.0`, its validator catalog as
+`agent-ops.integrated-conformance@1.0.0`, and its frozen measurement contract as
+`agent-ops.c4-evidence-evaluation@1.0.0`. The integrated catalog pins the exact
+C4 validator, Evidence validator, and interface versions; it cannot redefine
+their relations or reason codes. An incompatible change to a required interface
+projection, consuming-decision rule, denominator, blocking metric, or claim
+limit requires the applicable new major version and an accepted owner proposal.
+
 Release input is stable SemVer `vMAJOR.MINOR.PATCH`, with no leading zeroes,
 prerelease or build suffix. This module admits major 0 or 1. Major 2 requires a
 separately reviewed module-path migration. Changes to normative text, schema

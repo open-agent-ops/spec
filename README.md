@@ -17,7 +17,7 @@ Go toolchain and dependencies. The conformance suite runs offline.
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The v0.5.0 candidate uses source revision `aom-04-r5` and supersedes the
+The v0.5.0 candidate uses source revision `aom-04-r6` and supersedes the
 v0.4.0 text candidate with independently versioned
 `agent-ops.c4-human-approved-apply@1.0.0` and
 `agent-ops.evidence-acquisition@1.0.0` profiles. Their separate executable
@@ -25,9 +25,13 @@ models compose through `agent-ops.c4-evidence-interface@1.0.0` and the
 independently versioned C4 and Evidence relation catalogs in
 [`formal/`](formal/README.md), while preserving separate authority and
 evidence-quality domains. Bounded implementation slices add six C4 schemas,
-five Evidence Acquisition schemas, `agent-ops.relation-validation@1.0.0`, and
-`agent-ops.evidence-relation-validation@1.0.0`; they validate exact cross-record
-bindings without claiming a complete lifecycle implementation. `review-summary.json`
+five Evidence Acquisition schemas, `agent-ops.relation-validation@1.0.0`,
+`agent-ops.evidence-relation-validation@1.0.0`, and the composed
+`agent-ops.integrated-conformance@1.0.0`; they validate exact cross-record and
+cross-profile bindings without claiming a complete lifecycle implementation.
+The frozen `agent-ops.c4-evidence-evaluation@1.0.0` protocol defines how a future
+separately authorized runtime evaluation must be measured but reports no such
+result. `review-summary.json`
 retains historical review evidence for r12; it does not approve this candidate.
 The two v0.4.0 PDFs retain predecessor bytes and do not render v0.5.0. Fresh
 exact-target owner and bilingual review and new PDF Build/Test remain pending.
@@ -87,7 +91,9 @@ traces whose individual records remain schema-valid, schema-negative fixtures,
 and independent mutation of the R/I/C/T axes. The Evidence slice checks
 twenty-three schema-valid negative traces, an explicit positive pair for each,
 five schema-negative traces, and separate syntax, relation, and consumer-
-sufficiency dispositions. Seven declared
+sufficiency dispositions. The integrated slice adds five schema-valid cross-
+boundary negative traces, each with an explicit positive pair, plus ordering,
+unknown-propagation, malformed-input, and protocol-pinning tests. Seven declared
 properties are verified across public and private release checks; private
 review-authentication and export checks are not part of this public module.
 Public schema checks do not authenticate provenance, grant authority or prove

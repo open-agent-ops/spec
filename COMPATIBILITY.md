@@ -56,3 +56,19 @@ bundle may retain the v1 bundle identity as external provenance, but no v1
 sufficiency. Failed attempts, exclusions, `partial`, `unknown`, and conflicts
 must be reconstructed explicitly; if they cannot be, migration remains
 insufficient rather than inventing the missing lineage.
+
+The integrated slice adds no replacement for either component profile. The
+`agent-ops.c4-evidence-integrated@1.0.0` profile composes the exact
+`agent-ops.relation-validation@1.0.0` and
+`agent-ops.evidence-relation-validation@1.0.0` results through
+`agent-ops.c4-evidence-interface@1.0.0`. Its consuming decision is `allowed`
+only when both component results and the interface projection pass; component
+failure cannot be hidden by an aggregate score.
+
+The C4 `consumer_rule` fields now use the same explicit versioned identifier
+syntax already required by Evidence Acquisition. This is a pre-release
+candidate correction of the previously non-composable field constraint; it
+changes the two C4 schema bytes and their pinned hashes without changing their
+resource IDs or record meaning. Producers of this candidate must regenerate
+records against the current pinned schema hashes rather than carrying forward
+the superseded candidate hashes.

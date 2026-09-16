@@ -93,7 +93,7 @@
           "applicable": {"type": "boolean"},
           "checked_at": {"format": "date-time", "type": "string"},
           "common_causes_disclosed": {"type": "boolean"},
-          "consumer_rule": {"$ref": "#/$defs/id"},
+          "consumer_rule": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*@[0-9]+\\.[0-9]+\\.[0-9]+$"},
           "coverage": {"enum": ["unknown", "partial", "complete"]},
           "detection_capable": {"type": "boolean"},
           "disposition": {"enum": ["unknown", "supported", "refuted", "does_not_test", "conflicted"]},

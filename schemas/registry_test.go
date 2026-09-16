@@ -13,7 +13,7 @@ func TestRegistryMembershipAndCopies(t *testing.T) {
 		t.Fatal(err)
 	}
 	entries := r.Entries()
-	if len(entries) != 61 || len(r.Digest()) != 64 {
+	if len(entries) != 67 || len(r.Digest()) != 64 {
 		t.Fatal("incomplete registry")
 	}
 	resources := make([]schemas.Resource, 0, len(entries))
@@ -27,7 +27,7 @@ func TestRegistryMembershipAndCopies(t *testing.T) {
 		}
 		resources = append(resources, schemas.Resource{Name: e.Name, Bytes: b})
 	}
-	if _, err := schemas.New(resources[:60]); err == nil {
+	if _, err := schemas.New(resources[:66]); err == nil {
 		t.Fatal("missing accepted")
 	}
 	if _, err := schemas.New(append(append([]schemas.Resource(nil), resources...), resources[0])); err == nil {

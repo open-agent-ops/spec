@@ -15,7 +15,7 @@ required relation needs a new profile major version and an accepted owner
 proposal. Compatible additions and clarifications use the applicable minor or
 patch version and still require the governed review for normative text.
 
-Stage 2 fixes independently versioned contracts
+The formal semantics fix independently versioned contracts
 `agent-ops.c4-relations@1.0.0`,
 `agent-ops.evidence-relations@1.0.0`, and
 `agent-ops.c4-evidence-interface@1.0.0`. Changing one does not silently change
@@ -24,6 +24,13 @@ relation, interface fact, authority, check time, or failure disposition needs a
 new applicable major version and an accepted owner proposal. A stronger bundle
 with incompatible acquisition or sufficiency semantics requires a new schema
 identity or major version and an explicit migration note.
+
+The bounded C4 implementation slice begins with six schema identities at
+revision `1.0.0` and the independently versioned validator catalog
+`agent-ops.relation-validation@1.0.0`. A change to required cross-record
+binding, authority, temporal, retry, budget, checkpoint, effect, Outcome, or
+completeness semantics requires the applicable new major version and an
+accepted owner proposal. Compatible additions still require governed review.
 
 Release input is stable SemVer `vMAJOR.MINOR.PATCH`, with no leading zeroes,
 prerelease or build suffix. This module admits major 0 or 1. Major 2 requires a

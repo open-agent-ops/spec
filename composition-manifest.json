@@ -209,35 +209,46 @@
     "schemas/run_request.schema.json",
     "schemas/terraform_inventory.schema.json",
     "scripts/check.sh",
-    "scripts/provision.sh"
+    "scripts/provision.sh",
+    "conformance/catalogs/relation-validation-v1.0.0.json",
+    "conformance/relation_catalog.go",
+    "conformance/relations.go",
+    "conformance/relations_test.go",
+    "conformance/relationtestdata/traces.json",
+    "schemas/c4_authority_receipt.schema.json",
+    "schemas/c4_change_package.schema.json",
+    "schemas/c4_checkpoint.schema.json",
+    "schemas/c4_execution_record.schema.json",
+    "schemas/c4_lifecycle_event.schema.json",
+    "schemas/c4_outcome.schema.json"
   ],
   "schema": "agent-ops.composition-manifest.v1",
   "files": [
     {
       "path": "CODEOWNERS",
       "kind": "regular",
-      "sha256": "3aace6e0cb433a7f9142c50b796fae5bfd6c6765cbc39d46d0bcc5d3b25e5092",
+      "sha256": "24cdc364411a6aec0fec174e32b5b418d12894e496db1dac7b9368b332b309c8",
       "class": "metadata",
       "license": "Apache-2.0"
     },
     {
       "path": "COMPATIBILITY.md",
       "kind": "regular",
-      "sha256": "ffd2e8f74793828e1c107bce76f72fbc57be446f6d6316c05df725dad92100f0",
+      "sha256": "b40511f3e9f902986220dc52b7b1f66f15df998406e621de9505e0b87d2f5fe5",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "CONTRIBUTING.md",
       "kind": "regular",
-      "sha256": "060febb3832c695f1b50eb63937285f92ceebfd7a0116db4882f56cba6dcd699",
+      "sha256": "51264fa9f7bb6423e6b29c71bddf1a8c28970b939961a025acefda15d9306be0",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "GOVERNANCE.md",
       "kind": "regular",
-      "sha256": "a2b9297530a56a321066600e2fb5a50c297f91e335fb0a53f1a638938179a0ba",
+      "sha256": "e072068586fdcbe45696552832abb0ecf8f4336cd108abe4c6fc764364889192",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -265,49 +276,49 @@
     {
       "path": "README.md",
       "kind": "regular",
-      "sha256": "173fffe4af036a87a40231d749e08447b1d4255a6543fecc8e2e159fd2302c5e",
+      "sha256": "8d360d0cee288506b8a8a3db4f6e79fcdb7978797998d4bb33b2e9fbefa31945",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "SECURITY.md",
       "kind": "regular",
-      "sha256": "e210a1624ea62b253680eaba9eb3f9f1f0484d0b0b9f0a377a7a7694784b6e34",
+      "sha256": "6e53593d0a523d42e86b05fcb43ecd1506811a1f0af649fc48587cd63fd02923",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "VERSIONING.md",
       "kind": "regular",
-      "sha256": "643af5c9e4eac613e5312c3bcf32035bfb389c0b38f9777d4dd282398e0fb138",
+      "sha256": "9e01853fe83a0e92a922276714543f98dda0c0da441f4ca937cdda0051ead30b",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "bilingual-pairs.json",
       "kind": "regular",
-      "sha256": "c1323ded7302d665ae840e64093b5025b3843a5e9963c30fa883a249d5e5a709",
+      "sha256": "2c7f5e818e4781901f15cdf346d915ada4dc0c0bfd72350699f053888f1c2076",
       "class": "metadata",
       "license": "Apache-2.0"
     },
     {
       "path": "composition-manifest.json",
       "kind": "regular",
-      "sha256": null,
+      "sha256": "41545aceaf9ef39b62ef436afdb5c985480ec12cf9d66bcd37d606b06fa718ac",
       "class": "metadata",
       "license": "Apache-2.0"
     },
     {
       "path": "conformance/assessment.go",
       "kind": "regular",
-      "sha256": "f1fd4bacc1e200b030df8e2b6063e5a4414bfb2b61295ae418170189aac54185",
+      "sha256": "c28b26a834c65a8b83d572d3e34349a42ee093e76102c7819aceafeb5fb36ef8",
       "class": "source",
       "license": "Apache-2.0"
     },
     {
       "path": "conformance/assessment_test.go",
       "kind": "regular",
-      "sha256": "e04c9661c17cfed1cf5accde3c423f61593240ef0655820a2de9ac346a940c48",
+      "sha256": "283b3d56ead06bf097e0b21b59751d2d5099629bd175e105cba1f47ef9c84e85",
       "class": "source",
       "license": "Apache-2.0"
     },
@@ -321,14 +332,14 @@
     {
       "path": "conformance/compiler.go",
       "kind": "regular",
-      "sha256": "5aea259b95746500f8e574d98cf74e4ee8a287be7b6bc85b08d1ab24b0f23a50",
+      "sha256": "ec8d5a7b70cc2b939e67422ef02fdced9c33037b8ce8845af1f5ecc0b03e3a7e",
       "class": "source",
       "license": "Apache-2.0"
     },
     {
       "path": "conformance/compiler_test.go",
       "kind": "regular",
-      "sha256": "5d274da9a6978ae0e80fb8ede8e46193d9f3dc0ad0317217c6e7bc243dea2587",
+      "sha256": "34a40c7ba3607d4f3481b5f03c25e780930240e738e9f4ec3f8fdb00b618cee6",
       "class": "source",
       "license": "Apache-2.0"
     },
@@ -587,7 +598,7 @@
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
       "kind": "regular",
-      "sha256": "755b0645171eb066489304496596b0b13795e7251a69e978aa9030938f5ce292",
+      "sha256": "a036e741c5515e5a935dabff6dfe43084c8de8c5e6e0815e4ea5ab86e3530344",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -601,7 +612,7 @@
     {
       "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
       "kind": "regular",
-      "sha256": "f6f8c24a8f0fe4f5565c22673e53db66c12a70aa0998c7dbdb49ece4fdadc25e",
+      "sha256": "28aaaa8731154994d691ebed0da3c6f6ce81c79a905c85a87afac82091423e19",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -615,14 +626,14 @@
     {
       "path": "docs/whitepaper/CHANGELOG-en.md",
       "kind": "regular",
-      "sha256": "12bfe74168a863cbaf98ac586a8093d95f11e6df712ec541953d32309a5cdfab",
+      "sha256": "78d6f1e7f4e54530f1aeef257496de987eead92817ddbfcc6700433e822acbed",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "kind": "regular",
-      "sha256": "87da9af3a5018899c23bc6a60490d2c32283bef1f50bfb6db8872fce01db314e",
+      "sha256": "d8e77b1ed00643ce4c8d1f56e6f0b58bffcaeb7e5f26a4b93bbb76eaa5669800",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -741,21 +752,21 @@
     {
       "path": "go.mod",
       "kind": "regular",
-      "sha256": "66284d82513aabda9fd656e4e92111d37b1a083a1bc60e00cf1a3c2fe66c605f",
+      "sha256": "a4ba831c754a935cb2561d213040902e04e5b873c79cf57450fb82f1fd5f75fc",
       "class": "metadata",
       "license": "Apache-2.0"
     },
     {
       "path": "go.sum",
       "kind": "regular",
-      "sha256": "68508c54fd238f8c7fb5e4e34a3aba9c61210151372f00ad22117ea0b450b01f",
+      "sha256": "4983308721ff8045ed40129709a6e9ee28d302d2e311bdc68eb72da6026a55b0",
       "class": "metadata",
       "license": "Apache-2.0"
     },
     {
       "path": "publication-manifest.json",
       "kind": "regular",
-      "sha256": "7b4ee9ecc1d800d32ee280220f1398caf576e1dbd29acb697e61143438ad9d78",
+      "sha256": "c7b183f70cf48d58148ec7cfe0294cd901458aa8f4d8b05d31979a1ca22e21ef",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -769,7 +780,7 @@
     {
       "path": "revision-manifest.json",
       "kind": "regular",
-      "sha256": "7292e342272f5a4447340c86de1cd9c28ff539e4e8b77c4b56b327d06df22ccb",
+      "sha256": "e35a062b843e148bfeacdbc660e7c8c77bef10f01f5c7a36526cd67d255bbb04",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -993,21 +1004,21 @@
     {
       "path": "schemas/foundation_semantic_object_v1_1.schema.json",
       "kind": "regular",
-      "sha256": "39ca7e5eac6160d2ffc724704379357c5a1b580a2d1fc6f06a898cc6a9b72941",
+      "sha256": "12d42fbe475912c1eb930fd7871f832c600bbeb92a4b59ada57aebceb56c5fbd",
       "class": "schema",
       "license": "Apache-2.0"
     },
     {
       "path": "schemas/foundation_semantic_object_v1_2.schema.json",
       "kind": "regular",
-      "sha256": "91f398fbe6aeac3423b13850723d759cae4fe8074fecfb1a8c1bae275a28d64b",
+      "sha256": "b95e0cacd65e3dde06d3750364d8ad3ac8457dc38c33dd1847192aa79c4f561e",
       "class": "schema",
       "license": "Apache-2.0"
     },
     {
       "path": "schemas/foundation_semantic_object_v1_3.schema.json",
       "kind": "regular",
-      "sha256": "732044b18cdd07febb59d997515b3e0b2312cc183e241d928d0727557034aedd",
+      "sha256": "8aecb0662670626fc01d9cd443dcc5fb6cc91c944ef4e76cb6afb86165889dd4",
       "class": "schema",
       "license": "Apache-2.0"
     },
@@ -1126,7 +1137,7 @@
     {
       "path": "schemas/inventory.go",
       "kind": "regular",
-      "sha256": "368a40ff6256f44024d1dc7d3fb436b28df26d542577df4721f6cf26ed38cda9",
+      "sha256": "11edc758c2ce75e22599ebd6b8c49a42811eb2b3e797d36bccbd5da8d8756f66",
       "class": "source",
       "license": "Apache-2.0"
     },
@@ -1196,7 +1207,7 @@
     {
       "path": "schemas/registry_test.go",
       "kind": "regular",
-      "sha256": "9ed0364e4a556b72bf24a2813190b42fc0ba62ac226fd54ad2cbc35129001f5a",
+      "sha256": "e02bc5cc7b0acad573509ae447f7c6cc38cd84c034439ccc3cad0100893d23ee",
       "class": "source",
       "license": "Apache-2.0"
     },
@@ -1232,6 +1243,83 @@
       "path": "schemas/terraform_inventory.schema.json",
       "kind": "regular",
       "sha256": "9d526c28fdff944b09c441e75181f892dfe1d04a2a25b8abbf74c97e5b2d0416",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/catalogs/relation-validation-v1.0.0.json",
+      "kind": "regular",
+      "sha256": "52a07c97a4428557b6f6091cf8d6096915fa2c388733dc61349b775cab0fcc11",
+      "class": "metadata",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/relation_catalog.go",
+      "kind": "regular",
+      "sha256": "4971b0dc5dcb32cf775c6ec8b1e1cdad7c8b72d28ab637b81454c9263aa7c27d",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/relations.go",
+      "kind": "regular",
+      "sha256": "6a69648b157ca69a14a1eb30ed1eef0b55564022d6a1d460bf46c0ec837a640d",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/relations_test.go",
+      "kind": "regular",
+      "sha256": "56c2fdda8df40de196b834ded1549b1fc3fe1974da3f6c8697b32acc71eead37",
+      "class": "source",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "conformance/relationtestdata/traces.json",
+      "kind": "regular",
+      "sha256": "b297c5092e2a2572b59216802d53e6f76b33dc64be08689614a6c3e4aecae3c4",
+      "class": "conformance-fixture",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/c4_authority_receipt.schema.json",
+      "kind": "regular",
+      "sha256": "e010b35da58cab7d992ebd9dac01c3e79465dc7a457ed2f37615537c586affe1",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/c4_change_package.schema.json",
+      "kind": "regular",
+      "sha256": "db93b003315f7a1a01e360fb720ad967435ec44280c66a90fdec1641c59828f7",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/c4_checkpoint.schema.json",
+      "kind": "regular",
+      "sha256": "5d03eb94ddd96fb6337b50350e2bae32d6d48b4925df6e32c6b74d8c9b8c63b1",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/c4_execution_record.schema.json",
+      "kind": "regular",
+      "sha256": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/c4_lifecycle_event.schema.json",
+      "kind": "regular",
+      "sha256": "0800e39644458427a38bdcc4a1799430a7486cb5614b78563972afd1e20b7e5f",
+      "class": "schema",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "schemas/c4_outcome.schema.json",
+      "kind": "regular",
+      "sha256": "e8ac821fa6be54fd5da226576f740b07e8b0ef752604344b9c79288b6fecb55c",
       "class": "schema",
       "license": "Apache-2.0"
     }

@@ -1,13 +1,14 @@
-# Stage 2 formal semantics
+# C4 and Evidence formal semantics
 
-This directory is the executable Stage 2 specification for
+This directory contains the executable formal specification for
 `agent-ops.c4-human-approved-apply@1.0.0` and
 `agent-ops.evidence-acquisition@1.0.0`. It contains two separate finite-state
 models connected only by `agent-ops.c4-evidence-interface@1.0.0`.
 
-The package is not a production gateway, collector, backend adapter, JSON
-Schema, or public relation validator. It does not change Evidence Bundle v1 and
-does not establish runtime conformance or production safety.
+The package is not a production gateway, collector, or backend adapter. The
+separate `conformance/` package and `schemas/` directory contain the bounded C4
+schema and relation-validation slice. Neither artifact set changes Evidence
+Bundle v1 or establishes full runtime conformance or production safety.
 
 ## Versioned contracts
 
@@ -60,7 +61,7 @@ go test -mod=readonly -run TestBoundedModels -v ./formal
 go test -mod=readonly -run TestRetainedCounterexamples -v ./formal
 ```
 
-On the Stage 2 candidate before publication, the default-assumption exploration
+On this candidate before publication, the default-assumption exploration
 visited 332 Evidence states over 2,325 accepted transitions and 1,233 C4 states
 over 6,014 accepted transitions, with no P1-P7, E1-E7, or C4-G03 violation.
 The retained corpus contains the required assumption-removal and cross-boundary
@@ -70,5 +71,6 @@ failure and an unresolved effect.
 
 These bounded results can falsify a universal claim when they find a trace.
 Their success does not prove an implementation, an unbounded environment, or a
-production system safe. Stage 3 schemas and relation validators remain a later
-owner-gated change.
+production system safe. The published C4 schemas and relation validators cover
+only the named offline cross-record slice; runtime gateway, effect observation,
+production evaluation, and complete lifecycle conformance remain outside it.

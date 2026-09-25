@@ -5,20 +5,20 @@
       "embedded_images": 8,
       "language": "en",
       "page_count": 65,
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf",
-      "sha256": "ec62299769c985b03146f8fcbba2b85bfb209c81ffc0cc25965e4abe1bb981ca",
-      "source_path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
-      "source_sha256": "2f0efd2d41ab0582fb853c131da8f4749a22bf904f931103b09d2b525e60eda8"
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.pdf",
+      "sha256": "c541a0f936f4a626c0f4bc02a5bd894fd121f0f6353fd156825077c82d4d283c",
+      "source_path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.md",
+      "source_sha256": "3092f45a4c6e19e4a3e0264f609a89241fa8fe0a37c9be93ca0d57fbc53e560c"
     },
     {
       "bookmarks": 112,
       "embedded_images": 8,
       "language": "ru",
-      "page_count": 78,
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf",
-      "sha256": "55f2ad763cd4a78f2da100d9500bdc4b946a2bf4c2a412b0f94460e67fa71403",
-      "source_path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
-      "source_sha256": "0089bc02a23ed3a976a6d6e79ceeb3ec08ea7c65577015dedc13acfafd765ff1"
+      "page_count": 80,
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.pdf",
+      "sha256": "90c07ea19a116eb1396dbddc3baff170c2f8d1f3efc242610554255cbd37bfc6",
+      "source_path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.md",
+      "source_sha256": "a54867f9bdbe68b6c76b5631bfa19af9eb6cd40168c8db3e1dd3b8449fde7712"
     }
   ],
   "build": {
@@ -36,7 +36,7 @@
   "claim_limit": "The generator is intentionally excluded from the public tree. This record proves byte-identical repeat builds and bounded inspection in the recorded local environment; it does not by itself provide an independently executable public build recipe or authorize release.",
   "inspection": {
     "blank_pages": 0,
-    "contact_sheet_pages_reviewed": 143,
+    "contact_sheet_pages_reviewed": 145,
     "out_of_media_box_text_blocks": 0,
     "pillow": "11.3.0",
     "pymupdf": "1.26.4",
@@ -44,17 +44,17 @@
     "render_scale": 2,
     "selected_full_resolution_pages_reviewed": [
       "en:1",
-      "en:45",
-      "en:56",
+      "en:38",
+      "en:41",
       "en:65",
       "ru:1",
-      "ru:45",
-      "ru:68",
-      "ru:78"
+      "ru:40",
+      "ru:46",
+      "ru:80"
     ],
     "visual_result": "pass"
   },
   "schema": "agent-ops.pdf-build-test-evidence.v1",
-  "source_revision": "aom-04-r7",
-  "version": "v0.5.0"
+  "source_revision": "aom-04-r8",
+  "version": "v0.5.1"
 }

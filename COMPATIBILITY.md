@@ -79,3 +79,10 @@ changes no normative profile, schema, relation catalog, semantic interface,
 fixture, Go-module, or release-tag identity. The migration path therefore
 remains the v1-to-v2 Evidence Bundle procedure above; no additional record or
 runtime migration is introduced by this publication-only revision.
+
+Source revision `aom-04-r8` publishes White Paper v0.5.1, which supersedes
+released v0.5.0. It adds `target` text requirements for agent identity, the
+session baseline and governed session stop, and a session-scoped reasoning
+runtime, plus optional policy-level aggregate bounds. It changes no profile,
+schema, relation catalog, semantic interface, fixture, Go-module, or
+release-tag identity; records valid under v0.5.0 need no migration.

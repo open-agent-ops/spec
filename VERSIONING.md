@@ -1,7 +1,7 @@
 # Versioning
 
 Document, schema, contract, Go module and release versions are separate dimensions.
-Text v0.5.0 does not imply a released module or change every schema revision.
+Text v0.5.1 does not imply a released module or change every schema revision.
 See [compatibility](COMPATIBILITY.md) for the current schema family versions.
 
 Profile identifiers are independently versioned contracts of the form
@@ -61,7 +61,8 @@ or changing a version, source, asset, lock or policy invalidates approval. Tags
 and assets are immutable: a differing existing object is a conflict. Recovery
 uses a previous immutable release or a new reviewed fix, never a moved tag.
 
-The v0.5.0 release candidate is source revision `aom-04-r7`. That revision is a
-publication consolidation: it does not advance any profile, schema, catalog,
-interface, Go-module, or release-tag version. The candidate becomes a release
+Released v0.5.0 is source revision `aom-04-r7`. The v0.5.1 release candidate
+is source revision `aom-04-r8`; it advances only the white paper edition and
+adds `target` text requirements. It does not advance any profile, schema,
+catalog, interface, Go-module, or release-tag version. The candidate becomes a release
 only after exact-target review and release evidence satisfy the governed gates.

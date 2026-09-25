@@ -1,5 +1,7 @@
 # Agent-Ops. White Paper Edition History
 
+Agent Trust reconciliation (aom-04-r8): advance the white paper to edition v0.5.1 and reconcile it with Teleport's *From Zero Trust to Agent Trust* (2 July 2026) under the owner-accepted proposal in open-agent-ops/spec issue #26. All nine proposed edits are applied: related work citing NIST SP 800-207 directly (§3.3); an agent objective or behavioral drift threat with a session baseline and a governed session stop (§20.1) and a session-stop signal (§19.3); rejection of agent agreement and meta-agent assessment as independent verification (§19.1); policy-level aggregate bounds on an action class (§11.2); attestable subject identity bound to the grantor and harness version (§16.2); a session-scoped reasoning-component runtime (§20.3); two Appendix C sources; a derived Teleport-to-Agent-Ops standards-map section; and three glossary terms. The new requirements are `target`. The version label on the sixteen infographics changes from v0.4.0 to v0.5.1 without other changes to their content. Both new source URLs were confirmed reachable without authorization on 23 September 2026. Appendix G, `formal/`, and every profile, schema, catalog, interface, Go-module, and release-tag identity are unchanged. Exact-target owner and bilingual review, release and reproducibility evidence, and separate protected-environment authorization remain required.
+
 Release-candidate consolidation (aom-04-r7): align the English and Russian v0.5.0 sources, compatibility and versioning statements, public manifests, protected hashes, and release notes; replace the retained predecessor PDFs with deterministic PDFs that render this exact source revision; and publish bounded PDF Build/Test evidence. This revision changes no profile, schema, catalog, interface, Go-module, or release-tag identity. Exact-target owner and bilingual review, complete release and reproducibility evidence, and separate protected-environment authorization remain required before release.
 
 Integrated C4/Evidence conformance slice (aom-04-r6): publish `agent-ops.c4-evidence-integrated@1.0.0` with one composed validator that preserves separate syntax, C4-relation, Evidence-relation, Evidence-sufficiency, cross-boundary, and consuming-decision results. Add paired negative fixtures for effect proof, partial coverage, stale or insufficient Outcome evidence, retry from incomplete negative observation, and supersession or checkpoint masking. Freeze the pre-runtime evaluation and reproducibility protocol, including seed, barriers, exact version pins, denominators, metrics, required artifacts, blocking rule, and claim limits. Align the two C4 `consumer_rule` fields with the already-versioned Evidence contract. This remains an offline bounded conformance candidate, not runtime, pilot, or production evidence.
@@ -30,6 +32,7 @@ The white paper itself is normative. This file records what changed between edit
 
 | Edition | Summary |
 | --- | --- |
+| 0.5.1 | Agent identity bound to its grantor, session baseline and governed session stop, aggregate action-class bounds, session-scoped reasoning runtime, explicit rejection of agent agreement as independent verification, and a derived Teleport Agent Trust map. |
 | 0.5.0 | C4 and Evidence profile boundaries, bounded executable models, versioned relation catalogs and interface, retained counterexamples, bounded component validators, and integrated C4/Evidence conformance with a frozen evaluation protocol. |
 | 0.4.0 | Three-plane lifecycle structure plus scoped shadow promotion, Controlled Change attempt budgets and circuit breakers, agent-runtime observability, reproducible context assembly, and exact-integration admission. |
 | 0.3.3 | Closed bilingual normative set, explicit English precedence, paired methodology/maps/glossary/diagrams, deterministic PDF toolchain contract, and external semantic-review gate. |
@@ -38,6 +41,16 @@ The white paper itself is normative. This file records what changed between edit
 | 0.3.0 | Operational Intent and Outcome Contract, Unified Evidence Bundle, separated R/C/I/S/M taxonomies, Validation Spine, Policy Hooks, and Agent Context Lifecycle. |
 
 The English edition moved directly from 0.3.0 to 0.3.2 and carries the 0.3.1 changes listed below.
+
+## Edition 0.5.1 | September 2026
+
+- Supersedes edition v0.5.0 without changing its profiles, schemas, relation catalogs, semantic interface, formal models, or Appendix G.
+- Relates Agent-Ops to NIST SP 800-207 and to Teleport's agent-trust extension, distinguishing a trusted runtime that bounds reach from the C4 profile that bounds executable actions, without a superiority claim.
+- Adds agent objective or behavioral drift to the §20.1 threat table: a session baseline of Intent, harness, role-permission, and `ContextAssemblyProfile` digests; a governed session stop that preserves checkpoint and context and blocks, without revoking, issued `HumanDecision` records; and a §19.3 signal for session stops by cause class.
+- States that agreement among agents or a meta-agent assessment remains derived evidence and is not independent verification.
+- Permits policy-level aggregate bounds on an action class within a target domain, irrespective of case and subject count, without changing the C4 relations or the `GovernanceResult` classifier.
+- Recommends an attestable identity for every lifecycle-record-producing subject, including an agent instance, bound to its grantor and harness version, and a session-scoped runtime for the reasoning component; the authority-grant schema remains a target state.
+- Adds NIST SP 800-207 and the Teleport paper to Appendix C, a derived Teleport Agent Trust section to the standards map, and the session baseline, objective drift, and aggregate bound glossary terms.
 
 ## Edition 0.5.0 | September 2026
 

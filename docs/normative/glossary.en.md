@@ -1,7 +1,7 @@
 # Agent-Ops Glossary
-## Controlled vocabulary v0.5.0
+## Controlled vocabulary v0.5.1
 
-**Source revision aom-04-r2 | English precedence**
+**Source revision aom-04-r8 | English precedence**
 
 > Literal identifiers and schema values stay unchanged across languages; explanations may be localized.
 
@@ -64,6 +64,9 @@
 | Manifest stripping | Loss of declared constraints when an artifact is ported between runtimes. |
 | mutation conflict domain | A policy-defined set of overlapping target-mutation scopes whose attempts are mutually serialized until Verification or terminal release. |
 | constructed-state evaluation | An evaluation that starts from an exact validated prior state, appends one stimulus, and grades the resulting artifacts and decision; it does not prove the transitions that created the prior state. |
+| session baseline | The digests of the Intent, the project harness, the role permissions, and the `ContextAssemblyProfile`, recorded in the process trace at session start. |
+| objective drift (misalignment) | A divergence of an agent's actual behavior or context from its session baseline, irrespective of cause. |
+| aggregate bound | A policy limit on an action class within a target domain that applies to all cases and subjects together. |
 
 ## 2. Result terms
 

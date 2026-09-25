@@ -4,62 +4,62 @@
       "language": "en",
       "pair_id": "glossary",
       "path": "docs/normative/glossary.en.md",
-      "sha256": "87f8cb94dcf1ec61d28ad746031e8afe12832054df8b640ae53251ecebd6d99f",
+      "sha256": "241f1c7356b256f9535d83ff36e6dbc39fa6bbc9365047310a7fd305905e238a",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "glossary",
       "path": "docs/normative/glossary.ru.md",
-      "sha256": "ef2e6d1b89a4c5921074f5d5f9f98a7d3908aa44a51c71e1527beeb1bcdfe004",
+      "sha256": "b83ed99fb227bb9b39770acda9ec9c701b00e466d7dcba7bac0a16e82848f67a",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "standards-map",
       "path": "docs/normative/standards-map.en.md",
-      "sha256": "1bcb87161dfeb9e0f4c3ec80720001bf6774ef301f012e66405463b842e16030",
+      "sha256": "c6e66d5d8a1b1d19bea6d0933870ff27b42b38f564820127b1c52268d1cd7169",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "standards-map",
       "path": "docs/normative/standards-map.ru.md",
-      "sha256": "57d78945bb473908ef5e2d74d15b303272861d2f4c97eb6f4e60346de6eace18",
+      "sha256": "7b707e0c382e79dc661577be6079b8783c71418507ddd8c1cfaab2d2eeb9d768",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "whitepaper",
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md",
-      "sha256": "2f0efd2d41ab0582fb853c131da8f4749a22bf904f931103b09d2b525e60eda8",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.md",
+      "sha256": "3092f45a4c6e19e4a3e0264f609a89241fa8fe0a37c9be93ca0d57fbc53e560c",
       "status": "candidate"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper",
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md",
-      "sha256": "0089bc02a23ed3a976a6d6e79ceeb3ec08ea7c65577015dedc13acfafd765ff1",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.md",
+      "sha256": "a54867f9bdbe68b6c76b5631bfa19af9eb6cd40168c8db3e1dd3b8449fde7712",
       "status": "candidate"
     },
     {
       "language": "en",
       "pair_id": "whitepaper-pdf",
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf",
-      "sha256": "ec62299769c985b03146f8fcbba2b85bfb209c81ffc0cc25965e4abe1bb981ca",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.pdf",
+      "sha256": "c541a0f936f4a626c0f4bc02a5bd894fd121f0f6353fd156825077c82d4d283c",
       "status": "candidate_build_test_passed"
     },
     {
       "language": "ru",
       "pair_id": "whitepaper-pdf",
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf",
-      "sha256": "55f2ad763cd4a78f2da100d9500bdc4b946a2bf4c2a412b0f94460e67fa71403",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.pdf",
+      "sha256": "90c07ea19a116eb1396dbddc3baff170c2f8d1f3efc242610554255cbd37bfc6",
       "status": "candidate_build_test_passed"
     }
   ],
   "english_precedence": true,
   "release_status": "release_candidate_pending_exact_target_owner_bilingual_review_release_reproducibility_evidence_and_authorization",
   "schema": "agent-ops.publication-manifest.v1",
-  "source_revision": "aom-04-r7",
-  "version": "v0.5.0"
+  "source_revision": "aom-04-r8",
+  "version": "v0.5.1"
 }

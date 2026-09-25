@@ -1,6 +1,6 @@
 # Agent-Ops Specification
 
-Vendor-neutral public foundation candidate for Agent-Ops v0.5.0. The public
+Vendor-neutral public foundation candidate for Agent-Ops v0.5.1. The public
 identity is `agent-ops.ru`; `open-agent-ops` is the distribution repository
 name. Repository presence does not mean that a candidate has been released.
 
@@ -10,21 +10,23 @@ See `COMPATIBILITY.md` for the public namespace and live schema revisions.
 From this module directory, run `go test ./...` after provisioning the pinned
 Go toolchain and dependencies. The conformance suite runs offline.
 
-[English white paper](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.md) ·
-[Русский white paper](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.md)
+[English white paper](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.md) ·
+[Русский white paper](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.md)
 
-[English PDF](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.0.pdf) ·
-[Русский PDF](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.0.pdf) ·
-[release notes](docs/whitepaper/RELEASE-NOTES-v0.5.0.en.md) ·
-[примечания к выпуску](docs/whitepaper/RELEASE-NOTES-v0.5.0.ru.md) ·
-[PDF Build/Test evidence](docs/whitepaper/PDF-BUILD-TEST-v0.5.0.json)
+[English PDF](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.pdf) ·
+[Русский PDF](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.pdf) ·
+[release notes](docs/whitepaper/RELEASE-NOTES-v0.5.1.en.md) ·
+[примечания к выпуску](docs/whitepaper/RELEASE-NOTES-v0.5.1.ru.md) ·
+[PDF Build/Test evidence](docs/whitepaper/PDF-BUILD-TEST-v0.5.1.json)
 
 ## Normative publication set
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The v0.5.0 release candidate uses source revision `aom-04-r7` and supersedes the
-v0.4.0 text candidate with independently versioned
+The v0.5.1 release candidate uses source revision `aom-04-r8` and supersedes
+released edition v0.5.0 by adding `target` agent-identity, session-drift,
+aggregate-bound, and reasoning-runtime requirements. Like v0.5.0, which
+superseded the v0.4.0 text candidate, it carries the independently versioned
 `agent-ops.c4-human-approved-apply@1.0.0` and
 `agent-ops.evidence-acquisition@1.0.0` profiles. Their separate executable
 models compose through `agent-ops.c4-evidence-interface@1.0.0` and the
@@ -39,7 +41,7 @@ The frozen `agent-ops.c4-evidence-evaluation@1.0.0` protocol defines how a futur
 separately authorized runtime evaluation must be measured but reports no such
 result. `review-summary.json`
 retains historical review evidence for r12; it does not approve this candidate.
-The two v0.5.0 PDFs render source revision `aom-04-r7`; their deterministic
+The two v0.5.1 PDFs render source revision `aom-04-r8`; their deterministic
 build and inspection record is published with the candidate. Fresh exact-target
 owner and bilingual review remain pending, as does a separately authorized
 release from an exact clean main SHA.
@@ -55,7 +57,7 @@ outside this publication set.
 - Russian: [карта стандартов](docs/normative/standards-map.ru.md), [глоссарий](docs/normative/glossary.ru.md).
 
 Structural parity is machine-verifiable but is not semantic approval. The
-v0.5.0 release candidate remains pending until its complete conformance,
+v0.5.1 release candidate remains pending until its complete conformance,
 composition and supply-chain evidence and independent reviews are bound to its
 exact target.
 

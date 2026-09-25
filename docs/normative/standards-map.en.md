@@ -1,7 +1,7 @@
 # Agent-Ops Standards Map
-## Informative alignment v0.5.0
+## Informative alignment v0.5.1
 
-**Source revision aom-04-r2 | English precedence**
+**Source revision aom-04-r8 | English precedence**
 
 > This document is an informative map; the named external sources remain authoritative for their own requirements.
 
@@ -54,20 +54,39 @@ The following systems and publications informed comparative architecture and thr
 - Ganesh Gurudu, "Building an AI Agent That Runs Your SRE Operations - What I Learned, What Works, and How You Can Do It Too," 8 April 2026: <https://blog.stackademic.com/building-an-ai-agent-that-runs-your-sre-operations-what-i-learned-what-works-and-how-you-can-do-8a3801124bdc>. The article is an informative implementation-experience source; Agent-Ops does not adopt its product stack, risk scale, deployment topology, or accuracy claims.
 - Ali Shazal and Matthew Koen, Anthropic, "A guide to the anatomy of effective commerce agents," 2 September 2026: <https://claude.com/blog/the-anatomy-of-effective-commerce-agents>. The article is an informative source outside the operations domain; Agent-Ops does not adopt its commerce architecture, model selection, latency techniques, or deployment stack.
 
-## 6. Caveats
+## 6. Teleport Agent Trust to Agent-Ops
+
+This section maps the requirements of Alexander Klizhentas and Diana Jovin, Teleport, *From Zero Trust to Agent Trust*, 2 July 2026 (<https://goteleport.com/resources/white-papers/zero-trust-to-agent-trust/>), to Agent-Ops sections. The mapping is derived: Git in Sky produced it, and Teleport has neither produced nor confirmed it. It creates no dependency on Teleport products, and "Agent Trust" is not an Agent-Ops term. **Covered** means the Agent-Ops text addresses the requirement; **covered (target)** means a `target` requirement addresses it without an implementation slice; **partial** names the remaining gap; **not adopted** means Agent-Ops rejects the requirement as stated.
+
+| Teleport principle | Teleport requirement | Agent-Ops section | Coverage |
+| --- | --- | --- | --- |
+| Enforce Continuously | Cryptographic identity attestable to a human or platform grantor | 16.2 subject identity; 17 `principal_ref` and `issuer_attestation_ref`; 18.1 `actor_id`; Appendix G.3 C4-A08 | Covered (target): SHOULD for agent instances |
+| Enforce Continuously | Delegated identity | 16.2 permissions not exceeding the grantor's; 17 contract status | Partial: no normative authority-grant schema |
+| Enforce Continuously | Zero standing privileges with just-in-time authorization | 16.2; 20.1 unauthorized mutation or credential use; Appendix G.3 C4-A09 | Covered |
+| Enforce Continuously | Trusted ephemeral runtime | 20.3 context lifecycle and session-scoped reasoning runtime | Covered (target) |
+| Enforce Continuously | Runtime audit | 14.1 mandatory process trace; 19.3; Appendix G.3 C4-A06 | Covered |
+| Bound Collective Autonomy | Decision boundaries | 17.1 Decision Map; 18 Governance Mesh and Policy Hook; Appendix G | Covered |
+| Bound Collective Autonomy | Multi-agent consensus | 19.1 | Not adopted: agreement among agents or a meta-agent assessment remains derived evidence and is not independent verification |
+| Bound Collective Autonomy | Multi-agent constraints | 11.2 mutation conflict domain and aggregate bounds | Covered (target): aggregate bounds are a policy option (MAY) |
+| Assume Misalignment | Attestation of agent objective with behavioral baseline | 6 Intent; 20.1 session baseline | Covered (target) |
+| Assume Misalignment | Runtime behavioral monitoring | 19.3 runtime signals and session stops by cause class | Partial: no behavioral detector is specified |
+| Assume Misalignment | Adversarial drift detection | 16.5 inventory; 20.1 injection, supply-chain poisoning, and objective drift | Partial: structural controls, not behavioral detection |
+| Assume Misalignment | Incident response when behavioral misalignment is detected | 11.2 circuit breaker; 20.1 governed session stop | Covered (target) |
+
+## 7. Caveats
 
 - OWASP AIVSS (AI Vulnerability Scoring System, <https://aivss.owasp.org/>) is not applied in Agent-Ops: version 1.0 is unreleased as of this edition, and the OWASP Agentic Skills Top 10 itself refrains from assigning severity ratings until it ships.
 - The incident observations, campaigns, and scanner-bypass results underpinning the OWASP Agentic Skills Top 10 are not reproduced here and have not been independently verified. Primary-source references are given in the OWASP AST itself and in the separate applicability analysis published alongside this methodology.
 - Conformance with an external risk catalog means the methodology addresses the named risk, not that the risk is eliminated in a given deployment. Elimination is proven by run evidence, not by text.
 
-## 7. Evidence use
+## 8. Evidence use
 
 An implementation SHOULD record the exact external edition, applicable clause, local control, and evidence identity. A generic standards badge is insufficient.
 
-## 8. Change control
+## 9. Change control
 
 External sources MAY change independently. A mapping update creates a new source revision and does not rewrite prior evidence.
 
-## 9. Legal boundary
+## 10. Legal boundary
 
 The accountable organization MUST determine legal applicability and retain its decision. Agent-Ops supplies lifecycle evidence, not legal authority.

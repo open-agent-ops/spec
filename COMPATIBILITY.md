@@ -86,3 +86,13 @@ session baseline and governed session stop, and a session-scoped reasoning
 runtime, plus optional policy-level aggregate bounds. It changes no profile,
 schema, relation catalog, semantic interface, fixture, Go-module, or
 release-tag identity; records valid under v0.5.0 need no migration.
+
+Source revision `aom-04-r9` publishes the White Paper v0.5.2 candidate, which
+supersedes edition v0.5.1. Its case-boundary and adoption clarifications and
+informative examples preserve the existing human approval and separate human
+start, deterministic Executor, independent assurance, unknown-effect handling,
+attempt budgets, and completion-evidence requirements. Profiles, schemas,
+relation catalogs, interface, formal models, fixtures, and Go-module identities
+are unchanged; records valid under v0.5.1 need no migration. The informative
+Cost-to-Outcome Ratio (CTOR) explanation does not change its denominator or
+exclude failed and unknown cases from declared costs.

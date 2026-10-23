@@ -188,7 +188,7 @@ func NeedsSuccess(data []byte, full bool) error {
 func CheckName(job string) string { return fmt.Sprintf("AOM / %s", job) }
 
 func workflowPins(lock ToolLock) (map[string]string, error) {
-	if lock.Schema != "aom04a.toolchain-lock.v1" || lock.GoVersion != "1.26.8" || lock.GoMinimum != "1.25.13" || lock.Execution != "github-hosted-native" {
+	if lock.Schema != "aom04a.toolchain-lock.v1" || lock.GoVersion != "1.26.10" || lock.GoMinimum != "1.25.13" || lock.Execution != "github-hosted-native" {
 		return nil, Invalidf("toolchain lock header (schema %q, go %q/%q, execution %q)", lock.Schema, lock.GoVersion, lock.GoMinimum, lock.Execution)
 	}
 	pins := map[string]string{}

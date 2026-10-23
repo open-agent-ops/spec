@@ -66,3 +66,9 @@ is source revision `aom-04-r8`; it advances only the white paper edition and
 adds `target` text requirements. It does not advance any profile, schema,
 catalog, interface, Go-module, or release-tag version. The candidate becomes a release
 only after exact-target review and release evidence satisfy the governed gates.
+
+The v0.5.2 white paper candidate is source revision `aom-04-r9`. It clarifies
+case boundaries, completion, organizational responsibility, and adoption, and
+adds informative small-team, lost-response continuation, and full-adoption-cost
+examples. It changes no profile, schema, catalog, interface, Go-module, or
+release-tag version and introduces no new execution authority.

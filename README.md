@@ -1,6 +1,6 @@
 # Agent-Ops Specification
 
-Vendor-neutral public foundation candidate for Agent-Ops v0.5.1. The public
+Vendor-neutral public foundation candidate for Agent-Ops v0.5.2. The public
 identity is `agent-ops.ru`; `open-agent-ops` is the distribution repository
 name. Repository presence does not mean that a candidate has been released.
 
@@ -10,23 +10,25 @@ See `COMPATIBILITY.md` for the public namespace and live schema revisions.
 From this module directory, run `go test ./...` after provisioning the pinned
 Go toolchain and dependencies. The conformance suite runs offline.
 
-[English white paper](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.md) ·
-[Русский white paper](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.md)
+[English white paper](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.2.md) ·
+[Русский white paper](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.2.md)
 
-[English PDF](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.pdf) ·
-[Русский PDF](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.pdf) ·
-[release notes](docs/whitepaper/RELEASE-NOTES-v0.5.1.en.md) ·
-[примечания к выпуску](docs/whitepaper/RELEASE-NOTES-v0.5.1.ru.md) ·
-[PDF Build/Test evidence](docs/whitepaper/PDF-BUILD-TEST-v0.5.1.json)
+[English PDF](docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.2.pdf) ·
+[Русский PDF](docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.2.pdf) ·
+[release notes](docs/whitepaper/RELEASE-NOTES-v0.5.2.en.md) ·
+[примечания к выпуску](docs/whitepaper/RELEASE-NOTES-v0.5.2.ru.md) ·
+[PDF Build/Test evidence](docs/whitepaper/PDF-BUILD-TEST-v0.5.2.json)
 
 ## Normative publication set
 
 The closed bilingual catalog is `bilingual-pairs.json`. It pairs the white
 paper, standards map, and glossary.
-The v0.5.1 release candidate uses source revision `aom-04-r8` and supersedes
-released edition v0.5.0 by adding `target` agent-identity, session-drift,
-aggregate-bound, and reasoning-runtime requirements. Like v0.5.0, which
-superseded the v0.4.0 text candidate, it carries the independently versioned
+The v0.5.2 release candidate uses source revision `aom-04-r9` and supersedes
+white paper edition v0.5.1. It clarifies case boundaries and completion,
+organizational responsibilities, and adoption without mandatory autonomy growth,
+and adds informative small-team, lost-response continuation, and full-adoption-
+cost explanations. It preserves the v0.5.1 `target` agent-identity, session-drift,
+aggregate-bound, and reasoning-runtime requirements. It carries the independently versioned
 `agent-ops.c4-human-approved-apply@1.0.0` and
 `agent-ops.evidence-acquisition@1.0.0` profiles. Their separate executable
 models compose through `agent-ops.c4-evidence-interface@1.0.0` and the
@@ -41,7 +43,7 @@ The frozen `agent-ops.c4-evidence-evaluation@1.0.0` protocol defines how a futur
 separately authorized runtime evaluation must be measured but reports no such
 result. `review-summary.json`
 retains historical review evidence for r12; it does not approve this candidate.
-The two v0.5.1 PDFs render source revision `aom-04-r8`; their deterministic
+The two v0.5.2 PDFs render source revision `aom-04-r9`; their deterministic
 build and inspection record is published with the candidate. Fresh exact-target
 owner and bilingual review remain pending, as does a separately authorized
 release from an exact clean main SHA.
@@ -57,7 +59,7 @@ outside this publication set.
 - Russian: [карта стандартов](docs/normative/standards-map.ru.md), [глоссарий](docs/normative/glossary.ru.md).
 
 Structural parity is machine-verifiable but is not semantic approval. The
-v0.5.1 release candidate remains pending until its complete conformance,
+v0.5.2 release candidate remains pending until its complete conformance,
 composition and supply-chain evidence and independent reviews are bound to its
 exact target.
 
@@ -73,7 +75,7 @@ explicit artifact publication capability; it is inactive until host admission. S
 
 ## Offline conformance
 
-Use pinned Go 1.26.8 for public checks; Go 1.25.13 remains the compatibility
+Use pinned Go 1.26.10 for public checks; Go 1.25.13 remains the compatibility
 minimum. Provision the exact dependencies from `go.mod` and `go.sum`
 with the standard verified Go download mechanism before disconnecting.
 Then run `GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local go test ./...` with the

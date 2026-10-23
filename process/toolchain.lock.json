@@ -1,6 +1,6 @@
 {
   "schema": "aom04a.toolchain-lock.v1",
-  "go_version": "1.26.8",
+  "go_version": "1.26.10",
   "go_minimum": "1.25.13",
   "actions": [
     {
@@ -34,44 +34,44 @@
   ],
   "go_archives": [
     {
-      "filename": "go1.26.8.darwin-amd64.tar.gz",
+      "filename": "go1.26.10.darwin-amd64.tar.gz",
       "os": "darwin",
       "arch": "amd64",
-      "version": "go1.26.8",
-      "sha256": "186be014105aa6542b767d2c6ed5cca10a0214bdff809ef1724022a8c7894150",
-      "size": 67759394,
+      "version": "go1.26.10",
+      "sha256": "e820ab780c273ae4a340b79d0f3c4313b74ee029aa3874792145d44b9f4f91da",
+      "size": 67810289,
       "kind": "archive",
-      "url": "https://go.dev/dl/go1.26.8.darwin-amd64.tar.gz"
+      "url": "https://go.dev/dl/go1.26.10.darwin-amd64.tar.gz"
     },
     {
-      "filename": "go1.26.8.darwin-arm64.tar.gz",
+      "filename": "go1.26.10.darwin-arm64.tar.gz",
       "os": "darwin",
       "arch": "arm64",
-      "version": "go1.26.8",
-      "sha256": "a012b25b571bd0138a03dcd25375ceba866fe5ca822f426d2c66a4de56fd3f4b",
-      "size": 64626620,
+      "version": "go1.26.10",
+      "sha256": "0b5183492292ada170f9b561a834863808dd02edba599e4ad0e89899330020b3",
+      "size": 64669745,
       "kind": "archive",
-      "url": "https://go.dev/dl/go1.26.8.darwin-arm64.tar.gz"
+      "url": "https://go.dev/dl/go1.26.10.darwin-arm64.tar.gz"
     },
     {
-      "filename": "go1.26.8.linux-amd64.tar.gz",
+      "filename": "go1.26.10.linux-amd64.tar.gz",
       "os": "linux",
       "arch": "amd64",
-      "version": "go1.26.8",
-      "sha256": "d0f743b33e8d8945e6b1f432edd15785c70507121d6e2a723b21285eddf8b57b",
-      "size": 66897291,
+      "version": "go1.26.10",
+      "sha256": "ccfe7ae822d2c2f41f4fe7c956199967a4dac22d0ee0d2b2bfdb440aab3b20c5",
+      "size": 66936659,
       "kind": "archive",
-      "url": "https://go.dev/dl/go1.26.8.linux-amd64.tar.gz"
+      "url": "https://go.dev/dl/go1.26.10.linux-amd64.tar.gz"
     },
     {
-      "filename": "go1.26.8.linux-arm64.tar.gz",
+      "filename": "go1.26.10.linux-arm64.tar.gz",
       "os": "linux",
       "arch": "arm64",
-      "version": "go1.26.8",
-      "sha256": "211ffced9dcb9633a55eac6364816ec0ddd951389a740e88fa8b3337971bdda0",
-      "size": 63811405,
+      "version": "go1.26.10",
+      "sha256": "3f4227ce7b206a513e794f1393adb473a07b46e94d18bd15d1c684bbb7319797",
+      "size": 63827526,
       "kind": "archive",
-      "url": "https://go.dev/dl/go1.26.8.linux-arm64.tar.gz"
+      "url": "https://go.dev/dl/go1.26.10.linux-arm64.tar.gz"
     }
   ],
   "actionlint": {
@@ -105,7 +105,7 @@
       "version": "v1.7.12",
       "sum": "h1:vQ4GeJN86C0QH+gTUQcs8McmK62OLT3kmakPMtEWYnY=",
       "go_mod_sum": "h1:krOUhujIsJusovkaYzQ/VNH8PFexjNKqU0q5XI/4w+g=",
-      "build_go": "1.26.8",
+      "build_go": "1.26.10",
       "modules": [
         {
           "name": "github.com/bmatcuk/doublestar/v4",
@@ -312,7 +312,7 @@
       "version": "v1.3.0",
       "sum": "h1:hZYzR8uRhYhDSX88d+40TWbKAVw7BIvRWm26rtEn8jw=",
       "go_mod_sum": "h1:MIY2PaR1y52stzZM3uHBboUAdVJvSVMl5nP3OQrwQaE=",
-      "build_go": "1.26.8",
+      "build_go": "1.26.10",
       "modules": [
         {
           "name": "github.com/google/go-cmdtest",

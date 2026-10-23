@@ -1,5 +1,9 @@
 # Agent-Ops. White Paper Edition History
 
+The same v0.5.2 candidate updates the public verification compiler from Go 1.26.8 to 1.26.10 for upstream vulnerability findings GO-2026-6599 and GO-2026-6809, with verified official archive pins, matching compiler checks and factual EN/RU compiler references. Checking-tool versions, module compatibility minimum, formal bounds and public contract semantics are retained.
+
+Case and adoption clarification (aom-04-r9): advance the white paper to edition v0.5.2; align the executive summary with the existing case-completion rules; define a bounded operational case and its organizational interfaces; add an informative small-team example and lost-response continuation example; clarify that adoption does not require autonomy growth; and explain full adoption costs with Cost-to-Outcome Ratio (CTOR) expanded. These changes preserve existing authority, execution, independence, uncertainty, budget, and completion-evidence semantics. Profiles, schemas, relation catalogs, interface, formal models, and module versions are unchanged. The paired publication metadata and PDFs are advanced to this revision; figure edition labels are updated to v0.5.2. Fresh exact-target owner and bilingual review and release evidence remain required.
+
 Agent Trust reconciliation (aom-04-r8): advance the white paper to edition v0.5.1 and reconcile it with Teleport's *From Zero Trust to Agent Trust* (2 July 2026) under the owner-accepted proposal in open-agent-ops/spec issue #26. All nine proposed edits are applied: related work citing NIST SP 800-207 directly (§3.3); an agent objective or behavioral drift threat with a session baseline and a governed session stop (§20.1) and a session-stop signal (§19.3); rejection of agent agreement and meta-agent assessment as independent verification (§19.1); policy-level aggregate bounds on an action class (§11.2); attestable subject identity bound to the grantor and harness version (§16.2); a session-scoped reasoning-component runtime (§20.3); two Appendix C sources; a derived Teleport-to-Agent-Ops standards-map section; and three glossary terms. The new requirements are `target`. The version label on the sixteen infographics changes from v0.4.0 to v0.5.1 without other changes to their content. Both new source URLs were confirmed reachable without authorization on 23 September 2026. Appendix G, `formal/`, and every profile, schema, catalog, interface, Go-module, and release-tag identity are unchanged. Exact-target owner and bilingual review, release and reproducibility evidence, and separate protected-environment authorization remain required.
 
 Release-candidate consolidation (aom-04-r7): align the English and Russian v0.5.0 sources, compatibility and versioning statements, public manifests, protected hashes, and release notes; replace the retained predecessor PDFs with deterministic PDFs that render this exact source revision; and publish bounded PDF Build/Test evidence. This revision changes no profile, schema, catalog, interface, Go-module, or release-tag identity. Exact-target owner and bilingual review, complete release and reproducibility evidence, and separate protected-environment authorization remain required before release.
@@ -32,6 +36,7 @@ The white paper itself is normative. This file records what changed between edit
 
 | Edition | Summary |
 | --- | --- |
+| 0.5.2 | Case boundaries, completion and adoption clarifications; informative small-team, lost-response continuation, and full-adoption-cost explanations. |
 | 0.5.1 | Agent identity bound to its grantor, session baseline and governed session stop, aggregate action-class bounds, session-scoped reasoning runtime, explicit rejection of agent agreement as independent verification, and a derived Teleport Agent Trust map. |
 | 0.5.0 | C4 and Evidence profile boundaries, bounded executable models, versioned relation catalogs and interface, retained counterexamples, bounded component validators, and integrated C4/Evidence conformance with a frozen evaluation protocol. |
 | 0.4.0 | Three-plane lifecycle structure plus scoped shadow promotion, Controlled Change attempt budgets and circuit breakers, agent-runtime observability, reproducible context assembly, and exact-integration admission. |
@@ -41,6 +46,15 @@ The white paper itself is normative. This file records what changed between edit
 | 0.3.0 | Operational Intent and Outcome Contract, Unified Evidence Bundle, separated R/C/I/S/M taxonomies, Validation Spine, Policy Hooks, and Agent Context Lifecycle. |
 
 The English edition moved directly from 0.3.0 to 0.3.2 and carries the 0.3.1 changes listed below.
+
+## Edition 0.5.2 | October 2026
+
+- Clarifies the case boundary, owner-accepted completion without a target change, and organizational responsibility for priorities, risk, service ownership, and user communication.
+- Adds an informative small-team example that preserves required independent review and the limited non-production C4 boundary.
+- Explains the adoption roadmap without deferring case prerequisites or requiring autonomy growth; C5 remains future and disabled by default.
+- Adds informative human-led continuation after a lost response, preserving authority, logging, unknown effects, budgets, and verification.
+- Adds full-adoption-cost accounting and expands Cost-to-Outcome Ratio (CTOR), preserving its existing calculation and completion evidence.
+- Changes no schema, profile, catalog, interface, formal model, or module version; it adds no PSLC comparison or integration claim.
 
 ## Edition 0.5.1 | September 2026
 

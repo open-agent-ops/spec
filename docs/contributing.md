@@ -6,10 +6,10 @@
 2. A maintainer records triage, a reason and the next action. Normative or
    authority changes need an accepted owner proposal before implementation.
 3. Provision the exact tools with `sh scripts/provision.sh`. Public checks use
-   Go 1.26.8; Go 1.25.13 remains the module compatibility minimum. Provisioning
+   Go 1.26.10; Go 1.25.13 remains the module compatibility minimum. Provisioning
    needs network access to the verified official sources. It verifies pins and
    checksums and builds the selected actionlint/go vulnerability tools with
-   Go 1.26.8, outside the public payload.
+   Go 1.26.10, outside the public payload.
 4. Run `sh scripts/check.sh fast`; run `heavy`, `vulnerability` and `release`
    profiles before proposing a release. Heavy uses race detection and 1,000
    generated cases; fast uses 100. Replay seed is 30404 and failures retain the

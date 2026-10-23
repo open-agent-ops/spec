@@ -1,12 +1,12 @@
 #!/bin/sh
 set -eu
-AOM_TOOLS_DIR=${AOM_TOOLS_DIR:-${TMPDIR:-/tmp}/aom-spec-tools-1.26.8}
+AOM_TOOLS_DIR=${AOM_TOOLS_DIR:-${TMPDIR:-/tmp}/aom-spec-tools-1.26.10}
 export AOM_TOOLS_DIR
 case "$(uname -s)/$(uname -m)" in
-  Linux/x86_64) go_url='https://go.dev/dl/go1.26.8.linux-amd64.tar.gz'; go_sha='d0f743b33e8d8945e6b1f432edd15785c70507121d6e2a723b21285eddf8b57b' ;;
-  Linux/aarch64) go_url='https://go.dev/dl/go1.26.8.linux-arm64.tar.gz'; go_sha='211ffced9dcb9633a55eac6364816ec0ddd951389a740e88fa8b3337971bdda0' ;;
-  Darwin/x86_64) go_url='https://go.dev/dl/go1.26.8.darwin-amd64.tar.gz'; go_sha='186be014105aa6542b767d2c6ed5cca10a0214bdff809ef1724022a8c7894150' ;;
-  Darwin/arm64) go_url='https://go.dev/dl/go1.26.8.darwin-arm64.tar.gz'; go_sha='a012b25b571bd0138a03dcd25375ceba866fe5ca822f426d2c66a4de56fd3f4b' ;;
+  Linux/x86_64) go_url='https://go.dev/dl/go1.26.10.linux-amd64.tar.gz'; go_sha='ccfe7ae822d2c2f41f4fe7c956199967a4dac22d0ee0d2b2bfdb440aab3b20c5' ;;
+  Linux/aarch64) go_url='https://go.dev/dl/go1.26.10.linux-arm64.tar.gz'; go_sha='3f4227ce7b206a513e794f1393adb473a07b46e94d18bd15d1c684bbb7319797' ;;
+  Darwin/x86_64) go_url='https://go.dev/dl/go1.26.10.darwin-amd64.tar.gz'; go_sha='e820ab780c273ae4a340b79d0f3c4313b74ee029aa3874792145d44b9f4f91da' ;;
+  Darwin/arm64) go_url='https://go.dev/dl/go1.26.10.darwin-arm64.tar.gz'; go_sha='0b5183492292ada170f9b561a834863808dd02edba599e4ad0e89899330020b3' ;;
   *) printf '%s\n' 'unsupported public platform' >&2; exit 2 ;;
 esac
 mkdir -p "$AOM_TOOLS_DIR/bin"
@@ -25,7 +25,7 @@ PATH="$AOM_TOOLS_DIR/go/bin:$AOM_TOOLS_DIR/bin:$PATH"
 export PATH GOTOOLCHAIN=local GOWORK=off CGO_ENABLED=0
 GOROOT="$AOM_TOOLS_DIR/go"
 export GOROOT
-[ "$(go env GOVERSION)" = go1.26.8 ]
+[ "$(go env GOVERSION)" = go1.26.10 ]
 go mod download
 # Build the same pinned actionlint source with the supported compiler. The
 # upstream prebuilt archive embeds Go1.26.1 and is not an admitted executable.

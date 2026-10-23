@@ -1,5 +1,5 @@
 {
-  "maturity": "candidate-v0.5.1",
+  "maturity": "candidate-v0.5.2",
   "paths": [
     ".gitattributes",
     ".github/ISSUE_TEMPLATE/bug.yml",
@@ -85,15 +85,15 @@
     "docs/normative/standards-map.en.md",
     "docs/normative/standards-map.ru.md",
     "docs/releasing.md",
-    "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.pdf",
-    "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.md",
-    "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.pdf",
-    "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.md",
+    "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.2.pdf",
+    "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.2.md",
+    "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.2.pdf",
+    "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.2.md",
     "docs/whitepaper/CHANGELOG-en.md",
     "docs/whitepaper/CHANGELOG-ru.md",
-    "docs/whitepaper/PDF-BUILD-TEST-v0.5.1.json",
-    "docs/whitepaper/RELEASE-NOTES-v0.5.1.en.md",
-    "docs/whitepaper/RELEASE-NOTES-v0.5.1.ru.md",
+    "docs/whitepaper/PDF-BUILD-TEST-v0.5.2.json",
+    "docs/whitepaper/RELEASE-NOTES-v0.5.2.en.md",
+    "docs/whitepaper/RELEASE-NOTES-v0.5.2.ru.md",
     "docs/whitepaper/images/agent-ops-12-principles-en.png",
     "docs/whitepaper/images/agent-ops-12-principles-ru.png",
     "docs/whitepaper/images/agent-ops-8-steps-en.png",
@@ -263,7 +263,7 @@
     {
       "path": "COMPATIBILITY.md",
       "kind": "regular",
-      "sha256": "41639e319bd623ac319b0af07e007d793c6603b51b49559bd0655aa5efbb015a",
+      "sha256": "e041db9b8ff28a808d21691bd530d77c04f0781bf2a9929f0180722c7fb10198",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -305,7 +305,7 @@
     {
       "path": "README.md",
       "kind": "regular",
-      "sha256": "7b4234b63d404eafc42d564be57151992cf454137b2cf2f7cf9fee72022b0afe",
+      "sha256": "fb9b66d5e152cfed89a0cbec0cefaebd79876fbd5ec3df36f23a91db09511f8b",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -319,14 +319,14 @@
     {
       "path": "VERSIONING.md",
       "kind": "regular",
-      "sha256": "bc44c0037edab55bd7dec3626ae3f73c88bcfde6a4705331758c5ef0720e65f2",
+      "sha256": "984aa86b2aee689b31f16cc2527271d92e3e6ff5eaa6f9bb8ebd44a177aff3e7",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "bilingual-pairs.json",
       "kind": "regular",
-      "sha256": "fa13d682494c6a1db22cf84726e79991d9156977b15160f93c3896694fe0b7c2",
+      "sha256": "dab32ddcd066e94ed9fbbfbaaea88a6042d6f09999d4930442b90c3144f677f4",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -340,14 +340,14 @@
     {
       "path": "conformance/assessment.go",
       "kind": "regular",
-      "sha256": "c28b26a834c65a8b83d572d3e34349a42ee093e76102c7819aceafeb5fb36ef8",
+      "sha256": "e7e72859c1d793cf7718c5da197ebf73fb3503227ab0a398ef6b92926ead20a1",
       "class": "source",
       "license": "Apache-2.0"
     },
     {
       "path": "conformance/assessment_test.go",
       "kind": "regular",
-      "sha256": "283b3d56ead06bf097e0b21b59751d2d5099629bd175e105cba1f47ef9c84e85",
+      "sha256": "1588eee9e83bc36bbadf334c718518e37d864cb4026979c739e78da85f645452",
       "class": "source",
       "license": "Apache-2.0"
     },
@@ -368,7 +368,7 @@
     {
       "path": "conformance/compiler_test.go",
       "kind": "regular",
-      "sha256": "34a40c7ba3607d4f3481b5f03c25e780930240e738e9f4ec3f8fdb00b618cee6",
+      "sha256": "dbcec0fef0d5f128ccfb8c77c366fb44c0008cb6aaf59bbfbf8aa367e5c95261",
       "class": "source",
       "license": "Apache-2.0"
     },
@@ -599,203 +599,203 @@
     {
       "path": "docs/normative/glossary.en.md",
       "kind": "regular",
-      "sha256": "241f1c7356b256f9535d83ff36e6dbc39fa6bbc9365047310a7fd305905e238a",
+      "sha256": "0ebd27230a024fbe0e2d60ff6151ba2f42beac638686f71e11734df37e17fe57",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/glossary.ru.md",
       "kind": "regular",
-      "sha256": "b83ed99fb227bb9b39770acda9ec9c701b00e466d7dcba7bac0a16e82848f67a",
+      "sha256": "affbbaf9f46ea3fd385e1e58778a624d730170ea759747b59950cc7eeb03627e",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/standards-map.en.md",
       "kind": "regular",
-      "sha256": "c6e66d5d8a1b1d19bea6d0933870ff27b42b38f564820127b1c52268d1cd7169",
+      "sha256": "7c56d1099754c80d90f41c863bd2e96435d509c18c6ea8eb42dc31a389a64b2e",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/normative/standards-map.ru.md",
       "kind": "regular",
-      "sha256": "7b707e0c382e79dc661577be6079b8783c71418507ddd8c1cfaab2d2eeb9d768",
+      "sha256": "64a270d72f725848bd55aa9a63bacaa2786296055c14f134de73c2ad340c4b2b",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.md",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.2.md",
       "kind": "regular",
-      "sha256": "3092f45a4c6e19e4a3e0264f609a89241fa8fe0a37c9be93ca0d57fbc53e560c",
+      "sha256": "16730567cabe6416e6b5074f10ee927136d8a16108816821f14007d227ceb03f",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.1.pdf",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_EN_v0.5.2.pdf",
       "kind": "regular",
-      "sha256": "c541a0f936f4a626c0f4bc02a5bd894fd121f0f6353fd156825077c82d4d283c",
+      "sha256": "f89347b0fe25fea4cde3598ba663c875d6eeaac475630a99f731be004f0f6268",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.md",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.2.md",
       "kind": "regular",
-      "sha256": "a54867f9bdbe68b6c76b5631bfa19af9eb6cd40168c8db3e1dd3b8449fde7712",
+      "sha256": "c557b712bfcba1d72c601cb1909346b79da9249bb64b633cd9349dfd483b367b",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.1.pdf",
+      "path": "docs/whitepaper/Agent-Ops_White_Paper_RU_v0.5.2.pdf",
       "kind": "regular",
-      "sha256": "90c07ea19a116eb1396dbddc3baff170c2f8d1f3efc242610554255cbd37bfc6",
+      "sha256": "21af51cebec6ef50e7123f1729a0eb7eed5d227ec64856451982791de60e043d",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-en.md",
       "kind": "regular",
-      "sha256": "64b674aa51b1ca0f856d9b0eed7c31a4329f3700105a3ddb78c83e8c36792881",
+      "sha256": "6fa66e5d60707c45969b1f80c9d56c8e4fed4049f242eebd3e5b03f27b9e1f8b",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/CHANGELOG-ru.md",
       "kind": "regular",
-      "sha256": "2d63eab29bea910b8124c3c36fd17551b0570cc0f77019b7a128be48dd3ecf60",
+      "sha256": "56ba9851cefab685b10cffba1a74950ff0de668e4c80027d5cc1429b8208c18c",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/PDF-BUILD-TEST-v0.5.1.json",
+      "path": "docs/whitepaper/PDF-BUILD-TEST-v0.5.2.json",
       "kind": "regular",
-      "sha256": "f113e0551ef769a904d0d5b518eef11f9e3e9616a9f067822f9ba8d34800c17b",
+      "sha256": "92297ae1682b1a9ad0a9dc45ee010d72c510d0616da47e190e97d06217d70f78",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/RELEASE-NOTES-v0.5.1.en.md",
+      "path": "docs/whitepaper/RELEASE-NOTES-v0.5.2.en.md",
       "kind": "regular",
-      "sha256": "83e96dd7ce63eb6598c02c34a92f1ab7d1fb66bcffe9ffee2a64e61853a9c192",
+      "sha256": "048d5dffdc8ae192d76c472646629ce6e11a11852dfb779127e80f579a78338f",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
-      "path": "docs/whitepaper/RELEASE-NOTES-v0.5.1.ru.md",
+      "path": "docs/whitepaper/RELEASE-NOTES-v0.5.2.ru.md",
       "kind": "regular",
-      "sha256": "7e9aa168f31cab136bada44ae5f6c51b12b74a66829f0570e5c6f69572002ba9",
+      "sha256": "0b07a824360fd795608589a6e512d73160928f759c8c03a28e132e64dc35f745",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/agent-ops-12-principles-en.png",
       "kind": "regular",
-      "sha256": "ddf8937ccf379f5415701decb1c29ca3e6a27c0bd0e56f2f02b332586f9aa561",
+      "sha256": "3fa4402b813374e5ca2679370c5650c41c5c4d423f3f34bd223c55181050bb7f",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/agent-ops-12-principles-ru.png",
       "kind": "regular",
-      "sha256": "bd47dac66faca2d0b7cf249084ec5b9ebd05e4f88a10cc0cc3660c5175a5d490",
+      "sha256": "f4b5799dcbf98ccf7622a5379d8b5bd72f6c4da29983aa28270a6c9975701716",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/agent-ops-8-steps-en.png",
       "kind": "regular",
-      "sha256": "83190e8af7e98cd031347dd45f039dda4f7c3f4f072a20ce83888df5680edb0f",
+      "sha256": "e2e62c9e8658c8f05e9ceb1ecc07c6eb534602aea119b4f87258341e95700110",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/agent-ops-8-steps-ru.png",
       "kind": "regular",
-      "sha256": "bb47d5ddfae7e5663c47815806a516e1cc5d8f9aa1e5d15aa827d54428adba05",
+      "sha256": "29e9a596f1c0e106efe585e054fec14ad3d97d5d347344fd922f1d651e57f9ec",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/governance-plane-en.png",
       "kind": "regular",
-      "sha256": "934910c8f98bf6e6ee1727e9feabc046ed85c2faaa3b01b8bad23d0b63295383",
+      "sha256": "6bb59fe88a20ff5adff1a1f10897762d753f24e1ef53c0bb5ed98c96c7ebe59e",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/governance-plane-ru.png",
       "kind": "regular",
-      "sha256": "8fbf0f79b25a77f00d3bdb2a6aa164bc9f0ddbe98e703a044795c7cad537e467",
+      "sha256": "e69767b3d2bd568de7244cb0bd69deac16bd86bf9a8fa809696bbf60ab7d4fcb",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/independent-assurance-plane-en.png",
       "kind": "regular",
-      "sha256": "8be6ea1382ffc9d461d77863d6a4eafb7b914727dee5be559ec2162f6d62e66f",
+      "sha256": "5e35c4dc9c764c40dd2092286e8eeb3cbce64fc13725a9bf145355113b701282",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/independent-assurance-plane-ru.png",
       "kind": "regular",
-      "sha256": "133650104e76dabc0e14744b7ea84602d8a363a6fb6afc5b9ecc5c5bdc1f6839",
+      "sha256": "6c5aa0adcc9858cb4d3c4f506cca01770c39ed2c62b0904620f964ce38aac2ad",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/metric-cardinality-freshness-en.png",
       "kind": "regular",
-      "sha256": "889d28b5918d6aecf93cefb4569c5d1d5d941784ff5fba7d1528449222a42ac4",
+      "sha256": "c74eb1a0e6250c2590940e5ea3fccbc0de46077358d8d494be5f4b66c90c10bf",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/metric-cardinality-freshness-ru.png",
       "kind": "regular",
-      "sha256": "26a7deae7980dad89af8474c0ba7a27aa1ae47e9731f2ccef9376d3a2a3d9835",
+      "sha256": "70a31600ab0413f68fe9b124aca5328aac1a17811da5f3dc898a4410fcd7e1b5",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/rapid-disk-filling-scenario-en.png",
       "kind": "regular",
-      "sha256": "65fc3f5c64f060aecdf373b55a9ff772ccf177303bcdf890ed817ec8d9bb2994",
+      "sha256": "6340160995b95fca1fdadc86841ded443888d6e4b551f3880dd0b5c273d915fc",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/rapid-disk-filling-scenario-ru.png",
       "kind": "regular",
-      "sha256": "6d45770c0ca30ec5a3a898a574b310e80ef99c7b9c20b2ff7dd3cde892f4caff",
+      "sha256": "cc8b63c7682f8b45ad731b39b649b32e5a996e65e28291e144343e35f2e0ba08",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/six-scales-en.png",
       "kind": "regular",
-      "sha256": "7f230c7d3a79c1ebafd963db0e0c2dfe117664af7035d091ce361585a777db85",
+      "sha256": "b5637a2d0aa9b6efc67080cf9ee64e25be0f08a254c3db8db61065d81e6d2a33",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/six-scales-ru.png",
       "kind": "regular",
-      "sha256": "16fdb0ce574c010f12ea1c8de3c6e0d8a5ea4863baf466c32438ba6cc1f1bdfb",
+      "sha256": "23a56c45215248c9cf689a99e021e563d4b48bb1578f6e0f227b7503839975ba",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/three-planes-en.png",
       "kind": "regular",
-      "sha256": "b9f5172a39b19abfcee8ad26cd110b4357f9a2e3b83e655fb31c5f2c685b06cf",
+      "sha256": "2c0102dab4d85c7a5b3517959dbc92b6587768815500768f7f10b0c52df7db0a",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
     {
       "path": "docs/whitepaper/images/three-planes-ru.png",
       "kind": "regular",
-      "sha256": "16cdedf9a54e2d4b5771bda14883f61b6ff41ab0f720367e9732b7ac4862df0f",
+      "sha256": "238fcba723d2026f45772e7fa20f29845c7910388e739d698d793296e7416d54",
       "class": "documentation",
       "license": "CC-BY-4.0"
     },
@@ -816,7 +816,7 @@
     {
       "path": "publication-manifest.json",
       "kind": "regular",
-      "sha256": "48d2ae2684688ff724ac619e8b76b1bbaaf89de88c1f9ff404d4ecf6a5659b3e",
+      "sha256": "2062b50ba101452584751637629b1b28f8f24b5e0931e897d2e61fc6f65fea42",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -830,7 +830,7 @@
     {
       "path": "revision-manifest.json",
       "kind": "regular",
-      "sha256": "326049bd494d547b26b526ca03efefb1f294531747ebfeb18f632966039be4b8",
+      "sha256": "9601aa931409b65222c67f29b8caa8a522a7484472a34cfc2d451640b317fed0",
       "class": "metadata",
       "license": "Apache-2.0"
     },
@@ -1187,7 +1187,7 @@
     {
       "path": "schemas/inventory.go",
       "kind": "regular",
-      "sha256": "11edc758c2ce75e22599ebd6b8c49a42811eb2b3e797d36bccbd5da8d8756f66",
+      "sha256": "d6e1b060f1c4a953bcfd4718ef18ed33a69803d30686b306cc771b70aa73f726",
       "class": "source",
       "license": "Apache-2.0"
     },
@@ -1257,7 +1257,7 @@
     {
       "path": "schemas/registry_test.go",
       "kind": "regular",
-      "sha256": "e02bc5cc7b0acad573509ae447f7c6cc38cd84c034439ccc3cad0100893d23ee",
+      "sha256": "74b8afd3e9581911a6722befaf07dc50fd296d1639e704d70c89a65bae0fa28e",
       "class": "source",
       "license": "Apache-2.0"
     },
@@ -1327,7 +1327,7 @@
     {
       "path": "conformance/relationtestdata/traces.json",
       "kind": "regular",
-      "sha256": "b297c5092e2a2572b59216802d53e6f76b33dc64be08689614a6c3e4aecae3c4",
+      "sha256": "4b7cbfd28d47a55ab839d6d6abd0e714bc6e8c768713643a9fe2c5e47bece504",
       "class": "conformance-fixture",
       "license": "Apache-2.0"
     },
@@ -1341,7 +1341,7 @@
     {
       "path": "schemas/c4_change_package.schema.json",
       "kind": "regular",
-      "sha256": "db93b003315f7a1a01e360fb720ad967435ec44280c66a90fdec1641c59828f7",
+      "sha256": "727531f265e951aac29d3a883156ed86466445d89f5480f9f802dc470d94141d",
       "class": "schema",
       "license": "Apache-2.0"
     },
@@ -1355,7 +1355,7 @@
     {
       "path": "schemas/c4_execution_record.schema.json",
       "kind": "regular",
-      "sha256": "f628c946eba81add118ac3b70ad64c6caf5d3eeaa13c189ab9f7eb4db4b6fd52",
+      "sha256": "cf481e5fefb7f7fbbdb9a5e98accddd48ba8ac4c537efa0cc8581b869804c5bd",
       "class": "schema",
       "license": "Apache-2.0"
     },

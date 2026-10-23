@@ -271,7 +271,7 @@ func run(args []string) error {
 func tool(name string) string {
 	dir := os.Getenv("AOM_TOOLS_DIR")
 	if dir == "" {
-		dir = filepath.Join(os.TempDir(), "aom-spec-tools-1.26.8")
+		dir = filepath.Join(os.TempDir(), "aom-spec-tools-1.26.10")
 	}
 	if name == "go" {
 		return filepath.Join(dir, "go", "bin", "go")
@@ -706,8 +706,8 @@ func toolObservations() (map[string]any, error) {
 		if e != nil {
 			return nil, repocheck.Rejectedf("tool %s: no Go build info: %v", pin.name, e)
 		}
-		if info.GoVersion != "go1.26.8" {
-			return nil, repocheck.Rejectedf("tool %s built with %s, want go1.26.8", pin.name, info.GoVersion)
+		if info.GoVersion != "go1.26.10" {
+			return nil, repocheck.Rejectedf("tool %s built with %s, want go1.26.10", pin.name, info.GoVersion)
 		}
 		if info.Main.Replace != nil || (pin.module != "" && (info.Main.Path != pin.module || info.Main.Version != pin.version)) {
 			return nil, repocheck.Rejectedf("tool %s main module %s@%s, want %s@%s", pin.name, info.Main.Path, info.Main.Version, pin.module, pin.version)

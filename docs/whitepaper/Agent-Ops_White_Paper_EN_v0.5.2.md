@@ -2,7 +2,7 @@
 
 ## A Methodology for AI-Agent-Based Infrastructure Operations and Technical Support
 
-**Public normative release candidate v0.5.1 | source revision aom-04-r8 | English version prevails**
+**Public normative release candidate v0.5.2 | source revision aom-04-r9 | English version prevails**
 
 > Facts, conclusions, and recommendations are not authorization to change infrastructure.
 
@@ -72,7 +72,7 @@ The full governed lifecycle for any infrastructure change is:
 
 The twelve principles in Section 4 are summarized here as five cross-cutting pillars:
 
-1. Intent and verified outcome: an explicit objective, scope, and success criteria precede action; work closes only after the expected outcome is verified and the resulting learning is incorporated.
+1. Intent and verified outcome: an explicit objective, scope, and success criteria precede action. Case completion follows Section 12.3: required work and evidence are complete and the owner accepts a terminal disposition. The recorded Outcome distinguishes success, failure, and uncertainty against the exact Intent; closure alone does not prove success. Learning proposals follow Section 13.
 2. Evidence and explicit uncertainty: facts, declared state, and interpretations remain distinct; every conclusion references its source, timestamp, freshness, and authority, while missing evidence remains `unknown` rather than becoming an assumption.
 3. Deterministic bounded execution: collection and execution use bounded deterministic tools wherever possible; only a separate Gated Executor may apply an approved change, with action logging and the strongest available rollback or compensation.
 4. Governance and accountable authority: policy and a versioned project-specific harness constrain each transition; a human retains approval and decision authority, and no authority is delegated implicitly.
@@ -120,6 +120,10 @@ Agent-Ops is an operations methodology in which:
 | Remediation planning | Proposal, risk assessment, verification plan, and rollback or compensation plan. This layer performs no target action. |
 | Execution | A separate gated path with scoped credentials and an audit log. |
 | Learning | Outcome, decision log, postmortem, and Operations-as-Code updates. |
+
+An Agent-Ops case is bounded work on an operational request, audit, incident, or change proposal, organized around an explicit Intent, evidence, decisions, and a trace. The eight-step path describes work that requires a target change. A case can instead produce a verified report or an owner-accepted disposition without a change, as described in Section 12.3. A refusal to change a system does not by itself establish that the original service-restoration objective was achieved.
+
+The case operates within the organization's service and product responsibilities. Service ownership, business priorities, risk decisions, and communication with users remain with the accountable organizational functions; the applicable policy and DecisionMap establish who may decide. Access to a tool, authorship of an Intent, and execution authority are different things. Findings and verified outcomes can feed reviewed knowledge updates, reliability work, and development backlog items under Section 13. Agent-Ops does not require a particular external product-lifecycle methodology.
 
 ### 3.1. What Agent-Ops Is Not
 
@@ -968,6 +972,12 @@ A checkpoint is a derived summary, never the authority source for C4. It may ref
 
 The runtime of the reasoning component SHOULD be session-scoped: without write credentials, without state persisted across cases other than the checkpoints of this section, and without network access beyond what the profile declares. The absence of a path to an effect does not waive this requirement: persisted state can carry poisoned context across cases.
 
+### 20.4. Human-led Continuation after a Lost Response (Informative)
+
+Informative example — a lost response. An admitted operation times out before the engineer receives its result. The handoff preserves the exact case, package, attempt and backend key, current authority references, consumed budget, observations, and unresolved obligations. A missing response is not evidence that no effect occurred. The receiver uses the authoritative log and independent current observations to establish what can be known before considering a retry or separately authorized reconciliation.
+
+Human-led continuation preserves the same authority, logging, and verification requirements. It can include coordination, permitted observation, preparation, and a human start of an authorized deterministic procedure when all required controls are available. If the required log, authority service, gate, or observer is unavailable, a saved summary does not restore those controls or establish recovery. Direct manual mutation is not introduced as an alternative execution path. A stopped agent session also retains the decision-use restrictions in Section 20.1.
+
 ## 21. Quality, Reproducibility, and AI Economics
 
 The procedures below specify how quality, reproducibility, and cost are to be assessed. Their inclusion is not evidence that an Agent-Ops implementation has passed them; this edition reports no controlled comparative runtime results.
@@ -1045,6 +1055,10 @@ Metrics remain low-cardinality and contain no prompts, PII, secrets, or unique c
 
 Lower cost or triage time is not an improvement when evidence completeness, decision safety, or verified Outcome quality degrades. Conversely, a safer result may justify higher cost for a high-impact case. The scorecard therefore reports quality, risk, time, and cost together and never grants authority or promotion from a single metric.
 
+### 21.4. Full Adoption Cost (Informative)
+
+An adoption assessment can extend the cost view in Section 21.3 with setup, integration, training, maintenance, upgrades, supplier transition, and the effort of collecting the measurements. Recurring case work and shared overhead are counted once; one-off costs are shown in full and, if allocated, with an explicit allocation period. Net engineering time is comparable baseline effort minus case work, shared overhead, and the stated allocation of setup effort. Unsupported estimates remain estimates. This supplementary view does not change the Cost-to-Outcome Ratio (CTOR), replace Section 24's outcome and quality measures, or waive the completion evidence in Section 14.3.
+
 ## 22. How the Principles Operate Across Three Planes
 
 The principles in Section 4 become verifiable only when each has a data type, a transition rule, and independent evidence.
@@ -1097,6 +1111,16 @@ This is a teaching example, not a universal threshold. Its R1 autonomy allows a 
 
 > AI explains and plans. Governance constrains. A human approves. An executor applies. Outcome proves the result.
 
+### 23.1. A Small Team and Its Service Owner (Informative)
+
+Informative example — a small team and its service owner. An engineer combines development and on-call work; another suitably authorized, competent participant provides the required independent review. That participant may be external. The service owner sets the priority and acceptable bounds and names the person who communicates with users. These functions need not be separate departments, but one person changing role names does not create independence.
+
+The first Intent may ask only for a verified disk-growth report. In that case, a supported report can satisfy the Intent without a target change. If the Intent instead asks for service restoration and a proposed change is denied, the trace records the refusal and the result against the original criteria; it does not invent an ExecutionRecord or record restoration as successful. If required independent review is unavailable, the team continues only permitted evidence collection, analysis, preparation, and escalation.
+
+After the case, the owner receives the verified result, residual risks, and proposed reliability or development work. A runbook edit remains a proposal until its applicable review and admission process completes. When development later changes the product, the operational acceptance criteria can be checked again using new evidence linked to the earlier case.
+
+This is a teaching example, not evidence of a runtime implementation. The limited C4 profile in Appendix G covers an isolated, resettable, non-production test domain; neither this example nor passing the offline validators extends that domain.
+
 ## 24. Methodology Adoption Success Criteria
 
 Success is evaluated by comparing like-for-like periods before Agent-Ops adoption and after adoption and stabilization. The primary measure is the number of completed units of work: requests and incidents brought to an explicit terminal result that is accepted by the accountable owner and supported by the evidence required for that case. Both owner-accepted `succeeded` and `failed` terminal results may count as completed work, but their outcome classes are reported separately; `unknown` or incomplete cases do not count as completed. Report both the absolute count and units completed per unit of time. Show incoming volume, backlog change, and team effort alongside it so that clearing accumulated backlog or adding resources is not misrepresented as a methodology improvement.
@@ -1117,6 +1141,8 @@ Higher completed-unit volume counts as successful methodology adoption only when
 
 ## 25. Phased Adoption
 
+This table is an adoption roadmap, not the transition order of an individual case. Each case still establishes its Intent, scope, authority, and required evidence before the relevant work, as specified in Sections 6–7. Later roadmap entries do not defer those prerequisites.
+
 | Stage | Outcome |
 | --- | --- |
 | 0. Boundaries + governance | Production scopes, data classification, authority, denylist, and foundational Policy Hooks. |
@@ -1133,6 +1159,8 @@ Higher completed-unit volume counts as successful methodology adoption only when
 | 11. Bounded self-healing | Proven repeatable scenarios only; disabled by default. |
 
 > Pilot -> standardize -> scale. Every stage closes with evidence and does not inherit the next stage's authority.
+
+A team can obtain sustained value from audit, diagnosis, and change preparation without progressing to execution. Progress is assessed by verified outcomes, maintained controls, and the team's total effort, not by autonomy alone. Each additional capability remains subject to its applicable evaluation and admission requirements. C5 remains a future, disabled-by-default mode; every real target change under the current operating boundary retains explicit human approval and a separate human start of the deterministic Executor.
 
 ## 26. Expected Benefits and Positioning
 
@@ -1162,7 +1190,7 @@ The closed publication set consists of this white paper, the standards map, and 
 
 ## 28. Status of This Edition
 
-Edition v0.5.1, source revision `aom-04-r8`, supersedes edition v0.5.0 and, like it, publishes two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable formal state-transition models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition also publishes bounded implementation slices: six C4 record schemas and `agent-ops.relation-validation@1.0.0`, five Evidence Acquisition schemas and `agent-ops.evidence-relation-validation@1.0.0`, and their composed `agent-ops.integrated-conformance@1.0.0` checker with a frozen pre-runtime evaluation protocol. Positive, schema-negative, relation-negative, and paired cross-boundary fixtures remain synthetic and offline. The edition does not implement a runtime, provide a complete lifecycle validator, report a runtime evaluation, or establish production safety. The agent identity, session baseline and session stop, aggregate bound, and session-scoped reasoning-runtime requirements added in v0.5.1 (§3.3, §11.2, §16.2, §19.1, §19.3, §20.1, §20.3) are `target` and add no implementation slice; Appendix G and the formal models are unchanged. The paired v0.5.1 PDFs render this source revision and have deterministic Build/Test evidence, but neither those artifacts nor earlier reviews approve the successor. Release still requires fresh exact-target owner and bilingual review, complete release and reproducibility evidence, and separate authorization for the protected release environment. Repository presence alone does not make the edition released.
+Edition v0.5.2, source revision `aom-04-r9`, supersedes edition v0.5.1 and, like it, publishes two independently versioned profiles: limited C4 Human-approved Apply and Evidence Acquisition. Their stable identities, scope, explicit non-goals, assumption and claim boundaries, trusted computing bases, common-cause boundaries, separate bounded executable formal state-transition models, independently versioned relation catalogs, and small semantic interface are normative candidate content. This edition also publishes bounded implementation slices: six C4 record schemas and `agent-ops.relation-validation@1.0.0`, five Evidence Acquisition schemas and `agent-ops.evidence-relation-validation@1.0.0`, and their composed `agent-ops.integrated-conformance@1.0.0` checker with a frozen pre-runtime evaluation protocol. Positive, schema-negative, relation-negative, and paired cross-boundary fixtures remain synthetic and offline. The edition does not implement a runtime, provide a complete lifecycle validator, report a runtime evaluation, or establish production safety. The agent identity, session baseline and session stop, aggregate bound, and session-scoped reasoning-runtime requirements added in v0.5.1 (§3.3, §11.2, §16.2, §19.1, §19.3, §20.1, §20.3) are `target` and add no implementation slice; Appendix G and the formal models are unchanged. This edition clarifies case boundaries, organizational responsibilities, completion without change, and adoption without mandatory autonomy growth; it adds informative small-team, lost-response continuation, and full-adoption-cost explanations. These clarifications and examples change no profile, schema, relation catalog, semantic interface, formal model, execution authority, or completion-evidence requirement. Figure edition labels are aligned with v0.5.2. The paired v0.5.2 PDFs render this source revision and have deterministic Build/Test evidence, but neither those artifacts nor earlier reviews approve the successor. Release still requires fresh exact-target owner and bilingual review, complete release and reproducibility evidence, and separate authorization for the protected release environment. Repository presence alone does not make the edition released.
 
 ## Appendix A. 47 Baseline Checks
 
@@ -1439,7 +1467,7 @@ Each proposed property requires at least one counterexample produced by removing
 | P7 Outcome success is not inferred from admission or effect | remove C4-A12 | The requested mutation occurs but the original Intent criterion fails while the attempt is labeled successful. |
 | L1 Every admitted obligation eventually reaches an authorized terminal disposition | remove C4-A14 or C4-A15 | The observer/control plane remains unavailable or an irreversible residual effect has no authorized reconciliation path. |
 
-The executable checker uses pinned Go 1.26.8, deterministic exhaustive exploration to depth 8, no random seed, and the finite event sets in `formal/check.go`. On this candidate it visits 1,233 C4 states over 6,014 accepted transitions and 332 Evidence states over 2,325 accepted transitions. `formal/counterexamples.json` retains minimized traces tied to named removed assumptions, including the three required combined traces. A bounded formal state-transition model can falsify a universal claim; successful bounded checking does not prove production safety. Exact acceptance remains an owner decision on the reviewed candidate.
+The executable checker uses pinned Go 1.26.10, deterministic exhaustive exploration to depth 8, no random seed, and the finite event sets in `formal/check.go`. On this candidate it visits 1,233 C4 states over 6,014 accepted transitions and 332 Evidence states over 2,325 accepted transitions. `formal/counterexamples.json` retains minimized traces tied to named removed assumptions, including the three required combined traces. A bounded formal state-transition model can falsify a universal claim; successful bounded checking does not prove production safety. Exact acceptance remains an owner decision on the reviewed candidate.
 
 ### G.8. Public schema and relation-validation slice
 

@@ -55,7 +55,7 @@ the use of C4 authority as evidence truth.
 ## Reproducible checker record
 
 The checker is deterministic exhaustive exploration, not random simulation. It
-uses Go 1.26.8 from `process/toolchain.lock.json`, depth 8, the finite event sets
+uses Go 1.26.10 from `process/toolchain.lock.json`, depth 8, the finite event sets
 in `check.go`, and no seed. Run:
 
 ```text
